@@ -9,7 +9,7 @@ SRCS	=	$(MAIN)
 MAIN	=	main.c 
 
 VPATH	=	src
-HEADER	=	minirt.h
+HEADER	=	minirt.h libft/libft.h
 INCLUDE	=	-I ./
 
 all: $(NAME)
@@ -19,14 +19,14 @@ clean:
 	rm -rf obj
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) libft.a
 
 re: fclean all
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 	make -C ./libft/
-	mv ./libft/libft.a ./$(NAME)
-	$(CC) $(CFLAGS) $(OBJS) $(IMLX) -o $(NAME)
+	mv ./libft/libft.a ./
+	$(CC) $(CFLAGS) $(OBJS) libft.a $(IMLX) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< $(IMLX) -o $@ $(INCLUDE)

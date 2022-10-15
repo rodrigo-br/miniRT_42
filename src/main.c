@@ -6,14 +6,15 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 10:28:35 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/15 13:39:22 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+#include <libft/libft.h>
 
 int	main(void)
 {
-	write(1, "Brace yourself, a cool miniRT is coming", 39);
-	write(1, "\n", 1);
+	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
+	ft_putchar_fd('\n', 1);
 }
