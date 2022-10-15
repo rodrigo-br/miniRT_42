@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 13:27:59 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/05/31 16:55:37 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/07/14 18:05:29 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <math.h>
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else if (c < -1)
+	{
+		c = (unsigned char)c;
+		return ((int)c);
+	}
+	else
+		return (c);
+}

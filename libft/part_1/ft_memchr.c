@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 13:27:59 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/05/31 19:18:27 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/07/14 18:04:53 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <math.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*pointer;
 
-#endif
+	pointer = (unsigned char *)s;
+	while (n--)
+	{
+		if (*pointer == (unsigned char)c)
+			return (pointer);
+		pointer++;
+	}
+	return (NULL);
+}

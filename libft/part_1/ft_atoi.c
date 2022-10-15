@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 13:27:59 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/06/01 18:10:33 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/07/14 18:04:17 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <math.h>
+int	ft_atoi(const char *nptr)
+{
+	int	signal;
+	int	result;
 
-#endif
+	result = 0;
+	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == ' '))
+		nptr++;
+	signal = ((ft_isdigit(*nptr) || *nptr == '+') - (*nptr == '-'));
+	nptr += (*nptr == '-' || *nptr == '+');
+	while (ft_isdigit(*nptr))
+		result = result * 10 + (*nptr++ - '0');
+	return (result * signal);
+}

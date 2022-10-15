@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 13:27:59 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/06/01 00:20:33 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/07/14 18:05:11 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <math.h>
-
-#endif
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	if (n == 0)
+		return (0);
+	else
+	{
+		while (--n && *s1 && *s2 && *s1 == *s2)
+		{
+			s1++;
+			s2++;
+		}
+	}	
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}

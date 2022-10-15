@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/15 13:27:59 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/05/31 22:57:57 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/07/14 18:04:55 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <math.h>
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*aux_s1;
+	unsigned char	*aux_s2;
 
-#endif
+	aux_s1 = (unsigned char *)s1;
+	aux_s2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (--n && *aux_s1 == *aux_s2)
+	{
+		aux_s1++;
+		aux_s2++;
+	}
+	return (*(unsigned char *)aux_s1 - *(unsigned char *)aux_s2);
+}

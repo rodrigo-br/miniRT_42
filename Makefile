@@ -15,6 +15,7 @@ INCLUDE	=	-I ./
 all: $(NAME)
 
 clean:
+	make clean -C ./libft
 	rm -rf obj
 
 fclean: clean
@@ -23,6 +24,8 @@ fclean: clean
 re: fclean all
 
 $(NAME): $(OBJ_DIR) $(OBJS)
+	make -C ./libft/
+	mv ./libft/libft.a ./$(NAME)
 	$(CC) $(CFLAGS) $(OBJS) $(IMLX) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
