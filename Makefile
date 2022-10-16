@@ -1,4 +1,6 @@
 NAME	=	miniRT
+LIBFT_P	=	libft/
+LIBFT 	=	$(LIBFT_P)libft.a
 
 IMLX	= -Imlx -Lmlx -lmlx -lXext -lX11 -lm
 CFLAGS	=	-Wall -Wextra -Werror -g3
@@ -19,14 +21,15 @@ clean:
 	rm -rf obj
 
 fclean: clean
-	rm -rf $(NAME) libft.a
+	rm -rf $(NAME) $(LIBFT)
 
-re: fclean all
+re:  fclean all
 
-$(NAME): $(OBJ_DIR) $(OBJS)
-	make -C ./libft/
-	mv ./libft/libft.a ./
-	$(CC) $(CFLAGS) $(OBJS) libft.a $(IMLX) -o $(NAME)
+$(LIBFT):
+	make -C $(LIBFT_P)
+
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(IMLX) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< $(IMLX) -o $@ $(INCLUDE)
