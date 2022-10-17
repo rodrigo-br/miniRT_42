@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/17 20:26:27 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/17 20:26:05 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unity/unity.h>
-#include <tests.h>
+#ifndef TESTS_H
+# define TESTS_H
 
-void	setUp(void)
-{
-	// set stuff up here
-}
+void	test_tuple_operations(void);
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_tuple_operations();
-	return (UNITY_END());
-}
+#endif /* TESTS_H */
