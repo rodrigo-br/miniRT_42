@@ -15,7 +15,7 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= minirt.h
 
 MAIN	= main.c
-SRCS	= tuple.c
+SRCS	= tuple.c operations.c
 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
