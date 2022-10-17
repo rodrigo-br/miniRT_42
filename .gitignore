@@ -55,6 +55,7 @@ dkms.conf
 miniRT
 *.gen
 .normignore
+check_test
 
 # Custom directories
 .vscode/
