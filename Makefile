@@ -7,13 +7,15 @@ MINILIBX_PATH	= ./libs/minilibx
 MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
 OBJ_DIR	= ./obj
-OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MAIN:%.c=$(OBJ_DIR)/%.o)
+
+TEST_OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 HEADER_PATH		= ./inc
 HEADER_FILES	= minirt.h
 
-SRCS	= $(MAIN)
 MAIN	= main.c
+SRCS	= tuple.c
 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
@@ -58,5 +60,10 @@ git:
 	git add .
 	git commit -m "$(m)"
 	git push
+
+test: $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJS)
+	@$(CC) $(CFLAGS) $(IFLAGS) -o check_test $(TEST_OBJS) ./tests/main.c ./tests/unity/unity.c $(LDFLAGS)
+	@./check_test
+	@rm check_test
 
 .PHONY:	all clean fclean re git
