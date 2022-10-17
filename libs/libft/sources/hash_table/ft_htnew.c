@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_htnew.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/08/14 21:36:04 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+t_htnode	*ft_htnew(char *key, char *value)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	t_htnode	*item;
+
+	item = (t_htnode *)ft_calloc(1, sizeof(t_htnode));
+	if (key)
+		item->key = ft_strdup(key);
+	if (value)
+		item->value = ft_strdup(value);
+	return (item);
 }

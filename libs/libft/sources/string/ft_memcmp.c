@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/04/03 21:35:26 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	const unsigned char	*us1 = (unsigned char *)s1;
+	const unsigned char	*us2 = (unsigned char *)s2;
+
+	while (n--)
+		if (*us1++ != *us2++)
+			return (*(us1 - 1) - *(us2 - 1));
+	return (0);
 }

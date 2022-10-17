@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/04/07 20:51:39 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	t_list	*new;
+
+	if (!lst || !f || !del)
+		return (NULL);
+	new = ft_lstnew(f(lst->content));
+	if (!new)
+	{
+		ft_lstclear(&new, del);
+		return (NULL);
+	}
+	new->next = ft_lstmap(lst->next, f, del);
+	return (new);
 }

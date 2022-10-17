@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/04/03 23:17:10 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_atoi(const char *nptr)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	int	is_neg;
+	int	result;
+
+	while (ft_isspace(*nptr))
+		nptr++;
+	is_neg = 1;
+	if (*nptr == '-' || *nptr == '+')
+		if (*nptr++ == '-')
+			is_neg = -1;
+	result = 0;
+	while (ft_isdigit(*nptr))
+		result = (result * 10) + (*nptr++ - '0');
+	return (result * is_neg);
 }

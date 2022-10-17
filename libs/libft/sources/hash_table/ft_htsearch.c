@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_htsearch.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/06/21 23:57:18 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:35:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+char	*ft_htsearch(t_hashtable *table, char *key)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	int			index;
+	t_htnode	*curr_item;
+
+	index = ft_hthasher(key);
+	curr_item = table->item[index];
+	while (curr_item)
+	{
+		if (ft_strcmp(key, curr_item->key) == 0)
+			return (curr_item->value);
+		curr_item = curr_item->next;
+	}
+	return (NULL);
 }

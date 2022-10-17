@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/04/05 14:47:35 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/22 15:55:54 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+char	*ft_strmapi(const char *s, char (*f)(size_t, char))
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	char	*str;
+	size_t	len;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

@@ -1,38 +1,55 @@
-NAME	=	miniRT
-LIBFT_P	=	libft/
-LIBFT 	=	$(LIBFT_P)libft.a
+NAME	= miniRT
 
-IMLX	= -Imlx -Lmlx -lmlx -lXext -lX11 -lm
-CFLAGS	=	-Wall -Wextra -Werror -g3
-OBJ_DIR	=	obj
-OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
+LIBFT_PATH	= ./libs/libft
+LIBFT 	= $(LIBFT_PATH)/libft.a
 
-SRCS	=	$(MAIN)
-MAIN	=	main.c 
+MINILIBX_PATH	= ./libs/minilibx
+MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
-VPATH	=	src
-HEADER	=	minirt.h libft/libft.h
-INCLUDE	=	-I ./
+OBJ_DIR	= ./obj
+OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
+
+HEADER_PATH		= ./inc
+HEADER_FILES	= minirt.h
+
+SRCS	= $(MAIN)
+MAIN	= main.c
+
+IFLAGS	= -I $(HEADER_PATH)
+LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
+CFLAGS	= -Wall -Wextra -Werror
+
+VPATH	= ./src
+VPATH	+= ./inc
+
+ifdef DEBUG
+	CFLAGS += -g3
+endif
 
 all: $(NAME)
 
 clean:
-	make clean -C ./libft
 	rm -rf obj
+	make clean -C $(LIBFT_PATH)
+	make clean -C $(MINILIBX_PATH)
 
 fclean: clean
-	rm -rf $(NAME) $(LIBFT)
+	rm -rf $(NAME) $(MINILIBX)
+	make fclean -C $(LIBFT_PATH)
 
 re:  fclean all
 
 $(LIBFT):
-	make -C $(LIBFT_P)
+	make -C $(LIBFT_PATH)
 
-$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(IMLX) -o $(NAME)
+$(MINILIBX):
+	make -C $(MINILIBX_PATH)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< $(IMLX) -o $@ $(INCLUDE)
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+
+$(OBJ_DIR)/%.o: %.c $(HEADER_FILES) Makefile | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $@

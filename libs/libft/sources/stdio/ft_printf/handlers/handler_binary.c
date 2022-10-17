@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handler_binary.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/07/14 23:53:02 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/25 22:24:11 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+void	handle_binary(t_flags *flags, va_list ap)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	size_t	number;
+
+	flags->specifier = BINARY;
+	if (flags->has_precision)
+		flags->zero = 0;
+	number = va_arg(ap, size_t);
+	if (number == 0)
+		flags->hash = 0;
+	flags->str = ft_itoa_base(number, BINARY_BASE);
+	flags->str_len = ft_strlen(flags->str);
+	handle_flags_integer(flags);
 }

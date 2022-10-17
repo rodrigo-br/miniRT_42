@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 09:52:50 by maolivei         ###   ########.fr       */
+/*   Created: 2022/04/05 16:16:05 by maolivei          #+#    #+#             */
+/*   Updated: 2022/09/23 00:35:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
+	long	num;
+
+	num = n;
+	if (num < 0)
+	{
+		ft_putchar_fd('-', fd);
+		num = -num;
+	}
+	if (num >= 0)
+	{
+		if (num >= 10)
+			ft_putnbr_fd((num / 10), fd);
+		ft_putchar_fd(((num % 10) + '0'), fd);
+	}
 }
