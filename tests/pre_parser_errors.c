@@ -34,7 +34,7 @@ void	can_open(void)
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_4), 1);
 }
 
-void	pre_parser_error(void)
+void	pre_parser_errors(void)
 {
 	RUN_TEST(dont_have_two_args);
 	RUN_TEST(is_invalid_extension);

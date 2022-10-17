@@ -6,13 +6,13 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 19:45:29 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:39:31 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	parser(int argc, char *file) // enviar argv[1]
+void	parser(char *file)
 {
 	return ;
 }
