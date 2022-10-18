@@ -1,10 +1,10 @@
 NAME	= miniRT_tests
 
-HEADER	= tests.h unity.h unity_internals.h
-SRCS	= unity.c tests.c test_tuple_operations.c
+HEADER	= $(shell ls . unity | grep .h$)
+SRCS	= $(shell ls . unity | grep .c$)
 
-MINIRT_HEADER	= minirt.h
-MINIRT_SRCS		= tuple.c operations.c
+MINIRT_SRCS		= $(shell find ../src/*/* -name "*.c" -exec basename '{}' ';')
+MINIRT_DIRS	= $(shell ls ../src | grep -v .c$)
 
 LIBFT_PATH	= ../libs/libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -19,7 +19,7 @@ CFLAGS	= -Wall -Wextra
 IFLAGS	= -I. -Iunity -I../inc
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 
-VPATH_MINRT	= ../src
+VPATH_MINRT	= $(addprefix ../src, $(MINIRT_DIRS))
 VPATH	= $(VPATH_MINRT) unity
 
 all: $(NAME)

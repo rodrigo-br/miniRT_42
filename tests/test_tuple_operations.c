@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/17 21:54:36 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:07:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 
 #define DOUBLE_RAND_OFFSET 1000000
 #define LOOP_ITERATIONS 100
-#define POINT_W 1
-#define VECTOR_W 0
+
+double double_rand()
+{
+	return (rand() + ((double)rand() / DOUBLE_RAND_OFFSET));
+}
 
 void	is_tuple_value_correct(void)
 {
@@ -26,10 +29,10 @@ void	is_tuple_value_correct(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_w = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
 		tuple = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_x, tuple->x);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_y, tuple->y);
@@ -46,14 +49,14 @@ void	is_point_value_correct(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		point = create_point(rand_x, rand_y, rand_z);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_x, point->x);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_y, point->y);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_z, point->z);
-		TEST_ASSERT_EQUAL_DOUBLE(1, point->w);
+		TEST_ASSERT_EQUAL_DOUBLE(POINT_W, point->w);
 		free(point);
 	}
 }
@@ -65,9 +68,9 @@ void	is_vector_value_correct(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		vector = create_vector(rand_x, rand_y, rand_z);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_x, vector->x);
 		TEST_ASSERT_EQUAL_DOUBLE(rand_y, vector->y);
@@ -84,9 +87,9 @@ void	is_point_ending_in_one(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		point = create_point(rand_x, rand_y, rand_z);
 		TEST_ASSERT_EQUAL_DOUBLE(POINT_W, point->w);
 		free(point);
@@ -100,9 +103,9 @@ void	is_vector_ending_in_zero(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		vector = create_vector(rand_x, rand_y, rand_z);
 		TEST_ASSERT_EQUAL_DOUBLE(VECTOR_W, vector->w);
 		free(vector);
@@ -116,10 +119,10 @@ void	sum_two_tuples(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_w = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
 		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		b = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		sum = sum_tuple(a, b);
@@ -140,16 +143,16 @@ void	sum_two_vectors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_vector(rand_x, rand_y, rand_z);
 		b = create_vector(rand_x, rand_y, rand_z);
 		sum = sum_tuple(a, b);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x + rand_x), sum->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y + rand_y), sum->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z + rand_z), sum->z);
-		TEST_ASSERT_EQUAL_DOUBLE(VECTOR_W, sum->w);
+		TEST_ASSERT_EQUAL_DOUBLE((VECTOR_W + VECTOR_W), sum->w);
 		free(a);
 		free(b);
 		free(sum);
@@ -163,9 +166,9 @@ void	sum_two_points(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
 		b = create_point(rand_x, rand_y, rand_z);
 		sum = sum_tuple(a, b);
@@ -187,9 +190,9 @@ void	sum_point_and_vector(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
 		b = create_vector(rand_x, rand_y, rand_z);
 		sum = sum_tuple(a, b);
@@ -210,10 +213,10 @@ void	sub_two_tuples(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_w = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
 		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		b = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		sub = sub_tuple(a, b);
@@ -234,9 +237,9 @@ void	sub_two_vectors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_vector(rand_x, rand_y, rand_z);
 		b = create_vector(rand_x, rand_y, rand_z);
 		sub = sub_tuple(a, b);
@@ -257,9 +260,9 @@ void	sub_two_points(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
 		b = create_point(rand_x, rand_y, rand_z);
 		sub = sub_tuple(a, b);
@@ -281,9 +284,9 @@ void	sub_point_and_vector(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
 		b = create_vector(rand_x, rand_y, rand_z);
 		sub = sub_tuple(a, b);
@@ -304,10 +307,10 @@ void	neg_a_tuple(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_w = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
 		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
 		neg = neg_tuple(a);
 		TEST_ASSERT_EQUAL_DOUBLE(-rand_x, neg->x);
@@ -326,9 +329,9 @@ void	neg_a_vector(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_vector(rand_x, rand_y, rand_z);
 		neg = neg_tuple(a);
 		TEST_ASSERT_EQUAL_DOUBLE(-rand_x, neg->x);
@@ -347,9 +350,9 @@ void	neg_a_point(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		rand_x = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_y = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
-		rand_z = rand() + ((double)rand() / DOUBLE_RAND_OFFSET);
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
 		neg = neg_tuple(a);
 		TEST_ASSERT_EQUAL_DOUBLE(-rand_x, neg->x);
@@ -358,6 +361,144 @@ void	neg_a_point(void)
 		TEST_ASSERT_EQUAL_DOUBLE(-POINT_W, neg->w);
 		free(a);
 		free(neg);
+	}
+}
+
+void	multiply_a_tuple(void)
+{
+	double	rand_x, rand_y, rand_z, rand_w, multiplier;
+	t_tuple	*a, *multiply;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
+		multiplier = double_rand();
+		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
+		multiply = scalar_multiply(a, multiplier);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_w * multiplier), multiply->w);
+		free(a);
+		free(multiply);
+	}
+}
+
+void	multiply_a_vector(void)
+{
+	double		rand_x, rand_y, rand_z, multiplier;
+	t_vector	*a;
+	t_tuple		*multiply;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		multiplier = double_rand();
+		a = create_vector(rand_x, rand_y, rand_z);
+		multiply = scalar_multiply(a, multiplier);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
+		TEST_ASSERT_EQUAL_DOUBLE((VECTOR_W * multiplier), multiply->w);
+		free(a);
+		free(multiply);
+	}
+}
+
+void	multiply_a_point(void)
+{
+	double	rand_x, rand_y, rand_z, multiplier;
+	t_point	*a;
+	t_tuple	*multiply;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		multiplier = double_rand();
+		a = create_point(rand_x, rand_y, rand_z);
+		multiply = scalar_multiply(a, multiplier);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
+		TEST_ASSERT_EQUAL_DOUBLE((POINT_W * multiplier), multiply->w);
+		free(a);
+		free(multiply);
+	}
+}
+
+void	divide_a_tuple(void)
+{
+	double	rand_x, rand_y, rand_z, rand_w, divider;
+	t_tuple	*a, *divide;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_w = double_rand();
+		divider = double_rand();
+		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
+		divide = scalar_divide(a, divider);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_w / divider), divide->w);
+		free(a);
+		free(divide);
+	}
+}
+
+void	divide_a_vector(void)
+{
+	double		rand_x, rand_y, rand_z, divider;
+	t_vector	*a;
+	t_tuple		*divide;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		divider = double_rand();
+		a = create_vector(rand_x, rand_y, rand_z);
+		divide = scalar_divide(a, divider);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
+		TEST_ASSERT_EQUAL_DOUBLE((VECTOR_W / divider), divide->w);
+		free(a);
+		free(divide);
+	}
+}
+
+void	divide_a_point(void)
+{
+	double	rand_x, rand_y, rand_z, divider;
+	t_point	*a;
+	t_tuple	*divide;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		divider = double_rand();
+		a = create_point(rand_x, rand_y, rand_z);
+		divide = scalar_divide(a, divider);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
+		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
+		TEST_ASSERT_EQUAL_DOUBLE((POINT_W / divider), divide->w);
+		free(a);
+		free(divide);
 	}
 }
 
@@ -380,4 +521,10 @@ void	test_tuple_operations(void)
 	RUN_TEST(neg_a_tuple);
 	RUN_TEST(neg_a_vector);
 	RUN_TEST(neg_a_point);
+	RUN_TEST(multiply_a_tuple);
+	RUN_TEST(multiply_a_vector);
+	RUN_TEST(multiply_a_point);
+	RUN_TEST(divide_a_tuple);
+	RUN_TEST(divide_a_vector);
+	RUN_TEST(divide_a_point);
 }
