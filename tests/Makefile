@@ -35,7 +35,7 @@ re:  fclean all
 $(NAME): $(OBJS) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER_FILES) Makefile | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c $(HEADER) Makefile | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
