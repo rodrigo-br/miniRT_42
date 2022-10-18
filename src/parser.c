@@ -6,13 +6,14 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 20:39:31 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:42:57 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	parser(char *file)
+void	parser(int fd)
 {
+	
 	return ;
 }

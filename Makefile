@@ -62,7 +62,7 @@ git:
 	git push
 
 test: $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(IFLAGS) -o check_test $(TEST_OBJS) ./tests/main.c ./tests/unity/unity.c $(LDFLAGS)
+	@$(CC) tests/pre_parser_errors.c $(CFLAGS) $(IFLAGS) -o check_test $(TEST_OBJS) ./tests/main.c ./tests/unity/unity.c $(LDFLAGS)
 	@./check_test
 	@rm check_test
 
