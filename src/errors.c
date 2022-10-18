@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:44:10 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 20:39:51 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:21:16 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	errors(int argc, char **argv)
 		perror(file);
 		return (EXIT_FAILURE);
 	}
+	close(fd); //when put it together, change it for parser(fd);
 	return (EXIT_SUCCESS);
 }

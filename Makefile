@@ -10,7 +10,7 @@ OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
 HEADER_PATH		= ./inc
-HEADER_FILES	= minirt.h
+HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c
 SRCS	= tuple.c errors.c operations.c

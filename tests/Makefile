@@ -1,10 +1,10 @@
 NAME	= miniRT_tests
 
 HEADER	= tests.h unity.h unity_internals.h
-SRCS	= unity.c tests.c test_tuple_operations.c pre_parser_errors.c
+SRCS	= unity.c tests.c test_tuple_operations.c pre_parser_errors.c parser.c
 
-MINIRT_HEADER	= minirt.h
-MINIRT_SRCS		= tuple.c operations.c errors.c
+MINIRT_HEADER	= structs.h minirt.h
+MINIRT_SRCS		= tuple.c operations.c errors.c test_parser.c
 
 LIBFT_PATH	= ../libs/libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -15,7 +15,7 @@ MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINIRT_SRCS:%.c=$(OBJ_DIR)/%.o)
 
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Wextra -g3
 IFLAGS	= -I. -Iunity -I../inc
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 
@@ -42,6 +42,6 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	./$(NAME) 2>/dev/null
+	valgrind ./$(NAME)
 
 .PHONY:	all clean fclean re run
