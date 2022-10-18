@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 13:48:24 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:18:01 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	set_brightness(t_light *light, char *s)
 	return (EXIT_SUCCESS);
 }
 
-int	set_coordinates(t_light *light, char *s)
+int	set_light_coordinates(t_light *light, char *s)
 {
 	char	**coordinates;
 
@@ -63,7 +63,7 @@ int	check_light(char **line_splited)
 	if (!line_splited || !line_splited[0] || !line_splited[1]
 		|| !line_splited[2] || !line_splited[3] || line_splited[4])
 		return (EXIT_FAILURE);
-	errors = set_coordinates(&light, line_splited[1]);
+	errors = set_light_coordinates(&light, line_splited[1]);
 	errors += set_brightness(&light, line_splited[2]);
 	errors += set_light_rgb(&light, line_splited[3]);
 	if (errors)

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 13:40:15 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:16:10 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	parse_line(char **line_splited)
 	errors = 0;
 	if (line_splited[0][0] == LIGHT)
 		errors = check_light(line_splited);
-	if (line_splited[0][0] == AMBIENT)
+	else if (line_splited[0][0] == AMBIENT)
 		errors = check_ambient(line_splited);
+	else if (line_splited[0][0] == CAMERA)
+		errors = check_camera(line_splited);
 	if (!errors)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);

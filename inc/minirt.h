@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 13:50:40 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:27:52 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			errors(int argc, char **argv);
 int			parser_1(int fd);
 int			check_light(char **line_splited);
 int			check_ambient(char **line_splited);
+int			check_camera(char **line_splited);
 double		ft_atod(char *s);
 int			ft_is_a_double(char *string);
 int			ft_is_all_digit(char *string);

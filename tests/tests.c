@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 13:59:39 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:33:41 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	main(void)
 	test_atod();
 	test_check_light();
 	test_check_ambient();
+	test_check_camera();
 	return (UNITY_END());
 }

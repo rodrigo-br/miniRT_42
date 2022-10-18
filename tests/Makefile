@@ -3,11 +3,11 @@ NAME	= miniRT_tests
 HEADER	= tests.h unity.h unity_internals.h
 SRCS	= unity.c tests.c test_tuple_operations.c pre_parser_errors.c parser.c \
 		ft_atod.c check_light.c ft_is_all_digit.c ft_is_a_double.c checkers.c \
-		check_ambient.c
+		check_ambient.c check_camera.c
 
 MINIRT_HEADER	= structs.h minirt.h
 MINIRT_SRCS		= tuple.c operations.c errors.c test_parser.c test_atod.c \
-				test_check_light.c test_check_ambient.c
+				test_check_light.c test_check_ambient.c test_check_camera.c
 
 LIBFT_PATH	= ../libs/libft
 LIBFT 	= $(LIBFT_PATH)/libft.a

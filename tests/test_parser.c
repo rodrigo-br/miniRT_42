@@ -1,7 +1,6 @@
 #include <minirt.h>
 #include "unity/unity.h"
 
-
 void	test_parser_only_1_each_unique_element(void)
 {
 	int fd = open("../rt_files/many_obj.rt", O_RDONLY);

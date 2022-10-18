@@ -15,25 +15,25 @@ void	test_set_light_coordinates(void)
 {
 	t_light	light;
 
-	set_coordinates(&light, ft_strdup(line_1));
+	set_light_coordinates(&light, ft_strdup(line_1));
 	TEST_ASSERT_EQUAL_DOUBLE(10, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(10, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(-10, light.z);
-	set_coordinates(&light, ft_strdup(line_2));
+	set_light_coordinates(&light, ft_strdup(line_2));
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.z);
-	set_coordinates(&light, ft_strdup(line_3));
+	set_light_coordinates(&light, ft_strdup(line_3));
 	TEST_ASSERT_EQUAL_DOUBLE(0.1, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(10.5, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(40.3, light.z);
-	set_coordinates(&light, ft_strdup(line_4));
+	set_light_coordinates(&light, ft_strdup(line_4));
 	TEST_ASSERT_EQUAL_DOUBLE(255.0, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(500.999, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(10.00001, light.z);
-	TEST_ASSERT_EQUAL_INT(1, set_coordinates(&light, ft_strdup("abc")));
-	TEST_ASSERT_EQUAL_INT(1, set_coordinates(&light, ft_strdup("10,0,0.a")));
-	TEST_ASSERT_EQUAL_INT(1, set_coordinates(&light, ft_strdup("10,0,0.0a")));
+	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("abc")));
+	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("10,0,0.a")));
+	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("10,0,0.0a")));
 }
 
 void	test_set_light_brightness(void)
