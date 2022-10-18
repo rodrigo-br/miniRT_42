@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:22:14 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 10:38:46 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:28:08 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	ft_atod(char *s)
 {
 	double	integer_part;
 	double	decimal_fraction;
-	int	len;
+	int		len;
 	char	**splited;
 
 	decimal_fraction = 0;

@@ -40,11 +40,11 @@ void	test_set_light_brightness(void)
 {
 	t_light	light;
 	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("1")));
-	TEST_ASSERT_EQUAL_INT(1, light.brightness);
+	TEST_ASSERT_EQUAL_DOUBLE(1, light.brightness);
 	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("0.7")));
-	TEST_ASSERT_EQUAL_INT(0.7, light.brightness);
+	TEST_ASSERT_EQUAL_DOUBLE(0.7, light.brightness);
 	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("0.0000000001")));
-	TEST_ASSERT_EQUAL_INT(0.0000000001, light.brightness);
+	TEST_ASSERT_EQUAL_DOUBLE(0.0000000001, light.brightness);
 	TEST_ASSERT_EQUAL_INT(1, set_brightness(&light, ft_strdup("48")));
 	TEST_ASSERT_EQUAL_INT(1, set_brightness(&light, ft_strdup("1.0000000001")));
 }
@@ -55,17 +55,17 @@ void	test_set_light_rgb(void)
 
 	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_1)));
 	TEST_ASSERT_EQUAL_INT(0, set_light_rgb(&light, ft_strdup(line_2)));
-	TEST_ASSERT_EQUAL_INT(0, light.rgb.red);
-	TEST_ASSERT_EQUAL_INT(0, light.rgb.green);
-	TEST_ASSERT_EQUAL_INT(0, light.rgb.blue);
-	TEST_ASSERT_EQUAL_INT(255, light.rgb.opacity);
+	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.red);
+	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.green);
+	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.blue);
+	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
 	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_3)));
 	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_4)));
 	TEST_ASSERT_EQUAL_INT(0, set_light_rgb(&light, ft_strdup(line_5)));
-	TEST_ASSERT_EQUAL_INT(255, light.rgb.red);
-	TEST_ASSERT_EQUAL_INT(5, light.rgb.green);
-	TEST_ASSERT_EQUAL_INT(2, light.rgb.blue);
-	TEST_ASSERT_EQUAL_INT(255, light.rgb.opacity);
+	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.red);
+	TEST_ASSERT_EQUAL_CHAR(5, light.rgb.green);
+	TEST_ASSERT_EQUAL_CHAR(2, light.rgb.blue);
+	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
 	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_6)));
 }
 

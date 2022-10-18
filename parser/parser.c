@@ -6,17 +6,24 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 09:10:43 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:40:15 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int parse_line(char **line_splited)
+int	parse_line(char **line_splited)
 {
+	int	errors;
+
+	errors = 0;
 	if (line_splited[0][0] == LIGHT)
-		check_light(line_splited);
-	return (EXIT_SUCCESS);
+		errors = check_light(line_splited);
+	if (line_splited[0][0] == AMBIENT)
+		errors = check_ambient(line_splited);
+	if (!errors)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	parser_1(int fd)
