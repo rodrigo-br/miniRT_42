@@ -3,8 +3,7 @@ NAME	= miniRT_tests
 HEADER	= $(shell ls . unity | grep .h$)
 SRCS	= $(shell ls . unity | grep .c$)
 
-MINIRT_SRCS		= $(shell find ../src/*/* -name "*.c" -exec basename '{}' ';')
-MINIRT_DIRS	= $(shell ls ../src | grep -v .c$)
+MINIRT_OBJS		= $(shell find ../obj -type f | grep .o$ | grep -v main)
 
 LIBFT_PATH	= ../libs/libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -13,16 +12,18 @@ MINILIBX_PATH	= ../libs/minilibx
 MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
 OBJ_DIR	= ./obj
-OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINIRT_SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MINIRT_OBJS)
 
 CFLAGS	= -Wall -Wextra
 IFLAGS	= -I. -Iunity -I../inc
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 
-VPATH_MINRT	= $(addprefix ../src, $(MINIRT_DIRS))
-VPATH	= $(VPATH_MINRT) unity
+VPATH	= unity
 
-all: $(NAME)
+all: print $(NAME)
+
+print:
+	echo $(OBJS)
 
 clean:
 	rm -rf $(OBJ_DIR)

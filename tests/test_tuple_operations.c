@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 14:07:43 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:54:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 #include <minirt.h>
 #include <time.h>
 
-#define DOUBLE_RAND_OFFSET 1000000
 #define LOOP_ITERATIONS 100
 
 double double_rand()
 {
-	return (rand() + ((double)rand() / DOUBLE_RAND_OFFSET));
+	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
 }
 
 void	is_tuple_value_correct(void)
@@ -502,6 +501,86 @@ void	divide_a_point(void)
 	}
 }
 
+void	test_magnitude(void)
+{
+	double		rand_x, rand_y, rand_z;
+	t_vector	*a;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		a = create_vector(rand_x, rand_y, rand_z);
+		TEST_ASSERT_EQUAL_DOUBLE(
+			sqrt((rand_x * rand_x) + (rand_y * rand_y) + (rand_z * rand_z)),
+			magnitude(a)
+		);
+		free(a);
+	}
+}
+
+void	test_normalize(void)
+{
+	double		rand_x, rand_y, rand_z;
+	t_vector	*a, *normal;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		a = create_vector(rand_x, rand_y, rand_z);
+		normal = normalize(a);
+		TEST_ASSERT_EQUAL_DOUBLE(1.0, magnitude(normal));
+		free(a);
+		free(normal);
+	}
+}
+
+void	test_dot_product(void)
+{
+	double		rand_xa, rand_ya, rand_za, rand_xb, rand_yb, rand_zb;
+	t_vector	*a, *b;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_xa = double_rand();
+		rand_ya = double_rand();
+		rand_za = double_rand();
+		rand_xb = double_rand();
+		rand_yb = double_rand();
+		rand_zb = double_rand();
+		a = create_vector(rand_xa, rand_ya, rand_za);
+		b = create_vector(rand_xb, rand_yb, rand_zb);
+		TEST_ASSERT_EQUAL_DOUBLE(
+			((rand_xa * rand_xb) + (rand_ya * rand_yb) + (rand_za * rand_zb)),
+			dot_product(a, b)
+		);
+		free(a);
+	}
+}
+
+void	test_cross_product(void)
+{
+	t_vector	*a, *b, *cross_ab, *cross_ba;
+
+	a = create_vector(1, 2, 3);
+	b = create_vector(2, 3, 4);
+	cross_ab = cross_product(a, b);
+	cross_ba = cross_product(b, a);
+	TEST_ASSERT_EQUAL_DOUBLE(-1, cross_ab->x);
+	TEST_ASSERT_EQUAL_DOUBLE(2, cross_ab->y);
+	TEST_ASSERT_EQUAL_DOUBLE(-1, cross_ab->z);
+	TEST_ASSERT_EQUAL_DOUBLE(1, cross_ba->x);
+	TEST_ASSERT_EQUAL_DOUBLE(-2, cross_ba->y);
+	TEST_ASSERT_EQUAL_DOUBLE(1, cross_ba->z);
+	free(a);
+	free(b);
+	free(cross_ab);
+	free(cross_ba);
+}
+
 void	test_tuple_operations(void)
 {
 	srand(time(NULL));
@@ -527,4 +606,8 @@ void	test_tuple_operations(void)
 	RUN_TEST(divide_a_tuple);
 	RUN_TEST(divide_a_vector);
 	RUN_TEST(divide_a_point);
+	RUN_TEST(test_magnitude);
+	RUN_TEST(test_normalize);
+	RUN_TEST(test_dot_product);
+	RUN_TEST(test_cross_product);
 }
