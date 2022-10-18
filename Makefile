@@ -13,13 +13,14 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= minirt.h
 
 MAIN	= main.c
-SRCS	= tuple.c operations.c
+DIRS	= . tuple
+SRCS	= tuple_constructors.c tuple_operations.c tuple_checkers.c
 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
 
-VPATH	= ./src
+VPATH	= $(addprefix ./src/, $(DIRS))
 VPATH	+= ./inc
 
 ifdef DEBUG

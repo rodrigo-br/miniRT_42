@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   tuple_constructors.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 21:32:36 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/15 10:23:27 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/18 13:51:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_point	*create_point(double x, double y, double z)
 {
-	return (create_tuple(x, y, z, 1));
+	return (create_tuple(x, y, z, POINT_W));
 }
 
 t_vector	*create_vector(double x, double y, double z)
 {
-	return (create_tuple(x, y, z, 0));
+	return (create_tuple(x, y, z, VECTOR_W));
 }
 
 t_tuple	*create_tuple(double x, double y, double z, double w)
