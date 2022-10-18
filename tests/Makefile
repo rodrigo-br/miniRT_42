@@ -1,10 +1,10 @@
 NAME	= miniRT_tests
 
 HEADER	= tests.h unity.h unity_internals.h
-SRCS	= unity.c tests.c test_tuple_operations.c pre_parser_errors.c parser.c
+SRCS	= unity.c tests.c test_tuple_operations.c pre_parser_errors.c parser.c ft_atod.c
 
 MINIRT_HEADER	= structs.h minirt.h
-MINIRT_SRCS		= tuple.c operations.c errors.c test_parser.c
+MINIRT_SRCS		= tuple.c operations.c errors.c test_parser.c test_atod.c
 
 LIBFT_PATH	= ../libs/libft
 LIBFT 	= $(LIBFT_PATH)/libft.a
@@ -42,6 +42,6 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	gdb ./$(NAME)
+	./$(NAME)
 
 .PHONY:	all clean fclean re run
