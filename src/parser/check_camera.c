@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:15:19 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:39:00 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:39:50 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	set_camera_fov(t_camera *camera, char *s)
 {
 	int	fov;
 
-	if (!s || !s[0] || s[1] || !ft_is_all_digit(s))
+	if (!s || !s[0] || !ft_is_all_digit(s))
 		return (EXIT_FAILURE);
 	fov = ft_atoi(s);
 	if (fov > 180 || fov < 0)

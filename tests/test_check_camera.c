@@ -59,7 +59,12 @@ void test_set_camera_3d_orientation(void)
 
 void	test_set_camera_fov(void)
 {
-	
+	t_camera camera;
+
+	TEST_ASSERT_EQUAL_INT(0, set_camera_fov(&camera, "1"));
+	TEST_ASSERT_EQUAL_INT(0, set_camera_fov(&camera, "180"));
+	TEST_ASSERT_EQUAL_INT(1, set_camera_fov(&camera, "-1"));
+	TEST_ASSERT_EQUAL_INT(1, set_camera_fov(&camera, "181"));
 }
 
 void test_check_camera(void)
