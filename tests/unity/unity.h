@@ -5,6 +5,7 @@
 ========================================== */
 
 #define UNITY_OUTPUT_COLOR
+#define UNITY_INCLUDE_DOUBLE
 
 #ifndef UNITY_FRAMEWORK_H
 #define UNITY_FRAMEWORK_H

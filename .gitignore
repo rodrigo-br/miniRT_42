@@ -53,8 +53,10 @@ dkms.conf
 
 # Custom files
 miniRT
+miniRT_tests
 *.gen
 .normignore
+check_test
 
 # Custom directories
 .vscode/
