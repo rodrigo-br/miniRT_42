@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/17 21:51:45 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/17 21:54:36 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include <minirt.h>
 #include <time.h>
 
-#define ARBITRARY_X 30
-#define ARBITRARY_Y -20
-#define ARBITRARY_Z 50
-#define ARBITRARY_W 20
 #define DOUBLE_RAND_OFFSET 1000000
 #define LOOP_ITERATIONS 100
 #define POINT_W 1
