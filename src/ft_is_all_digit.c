@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   ft_is_all_digit.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 10:41:04 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 11:15:36 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/18 12:21:46 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include "tests.h"
+#include <minirt.h>
 
-void	setUp(void)
+int	ft_is_all_digit(char *string)
 {
-	// set stuff up here
-}
+	int		i;
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_tuple_operations();
-	pre_parser_errors();
-	test_atod();
-	test_check_light();
-	return (UNITY_END());
+	i = -1;
+	if (!string)
+		return (0);
+	while (string[++i])
+	{
+		if (!ft_isdigit(string[i]))
+			return (0);
+	}
+	return (1);
 }

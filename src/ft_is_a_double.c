@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   ft_is_a_double.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 10:41:04 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 11:07:11 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/18 11:28:35 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include "tests.h"
+#include <minirt.h>
 
-void	setUp(void)
+int	ft_is_a_double(char *string)
 {
-	// set stuff up here
-}
+	int		i;
+	t_bool	already_pointed;
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_tuple_operations();
-	pre_parser_errors();
-	test_atod();
-	test_check_light();
-	return (UNITY_END());
+	if (!string)
+		return (0);
+	i = 0;
+	already_pointed = FALSE;
+	while (string[i])
+	{
+		if (ft_isdigit(string[i]))
+			i++;
+		else if (string[i] == '.' && !already_pointed)
+		{
+			already_pointed = TRUE;
+			i++;
+		}
+		else if (i == 0 && string[i] == '-')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }

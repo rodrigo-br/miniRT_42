@@ -13,8 +13,8 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c $(SRCS) $(PARSER)
-SRCS	= tuple.c errors.c operations.c ft_atod.c
-PARSER	= parser.c check_light.c
+SRCS	= tuple.c errors.c operations.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c
+PARSER	= parser.c check_light.c checkers.c
 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
