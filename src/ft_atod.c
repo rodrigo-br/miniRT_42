@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 09:33:42 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 09:22:14 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/18 09:32:27 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include "tests.h"
+#include <minirt.h>
 
-void	setUp(void)
+double	ft_atod(char *s)
 {
-	// set stuff up here
-}
+	double	integer_part;
+	double	decimal_fraction;
+	size_t	len;
+	char	**splited;
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_tuple_operations();
-	pre_parser_errors();
-	test_parser();
-	test_atod();
-	return (UNITY_END());
+	splited = ft_split(s, '.');
+	len = ft_strlen(splited[1]);
+	integer_part = (double)ft_atoi(splited[0]);
+	decimal_fraction = (double)ft_atoi(splited[1]);
+	while (len--)
+		decimal_fraction /= 10;
+	return (integer_part + decimal_fraction);
 }

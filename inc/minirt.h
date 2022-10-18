@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 21:51:53 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 09:32:51 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_point		*create_point(int x, int y, int z);
 t_vector	*create_vector(int x, int y, int z);
 int			errors(int argc, char **argv);
 int			parser_1(int fd);
+void		check_light(char **line_splited);
+double		ft_atod(char *s);
 
 t_bool		is_equal(double a, double b);
 t_bool		is_equal_tuple(t_tuple *a, t_tuple *b);

@@ -42,6 +42,6 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run: all
-	valgrind ./$(NAME)
+	gdb ./$(NAME)
 
 .PHONY:	all clean fclean re run

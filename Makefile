@@ -7,19 +7,20 @@ MINILIBX_PATH	= ./libs/minilibx
 MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 
 OBJ_DIR	= ./obj
-OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MAIN:%.c=$(OBJ_DIR)/%.o)
+OBJS	= $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
 HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
-MAIN	= main.c
-SRCS	= tuple.c errors.c operations.c
+MAIN	= main.c $(SRCS) $(PARSER)
+SRCS	= tuple.c errors.c operations.c ft_atod.c
+PARSER	= parser.c check_light.c
 
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
 
-VPATH	= ./src
+VPATH	= ./src ./parser
 VPATH	+= ./inc
 
 ifdef DEBUG
