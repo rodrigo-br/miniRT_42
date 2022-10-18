@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/17 21:20:02 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:34:18 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_tuple
 	double	z;
 	double	w;
 }	t_tuple;
+
+typedef t_tuple	t_vector; /* tuple with 'w' value equal to 0 */
+typedef t_tuple	t_point; /* tuple with 'w' value equal to 1 */
 
 typedef union u_rgb
 {
@@ -88,7 +91,12 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
-typedef t_tuple	t_vector; /* tuple with 'w' value equal to 0 */
-typedef t_tuple	t_point; /* tuple with 'w' value equal to 1 */
+typedef struct s_scene
+{
+	t_ambience	ambience;
+	t_light		light;
+	t_camera	camera;
+	t_object	*objects;
+}	t_scene;
 
 #endif

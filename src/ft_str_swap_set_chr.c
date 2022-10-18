@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   ft_str_swap_set_chr.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 18:05:23 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 16:29:43 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/18 16:41:30 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include "tests.h"
+#include <minirt.h>
 
-void	setUp(void)
+void	ft_str_swap_set_chr(char *str, char *old, char new)
 {
-	// set stuff up here
-}
+	int	i;
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_tuple_operations();
-	pre_parser_errors();
-	test_atod();
-	test_check_light();
-	test_check_ambient();
-	test_check_camera();
-	return (UNITY_END());
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strchr(old, str[i]))
+			str[i] = new;
+		i++;
+	}
 }

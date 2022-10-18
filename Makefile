@@ -12,16 +12,18 @@ OBJS	= $(MAIN:%.c=$(OBJ_DIR)/%.o)
 HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
-MAIN	= main.c $(SRCS) $(PARSER)
-SRCS	= tuple.c errors.c operations.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c
+MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE)
+SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c
 PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c
+TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 
+DIRS	= . tuple parser
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
 
-VPATH	= ./src ./parser
-VPATH	+= ./inc
+VPATH	= $(addprefix ./src/, $(DIRS))
+VPATH	+= $(HEADER_PATH)
 
 ifdef DEBUG
 	CFLAGS += -g3

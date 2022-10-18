@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 14:16:10 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 18:41:54 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	parser_1(int fd)
 	char		*line;
 	char		**line_splited;
 
-	(void)fd;
-	int fd_1 = open("../rt_files/many_obj.rt", O_RDONLY);
-	line = ft_gnl(fd_1, FALSE);
+	fd = open("../rt_files/many_obj.rt", O_RDONLY);
+	line = ft_gnl(fd, FALSE);
 	while (line)
 	{
-		line = ft_strtrim_free(line, " ");
+		line = ft_strtrim_free(line, " \f\n\r\t\v");
+		ft_str_swap_set_chr(line, "\f\r\t\v", ' ');
 		line_splited = ft_split(line, ' ');
 		free(line);
 		if (line_splited)
@@ -46,7 +46,7 @@ int	parser_1(int fd)
 			parse_line(line_splited);
 			ft_free_matrix((void *)&line_splited);
 		}
-		line = ft_gnl(fd_1, FALSE);
+		line = ft_gnl(fd, FALSE);
 	}
 	return (EXIT_SUCCESS);
 }
