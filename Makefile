@@ -9,8 +9,6 @@ MINILIBX		= $(MINILIBX_PATH)/libmlx.a
 OBJ_DIR	= ./obj
 OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o) $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
-TEST_OBJS	= $(SRCS:%.c=$(OBJ_DIR)/%.o)
-
 HEADER_PATH		= ./inc
 HEADER_FILES	= minirt.h
 
@@ -61,9 +59,7 @@ git:
 	git commit -m "$(m)"
 	git push
 
-test: $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJS)
-	@$(CC) tests/pre_parser_errors.c $(CFLAGS) $(IFLAGS) -o check_test $(TEST_OBJS) ./tests/main.c ./tests/unity/unity.c $(LDFLAGS)
-	@./check_test
-	@rm check_test
+test: all
+	make run -C tests
 
-.PHONY:	all clean fclean re git
+.PHONY:	all clean fclean re git test

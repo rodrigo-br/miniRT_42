@@ -12,9 +12,9 @@ void	dont_have_two_args(void)
 
 void	is_invalid_extension(void)
 {
-	char *argv_1[2] = {"", "rt_files/many_obj.rt"};
-	char *argv_2[2] = {"./miniRT", "rt_files/many_obj.rt"};
-	char *argv_3[2] = {"", "Makefile"};
+	char *argv_1[2] = {"", "../rt_files/many_obj.rt"};
+	char *argv_2[2] = {"../miniRT", "../rt_files/many_obj.rt"};
+	char *argv_3[2] = {"", "../Makefile"};
 	char *argv_4[2] = {"", ".rt"};
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_1), 0);
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_2), 0);
@@ -24,12 +24,12 @@ void	is_invalid_extension(void)
 
 void	can_open(void)
 {
-	char *argv_1[2] = {"", "rt_files/many_obj.rt"};
-	char *argv_2[2] = {"./miniRT", "rt_files/many_obj.rt"};
-	char *argv_3[2] = {"", "Makefile.rt"};
+	char *argv_1[2] = {"", "../rt_files/many_obj.rt"};
+	char *argv_2[2] = {"../miniRT", "../rt_files/many_obj.rt"};
+	char *argv_3[2] = {"", "../Makefile.rt"};
 	char *argv_4[2] = {"", "a.rt"};
-	char *argv_5[2] = {"rt_files/many_obj.rt", "Makefile.rt"};
-	char *argv_6[2] = {"rt_files/many_obj.rt", "a.rt"};
+	char *argv_5[2] = {"../rt_files/many_obj.rt", "../Makefile.rt"};
+	char *argv_6[2] = {"../rt_files/many_obj.rt", "a.rt"};
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_1), 0);
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_2), 0);
 	TEST_ASSERT_EQUAL_INT(errors(2, argv_3), 1);
