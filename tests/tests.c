@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 18:05:23 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:34:09 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(void)
 {
 	UNITY_BEGIN();
 	test_tuple_operations();
+	test_colors();
 	pre_parser_errors();
 	test_atod();
 	test_check_light();

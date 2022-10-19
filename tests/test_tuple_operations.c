@@ -6,15 +6,11 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 20:53:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:36:45 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include <minirt.h>
-#include <time.h>
-
-#define LOOP_ITERATIONS 100
+#include <tests.h>
 
 double double_rand()
 {
@@ -558,6 +554,7 @@ void	test_dot_product(void)
 			dot_product(a, b)
 		);
 		free(a);
+		free(b);
 	}
 }
 
