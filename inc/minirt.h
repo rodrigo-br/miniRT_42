@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 11:18:25 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:07:14 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
+# define uchar unsigned char
 
 /* Errors before canvas*/
 int			errors(int argc, char **argv);
@@ -45,8 +46,9 @@ int			check_plane(char **line_splited);
 int			check_cylinder(char **line_splited);
 int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
 int			check_coordinates_digits(char **coordinates);
-int			set_object_coordinates(t_object *object, char *s);
-int			set_object_rgb(t_object *object, char *s);
+int			set_object_coordinates(double *ob_x, double *ob_y, \
+double *ob_z, char *s);
+int			set_object_rgb(uchar *r, uchar *g, uchar *b, char *s);
 int			set_object_3d_orientation(double *ob_x, double *ob_y, \
 double *ob_z, char *s);
 

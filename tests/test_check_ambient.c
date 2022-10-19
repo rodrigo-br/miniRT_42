@@ -15,20 +15,21 @@ void	test_set_ambient_rgb(void)
 {
 	t_ambience ambient;
 
-	TEST_ASSERT_EQUAL_INT(1, set_ambient_rgb(&ambient, ft_strdup(line_1)));
-	TEST_ASSERT_EQUAL_INT(0, set_ambient_rgb(&ambient, ft_strdup(line_2)));
+	ambient.rgb.opacity = 255;
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_1)));
+	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_2)));
 	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.red);
 	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.green);
 	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.blue);
 	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_ambient_rgb(&ambient, ft_strdup(line_3)));
-	TEST_ASSERT_EQUAL_INT(1, set_ambient_rgb(&ambient, ft_strdup(line_4)));
-	TEST_ASSERT_EQUAL_INT(0, set_ambient_rgb(&ambient, ft_strdup(line_5)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_3)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_4)));
+	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_5)));
 	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.red);
 	TEST_ASSERT_EQUAL_CHAR(5, ambient.rgb.green);
 	TEST_ASSERT_EQUAL_CHAR(2, ambient.rgb.blue);
 	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_ambient_rgb(&ambient, ft_strdup(line_6)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_6)));
 }
 
 void test_set_ambient_ratio(void)

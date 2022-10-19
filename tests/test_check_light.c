@@ -15,25 +15,25 @@ void	test_set_light_coordinates(void)
 {
 	t_light	light;
 
-	set_light_coordinates(&light, ft_strdup(line_1));
+	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_1));
 	TEST_ASSERT_EQUAL_DOUBLE(10, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(10, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(-10, light.z);
-	set_light_coordinates(&light, ft_strdup(line_2));
+	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_2));
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(0, light.z);
-	set_light_coordinates(&light, ft_strdup(line_3));
+	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_3));
 	TEST_ASSERT_EQUAL_DOUBLE(0.1, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(10.5, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(40.3, light.z);
-	set_light_coordinates(&light, ft_strdup(line_4));
+	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_4));
 	TEST_ASSERT_EQUAL_DOUBLE(255.0, light.x);
 	TEST_ASSERT_EQUAL_DOUBLE(500.999, light.y);
 	TEST_ASSERT_EQUAL_DOUBLE(10.00001, light.z);
-	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("abc")));
-	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("10,0,0.a")));
-	TEST_ASSERT_EQUAL_INT(1, set_light_coordinates(&light, ft_strdup("10,0,0.0a")));
+	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("abc")));
+	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("10,0,0.a")));
+	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("10,0,0.0a")));
 }
 
 void	test_set_light_brightness(void)
@@ -53,20 +53,20 @@ void	test_set_light_rgb(void)
 {
 	t_light light;
 
-	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_1)));
-	TEST_ASSERT_EQUAL_INT(0, set_light_rgb(&light, ft_strdup(line_2)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_1)));
+	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_2)));
 	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.red);
 	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.green);
 	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.blue);
 	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_3)));
-	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_4)));
-	TEST_ASSERT_EQUAL_INT(0, set_light_rgb(&light, ft_strdup(line_5)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_3)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_4)));
+	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_5)));
 	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.red);
 	TEST_ASSERT_EQUAL_CHAR(5, light.rgb.green);
 	TEST_ASSERT_EQUAL_CHAR(2, light.rgb.blue);
 	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_light_rgb(&light, ft_strdup(line_6)));
+	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_6)));
 }
 
 void	test_check_light_function(void)
