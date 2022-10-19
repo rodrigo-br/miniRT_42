@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:39:52 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:18:25 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,30 @@
 # define PLANE	"pl"
 # define CYLINDER "cy"
 
+/* Errors before canvas*/
 int			errors(int argc, char **argv);
+
+/* Parser */
 int			parser_1(int fd);
 int			check_light(char **line_splited);
 int			check_ambient(char **line_splited);
 int			check_camera(char **line_splited);
+int			check_sphere(char **line_splited);
+int			check_plane(char **line_splited);
+int			check_cylinder(char **line_splited);
+int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
+int			check_coordinates_digits(char **coordinates);
+int			set_object_coordinates(t_object *object, char *s);
+int			set_object_rgb(t_object *object, char *s);
+int			set_object_3d_orientation(double *ob_x, double *ob_y, \
+double *ob_z, char *s);
+
+/* Extra libft functions */
 double		ft_atod(char *s);
 int			ft_is_a_double(char *string);
 int			ft_is_all_digit(char *string);
 void		ft_str_swap_set_chr(char *str, char *old, char new);
-int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
-int			check_coordinates_digits(char **coordinates);
+int			set_double_value(double *variable, char *value);
 
 /* Constructors */
 t_tuple		*create_tuple(double x, double y, double z, double w);

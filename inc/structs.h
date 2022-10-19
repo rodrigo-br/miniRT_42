@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:34:18 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:44:53 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,41 +62,53 @@ typedef struct s_light
 	t_rgb	rgb;
 }	t_light;
 
-typedef struct s_object
-{
-	int		type;
-	double	x;
-	double	y;
-	double	z;
-	t_rgb	rgb;
-	void	*specs;
-}	t_object;
-
 /* tipos de acordo com as especificaçoes de cada um */
 typedef double	t_sphere;
 
 typedef struct s_plane
 {
-	double	x;
-	double	y;
-	double	z;
+	double	x_3d;
+	double	y_3d;
+	double	z_3d;
 }	t_plane;
 
 typedef struct s_cylinder
 {
+	double	x_3d;
+	double	y_3d;
+	double	z_3d;
+	double	diameter;
+	double	height;
+}	t_cylinder;
+
+typedef struct s_object
+{
+	int		type;
+	union
+	{
+		t_sphere	sphere;
+		t_cylinder	cylinder;
+		t_plane		plane;
+	};
 	double	x;
 	double	y;
 	double	z;
-	double	diamenter;
-	double	height;
-}	t_cylinder;
+	t_rgb	*rgb;
+}	t_object;
 
 typedef struct s_scene
 {
 	t_ambience	ambience;
 	t_light		light;
 	t_camera	camera;
-	t_object	*objects;
+	t_list		*objects;
 }	t_scene;
+
+typedef enum e_object_id
+{
+	ID_SPHERE,
+	ID_CYLINDER,
+	ID_PLANE,
+}	t_object_id;
 
 #endif

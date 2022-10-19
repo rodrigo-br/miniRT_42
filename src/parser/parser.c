@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:41:54 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 10:54:02 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	parse_line(char **line_splited)
 		errors = check_ambient(line_splited);
 	else if (line_splited[0][0] == CAMERA)
 		errors = check_camera(line_splited);
+	else if (!ft_strcmp(line_splited[0], SPHERE))
+		errors = check_sphere(line_splited);
+	else if (!ft_strcmp(line_splited[0], CYLINDER))
+		errors = check_cylinder(line_splited);
+	else if (!ft_strcmp(line_splited[0], PLANE))
+		errors = check_plane(line_splited);
+	else if (line_splited[0][0] != '#')
+		errors = 1;
 	if (!errors)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);

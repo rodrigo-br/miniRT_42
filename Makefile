@@ -13,8 +13,11 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE)
-SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c
-PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c
+SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c \
+		ft_str_swap_set_chr.c ft_set_double_value.c
+PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
+		check_sphere.c check_plane.c check_cylinder.c set_object_coordinates.c \
+		set_object_rgb.c set_object_3d_orientation.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 
 DIRS	= . tuple parser
