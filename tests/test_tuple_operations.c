@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 15:36:45 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:15:07 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -580,7 +580,6 @@ void	test_cross_product(void)
 
 void	test_tuple_operations(void)
 {
-	srand(time(NULL));
 	RUN_TEST(is_tuple_value_correct);
 	RUN_TEST(is_vector_value_correct);
 	RUN_TEST(is_point_value_correct);
