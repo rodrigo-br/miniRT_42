@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:39:52 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:57:23 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_bool		is_equal_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sum_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sub_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*neg_tuple(t_tuple *a);
-t_tuple		*scalar_multiply(t_tuple *t, double multiplier);
-t_tuple		*scalar_divide(t_tuple *t, double divider);
+t_tuple		*scalar_multiply_tuple(t_tuple *t, double multiplier);
+t_tuple		*scalar_divide_tuple(t_tuple *t, double divider);
 
 /* Manipulators */
 double		dot_product(t_tuple *a, t_tuple *b);
