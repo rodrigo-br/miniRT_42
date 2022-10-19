@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 21:03:33 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:45:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
+# define OPACITY_MAX 255
 # define AMBIENT 'A'
 # define CAMERA 'C'
 # define LIGHT	'L'
