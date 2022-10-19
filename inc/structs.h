@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 15:01:01 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:49:26 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,14 @@ typedef struct s_scene
 	t_camera	camera;
 	t_object	*objects;
 }	t_scene;
+
+typedef struct s_canvas
+{
+	void	*image;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endianness;
+}	t_canvas;
 
 #endif
