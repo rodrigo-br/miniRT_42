@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:22:25 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:04:09 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:17:08 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_cylinder(char **line_splited)
 {
 	t_object	object;
+	char		**rgb;
 	int			errors;
 
 	object.type = ID_CYLINDER;
@@ -23,20 +24,18 @@ int	check_cylinder(char **line_splited)
 		return (EXIT_FAILURE);
 	errors = set_object_coordinates(&object.x, \
 									&object.y, \
-									&object.z, \
-									line_splited[1]);
+									&object.z, line_splited[1]);
 	errors += set_object_3d_orientation(&object.cylinder.x_3d, \
 										&object.cylinder.y_3d, \
-										&object.cylinder.z_3d, \
-										line_splited[2]);
+										&object.cylinder.z_3d, line_splited[2]);
 	errors += set_double_value(&object.cylinder.diameter, line_splited[3]);
 	errors += set_double_value(&object.cylinder.height, line_splited[4]);
-	object.rgb = (t_rgb *)malloc(sizeof(t_rgb));
-	object.rgb->opacity = 255;
-	errors += set_object_rgb(&object.rgb->red, \
-							&object.rgb->green, \
-							&object.rgb->blue, \
-							line_splited[5]);
+	rgb = check_rgb(line_splited[5]);
+	if (!rgb)
+		errors = 1;
+	else
+		object.rgb = create_color(ft_atoi(rgb[0]), \
+								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	if (errors)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

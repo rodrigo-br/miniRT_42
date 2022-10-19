@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:25:04 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:13:51 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	set_brightness(t_light *light, char *s)
 int	check_light(char **line_splited)
 {
 	t_light	light;
+	char	**rgb;
 	int		errors;
 
 	if (!line_splited || !line_splited[0] || !line_splited[1]
@@ -38,11 +39,13 @@ int	check_light(char **line_splited)
 									&light.z, \
 									line_splited[1]);
 	errors += set_brightness(&light, line_splited[2]);
-	light.rgb.opacity = 255;
-	errors += set_object_rgb(&light.rgb.red, \
-							&light.rgb.green, \
-							&light.rgb.blue, \
-							line_splited[3]);
+	rgb = check_rgb(line_splited[3]);
+	if (!rgb)
+		errors = 1;
+	else
+		light.rgb = create_color(ft_atoi(rgb[0]), \
+								ft_atoi(rgb[1]), \
+								ft_atoi(rgb[2]));
 	if (errors)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

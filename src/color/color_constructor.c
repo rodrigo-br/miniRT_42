@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_object_rgb.c                                   :+:      :+:    :+:   */
+/*   color_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 10:27:03 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:06:54 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/19 12:44:42 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	set_object_rgb(uchar *r, uchar *g, uchar *b, char *s)
+t_rgb	*create_color(int r, int g, int b)
 {
-	char	**rgb;
-	int		red;
-	int		green;
-	int		blue;
+	t_rgb	*rgb;
 
-	rgb = ft_split(s, ',');
-	if (check_rgb_digits(rgb, &red, &green, &blue))
-		return (EXIT_FAILURE);
-	*r = red;
-	*g = green;
-	*b = blue;
-	return (EXIT_SUCCESS);
+	rgb = (t_rgb *)malloc(sizeof(t_rgb));
+	if (!rgb)
+		return (NULL);
+	rgb->opacity = 255;
+	rgb->red = r;
+	rgb->green = g;
+	rgb->blue = b;
+	return (rgb);
 }

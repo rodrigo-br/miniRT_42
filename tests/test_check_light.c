@@ -8,8 +8,10 @@
 # define line_5 "255,5,2"
 # define line_6 "255,5,-2"
 # define full_line_1 ft_split("L 10,10,-10 1 250,250,250", ' ')
-# define full_line_2 ft_split("L 10,10,-10 1 250,250,250", ' ')
-# define full_line_3 ft_split("L 10,10,-10 1 250,250,250", ' ')
+# define full_line_2 ft_split("L 10,10,-10 1 0,1,255", ' ')
+# define full_line_3 ft_split("L 10,10,-10 1 0,0,0", ' ')
+# define full_line_4 ft_split("L 10,10,-10 1 0,0,-1", ' ')
+# define full_line_5 ft_split("L 10,10,-10 1 0,0,256", ' ')
 
 void	test_set_light_coordinates(void)
 {
@@ -49,38 +51,18 @@ void	test_set_light_brightness(void)
 	TEST_ASSERT_EQUAL_INT(1, set_brightness(&light, ft_strdup("1.0000000001")));
 }
 
-void	test_set_light_rgb(void)
-{
-	t_light light;
-
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_1)));
-	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_2)));
-	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.red);
-	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.green);
-	TEST_ASSERT_EQUAL_CHAR(0, light.rgb.blue);
-	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_3)));
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_4)));
-	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_5)));
-	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.red);
-	TEST_ASSERT_EQUAL_CHAR(5, light.rgb.green);
-	TEST_ASSERT_EQUAL_CHAR(2, light.rgb.blue);
-	TEST_ASSERT_EQUAL_CHAR(255, light.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&light.rgb.red, &light.rgb.green, &light.rgb.blue, ft_strdup(line_6)));
-}
-
 void	test_check_light_function(void)
 {
 	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_1));
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_1));
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_1));
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_1));
+	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_2));
+	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_3));
+	TEST_ASSERT_EQUAL_INT(1, check_light(full_line_4));
+	TEST_ASSERT_EQUAL_INT(1, check_light(full_line_5));
 }
 
 void test_check_light(void)
 {
 	RUN_TEST(test_set_light_coordinates);
 	RUN_TEST(test_set_light_brightness);
-	RUN_TEST(test_set_light_rgb);
 	RUN_TEST(test_check_light_function);
 }

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:07:14 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:42:33 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
 int			check_coordinates_digits(char **coordinates);
 int			set_object_coordinates(double *ob_x, double *ob_y, \
 double *ob_z, char *s);
-int			set_object_rgb(uchar *r, uchar *g, uchar *b, char *s);
+char		**check_rgb(char *s);
 int			set_object_3d_orientation(double *ob_x, double *ob_y, \
 double *ob_z, char *s);
 
@@ -75,13 +75,20 @@ t_bool		is_equal_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sum_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sub_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*neg_tuple(t_tuple *a);
-t_tuple		*scalar_multiply(t_tuple *t, double multiplier);
-t_tuple		*scalar_divide(t_tuple *t, double divider);
+t_tuple		*scalar_multiply_tuple(t_tuple *t, double multiplier);
+t_tuple		*scalar_divide_tuple(t_tuple *t, double divider);
 
 /* Manipulators */
 double		dot_product(t_tuple *a, t_tuple *b);
 double		magnitude(t_tuple *t);
 t_tuple		*normalize(t_tuple *t);
 t_tuple		*cross_product(t_tuple *a, t_tuple *b);
+
+/* Colors */
+t_rgb		*create_color(int r, int g, int b);
+t_rgb		*sum_color(t_rgb *a, t_rgb *b);
+t_rgb		*sub_color(t_rgb *a, t_rgb *b);
+t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
+t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
 
 #endif /* MINIRT_H */

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 10:44:53 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:31:34 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef union u_rgb
 typedef struct s_ambience
 {
 	double	ratio;
-	t_rgb	rgb;
+	t_rgb	*rgb;
 }	t_ambience;
 
 typedef struct s_camera
@@ -59,7 +59,7 @@ typedef struct s_light
 	double	y;
 	double	z;
 	double	brightness;
-	t_rgb	rgb;
+	t_rgb	*rgb;
 }	t_light;
 
 /* tipos de acordo com as especificaçoes de cada um */

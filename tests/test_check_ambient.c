@@ -11,26 +11,6 @@
 # define full_line_2 ft_split("A 0.2 255,255,255", ' ')
 # define full_line_3 ft_split("A 1 0,50,200", ' ')
 
-void	test_set_ambient_rgb(void)
-{
-	t_ambience ambient;
-
-	ambient.rgb.opacity = 255;
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_1)));
-	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_2)));
-	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.red);
-	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.green);
-	TEST_ASSERT_EQUAL_CHAR(0, ambient.rgb.blue);
-	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_3)));
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_4)));
-	TEST_ASSERT_EQUAL_INT(0, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_5)));
-	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.red);
-	TEST_ASSERT_EQUAL_CHAR(5, ambient.rgb.green);
-	TEST_ASSERT_EQUAL_CHAR(2, ambient.rgb.blue);
-	TEST_ASSERT_EQUAL_CHAR(255, ambient.rgb.opacity);
-	TEST_ASSERT_EQUAL_INT(1, set_object_rgb(&ambient.rgb.red, &ambient.rgb.green, &ambient.rgb.blue, ft_strdup(line_6)));
-}
 
 void test_set_ambient_ratio(void)
 {
@@ -55,6 +35,5 @@ void	test_check_ambient_function(void)
 void test_check_ambient(void)
 {
 	RUN_TEST(test_set_ambient_ratio);
-	RUN_TEST(test_set_ambient_rgb);
 	RUN_TEST(test_check_ambient_function);
 }

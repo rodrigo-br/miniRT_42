@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:40:47 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:12:41 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:16:03 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ int	set_ambient_light_ratio(t_ambience *ambient, char *s)
 int	check_ambient(char **line_splited)
 {
 	t_ambience	ambient;
+	char		**rgb;
 	int			errors;
 
 	if (!line_splited || !line_splited[0] || !line_splited[1]
 		|| !line_splited[2] || line_splited[3])
 		return (EXIT_FAILURE);
 	errors = set_ambient_light_ratio(&ambient, line_splited[1]);
-	ambient.rgb.opacity = 255;
-	errors += set_object_rgb(&ambient.rgb.red, \
-							&ambient.rgb.green, \
-							&ambient.rgb.blue, \
-							line_splited[2]);
+	rgb = check_rgb(line_splited[2]);
+	if (!rgb)
+		errors = 1;
+	else
+		ambient.rgb = create_color(ft_atoi(rgb[0]), \
+									ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	if (errors)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

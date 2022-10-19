@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkers.c                                         :+:      :+:    :+:   */
+/*   check_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 13:04:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 13:01:43 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/19 10:27:03 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/19 13:16:15 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	check_coordinates_digits(char **coordinates)
+char	**check_rgb(char *s)
 {
-	if (!coordinates || !coordinates[0] || !coordinates[1] || !coordinates[2]
-		|| coordinates[3] || !ft_is_a_double(coordinates[0])
-		|| !ft_is_a_double(coordinates[1]) || !ft_is_a_double(coordinates[2]))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+
+	rgb = ft_split(s, ',');
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || !ft_is_all_digit(rgb[0])
+		|| rgb[3] || !ft_is_all_digit(rgb[1]) || !ft_is_all_digit(rgb[2]))
+		return (NULL);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (NULL);
+	return (rgb);
 }
