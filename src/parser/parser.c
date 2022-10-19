@@ -6,23 +6,23 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 10:54:02 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:24:46 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	parse_line(char **line_splited)
+int	parse_line(char **line_splited, t_scene *scene)
 {
 	int	errors;
 
 	errors = 0;
-	if (line_splited[0][0] == LIGHT)
-		errors = check_light(line_splited);
-	else if (line_splited[0][0] == AMBIENT)
-		errors = check_ambient(line_splited);
-	else if (line_splited[0][0] == CAMERA)
-		errors = check_camera(line_splited);
+	if (line_splited[0][0] == LIGHT && !scene->light)
+		errors = check_light(line_splited, &scene->light);
+	else if (line_splited[0][0] == AMBIENT && !scene->ambience)
+		errors = check_ambient(line_splited, &scene->ambience);
+	else if (line_splited[0][0] == CAMERA && !scene->camera)
+		errors = check_camera(line_splited, &scene->camera);
 	else if (!ft_strcmp(line_splited[0], SPHERE))
 		errors = check_sphere(line_splited);
 	else if (!ft_strcmp(line_splited[0], CYLINDER))
@@ -36,7 +36,7 @@ int	parse_line(char **line_splited)
 	return (EXIT_FAILURE);
 }
 
-int	parser_1(int fd)
+int	parser_1(int fd, t_scene *scene)
 {
 	char		*line;
 	char		**line_splited;
@@ -51,7 +51,7 @@ int	parser_1(int fd)
 		free(line);
 		if (line_splited)
 		{
-			parse_line(line_splited);
+			parse_line(line_splited, scene);
 			ft_free_matrix((void *)&line_splited);
 		}
 		line = ft_gnl(fd, FALSE);

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 13:07:57 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:41:09 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	tearDown(void)
 int	main(void)
 {
 	UNITY_BEGIN();
-	test_tuple_operations();
+	// test_tuple_operations();
 	pre_parser_errors();
 	test_atod();
 	test_check_light();

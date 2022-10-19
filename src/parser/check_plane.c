@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 13:15:46 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:42:13 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_plane(char **line_splited)
 {
-	t_object	object;
+	(void)line_splited;
+	/* t_object	object;
 	char		**rgb;
 	int			errors;
 
@@ -37,6 +38,6 @@ int	check_plane(char **line_splited)
 		object.rgb = create_color(ft_atoi(rgb[0]), \
 								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	if (errors)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILURE); */
 	return (EXIT_SUCCESS);
 }

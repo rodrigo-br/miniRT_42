@@ -7,62 +7,49 @@
 # define line_4 "255.0,500.999,10.00001"
 # define line_5 "255,5,2"
 # define line_6 "255,5,-2"
-# define full_line_1 ft_split("L 10,10,-10 1 250,250,250", ' ')
-# define full_line_2 ft_split("L 10,10,-10 1 0,1,255", ' ')
-# define full_line_3 ft_split("L 10,10,-10 1 0,0,0", ' ')
-# define full_line_4 ft_split("L 10,10,-10 1 0,0,-1", ' ')
-# define full_line_5 ft_split("L 10,10,-10 1 0,0,256", ' ')
-
-void	test_set_light_coordinates(void)
-{
-	t_light	light;
-
-	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_1));
-	TEST_ASSERT_EQUAL_DOUBLE(10, light.x);
-	TEST_ASSERT_EQUAL_DOUBLE(10, light.y);
-	TEST_ASSERT_EQUAL_DOUBLE(-10, light.z);
-	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_2));
-	TEST_ASSERT_EQUAL_DOUBLE(0, light.x);
-	TEST_ASSERT_EQUAL_DOUBLE(0, light.y);
-	TEST_ASSERT_EQUAL_DOUBLE(0, light.z);
-	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_3));
-	TEST_ASSERT_EQUAL_DOUBLE(0.1, light.x);
-	TEST_ASSERT_EQUAL_DOUBLE(10.5, light.y);
-	TEST_ASSERT_EQUAL_DOUBLE(40.3, light.z);
-	set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup(line_4));
-	TEST_ASSERT_EQUAL_DOUBLE(255.0, light.x);
-	TEST_ASSERT_EQUAL_DOUBLE(500.999, light.y);
-	TEST_ASSERT_EQUAL_DOUBLE(10.00001, light.z);
-	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("abc")));
-	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("10,0,0.a")));
-	TEST_ASSERT_EQUAL_INT(1, set_object_coordinates(&light.x, &light.y, &light.z, ft_strdup("10,0,0.0a")));
-}
-
-void	test_set_light_brightness(void)
-{
-	t_light	light;
-	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("1")));
-	TEST_ASSERT_EQUAL_DOUBLE(1, light.brightness);
-	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("0.7")));
-	TEST_ASSERT_EQUAL_DOUBLE(0.7, light.brightness);
-	TEST_ASSERT_EQUAL_INT(0, set_brightness(&light, ft_strdup("0.0000000001")));
-	TEST_ASSERT_EQUAL_DOUBLE(0.0000000001, light.brightness);
-	TEST_ASSERT_EQUAL_INT(1, set_brightness(&light, ft_strdup("48")));
-	TEST_ASSERT_EQUAL_INT(1, set_brightness(&light, ft_strdup("1.0000000001")));
-}
+# define full_line_1 "L 10,10,-10 1 250,250,250"
+# define full_line_2 "L 10,10,-10 1 0,1,255"
+# define full_line_3 "L 10,10,-10 1 0,0,0"
+# define full_line_4 "L 10,10,-10 1 0,0,-1"
+# define full_line_5 "L 10,10,-10 1 0,0,256"
+# define full_line_6 "L 10.0.,10,-10 1 0,0,0"
+# define full_line_7 "L 10.0,10,-10 2 0,0,0"
 
 void	test_check_light_function(void)
 {
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_1));
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_2));
-	TEST_ASSERT_EQUAL_INT(0, check_light(full_line_3));
-	TEST_ASSERT_EQUAL_INT(1, check_light(full_line_4));
-	TEST_ASSERT_EQUAL_INT(1, check_light(full_line_5));
+	t_light 	*light;
+	char		**splited;
+
+	splited = ft_split(full_line_1, ' ');
+	TEST_ASSERT_EQUAL_INT(0, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	free(light->rgb);
+	free(light);
+	splited = ft_split(full_line_2, ' ');
+	TEST_ASSERT_EQUAL_INT(0, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	free(light->rgb);
+	free(light);
+	splited = ft_split(full_line_3, ' ');
+	TEST_ASSERT_EQUAL_INT(0, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	free(light->rgb);
+	free(light);
+	splited = ft_split(full_line_4, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	splited = ft_split(full_line_5, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	splited = ft_split(full_line_6, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
+	splited = ft_split(full_line_7, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_light(splited, &light));
+	ft_free_matrix((void *)&splited);
 }
 
 void test_check_light(void)
 {
-	RUN_TEST(test_set_light_coordinates);
-	RUN_TEST(test_set_light_brightness);
 	RUN_TEST(test_check_light_function);
 }

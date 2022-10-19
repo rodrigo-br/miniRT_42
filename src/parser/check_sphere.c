@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 13:17:46 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 16:41:51 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_sphere(char **line_splited)
 {
-	t_object	object;
+	(void)line_splited;
+	/* t_object	object;
 	char		**rgb;
 	int			errors;
 
@@ -33,6 +34,6 @@ int	check_sphere(char **line_splited)
 		object.rgb = create_color(ft_atoi(rgb[0]), \
 									ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	if (errors)
-		return (EXIT_FAILURE);
+		return (EXIT_FAILURE); */
 	return (EXIT_SUCCESS);
 }

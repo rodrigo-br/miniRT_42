@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:31:34 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:55:23 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ typedef struct s_object
 
 typedef struct s_scene
 {
-	t_ambience	ambience;
-	t_light		light;
-	t_camera	camera;
+	t_ambience	*ambience;
+	t_light		*light;
+	t_camera	*camera;
 	t_list		*objects;
 }	t_scene;
 

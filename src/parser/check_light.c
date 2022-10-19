@@ -6,13 +6,13 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 13:13:51 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:36:24 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	set_brightness(t_light *light, char *s)
+int	check_brightness(char *s)
 {
 	double	brightness;
 
@@ -21,32 +21,45 @@ int	set_brightness(t_light *light, char *s)
 	brightness = ft_atod(s);
 	if (brightness < 0.0 || brightness > 1.0)
 		return (EXIT_FAILURE);
-	light->brightness = brightness;
 	return (EXIT_SUCCESS);
 }
 
-int	check_light(char **line_splited)
+t_light	*set_light(char **coordinates, char **rgb, double brightness)
 {
-	t_light	light;
-	char	**rgb;
-	int		errors;
+	t_light	*light;
 
-	if (!line_splited || !line_splited[0] || !line_splited[1]
-		|| !line_splited[2] || !line_splited[3] || line_splited[4])
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
+		return (ft_free_matrix((void *)&rgb), \
+		ft_free_matrix((void *)&coordinates), NULL);
+	light->x = ft_atod(coordinates[0]);
+	light->y = ft_atod(coordinates[1]);
+	light->z = ft_atod(coordinates[2]);
+	light->rgb = create_color(ft_atoi(rgb[0]), \
+							ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	light->brightness = brightness;
+	return (ft_free_matrix((void *)&coordinates), \
+	ft_free_matrix((void *)&rgb), light);
+}
+
+int	check_light(char **line_splited, t_light **light)
+{
+	char	**coordinates;
+	char	**rgb;
+
+	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
-	errors = set_object_coordinates(&light.x, \
-									&light.y, \
-									&light.z, \
-									line_splited[1]);
-	errors += set_brightness(&light, line_splited[2]);
+	coordinates = ft_split(line_splited[1], ',');
+	if (!coordinates)
+		return (EXIT_FAILURE);
+	if (check_coordinates_digits(coordinates)
+		|| check_brightness(line_splited[2]))
+		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
 	rgb = check_rgb(line_splited[3]);
 	if (!rgb)
-		errors = 1;
-	else
-		light.rgb = create_color(ft_atoi(rgb[0]), \
-								ft_atoi(rgb[1]), \
-								ft_atoi(rgb[2]));
-	if (errors)
+	 	return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
+	*light = set_light(coordinates, rgb, ft_atod(line_splited[2]));
+	if (!(*light))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
