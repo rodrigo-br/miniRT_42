@@ -18,7 +18,7 @@ PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 COLOR	= color_constructor.c color_operations.c
 
-DIRS	= . tuple parser
+DIRS	= . tuple color parser
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
