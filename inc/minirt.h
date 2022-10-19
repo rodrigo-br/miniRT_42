@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 12:45:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:30:46 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ t_rgb		*create_color(int r, int g, int b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
-t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
+t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
 
 #endif /* MINIRT_H */
