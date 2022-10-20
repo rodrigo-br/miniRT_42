@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:08:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 15:33:50 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 22:19:04 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	decode_rgba(int r, int g, int b)
 {
-	return (((r & 0xFF) << 24) + ((g & 0xFF) << 16) + ((b & 0xFF) << 8) + (OPACITY_MAX & 0xFF));
-}
-
-int	color_rand()
-{
-	return (rand() % 256);
+	return (((r & 0xFF) << 16) + ((g & 0xFF) << 8) + ((b & 0xFF)));
 }
 
 void	test_color_creation(void)
@@ -29,9 +24,9 @@ void	test_color_creation(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		r = color_rand();
-		g = color_rand();
-		b = color_rand();
+		r = rand();
+		g = rand();
+		b = rand();
 		color = create_color(r, g, b);
 		TEST_ASSERT_EQUAL_HEX(decode_rgba(r, g, b), color->color);
 		free(color);
@@ -45,17 +40,17 @@ void	test_sum_colors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		ra = color_rand();
-		ga = color_rand();
-		ba = color_rand();
-		rb = color_rand();
-		gb = color_rand();
-		bb = color_rand();
+		ra = rand();
+		ga = rand();
+		ba = rand();
+		rb = rand();
+		gb = rand();
+		bb = rand();
 		color_a = create_color(ra, ga, ba);
 		color_b = create_color(rb, gb, bb);
 		sum = sum_color(color_a, color_b);
 		TEST_ASSERT_EQUAL_HEX(
-			(decode_rgba(((ra + rb) % 256), ((ga + gb) % 256), ((ba + bb) % 256))),
+			(decode_rgba(((ra + rb)), ((ga + gb)), ((ba + bb)))),
 			sum->color
 		);
 		free(color_a);
@@ -71,17 +66,17 @@ void	test_sub_colors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		ra = color_rand();
-		ga = color_rand();
-		ba = color_rand();
-		rb = color_rand();
-		gb = color_rand();
-		bb = color_rand();
+		ra = rand();
+		ga = rand();
+		ba = rand();
+		rb = rand();
+		gb = rand();
+		bb = rand();
 		color_a = create_color(ra, ga, ba);
 		color_b = create_color(rb, gb, bb);
 		sub = sub_color(color_a, color_b);
 		TEST_ASSERT_EQUAL_HEX(
-			(decode_rgba(((ra - rb) % 256), ((ga - gb) % 256), ((ba - bb) % 256))),
+			decode_rgba((ra - rb), (ga - gb), (ba - bb)),
 			sub->color
 		);
 		free(color_a);
@@ -97,17 +92,17 @@ void	test_multiply_colors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		ra = color_rand();
-		ga = color_rand();
-		ba = color_rand();
-		rb = color_rand();
-		gb = color_rand();
-		bb = color_rand();
+		ra = rand();
+		ga = rand();
+		ba = rand();
+		rb = rand();
+		gb = rand();
+		bb = rand();
 		color_a = create_color(ra, ga, ba);
 		color_b = create_color(rb, gb, bb);
 		multiply = multiply_color(color_a, color_b);
 		TEST_ASSERT_EQUAL_HEX(
-			(decode_rgba(((ra * rb) % 256), ((ga * gb) % 256), ((ba * bb) % 256))),
+			decode_rgba((ra * rb), (ga * gb), (ba * bb)),
 			multiply->color
 		);
 		free(color_a);
@@ -123,14 +118,14 @@ void	test_scalar_multiply_colors(void)
 
 	for (int i = 0; i < LOOP_ITERATIONS; i++)
 	{
-		r = color_rand();
-		g = color_rand();
-		b = color_rand();
+		r = rand();
+		g = rand();
+		b = rand();
 		multiplier = rand();
 		color_a = create_color(r, g, b);
 		multiply = scalar_multiply_color(color_a, multiplier);
 		TEST_ASSERT_EQUAL_HEX(
-			(decode_rgba(((r * multiplier) % 256), ((g * multiplier) % 256), ((b * multiplier) % 256))),
+			decode_rgba((r * multiplier), (g * multiplier), (b * multiplier)),
 			multiply->color
 		);
 		free(color_a);
