@@ -56,7 +56,8 @@ miniRT
 miniRT_tests
 *.gen
 .normignore
-check_test
+mlx_test
+mlx-test
 
 # Custom directories
 .vscode/

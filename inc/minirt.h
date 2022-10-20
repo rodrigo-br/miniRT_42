@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:15:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:45:18 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
+# define OPACITY_MAX 255
 # define AMBIENT 'A'
 # define CAMERA 'C'
 # define LIGHT	'L'
@@ -90,6 +91,10 @@ t_rgb		*create_color(int r, int g, int b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
-t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
+t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
+
+/* Canvas */
+t_canvas	*create_canvas(void *mlx, int width, int height);
+void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 
 #endif /* MINIRT_H */

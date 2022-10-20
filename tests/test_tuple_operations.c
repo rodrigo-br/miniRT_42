@@ -6,20 +6,11 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 20:53:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:29:55 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include <minirt.h>
-#include <time.h>
-
-#define LOOP_ITERATIONS 100
-
-double double_rand()
-{
-	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
-}
+#include <tests.h>
 
 void	is_tuple_value_correct(void)
 {
@@ -558,6 +549,7 @@ void	test_dot_product(void)
 			dot_product(a, b)
 		);
 		free(a);
+		free(b);
 	}
 }
 
@@ -583,7 +575,6 @@ void	test_cross_product(void)
 
 void	test_tuple_operations(void)
 {
-	srand(time(NULL));
 	RUN_TEST(is_tuple_value_correct);
 	RUN_TEST(is_vector_value_correct);
 	RUN_TEST(is_point_value_correct);

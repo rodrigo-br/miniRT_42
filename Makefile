@@ -12,17 +12,18 @@ OBJS	= $(MAIN:%.c=$(OBJ_DIR)/%.o)
 HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
-MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR)
-SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c lst_obj_free.c \
-		ft_str_swap_set_chr.c ft_set_double_value.c ft_get_matrix_len.c \
-		free_scene.c
+		
+MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS)
+SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c \
+		lst_obj_free.c ft_set_double_value.c ft_get_matrix_len.c free_scene.c
 PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
-		check_sphere.c check_plane.c check_cylinder.c \
-		check_rgb.c check_object_3d_orientation.c
+		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
+		check_object_3d_orientation.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 COLOR	= color_constructor.c color_operations.c
+CANVAS	= canvas_constructor.c write_to_canvas.c
 
-DIRS	= . tuple parser color
+DIRS	= . tuple color canvas parser
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror

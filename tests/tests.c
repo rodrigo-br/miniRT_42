@@ -6,12 +6,11 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 18:48:29 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:49:41 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include "tests.h"
+#include <tests.h>
 
 void	setUp(void)
 {
@@ -25,8 +24,11 @@ void	tearDown(void)
 
 int	main(void)
 {
+	srand(time(NULL));
 	UNITY_BEGIN();
-	// test_tuple_operations();
+	test_tuple_operations();
+	test_colors();
+	test_canvas();
 	pre_parser_errors();
 	test_atod();
 	test_check_light();

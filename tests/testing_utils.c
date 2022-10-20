@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_constructor.c                                :+:      :+:    :+:   */
+/*   testing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 20:46:13 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/20 14:30:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include <tests.h>
 
-t_rgb	*create_color(int r, int g, int b)
+double double_rand()
 {
-	t_rgb	*rgb;
+	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
+}
 
-	rgb = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!rgb)
-		return (NULL);
-	rgb->opacity = 255;
-	rgb->red = r;
-	rgb->green = g;
-	rgb->blue = b;
-	rgb->opacity = 0;
-	return (rgb);
+int	decode_rgba(int r, int g, int b)
+{
+	return (((r & 0xFF) << 16) + ((g & 0xFF) << 8) + ((b & 0xFF)));
 }

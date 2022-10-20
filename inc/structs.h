@@ -6,12 +6,19 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 13:55:23 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:46:00 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef enum e_object_id
+{
+	ID_SPHERE,
+	ID_CYLINDER,
+	ID_PLANE,
+}	t_object_id;
 
 typedef struct s_tuple
 {
@@ -29,10 +36,10 @@ typedef union u_rgb
 	int					color;
 	struct
 	{
-		unsigned char	opacity;
-		unsigned char	red;
-		unsigned char	green;
 		unsigned char	blue;
+		unsigned char	green;
+		unsigned char	red;
+		unsigned char	opacity;
 	};
 }	t_rgb;
 
@@ -104,11 +111,13 @@ typedef struct s_scene
 	t_list		*objects;
 }	t_scene;
 
-typedef enum e_object_id
+typedef struct s_canvas
 {
-	ID_SPHERE,
-	ID_CYLINDER,
-	ID_PLANE,
-}	t_object_id;
+	void	*image;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endianness;
+}	t_canvas;
 
 #endif
