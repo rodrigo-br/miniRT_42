@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 17:44:15 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:30:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@ void	test_parser(void);
 void	test_check_light(void);
 void	test_check_ambient(void);
 void	test_check_camera(void);
+
+/* Utils */
+double	double_rand();
+int		decode_rgba(int r, int g, int b);
 
 #endif /* TESTS_H */

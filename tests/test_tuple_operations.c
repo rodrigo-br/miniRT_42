@@ -6,16 +6,11 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 18:15:07 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:29:55 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tests.h>
-
-double double_rand()
-{
-	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
-}
 
 void	is_tuple_value_correct(void)
 {

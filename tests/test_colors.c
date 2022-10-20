@@ -6,16 +6,11 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:08:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 22:19:04 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:30:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tests.h>
-
-int	decode_rgba(int r, int g, int b)
-{
-	return (((r & 0xFF) << 16) + ((g & 0xFF) << 8) + ((b & 0xFF)));
-}
 
 void	test_color_creation(void)
 {
