@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:15:19 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 17:04:03 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:59:29 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,21 @@ t_camera	*set_camera(char **coordinates, char **line_splited)
 	camera->y_3d = ft_atod(ori_3d[1]);
 	camera->z_3d = ft_atod(ori_3d[2]);
 	camera->fov = ft_atoi(line_splited[1]);
-	return (ft_free_matrix((void *)&coordinates), \
-	ft_free_matrix((void *)&ori_3d), camera);
+	ft_free_matrix((void *)&coordinates);
+	ft_free_matrix((void *)&ori_3d);
+	return (camera);
 }
 
 int	check_camera(char **line_splited, t_camera **camera)
 {
-	int			errors;
+	int		errors;
 	char	**coordinates;
 
 	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
 	coordinates = ft_split(line_splited[1], ',');
-	if (!coordinates)
+	if (!coordinates || check_coordinates_digits(coordinates))
 		return (EXIT_FAILURE);
-	if (check_coordinates_digits(coordinates))
-		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
 	errors = check_object_3d_orientation(line_splited[2]);
 	errors += check_camera_fov(line_splited[3]);
 	if (errors)

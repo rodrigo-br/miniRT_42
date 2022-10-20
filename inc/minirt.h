@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 16:45:11 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:30:26 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int			parser_1(int fd, t_scene *scene);
 int			check_light(char **line_splited, t_light **light);
 int			check_ambient(char **line_splited, t_ambience **ambience);
 int			check_camera(char **line_splited, t_camera **camera);
-int			check_sphere(char **line_splited);
-int			check_plane(char **line_splited);
-int			check_cylinder(char **line_splited);
+int			check_sphere(char **line_splited, t_list **object);
+int			check_plane(char **line_splited, t_list **object);
+int			check_cylinder(char **line_splited, t_list **object);
 int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
 int			check_object_3d_orientation(char *s);
 int			check_coordinates_digits(char **coordinates);

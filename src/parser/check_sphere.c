@@ -6,34 +6,51 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 16:41:51 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 11:51:34 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	check_sphere(char **line_splited)
+t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 {
-	(void)line_splited;
-	/* t_object	object;
-	char		**rgb;
-	int			errors;
+	t_object	*object;
 
-	object.type = ID_SPHERE;
-	if (!line_splited || !line_splited[0] || !line_splited[1]
-		|| !line_splited[2] || !line_splited[3] || line_splited[4])
+	object = (t_object *)malloc(sizeof(t_object));
+	if (!object)
+	{
+		ft_free_matrix((void *)&coordinates);
+		ft_free_matrix((void *)&rgb);
+		return (NULL);
+	}
+	object->type = ID_SPHERE;
+	object->x = ft_atod(coordinates[0]);
+	object->y = ft_atod(coordinates[1]);
+	object->z = ft_atod(coordinates[2]);
+	object->rgb = create_color(ft_atoi(rgb[0]), \
+								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	object->sphere = ft_atod(s);
+	return (object);
+}
+
+int	check_sphere(char **line_splited, t_list **object)
+{
+	char		**rgb;
+	char		**coordinates;
+	t_object	*new_obj;
+
+	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
-	errors = set_object_coordinates(&object.x, \
-								&object.y, \
-								&object.z, line_splited[1]);
-	errors += set_double_value(&object.sphere, line_splited[2]);
+	coordinates = ft_split(line_splited[1], ',');
+	if (!coordinates || check_coordinates_digits(coordinates)
+		|| ft_is_a_double(line_splited[2]))
+		return (EXIT_FAILURE);
 	rgb = check_rgb(line_splited[3]);
 	if (!rgb)
-		errors = 1;
-	else
-		object.rgb = create_color(ft_atoi(rgb[0]), \
-									ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-	if (errors)
-		return (EXIT_FAILURE); */
+		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
+	new_obj = set_sphere(coordinates, rgb, line_splited[2]);
+	if (!(new_obj))
+		return (EXIT_FAILURE);
+	ft_lstadd_back(object, ft_lstnew(new_obj));
 	return (EXIT_SUCCESS);
 }
