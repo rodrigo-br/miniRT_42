@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 17:49:26 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:42:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef union u_rgb
 	int					color;
 	struct
 	{
-		unsigned char	opacity;
 		unsigned char	blue;
 		unsigned char	green;
 		unsigned char	red;
+		unsigned char	opacity;
 	};
 }	t_rgb;
 
@@ -102,9 +102,9 @@ typedef struct s_scene
 typedef struct s_canvas
 {
 	void	*image;
-	char	*addr;
-	int		bpp;
-	int		line_len;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endianness;
 }	t_canvas;
 

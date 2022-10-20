@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 12:45:20 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:42:50 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_rgb	*create_color(int r, int g, int b)
 	rgb = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!rgb)
 		return (NULL);
-	rgb->opacity = OPACITY_MAX;
 	rgb->red = r;
 	rgb->green = g;
 	rgb->blue = b;
+	rgb->opacity = 0;
 	return (rgb);
 }
