@@ -42,4 +42,7 @@ $(OBJ_DIR):
 run: all
 	./$(NAME)
 
+val: all
+	valgrind --leak-check=full ./$(NAME)
+
 .PHONY:	all clean fclean re run

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst_obj_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:14:09 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/20 18:10:26 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/20 19:03:02 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(void)
+void	free_lst_obj(void *_obj)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+	t_object	*obj;
+
+	obj = (t_object *)_obj;
+	free(obj->rgb);
+	free(obj);
 }

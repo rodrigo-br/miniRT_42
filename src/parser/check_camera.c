@@ -6,71 +6,64 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:15:19 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:39:00 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:59:29 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	set_camera_fov(t_camera *camera, char *s)
+int	check_camera_fov(char *s)
 {
 	int	fov;
 
-	if (!s || !s[0] || s[1] || !ft_is_all_digit(s))
+	if (!s || !s[0] || !ft_is_all_digit(s))
 		return (EXIT_FAILURE);
 	fov = ft_atoi(s);
 	if (fov > 180 || fov < 0)
 		return (EXIT_FAILURE);
-	camera->fov = fov;
 	return (EXIT_SUCCESS);
 }
 
-int	set_camera_3d_orientation(t_camera *camera, char *s)
+t_camera	*set_camera(char **coordinates, char **line_splited)
 {
-	char	**coordinates;
-	double	x;
-	double	y;
-	double	z;
+	t_camera	*camera;
+	char		**ori_3d;
 
-	coordinates = ft_split(s, ',');
-	if (check_coordinates_digits(coordinates))
-		return (EXIT_FAILURE);
-	x = ft_atod(coordinates[0]);
-	y = ft_atod(coordinates[1]);
-	z = ft_atod(coordinates[2]);
-	if (x < -1 || x > 1.0 || y < -1 || y > 1.0 || z < -1 || z > 1.0)
-		return (EXIT_FAILURE);
-	camera->x_3d = x;
-	camera->y_3d = y;
-	camera->z_3d = z;
-	return (EXIT_SUCCESS);
-}
-
-int	set_camera_coordinates(t_camera *camera, char *s)
-{
-	char	**coordinates;
-
-	coordinates = ft_split(s, ',');
-	if (check_coordinates_digits(coordinates))
-		return (EXIT_FAILURE);
+	ori_3d = ft_split(line_splited[0], ',');
+	if (!ori_3d)
+		return (ft_free_matrix((void *)&coordinates), NULL);
+	camera = (t_camera *)malloc(sizeof(t_camera));
+	if (!camera)
+		return (ft_free_matrix((void *)&ori_3d), \
+		ft_free_matrix((void *)&coordinates), NULL);
 	camera->view_x = ft_atod(coordinates[0]);
 	camera->view_y = ft_atod(coordinates[1]);
 	camera->view_z = ft_atod(coordinates[2]);
-	return (EXIT_SUCCESS);
+	camera->x_3d = ft_atod(ori_3d[0]);
+	camera->y_3d = ft_atod(ori_3d[1]);
+	camera->z_3d = ft_atod(ori_3d[2]);
+	camera->fov = ft_atoi(line_splited[1]);
+	ft_free_matrix((void *)&coordinates);
+	ft_free_matrix((void *)&ori_3d);
+	return (camera);
 }
 
-int	check_camera(char **line_splited)
+int	check_camera(char **line_splited, t_camera **camera)
 {
-	t_camera	camera;
-	int			errors;
+	int		errors;
+	char	**coordinates;
 
-	if (!line_splited || !line_splited[0] || !line_splited[1]
-		|| !line_splited[2] || !line_splited[3] || line_splited[4])
+	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
-	errors = set_camera_coordinates(&camera, line_splited[1]);
-	errors += set_camera_3d_orientation(&camera, line_splited[2]);
-	errors += set_camera_fov(&camera, line_splited[3]);
+	coordinates = ft_split(line_splited[1], ',');
+	if (!coordinates || check_coordinates_digits(coordinates))
+		return (EXIT_FAILURE);
+	errors = check_object_3d_orientation(line_splited[2]);
+	errors += check_camera_fov(line_splited[3]);
 	if (errors)
+		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
+	*camera = set_camera(coordinates, line_splited + 2);
+	if (!(*camera))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

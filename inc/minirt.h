@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 17:42:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:45:18 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,33 @@
 # define PLANE	"pl"
 # define CYLINDER "cy"
 
+/* Errors before canvas*/
 int			errors(int argc, char **argv);
-int			parser_1(int fd);
-int			check_light(char **line_splited);
-int			check_ambient(char **line_splited);
-int			check_camera(char **line_splited);
+
+/* Parser */
+int			parser_1(int fd, t_scene *scene);
+int			check_light(char **line_splited, t_light **light);
+int			check_ambient(char **line_splited, t_ambience **ambience);
+int			check_camera(char **line_splited, t_camera **camera);
+int			check_sphere(char **line_splited, t_list **object);
+int			check_plane(char **line_splited, t_list **object);
+int			check_cylinder(char **line_splited, t_list **object);
+int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
+int			check_object_3d_orientation(char *s);
+int			check_coordinates_digits(char **coordinates);
+char		**check_rgb(char *s);
+
+/* List */
+void		free_lst_obj(void *obj);
+void		free_scene(t_scene *scene);
+
+/* Extra libft functions */
 double		ft_atod(char *s);
 int			ft_is_a_double(char *string);
 int			ft_is_all_digit(char *string);
 void		ft_str_swap_set_chr(char *str, char *old, char new);
-int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
-int			check_coordinates_digits(char **coordinates);
+int			set_double_value(double *variable, char *value);
+size_t		ft_get_matrix_len(char **matrix);
 
 /* Constructors */
 t_tuple		*create_tuple(double x, double y, double z, double w);

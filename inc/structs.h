@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 21:42:40 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:46:00 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef enum e_object_id
+{
+	ID_SPHERE,
+	ID_CYLINDER,
+	ID_PLANE,
+}	t_object_id;
 
 typedef struct s_tuple
 {
@@ -39,7 +46,7 @@ typedef union u_rgb
 typedef struct s_ambience
 {
 	double	ratio;
-	t_rgb	rgb;
+	t_rgb	*rgb;
 }	t_ambience;
 
 typedef struct s_camera
@@ -59,44 +66,49 @@ typedef struct s_light
 	double	y;
 	double	z;
 	double	brightness;
-	t_rgb	rgb;
-}	t_light;
-
-typedef struct s_object
-{
-	int		type;
-	double	x;
-	double	y;
-	double	z;
 	t_rgb	*rgb;
-	void	*specs;
-}	t_object;
+}	t_light;
 
 /* tipos de acordo com as especificaçoes de cada um */
 typedef double	t_sphere;
 
 typedef struct s_plane
 {
-	double	x;
-	double	y;
-	double	z;
+	double	x_3d;
+	double	y_3d;
+	double	z_3d;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	double	x;
-	double	y;
-	double	z;
-	double	diamenter;
+	double	x_3d;
+	double	y_3d;
+	double	z_3d;
+	double	diameter;
 	double	height;
 }	t_cylinder;
 
+typedef struct s_object
+{
+	int		type;
+	union
+	{
+		t_sphere	sphere;
+		t_cylinder	cylinder;
+		t_plane		plane;
+	};
+	double	x;
+	double	y;
+	double	z;
+	t_rgb	*rgb;
+}	t_object;
+
 typedef struct s_scene
 {
-	t_ambience	ambience;
-	t_light		light;
-	t_camera	camera;
-	t_object	*objects;
+	t_ambience	*ambience;
+	t_light		*light;
+	t_camera	*camera;
+	t_list		*objects;
 }	t_scene;
 
 typedef struct s_canvas

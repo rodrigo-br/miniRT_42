@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_set_double_value.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:14:09 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/19 11:03:11 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/19 11:03:19 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(void)
+int	set_double_value(double *variable, char *value)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+	double	double_value;
+
+	if (!ft_is_a_double(value))
+		return (EXIT_FAILURE);
+	double_value = ft_atod(value);
+	*variable = double_value;
+	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 22:19:27 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:49:41 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,9 @@ int	main(void)
 	test_check_light();
 	test_check_ambient();
 	test_check_camera();
+	test_check_cylinder();
+	test_check_plane();
+	test_check_sphere();
+	test_parser();
 	return (UNITY_END());
 }

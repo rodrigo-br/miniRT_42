@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_get_matrix_len.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:14:09 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/19 15:51:17 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/19 15:55:27 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(void)
+size_t	ft_get_matrix_len(char **matrix)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+	size_t	i;
+
+	if (!matrix || !(*matrix))
+		return (0);
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
 }

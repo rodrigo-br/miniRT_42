@@ -1,62 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_light.c                                      :+:      :+:    :+:   */
+/*   check_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 15:17:49 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/20 18:39:30 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	check_brightness(char *s)
+t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 {
-	double	brightness;
+	t_object	*object;
 
-	if (!ft_is_a_double(s))
-		return (EXIT_FAILURE);
-	brightness = ft_atod(s);
-	if (brightness < 0.0 || brightness > 1.0)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-t_light	*set_light(char **coordinates, char **rgb, double brightness)
-{
-	t_light	*light;
-
-	light = (t_light *)malloc(sizeof(t_light));
-	if (!light)
+	object = (t_object *)malloc(sizeof(t_object));
+	if (!object)
 	{
-		ft_free_matrix((void *)&rgb);
 		ft_free_matrix((void *)&coordinates);
+		ft_free_matrix((void *)&rgb);
 		return (NULL);
 	}
-	light->x = ft_atod(coordinates[0]);
-	light->y = ft_atod(coordinates[1]);
-	light->z = ft_atod(coordinates[2]);
-	light->rgb = create_color(ft_atoi(rgb[0]), \
-							ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-	light->brightness = brightness;
+	object->type = ID_SPHERE;
+	object->x = ft_atod(coordinates[0]);
+	object->y = ft_atod(coordinates[1]);
+	object->z = ft_atod(coordinates[2]);
+	object->rgb = create_color(ft_atoi(rgb[0]), \
+								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	object->sphere = ft_atod(s);
 	ft_free_matrix((void *)&coordinates);
 	ft_free_matrix((void *)&rgb);
-	return (light);
+	return (object);
 }
 
-int	check_light(char **line_splited, t_light **light)
+int	check_sphere(char **line_splited, t_list **object)
 {
-	char	**coordinates;
-	char	**rgb;
+	char		**rgb;
+	char		**coordinates;
+	t_object	*new_obj;
 
 	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
 	coordinates = ft_split(line_splited[1], ',');
 	if (!coordinates || check_coordinates_digits(coordinates))
 		return (EXIT_FAILURE);
-	if (check_brightness(line_splited[2]))
+	if (!ft_is_a_double(line_splited[2]))
 	{
 		ft_free_matrix((void *)&coordinates);
 		return (EXIT_FAILURE);
@@ -64,8 +54,9 @@ int	check_light(char **line_splited, t_light **light)
 	rgb = check_rgb(line_splited[3]);
 	if (!rgb)
 		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
-	*light = set_light(coordinates, rgb, ft_atod(line_splited[2]));
-	if (!(*light))
+	new_obj = set_sphere(coordinates, rgb, line_splited[2]);
+	if (!(new_obj))
 		return (EXIT_FAILURE);
+	ft_lstadd_back(object, ft_lstnew(new_obj));
 	return (EXIT_SUCCESS);
 }

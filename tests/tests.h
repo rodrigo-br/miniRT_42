@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 20:30:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:49:05 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	test_parser(void);
 void	test_check_light(void);
 void	test_check_ambient(void);
 void	test_check_camera(void);
+void	test_check_cylinder(void);
+void	test_check_plane(void);
+void	test_check_sphere(void);
 
 /* Utils */
 double	double_rand();
