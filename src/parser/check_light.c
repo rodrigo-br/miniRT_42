@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 09:59:08 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:17:49 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ int	check_light(char **line_splited, t_light **light)
 	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
 	coordinates = ft_split(line_splited[1], ',');
-	if (!coordinates || check_coordinates_digits(coordinates)
-		|| check_brightness(line_splited[2]))
+	if (!coordinates || check_coordinates_digits(coordinates))
 		return (EXIT_FAILURE);
+	if (check_brightness(line_splited[2]))
+	{
+		ft_free_matrix((void *)&coordinates);
+		return (EXIT_FAILURE);
+	}
 	rgb = check_rgb(line_splited[3]);
 	if (!rgb)
 		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);

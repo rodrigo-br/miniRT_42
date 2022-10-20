@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:44:26 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 16:44:39 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:08:11 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ int	check_object_3d_orientation(char *s)
 	double	z;
 
 	coordinates = ft_split(s, ',');
-	if (!coordinates)
+	if (!coordinates || check_coordinates_digits(coordinates))
 		return (EXIT_FAILURE);
-	if (check_coordinates_digits(coordinates))
-		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
 	x = ft_atod(coordinates[0]);
 	y = ft_atod(coordinates[1]);
 	z = ft_atod(coordinates[2]);

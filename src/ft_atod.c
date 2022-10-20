@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:22:14 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 13:28:08 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:47:04 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ double	ft_atod(char *s)
 		while (len--)
 			decimal_fraction /= 10;
 	}
+	if (s[0] == '-')
+		decimal_fraction *= -1;
 	ft_free_matrix((void *)&splited);
 	return (integer_part + decimal_fraction);
 }

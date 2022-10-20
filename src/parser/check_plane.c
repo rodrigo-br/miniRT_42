@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 10:29:44 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:13:39 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	check_plane(char **line_splited, t_list **object)
 	if (!rgb)
 		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);
 	new_obj = set_plane(coordinates, rgb, line_splited[2]);
+	ft_free_matrix((void *)&coordinates);
+	ft_free_matrix((void *)&rgb);
 	if (!(new_obj))
 		return (EXIT_FAILURE);
 	ft_lstadd_back(object, ft_lstnew(new_obj));

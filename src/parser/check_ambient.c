@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:40:47 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 15:57:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:12:55 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	check_ambient(char **line_splited, t_ambience **ambience)
 	if (!rgb)
 		errors = 1;
 	if (errors)
+	{
+		ft_free_matrix((void *)&rgb);
 		return (EXIT_FAILURE);
+	}
 	*ambience = set_ambient(line_splited[1], rgb);
 	if (!(*ambience))
 		return (EXIT_FAILURE);

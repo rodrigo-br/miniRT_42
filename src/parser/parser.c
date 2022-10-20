@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 10:30:09 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:05:04 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	parser_1(int fd, t_scene *scene)
 {
 	char		*line;
 	char		**line_splited;
+	int			errors;
 
-	fd = open("../rt_files/many_obj.rt", O_RDONLY);
+	errors = 0;
 	line = ft_gnl(fd, FALSE);
 	while (line)
 	{
@@ -51,10 +52,13 @@ int	parser_1(int fd, t_scene *scene)
 		free(line);
 		if (line_splited)
 		{
-			parse_line(line_splited, scene);
+			if (!errors && parse_line(line_splited, scene))
+				errors++;
 			ft_free_matrix((void *)&line_splited);
 		}
 		line = ft_gnl(fd, FALSE);
 	}
+	if (errors)
+		return (free_scene(scene), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

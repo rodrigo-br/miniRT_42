@@ -10,6 +10,8 @@
 # define full_line_1 "L 10,10,-10 1 250,250,250"
 # define full_line_2 "A 0.2 255,255,255"
 # define full_line_3 "A 1 0,50,200"
+# define full_line_4 "A a a,50,200"
+# define full_line_5 "A 1 0,50,a00"
 
 void	test_check_ambient_function(void)
 {
@@ -29,6 +31,12 @@ void	test_check_ambient_function(void)
 	ft_free_matrix((void *)&splited);
 	free(ambient->rgb);
 	free(ambient);
+	splited = ft_split(full_line_4, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_ambient(splited, &ambient));
+	ft_free_matrix((void *)&splited);
+	splited = ft_split(full_line_5, ' ');
+	TEST_ASSERT_EQUAL_INT(1, check_ambient(splited, &ambient));
+	ft_free_matrix((void *)&splited);
 }
 
 void test_check_ambient(void)

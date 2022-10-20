@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 11:51:34 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:39:30 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 	object->rgb = create_color(ft_atoi(rgb[0]), \
 								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	object->sphere = ft_atod(s);
+	ft_free_matrix((void *)&coordinates);
+	ft_free_matrix((void *)&rgb);
 	return (object);
 }
 
@@ -42,9 +44,13 @@ int	check_sphere(char **line_splited, t_list **object)
 	if (ft_get_matrix_len(line_splited) != 4)
 		return (EXIT_FAILURE);
 	coordinates = ft_split(line_splited[1], ',');
-	if (!coordinates || check_coordinates_digits(coordinates)
-		|| ft_is_a_double(line_splited[2]))
+	if (!coordinates || check_coordinates_digits(coordinates))
 		return (EXIT_FAILURE);
+	if (!ft_is_a_double(line_splited[2]))
+	{
+		ft_free_matrix((void *)&coordinates);
+		return (EXIT_FAILURE);
+	}
 	rgb = check_rgb(line_splited[3]);
 	if (!rgb)
 		return (ft_free_matrix((void *)&coordinates), EXIT_FAILURE);

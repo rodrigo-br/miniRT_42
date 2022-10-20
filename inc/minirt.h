@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 10:30:26 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:15:07 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
-# define uchar unsigned char
 
 /* Errors before canvas*/
 int			errors(int argc, char **argv);
@@ -48,6 +47,10 @@ int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
 int			check_object_3d_orientation(char *s);
 int			check_coordinates_digits(char **coordinates);
 char		**check_rgb(char *s);
+
+/* List */
+void		free_lst_obj(void *obj);
+void		free_scene(t_scene *scene);
 
 /* Extra libft functions */
 double		ft_atod(char *s);
