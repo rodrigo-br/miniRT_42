@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   testing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 22:19:27 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/20 14:30:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tests.h>
 
-void	setUp(void)
+double double_rand()
 {
-	// set stuff up here
+	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
 }
 
-void	tearDown(void)
+int	decode_rgba(int r, int g, int b)
 {
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	srand(time(NULL));
-	UNITY_BEGIN();
-	test_tuple_operations();
-	test_colors();
-	test_canvas();
-	pre_parser_errors();
-	test_atod();
-	test_check_light();
-	test_check_ambient();
-	test_check_camera();
-	return (UNITY_END());
+	return (((r & 0xFF) << 16) + ((g & 0xFF) << 8) + ((b & 0xFF)));
 }

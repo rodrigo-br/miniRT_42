@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:34:18 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 21:42:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef union u_rgb
 	int					color;
 	struct
 	{
-		unsigned char	opacity;
-		unsigned char	red;
-		unsigned char	green;
 		unsigned char	blue;
+		unsigned char	green;
+		unsigned char	red;
+		unsigned char	opacity;
 	};
 }	t_rgb;
 
@@ -68,7 +68,7 @@ typedef struct s_object
 	double	x;
 	double	y;
 	double	z;
-	t_rgb	rgb;
+	t_rgb	*rgb;
 	void	*specs;
 }	t_object;
 
@@ -98,5 +98,14 @@ typedef struct s_scene
 	t_camera	camera;
 	t_object	*objects;
 }	t_scene;
+
+typedef struct s_canvas
+{
+	void	*image;
+	char	*address;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endianness;
+}	t_canvas;
 
 #endif

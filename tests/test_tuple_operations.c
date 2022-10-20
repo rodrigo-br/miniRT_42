@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test_tuple_operations.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:24:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 16:11:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:29:55 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity/unity.h"
-#include <minirt.h>
-#include <time.h>
-
-#define LOOP_ITERATIONS 100
-
-double double_rand()
-{
-	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
-}
+#include <tests.h>
 
 void	is_tuple_value_correct(void)
 {
@@ -376,7 +367,7 @@ void	multiply_a_tuple(void)
 		rand_w = double_rand();
 		multiplier = double_rand();
 		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
-		multiply = scalar_multiply(a, multiplier);
+		multiply = scalar_multiply_tuple(a, multiplier);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
@@ -399,7 +390,7 @@ void	multiply_a_vector(void)
 		rand_z = double_rand();
 		multiplier = double_rand();
 		a = create_vector(rand_x, rand_y, rand_z);
-		multiply = scalar_multiply(a, multiplier);
+		multiply = scalar_multiply_tuple(a, multiplier);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
@@ -422,7 +413,7 @@ void	multiply_a_point(void)
 		rand_z = double_rand();
 		multiplier = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
-		multiply = scalar_multiply(a, multiplier);
+		multiply = scalar_multiply_tuple(a, multiplier);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x * multiplier), multiply->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y * multiplier), multiply->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z * multiplier), multiply->z);
@@ -445,7 +436,7 @@ void	divide_a_tuple(void)
 		rand_w = double_rand();
 		divider = double_rand();
 		a = create_tuple(rand_x, rand_y, rand_z, rand_w);
-		divide = scalar_divide(a, divider);
+		divide = scalar_divide_tuple(a, divider);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
@@ -468,7 +459,7 @@ void	divide_a_vector(void)
 		rand_z = double_rand();
 		divider = double_rand();
 		a = create_vector(rand_x, rand_y, rand_z);
-		divide = scalar_divide(a, divider);
+		divide = scalar_divide_tuple(a, divider);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
@@ -491,7 +482,7 @@ void	divide_a_point(void)
 		rand_z = double_rand();
 		divider = double_rand();
 		a = create_point(rand_x, rand_y, rand_z);
-		divide = scalar_divide(a, divider);
+		divide = scalar_divide_tuple(a, divider);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_x / divider), divide->x);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_y / divider), divide->y);
 		TEST_ASSERT_EQUAL_DOUBLE((rand_z / divider), divide->z);
@@ -558,6 +549,7 @@ void	test_dot_product(void)
 			dot_product(a, b)
 		);
 		free(a);
+		free(b);
 	}
 }
 
@@ -583,7 +575,6 @@ void	test_cross_product(void)
 
 void	test_tuple_operations(void)
 {
-	srand(time(NULL));
 	RUN_TEST(is_tuple_value_correct);
 	RUN_TEST(is_vector_value_correct);
 	RUN_TEST(is_point_value_correct);

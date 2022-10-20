@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:18:56 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 13:51:19 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:53:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_tuple	*neg_tuple(t_tuple *t)
 	);
 }
 
-t_tuple	*scalar_multiply(t_tuple *t, double multiplier)
+t_tuple	*scalar_multiply_tuple(t_tuple *t, double multiplier)
 {
 	return (create_tuple(
 			(t->x * multiplier),
@@ -52,7 +52,7 @@ t_tuple	*scalar_multiply(t_tuple *t, double multiplier)
 	);
 }
 
-t_tuple	*scalar_divide(t_tuple *t, double divider)
+t_tuple	*scalar_divide_tuple(t_tuple *t, double divider)
 {
 	return (create_tuple(
 			(t->x / divider),

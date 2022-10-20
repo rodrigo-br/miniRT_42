@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 18:39:52 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:42:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
+# define OPACITY_MAX 255
 # define AMBIENT 'A'
 # define CAMERA 'C'
 # define LIGHT	'L'
@@ -60,13 +61,24 @@ t_bool		is_equal_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sum_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*sub_tuple(t_tuple *a, t_tuple *b);
 t_tuple		*neg_tuple(t_tuple *a);
-t_tuple		*scalar_multiply(t_tuple *t, double multiplier);
-t_tuple		*scalar_divide(t_tuple *t, double divider);
+t_tuple		*scalar_multiply_tuple(t_tuple *t, double multiplier);
+t_tuple		*scalar_divide_tuple(t_tuple *t, double divider);
 
 /* Manipulators */
 double		dot_product(t_tuple *a, t_tuple *b);
 double		magnitude(t_tuple *t);
 t_tuple		*normalize(t_tuple *t);
 t_tuple		*cross_product(t_tuple *a, t_tuple *b);
+
+/* Colors */
+t_rgb		*create_color(int r, int g, int b);
+t_rgb		*sum_color(t_rgb *a, t_rgb *b);
+t_rgb		*sub_color(t_rgb *a, t_rgb *b);
+t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
+t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
+
+/* Canvas */
+t_canvas	*create_canvas(void *mlx, int width, int height);
+void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 
 #endif /* MINIRT_H */

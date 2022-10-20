@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   color_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 22:19:27 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/19 21:42:50 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tests.h>
+#include <minirt.h>
 
-void	setUp(void)
+t_rgb	*create_color(int r, int g, int b)
 {
-	// set stuff up here
-}
+	t_rgb	*rgb;
 
-void	tearDown(void)
-{
-	// clean stuff up here
-}
-
-int	main(void)
-{
-	srand(time(NULL));
-	UNITY_BEGIN();
-	test_tuple_operations();
-	test_colors();
-	test_canvas();
-	pre_parser_errors();
-	test_atod();
-	test_check_light();
-	test_check_ambient();
-	test_check_camera();
-	return (UNITY_END());
+	rgb = (t_rgb *)malloc(sizeof(t_rgb));
+	if (!rgb)
+		return (NULL);
+	rgb->red = r;
+	rgb->green = g;
+	rgb->blue = b;
+	rgb->opacity = 0;
+	return (rgb);
 }
