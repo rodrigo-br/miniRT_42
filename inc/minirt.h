@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:45:18 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:15:58 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,10 @@ t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
 /* Canvas */
 t_canvas	*create_canvas(void *mlx, int width, int height);
 void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
+
+/* Matrix */
+t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
+t_matrix	*create_matrix(size_t size, double m[MATRIX_MAX][MATRIX_MAX]);
+t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
 
 #endif /* MINIRT_H */
