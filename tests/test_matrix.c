@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:14:01 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/21 08:57:15 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:20:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,48 @@ void	test_multiply_identity_matrix_tuple(void)
 	free(multiply);
 }
 
+void	test_transpose_matrix(void)
+{
+	double	same[MATRIX_MAX][MATRIX_MAX] = {
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 8, 7, 6},
+		{5, 4, 3, 2}
+	};
+	double	tpos[MATRIX_MAX][MATRIX_MAX] = {
+		{1, 5, 9, 5},
+		{2, 6, 8, 4},
+		{3, 7, 7, 3},
+		{4, 8, 6, 2}
+	};
+	t_matrix	*m, *transpose, *expected;
+
+	m = create_matrix(4, same);
+	transpose = transpose_matrix(m);
+	expected = create_matrix(4, tpos);
+	TEST_ASSERT_TRUE(is_equal_matrix(transpose, expected));
+	free(m);
+	free(expected);
+	free(transpose);
+}
+
+void	test_transpose_identity_matrix(void)
+{
+	double	idty[MATRIX_MAX][MATRIX_MAX] = {
+		{1, 0, 0, 0},
+		{0, 1, 0, 0},
+		{0, 0, 1, 0},
+		{0, 0, 0, 1}
+	};
+	t_matrix	*transpose, *expected;
+
+	expected = create_matrix(4, idty);
+	transpose = transpose_matrix(expected);
+	TEST_ASSERT_TRUE(is_equal_matrix(transpose, expected));
+	free(expected);
+	free(transpose);
+}
+
 void	test_matrix(void)
 {
 	RUN_TEST(test_4x4_matrix);
@@ -318,4 +360,6 @@ void	test_matrix(void)
 	RUN_TEST(test_multiply_matrix_tuple);
 	RUN_TEST(test_multiply_identity_matrix);
 	RUN_TEST(test_multiply_identity_matrix_tuple);
+	RUN_TEST(test_transpose_matrix);
+	RUN_TEST(test_transpose_identity_matrix);
 }

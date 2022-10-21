@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:18:41 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/21 08:33:59 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:14:56 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,24 @@ t_tuple	*multiply_matrix_tuple(t_matrix *m, t_tuple *t)
 		++index;
 	}
 	return (create_tuple(tmp[0], tmp[1], tmp[2], tmp[3]));
+}
+
+t_matrix	*transpose_matrix(t_matrix *m)
+{
+	size_t	row;
+	size_t	col;
+	double	transpose[MATRIX_MAX][MATRIX_MAX];
+
+	row = 0;
+	while (row < m->size)
+	{
+		col = 0;
+		while (col < m->size)
+		{
+			transpose[col][row] = m->matrix[row][col];
+			++col;
+		}
+		++row;
+	}
+	return (create_matrix(m->size, transpose));
 }

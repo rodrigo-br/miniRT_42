@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 08:55:26 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:18:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ t_matrix	*create_matrix(size_t size, const double m[MATRIX_MAX][MATRIX_MAX]);
 t_matrix	*create_identity_matrix(void);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
 t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
+t_matrix	*transpose_matrix(t_matrix *m);
 
 #endif /* MINIRT_H */
