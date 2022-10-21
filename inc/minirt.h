@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 12:32:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:25:25 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define CYLINDER "cy"
 
 /* Errors before canvas*/
-int			errors(int argc, char **argv);
+int			errors(int argc, char **argv, int *fd);
 
 /* Parser */
 int			parser_1(int fd, t_scene *scene);
