@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 12:58:05 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:39:08 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,14 @@ void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
 t_matrix	*create_matrix(size_t size, const double m[MATRIX_MAX][MATRIX_MAX]);
 t_matrix	*create_identity_matrix(void);
+t_matrix	*create_submatrix(t_matrix *m, size_t delrow, size_t delcol);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
 t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
 t_matrix	*transpose_matrix(t_matrix *m);
+t_matrix	*inverse_matrix(t_matrix *m);
+double		determinant(t_matrix *m);
+double		minor(t_matrix *m, size_t row, size_t col);
+double		cofactor(t_matrix *m, size_t row, size_t col);
 
 /* Transformation */
 t_matrix	*translate_matrix(t_tuple *point, t_tuple *translation);
