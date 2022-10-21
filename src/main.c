@@ -6,15 +6,28 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:14:09 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:30:32 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(void)
+int	sub_main(int argc, char **argv)
 {
-	ft_putstr_fd("Brace yourself, a cool miniRT is coming", 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+	t_scene	*scene;
+	int		fd;
+
+	if (errors(argc, argv, &fd))
+		return (EXIT_FAILURE);
+	scene = (t_scene *)malloc(sizeof(t_scene));
+	if (parser_1(fd, scene))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	main(int argc, char **argv)
+{
+	if (sub_main(argc, argv))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
