@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:46:00 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:13:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# define MATRIX_MAX 4
 
 typedef enum e_object_id
 {
@@ -119,5 +121,11 @@ typedef struct s_canvas
 	int		line_length;
 	int		endianness;
 }	t_canvas;
+
+typedef struct s_matrix
+{
+	size_t	size;
+	double	matrix[MATRIX_MAX][MATRIX_MAX];
+}	t_matrix;
 
 #endif
