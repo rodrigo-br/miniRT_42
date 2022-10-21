@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 13:39:08 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:33:08 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,7 @@ double		minor(t_matrix *m, size_t row, size_t col);
 double		cofactor(t_matrix *m, size_t row, size_t col);
 
 /* Transformation */
-t_matrix	*translate_matrix(t_tuple *point, t_tuple *translation);
-t_matrix	*translate_inverse_matrix(t_tuple *point, t_tuple *translation);
-t_tuple		*create_copy_tuple(t_tuple *t);
-t_matrix	*scale_matrix(t_tuple *tuple, t_tuple *scaling);
-t_matrix	*inversed_scale_matrix(t_tuple *tuple, t_tuple *scaling);
+t_matrix	*translate_matrix(double x, double y, double z);
+t_matrix	*scale_matrix(double x, double y, double z);
 
 #endif /* MINIRT_H */

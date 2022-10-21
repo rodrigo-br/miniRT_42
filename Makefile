@@ -22,8 +22,8 @@ PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 COLOR	= color_constructor.c color_operations.c
 CANVAS	= canvas_constructor.c write_to_canvas.c
-MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c
-TRANS 	= translate_matrix.c scale_matrix.c
+MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
+		matrix_transformations.c
 
 DIRS	= . tuple color canvas matrix parser transformations
 IFLAGS	= -I $(HEADER_PATH)
