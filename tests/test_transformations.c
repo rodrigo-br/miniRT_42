@@ -311,7 +311,7 @@ void test_reflection(void)
 		rand_x = double_rand();
 		rand_y = double_rand();
 		rand_z = double_rand();
-		rand_x2 = -double_rand();
+		rand_x2 = -1;
 		rand_y2 = double_rand();
 		rand_z2 = double_rand();
 		rand_w = 1;
