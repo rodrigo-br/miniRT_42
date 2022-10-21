@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 20:05:04 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/20 21:26:46 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parser_1(int fd, t_scene *scene)
 		free(line);
 		if (line_splited)
 		{
-			if (!errors && parse_line(line_splited, scene))
+			if (parse_line(line_splited, scene))
 				errors++;
 			ft_free_matrix((void *)&line_splited);
 		}
