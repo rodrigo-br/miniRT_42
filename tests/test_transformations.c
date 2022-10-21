@@ -3,7 +3,7 @@
 #include <tests.h>
 
 
-void	transform_point_tuple(void)
+void	translate_point_tuple(void)
 {
 	double	rand_x, rand_y, rand_z, rand_w;
 	t_tuple	*a, *b;
@@ -42,7 +42,7 @@ void	transform_point_tuple(void)
 	free(matrix);
 }
 
-void inverse_transform_point_tuple(void)
+void inverse_translate_point_tuple(void)
 {
 	double	rand_x, rand_y, rand_z, rand_w;
 	t_tuple	*a, *b;
@@ -82,7 +82,7 @@ void inverse_transform_point_tuple(void)
 	free(matrix);
 }
 
-void	transform_vector_tuple(void)
+void	translate_vector_tuple(void)
 {
 	double	rand_x, rand_y, rand_z, rand_w;
 	t_tuple	*a, *b;
@@ -121,7 +121,7 @@ void	transform_vector_tuple(void)
 	free(matrix);
 }
 
-void inverse_transform_vector_tuple(void)
+void inverse_translate_vector_tuple(void)
 {
 	double	rand_x, rand_y, rand_z, rand_w;
 	t_tuple	*a, *b;
@@ -160,10 +160,57 @@ void inverse_transform_vector_tuple(void)
 	free(matrix);
 }
 
+void test_scale_matrix(void)
+{
+	double		rand_x, rand_y, rand_z, rand_w;
+	double		rand_x2, rand_y2, rand_z2, rand_w2;
+	t_tuple		*a, *b;
+	t_matrix	*matrix;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_x2 = double_rand();
+		rand_y2 = double_rand();
+		rand_z2 = double_rand();
+		rand_w = 1;
+		a = create_point(rand_x, rand_y, rand_z);
+		b = create_point(rand_x2, rand_y2, rand_z2);
+		matrix = scale_matrix(a, b);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_x * rand_x2, matrix->matrix[0][0]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE(rand_x * rand_x2 - 1, matrix->matrix[0][0]);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_y * rand_y2, matrix->matrix[1][1]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE(rand_y * (rand_y2 - 1), matrix->matrix[1][1]);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_z * rand_z2, matrix->matrix[2][2]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE((rand_z + 0.0001) * rand_z2, matrix->matrix[2][2]);
+		TEST_ASSERT_EQUAL_DOUBLE(a->w, matrix->matrix[3][3]);
+		free(a);
+		free(b);
+		free(matrix);
+	}
+	/* Scenario: A scaling matrix applied to a point
+	Given transform ← scaling(2, 3, 4)
+	And p ← point(-4, 6, 8)
+	Then transform * p = point(-8, 18, 32) */
+	a = create_point(-4, 6, 8);
+	b = create_point(2, 3, 4);
+	matrix = scale_matrix(a, b);
+	TEST_ASSERT_EQUAL_DOUBLE(-8, matrix->matrix[0][0]);
+	TEST_ASSERT_EQUAL_DOUBLE(18, matrix->matrix[1][1]);
+	TEST_ASSERT_EQUAL_DOUBLE(32, matrix->matrix[2][2]);
+	TEST_ASSERT_EQUAL_DOUBLE(a->w, matrix->matrix[3][3]);
+	free(a);
+	free(b);
+	free(matrix);
+}
+
 void test_transformations(void)
 {
-	RUN_TEST(transform_point_tuple);
-	RUN_TEST(inverse_transform_point_tuple);
-	RUN_TEST(transform_vector_tuple);
-	RUN_TEST(inverse_transform_vector_tuple);
+	RUN_TEST(translate_point_tuple);
+	RUN_TEST(inverse_translate_point_tuple);
+	RUN_TEST(translate_vector_tuple);
+	RUN_TEST(inverse_translate_vector_tuple);
+	RUN_TEST(test_scale_matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 08:49:18 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 12:08:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:28:18 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_matrix	*translate_matrix(t_tuple *point, t_tuple *translation)
 	matrix->matrix[0][3] = new_tuple->x;
 	matrix->matrix[1][3] = new_tuple->y;
 	matrix->matrix[2][3] = new_tuple->z;
-	if (point->w == POINT_W)
+	if (is_point(point))
 		free(new_tuple);
 	matrix->matrix[3][3] = point->w;
 	return (matrix);
@@ -54,7 +54,7 @@ t_matrix	*translate_inverse_matrix(t_tuple *point, t_tuple *translation)
 	matrix->matrix[0][3] = new_tuple->x;
 	matrix->matrix[1][3] = new_tuple->y;
 	matrix->matrix[2][3] = new_tuple->z;
-	if (point->w == POINT_W)
+	if (is_point(point))
 		free(new_tuple);
 	matrix->matrix[3][3] = point->w;
 	return (matrix);
