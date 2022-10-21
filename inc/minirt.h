@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 10:57:36 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:53:58 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
 t_matrix	*transpose_matrix(t_matrix *m);
 
 /* Transformation */
-t_tuple		*translate_matrix(t_tuple *point, t_tuple *translation);
-t_tuple		*translate_inverse_matrix(t_tuple *point, t_tuple *translation);
+t_matrix	*translate_matrix(t_tuple *point, t_tuple *translation);
+t_matrix	*translate_inverse_matrix(t_tuple *point, t_tuple *translation);
 t_tuple		*create_copy_tuple(t_tuple *t);
 
 #endif /* MINIRT_H */
