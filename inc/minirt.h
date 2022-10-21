@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 13:39:08 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:56:44 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,8 @@ t_matrix	*translate_inverse_matrix(t_tuple *point, t_tuple *translation);
 t_tuple		*create_copy_tuple(t_tuple *t);
 t_matrix	*scale_matrix(t_tuple *tuple, t_tuple *scaling);
 t_matrix	*inversed_scale_matrix(t_tuple *tuple, t_tuple *scaling);
+
+/* Ray */
+t_ray		*create_ray(t_point *origin, t_vector *direction);
 
 #endif /* MINIRT_H */

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 21:13:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:56:15 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,11 @@ typedef struct s_matrix
 	size_t	size;
 	double	matrix[MATRIX_MAX][MATRIX_MAX];
 }	t_matrix;
+
+typedef struct s_ray
+{
+	t_point		*origin;
+	t_vector	*direction;
+}	t_ray;
 
 #endif
