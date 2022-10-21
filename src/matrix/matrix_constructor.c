@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:10:00 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/21 08:56:26 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:55:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,27 @@ t_matrix	*create_identity_matrix(void)
 	};
 
 	return (create_matrix(MATRIX_MAX, identity));
+}
+
+t_matrix	*create_submatrix(t_matrix *m, size_t delrow, size_t delcol)
+{
+	size_t	row;
+	size_t	col;
+	double	aux[MATRIX_MAX][MATRIX_MAX];
+
+	if (m->size == 2)
+		return (NULL);
+	row = 0;
+	while (row < (m->size - 1))
+	{
+		col = 0;
+		while (col < (m->size - 1))
+		{
+			aux[row][col] = \
+				m->matrix[row + (row >= delrow)][col + (col >= delcol)];
+			++col;
+		}
+		++row;
+	}
+	return (create_matrix((m->size - 1), aux));
 }
