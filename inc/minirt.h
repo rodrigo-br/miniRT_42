@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 12:35:14 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:58:05 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ t_matrix	*translate_matrix(t_tuple *point, t_tuple *translation);
 t_matrix	*translate_inverse_matrix(t_tuple *point, t_tuple *translation);
 t_tuple		*create_copy_tuple(t_tuple *t);
 t_matrix	*scale_matrix(t_tuple *tuple, t_tuple *scaling);
+t_matrix	*inversed_scale_matrix(t_tuple *tuple, t_tuple *scaling);
 
 #endif /* MINIRT_H */
