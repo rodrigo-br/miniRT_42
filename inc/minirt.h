@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 09:18:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:01:07 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ t_matrix	*create_identity_matrix(void);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
 t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
 t_matrix	*transpose_matrix(t_matrix *m);
+
+/* Transformation */
+t_tuple		*translate_matrix(t_tuple *point, t_tuple *translation);
 
 #endif /* MINIRT_H */
