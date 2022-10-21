@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:14:01 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/21 08:39:37 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 08:57:15 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,39 @@ void	test_multiply_matrix_tuple(void)
 	free(multiply);
 }
 
+void	test_multiply_identity_matrix(void)
+{
+	double	aux[MATRIX_MAX][MATRIX_MAX] = {
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 8, 7, 6},
+		{5, 4, 3, 2}
+	};
+	t_matrix	*a, *b, *multiply;
+
+	a = create_matrix(4, aux);
+	b = create_identity_matrix();
+	multiply = multiply_matrix(a, b);
+	TEST_ASSERT_TRUE(is_equal_matrix(multiply, a));
+	free(a);
+	free(b);
+	free(multiply);
+}
+
+void	test_multiply_identity_matrix_tuple(void)
+{
+	t_matrix	*m;
+	t_tuple		*t, *multiply;
+
+	m = create_identity_matrix();
+	t = create_tuple(1, 2, 3, 4);
+	multiply = multiply_matrix_tuple(m, t);
+	TEST_ASSERT_TRUE(is_equal_tuple(multiply, t));
+	free(m);
+	free(t);
+	free(multiply);
+}
+
 void	test_matrix(void)
 {
 	RUN_TEST(test_4x4_matrix);
@@ -283,4 +316,6 @@ void	test_matrix(void)
 	RUN_TEST(test_multiply_3x3_matrix);
 	RUN_TEST(test_multiply_2x2_matrix);
 	RUN_TEST(test_multiply_matrix_tuple);
+	RUN_TEST(test_multiply_identity_matrix);
+	RUN_TEST(test_multiply_identity_matrix_tuple);
 }
