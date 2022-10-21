@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 21:15:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 08:38:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
 t_matrix	*create_matrix(size_t size, double m[MATRIX_MAX][MATRIX_MAX]);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
+t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
 
 #endif /* MINIRT_H */

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:14:01 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 21:45:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/21 08:39:37 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,28 @@ void	test_multiply_2x2_matrix(void)
 	free(multiply);
 }
 
+void	test_multiply_matrix_tuple(void)
+{
+	double	aux[MATRIX_MAX][MATRIX_MAX] = {
+		{1, 2, 3, 4},
+		{2, 4, 4, 2},
+		{8, 6, 4, 1},
+		{0, 0, 0, 1}
+	};
+	t_matrix	*m;
+	t_tuple		*t, *expected, *multiply;
+
+	m = create_matrix(4, aux);
+	t = create_tuple(1, 2, 3, 1);
+	expected = create_tuple(18, 24, 33, 1);
+	multiply = multiply_matrix_tuple(m, t);
+	TEST_ASSERT_TRUE(is_equal_tuple(multiply, expected));
+	free(m);
+	free(t);
+	free(expected);
+	free(multiply);
+}
+
 void	test_matrix(void)
 {
 	RUN_TEST(test_4x4_matrix);
@@ -260,4 +282,5 @@ void	test_matrix(void)
 	RUN_TEST(test_multiply_4x4_matrix);
 	RUN_TEST(test_multiply_3x3_matrix);
 	RUN_TEST(test_multiply_2x2_matrix);
+	RUN_TEST(test_multiply_matrix_tuple);
 }
