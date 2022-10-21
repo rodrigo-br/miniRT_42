@@ -299,6 +299,52 @@ void test_inverse_scale_matrix_point(void)
 	free(matrix);
 }
 
+void test_reflection(void)
+{
+	double		rand_x, rand_y, rand_z, rand_w;
+	double		rand_x2, rand_y2, rand_z2, rand_w2;
+	t_tuple		*a, *b;
+	t_matrix	*matrix;
+
+	for (int i = 0; i < LOOP_ITERATIONS; i++)
+	{
+		rand_x = double_rand();
+		rand_y = double_rand();
+		rand_z = double_rand();
+		rand_x2 = -double_rand();
+		rand_y2 = double_rand();
+		rand_z2 = double_rand();
+		rand_w = 1;
+		a = create_vector(rand_x, rand_y, rand_z);
+		b = create_vector(rand_x2, rand_y2, rand_z2);
+		matrix = scale_matrix(a, b);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_x * rand_x2, matrix->matrix[0][0]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE(rand_x * rand_x2 - 1, matrix->matrix[0][0]);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_y * rand_y2, matrix->matrix[1][1]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE(rand_y * (rand_y2 - 1), matrix->matrix[1][1]);
+		TEST_ASSERT_EQUAL_DOUBLE(rand_z * rand_z2, matrix->matrix[2][2]);
+		TEST_ASSERT_NOT_EQUAL_DOUBLE((rand_z + 0.0001) * rand_z2, matrix->matrix[2][2]);
+		TEST_ASSERT_EQUAL_DOUBLE(a->w, matrix->matrix[3][3]);
+		free(a);
+		free(b);
+		free(matrix);
+	}
+	/*Scenario: Reflection is scaling by a negative value
+	Given transform ← scaling(-1, 1, 1)
+	And p ← point(2, 3, 4)
+	Then transform * p = point(-2, 3, 4)*/
+	a = create_point(2, 3, 4);
+	b = create_point(-1, 1, 1);
+	matrix = scale_matrix(a, b);
+	TEST_ASSERT_EQUAL_DOUBLE(-2, matrix->matrix[0][0]);
+	TEST_ASSERT_EQUAL_DOUBLE(3, matrix->matrix[1][1]);
+	TEST_ASSERT_EQUAL_DOUBLE(4, matrix->matrix[2][2]);
+	TEST_ASSERT_EQUAL_DOUBLE(a->w, matrix->matrix[3][3]);
+	free(a);
+	free(b);
+	free(matrix);
+}
+
 void test_transformations(void)
 {
 	RUN_TEST(translate_point_tuple);
@@ -308,4 +354,5 @@ void test_transformations(void)
 	RUN_TEST(test_scale_matrix_point);
 	RUN_TEST(test_scale_matrix_vector);
 	RUN_TEST(test_inverse_scale_matrix_point);
+	RUN_TEST(test_reflection);
 }
