@@ -6,25 +6,13 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 16:33:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 18:56:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_intersection	*create_intersection(double time, t_object *object)
-{
-	t_intersection	*intersection;
-
-	intersection = (t_intersection *)malloc(sizeof(t_intersection));
-	if (!intersection)
-		return (NULL);
-	intersection->time = time;
-	intersection->object = object;
-	return (intersection);
-}
-
-void	intersect_sphere(t_object *sphere, t_ray *ray, t_list **xs)
+void	intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head)
 {
 	double		x1;
 	double		x2;
@@ -41,7 +29,7 @@ void	intersect_sphere(t_object *sphere, t_ray *ray, t_list **xs)
 		return ;
 	x1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	x2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-	ft_lstadd_back(xs, ft_lstnew(create_intersection(x1, sphere)));
+	intersection_sorted_insert(head, create_intersection(x1, sphere));
 	if (!is_equal_double(x1, x2))
-		ft_lstadd_back(xs, ft_lstnew(create_intersection(x2, sphere)));
+		intersection_sorted_insert(head, create_intersection(x2, sphere));
 }

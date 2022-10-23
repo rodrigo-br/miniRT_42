@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/23 16:16:01 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,11 @@ typedef struct s_bhaskara
 	double	delta;
 }	t_bhaskara;
 
-typedef struct s_intersection
+typedef struct s_intersect
 {
-	t_object	*object;
-	double		time;
-}	t_intersection;
+	t_object			*object;
+	double				time;
+	struct s_intersect	*next;
+}	t_intersect;
 
 #endif
