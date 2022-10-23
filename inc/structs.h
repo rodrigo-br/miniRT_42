@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 14:56:15 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:46:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ typedef struct s_light
 }	t_light;
 
 /* tipos de acordo com as especificaçoes de cada um */
-typedef double	t_sphere;
+typedef struct s_sphere
+{
+	double	diameter;
+	t_point	center;
+}	t_sphere;
 
 typedef struct s_plane
 {
@@ -133,5 +137,19 @@ typedef struct s_ray
 	t_point		*origin;
 	t_vector	*direction;
 }	t_ray;
+
+typedef struct s_intersect
+{
+	size_t	count;
+	double	*hit;
+}	t_intersect;
+
+typedef struct s_bhaskara
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+}	t_bhaskara;
 
 #endif

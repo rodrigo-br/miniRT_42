@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/21 15:02:44 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:37:39 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,8 @@ t_matrix	*scale_matrix(double x, double y, double z);
 
 /* Ray */
 t_ray		*create_ray(t_point *origin, t_vector *direction);
+t_object	*create_sphere(void);
+t_point		*position(t_ray *ray, double time);
+t_intersect	*intersect_sphere(t_object *sphere, t_ray *ray);
 
 #endif /* MINIRT_H */
