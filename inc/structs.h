@@ -6,14 +6,14 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/23 14:46:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:16:01 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define MATRIX_MAX 4
+# define MAT_MAX 4
 
 typedef enum e_object_id
 {
@@ -129,7 +129,7 @@ typedef struct s_canvas
 typedef struct s_matrix
 {
 	size_t	size;
-	double	matrix[MATRIX_MAX][MATRIX_MAX];
+	double	matrix[MAT_MAX][MAT_MAX];
 }	t_matrix;
 
 typedef struct s_ray
@@ -138,12 +138,6 @@ typedef struct s_ray
 	t_vector	*direction;
 }	t_ray;
 
-typedef struct s_intersect
-{
-	size_t	count;
-	double	*hit;
-}	t_intersect;
-
 typedef struct s_bhaskara
 {
 	double	a;
@@ -151,5 +145,11 @@ typedef struct s_bhaskara
 	double	c;
 	double	delta;
 }	t_bhaskara;
+
+typedef struct s_intersection
+{
+	t_object	*object;
+	double		time;
+}	t_intersection;
 
 #endif

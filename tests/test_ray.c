@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 14:43:59 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:41:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,92 +75,108 @@ void	test_sphere_creation(void)
 
 	sphere = create_sphere();
 	TEST_ASSERT_NOT_NULL(sphere);
-	TEST_ASSERT_TRUE(sphere->type == ID_SPHERE);
-	free(sphere);
+	TEST_ASSERT_TRUE(sphere->type == ID_SPHERE); free(sphere);
 }
 
 void	test_intersect_two_points(void)
 {
-	t_ray		*ray;
-	t_object	*sphere;
-	t_intersect	*xs;
+	t_ray			*ray;
+	t_object		*sphere;
+	t_intersection	*xs1, *xs2;
+	t_list			*xslist = NULL;
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	xs = intersect_sphere(sphere, ray);
-	TEST_ASSERT_EQUAL(2, xs->count);
-	TEST_ASSERT_EQUAL_DOUBLE(4.0, xs->hit[0]);
-	TEST_ASSERT_EQUAL_DOUBLE(6.0, xs->hit[1]);
-	free(ray->origin); free(ray->direction); free(ray);
-	free(xs->hit); free(xs);
-	free(sphere);
+	intersect_sphere(sphere, ray, &xslist);
+	xs1 = (t_intersection *)xslist->content;
+	xs2 = (t_intersection *)xslist->next->content;
+	TEST_ASSERT_EQUAL(2, ft_lstsize(xslist));
+	TEST_ASSERT_EQUAL_DOUBLE(4.0, xs1->time);
+	TEST_ASSERT_EQUAL_DOUBLE(6.0, xs2->time);
+	free(ray->origin); free(ray->direction); free(ray); free(sphere);
+	ft_lstclear(&xslist, free);
 }
 
 void	test_intersect_same_point(void)
 {
-	t_ray		*ray;
-	t_object	*sphere;
-	t_intersect	*xs;
+	t_ray			*ray;
+	t_object		*sphere;
+	t_intersection	*xs1;
+	t_list			*xslist = NULL;
 
 	ray = create_ray(create_point(0, 1, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	xs = intersect_sphere(sphere, ray);
-	TEST_ASSERT_EQUAL(2, xs->count);
-	TEST_ASSERT_EQUAL_DOUBLE(5.0, xs->hit[0]);
-	TEST_ASSERT_EQUAL_DOUBLE(5.0, xs->hit[1]);
-	free(ray->origin); free(ray->direction); free(ray);
-	free(xs->hit); free(xs);
-	free(sphere);
+	intersect_sphere(sphere, ray, &xslist);
+	xs1 = (t_intersection *)xslist->content;
+	TEST_ASSERT_EQUAL(1, ft_lstsize(xslist));
+	TEST_ASSERT_EQUAL_DOUBLE(5.0, xs1->time);
+	free(ray->origin); free(ray->direction); free(ray); free(sphere);
+	ft_lstclear(&xslist, free);
 }
 
 void	test_intersect_zero_points(void)
 {
-	t_ray		*ray;
-	t_object	*sphere;
-	t_intersect	*xs;
+	t_ray			*ray;
+	t_object		*sphere;
+	t_list			*xslist = NULL;
 
 	ray = create_ray(create_point(0, 2, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	xs = intersect_sphere(sphere, ray);
-	TEST_ASSERT_EQUAL(0, xs->count);
-	TEST_ASSERT_NULL(xs->hit);
-	free(ray->origin); free(ray->direction); free(ray);
-	free(xs->hit); free(xs);
-	free(sphere);
+	intersect_sphere(sphere, ray, &xslist);
+	TEST_ASSERT_NULL(xslist);
+	free(ray->origin); free(ray->direction); free(ray); free(sphere);
+	ft_lstclear(&xslist, free);
 }
 
 void	test_ray_inside_sphere(void)
 {
-	t_ray		*ray;
-	t_object	*sphere;
-	t_intersect	*xs;
+	t_ray			*ray;
+	t_object		*sphere;
+	t_intersection	*xs1, *xs2;
+	t_list			*xslist = NULL;
 
 	ray = create_ray(create_point(0, 0, 0), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	xs = intersect_sphere(sphere, ray);
-	TEST_ASSERT_EQUAL(2, xs->count);
-	TEST_ASSERT_EQUAL_DOUBLE(-1.0, xs->hit[0]);
-	TEST_ASSERT_EQUAL_DOUBLE(1.0, xs->hit[1]);
-	free(ray->origin); free(ray->direction); free(ray);
-	free(xs->hit); free(xs);
-	free(sphere);
+	intersect_sphere(sphere, ray, &xslist);
+	xs1 = (t_intersection *)xslist->content;
+	xs2 = (t_intersection *)xslist->next->content;
+	TEST_ASSERT_EQUAL(2, ft_lstsize(xslist));
+	TEST_ASSERT_EQUAL_DOUBLE(-1.0, xs1->time);
+	TEST_ASSERT_EQUAL_DOUBLE(1.0, xs2->time);
+	free(ray->origin); free(ray->direction); free(ray); free(sphere);
+	ft_lstclear(&xslist, free);
 }
 
 void	test_sphere_behind_ray(void)
 {
-	t_ray		*ray;
-	t_object	*sphere;
-	t_intersect	*xs;
+	t_ray			*ray;
+	t_object		*sphere;
+	t_intersection	*xs1, *xs2;
+	t_list			*xslist = NULL;
 
 	ray = create_ray(create_point(0, 0, 5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	xs = intersect_sphere(sphere, ray);
-	TEST_ASSERT_EQUAL(2, xs->count);
-	TEST_ASSERT_EQUAL_DOUBLE(-6.0, xs->hit[0]);
-	TEST_ASSERT_EQUAL_DOUBLE(-4.0, xs->hit[1]);
-	free(ray->origin); free(ray->direction); free(ray);
-	free(xs->hit); free(xs);
-	free(sphere);
+	intersect_sphere(sphere, ray, &xslist);
+	xs1 = (t_intersection *)xslist->content;
+	xs2 = (t_intersection *)xslist->next->content;
+	TEST_ASSERT_EQUAL(2, ft_lstsize(xslist));
+	TEST_ASSERT_EQUAL_DOUBLE(-6.0, xs1->time);
+	TEST_ASSERT_EQUAL_DOUBLE(-4.0, xs2->time);
+	free(ray->origin); free(ray->direction); free(ray); free(sphere);
+	ft_lstclear(&xslist, free);
+}
+
+void	test_intersection_creation(void)
+{
+	t_intersection	*intersection;
+	t_object		*sphere;
+
+	sphere = create_sphere();
+	intersection = create_intersection(3.5, sphere);
+	TEST_ASSERT_NOT_NULL(intersection);
+	TEST_ASSERT_EQUAL_PTR(sphere, intersection->object);
+	TEST_ASSERT_EQUAL_DOUBLE(3.5, intersection->time);
+	free(sphere); free(intersection);
 }
 
 void	test_ray(void)
@@ -174,4 +190,5 @@ void	test_ray(void)
 	RUN_TEST(test_intersect_zero_points);
 	RUN_TEST(test_ray_inside_sphere);
 	RUN_TEST(test_sphere_behind_ray);
+	RUN_TEST(test_intersection_creation);
 }

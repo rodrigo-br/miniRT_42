@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/23 14:37:39 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:13:53 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,90 +34,91 @@
 # define CYLINDER "cy"
 
 /* Errors before canvas*/
-int			errors(int argc, char **argv, int *fd);
+int				errors(int argc, char **argv, int *fd);
 
 /* Parser */
-int			parser_1(int fd, t_scene *scene);
-int			check_light(char **line_splited, t_light **light);
-int			check_ambient(char **line_splited, t_ambience **ambience);
-int			check_camera(char **line_splited, t_camera **camera);
-int			check_sphere(char **line_splited, t_list **object);
-int			check_plane(char **line_splited, t_list **object);
-int			check_cylinder(char **line_splited, t_list **object);
-int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
-int			check_object_3d_orientation(char *s);
-int			check_coordinates_digits(char **coordinates);
-char		**check_rgb(char *s);
+int				parser_1(int fd, t_scene *scene);
+int				check_light(char **line_splited, t_light **light);
+int				check_ambient(char **line_splited, t_ambience **ambience);
+int				check_camera(char **line_splited, t_camera **camera);
+int				check_sphere(char **line_splited, t_list **object);
+int				check_plane(char **line_splited, t_list **object);
+int				check_cylinder(char **line_splited, t_list **object);
+int				check_rgb_digits(char **rgb, int *red, int *green, int *blue);
+int				check_object_3d_orientation(char *s);
+int				check_coordinates_digits(char **coordinates);
+char			**check_rgb(char *s);
 
 /* List */
-void		free_lst_obj(void *obj);
-void		free_scene(t_scene *scene);
+void			free_lst_obj(void *obj);
+void			free_scene(t_scene *scene);
 
 /* Extra libft functions */
-double		ft_atod(char *s);
-int			ft_is_a_double(char *string);
-int			ft_is_all_digit(char *string);
-void		ft_str_swap_set_chr(char *str, char *old, char new);
-int			set_double_value(double *variable, char *value);
-size_t		ft_get_matrix_len(char **matrix);
+double			ft_atod(char *s);
+int				ft_is_a_double(char *string);
+int				ft_is_all_digit(char *string);
+void			ft_str_swap_set_chr(char *str, char *old, char new);
+int				set_double_value(double *variable, char *value);
+size_t			ft_get_matrix_len(char **matrix);
 
 /* Constructors */
-t_tuple		*create_tuple(double x, double y, double z, double w);
-t_point		*create_point(double x, double y, double z);
-t_vector	*create_vector(double x, double y, double z);
+t_tuple			*create_tuple(double x, double y, double z, double w);
+t_point			*create_point(double x, double y, double z);
+t_vector		*create_vector(double x, double y, double z);
 
 /* Checkers */
-t_bool		is_point(t_tuple *t);
-t_bool		is_vector(t_tuple *t);
-t_bool		is_tuple(t_tuple *t);
-t_bool		is_equal_double(double a, double b);
-t_bool		is_equal_tuple(t_tuple *a, t_tuple *b);
+t_bool			is_point(t_tuple *t);
+t_bool			is_vector(t_tuple *t);
+t_bool			is_tuple(t_tuple *t);
+t_bool			is_equal_double(double a, double b);
+t_bool			is_equal_tuple(t_tuple *a, t_tuple *b);
 
 /* Operations */
-t_tuple		*sum_tuple(t_tuple *a, t_tuple *b);
-t_tuple		*sub_tuple(t_tuple *a, t_tuple *b);
-t_tuple		*neg_tuple(t_tuple *a);
-t_tuple		*scalar_multiply_tuple(t_tuple *t, double multiplier);
-t_tuple		*scalar_divide_tuple(t_tuple *t, double divider);
+t_tuple			*sum_tuple(t_tuple *a, t_tuple *b);
+t_tuple			*sub_tuple(t_tuple *a, t_tuple *b);
+t_tuple			*neg_tuple(t_tuple *a);
+t_tuple			*scalar_multiply_tuple(t_tuple *t, double multiplier);
+t_tuple			*scalar_divide_tuple(t_tuple *t, double divider);
 
 /* Manipulators */
-double		dot_product(t_tuple *a, t_tuple *b);
-double		magnitude(t_tuple *t);
-t_tuple		*normalize(t_tuple *t);
-t_tuple		*cross_product(t_tuple *a, t_tuple *b);
+double			dot_product(t_tuple *a, t_tuple *b);
+double			magnitude(t_tuple *t);
+t_tuple			*normalize(t_tuple *t);
+t_tuple			*cross_product(t_tuple *a, t_tuple *b);
 
 /* Colors */
-t_rgb		*create_color(int r, int g, int b);
-t_rgb		*sum_color(t_rgb *a, t_rgb *b);
-t_rgb		*sub_color(t_rgb *a, t_rgb *b);
-t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
-t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
+t_rgb			*create_color(int r, int g, int b);
+t_rgb			*sum_color(t_rgb *a, t_rgb *b);
+t_rgb			*sub_color(t_rgb *a, t_rgb *b);
+t_rgb			*multiply_color(t_rgb *a, t_rgb *b);
+t_rgb			*scalar_multiply_color(t_rgb *a, int multiplier);
 
 /* Canvas */
-t_canvas	*create_canvas(void *mlx, int width, int height);
-void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
+t_canvas		*create_canvas(void *mlx, int width, int height);
+void			write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 
 /* Matrix */
-t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
-t_matrix	*create_matrix(size_t size, const double m[MATRIX_MAX][MATRIX_MAX]);
-t_matrix	*create_identity_matrix(void);
-t_matrix	*create_submatrix(t_matrix *m, size_t delrow, size_t delcol);
-t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
-t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
-t_matrix	*transpose_matrix(t_matrix *m);
-t_matrix	*inverse_matrix(t_matrix *m);
-double		determinant(t_matrix *m);
-double		minor(t_matrix *m, size_t row, size_t col);
-double		cofactor(t_matrix *m, size_t row, size_t col);
+t_bool			is_equal_matrix(t_matrix *a, t_matrix *b);
+t_matrix		*create_matrix(size_t size, const double m[MAT_MAX][MAT_MAX]);
+t_matrix		*create_identity_matrix(void);
+t_matrix		*create_submatrix(t_matrix *m, size_t delrow, size_t delcol);
+t_matrix		*multiply_matrix(t_matrix *a, t_matrix *b);
+t_tuple			*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
+t_matrix		*transpose_matrix(t_matrix *m);
+t_matrix		*inverse_matrix(t_matrix *m);
+double			determinant(t_matrix *m);
+double			minor(t_matrix *m, size_t row, size_t col);
+double			cofactor(t_matrix *m, size_t row, size_t col);
 
 /* Transformation */
-t_matrix	*translate_matrix(double x, double y, double z);
-t_matrix	*scale_matrix(double x, double y, double z);
+t_matrix		*translate_matrix(double x, double y, double z);
+t_matrix		*scale_matrix(double x, double y, double z);
 
 /* Ray */
-t_ray		*create_ray(t_point *origin, t_vector *direction);
-t_object	*create_sphere(void);
-t_point		*position(t_ray *ray, double time);
-t_intersect	*intersect_sphere(t_object *sphere, t_ray *ray);
+t_ray			*create_ray(t_point *origin, t_vector *direction);
+t_object		*create_sphere(void);
+t_point			*position(t_ray *ray, double time);
+t_intersection	*create_intersection(double time, t_object *object);
+void			intersect_sphere(t_object *sphere, t_ray *ray, t_list **xs);
 
 #endif /* MINIRT_H */

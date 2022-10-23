@@ -24,7 +24,7 @@ COLOR	= color_constructor.c color_operations.c
 CANVAS	= canvas_constructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 		matrix_transformations.c
-RAY		= ray_constructor.c ray_operations.c
+RAY		= ray_constructor.c ray_operations.c ray_intersection.c
 
 DIRS	= . tuple color canvas matrix ray parser
 IFLAGS	= -I $(HEADER_PATH)
