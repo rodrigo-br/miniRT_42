@@ -57,7 +57,7 @@ void	test_parser_only_1_each_unique_element(void)
 			TEST_ASSERT_EQUAL_DOUBLE(10, obj->rgb->red);
 			TEST_ASSERT_EQUAL_DOUBLE(0, obj->rgb->green);
 			TEST_ASSERT_EQUAL_DOUBLE(255, obj->rgb->blue);
-			TEST_ASSERT_EQUAL_DOUBLE(12.6, obj->sphere);
+			TEST_ASSERT_EQUAL_DOUBLE(12.6, obj->sphere.diameter);
 			//sp 6.1,5.7,20.6 12.6 10,0,255
 		}
 		else if (obj->type == ID_PLANE)
