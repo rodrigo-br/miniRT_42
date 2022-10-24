@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:11:27 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:38:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_rgb		*create_color(double r, double g, double b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
-t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
+t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
 int			to_rgb(double color);
 
 /* Canvas */
@@ -136,5 +136,13 @@ void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersection_list_clear(t_intersect **list);
 size_t		intersection_list_size(t_intersect *list);
+
+/* Light */
+t_vector	*reflect(t_vector *in, t_vector *normal);
+t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity);
+void		destroy_light_point(t_light_pnt *light_point);
+t_material	*create_material(void);
+void		destroy_material(t_material *material);
+t_rgb		*lighting(t_lightattr *args, t_material *material);
 
 #endif /* MINIRT_H */

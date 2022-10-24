@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:34:23 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:21:15 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:28:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_vector	*reflect(t_vector *in, t_vector *normal)
 	return (reflection);
 }
 
-t_light_pnt	*create_light_point(t_point *position, t_color *intensity)
+t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity)
 {
 	t_light_pnt	*light_point;
 
@@ -69,20 +69,20 @@ function lighting(material, light, point, eyev, normalv)
 	return ambient + diffuse + specular
 end function
 */
-t_color	*lighting(t_lightattr *args, t_material *material)
+t_rgb	*lighting(t_lightattr *args, t_material *material)
 {
-	t_color		*eff_color; // ambient
+	t_rgb		*eff_color; // ambient
 	t_vector	*path_to_light; // specular
 	t_vector	*light_vector; // specular
 	t_vector	*reflect_vector; // specular
 	double		light_dot_normal; // diffuse, specular
 	double		reflect_dot_eye; // specular
-	t_color		*ambient;
-	t_color		*diffuse;
-	t_color		*specular;
-	t_color		*auxrgb;
+	t_rgb		*ambient;
+	t_rgb		*diffuse;
+	t_rgb		*specular;
+	t_rgb		*auxrgb;
 	t_tuple		*auxtup;
-	t_color		*final_color;
+	t_rgb		*final_color;
 
 	eff_color = multiply_color(material->color, args->light_point->intensity);
 	light_vector = sub_tuple(args->light_point->position, args->position);

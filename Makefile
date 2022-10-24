@@ -11,8 +11,9 @@ OBJS	= $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
 HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
- 
-MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) $(SHAPE) $(UTILS)
+
+MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
+		$(SHAPE) $(LIGHT) $(UTILS)
 PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
@@ -27,8 +28,9 @@ UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
 SHAPE	= shape_destructor.c shape_setters.c sphere.c
+LIGHT	= material_constructor.c material_destructor.c reflection.c
 
-DIRS	= . tuple color canvas matrix ray shape parser transformations utils
+DIRS	= . tuple color canvas matrix ray shape parser transformations light utils
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
