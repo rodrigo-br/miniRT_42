@@ -42,8 +42,8 @@ void	test_check_sphere_function(void)
 	TEST_ASSERT_NOT_EQUAL_CHAR(91, object->rgb->green);
 	TEST_ASSERT_EQUAL_CHAR(255, object->rgb->blue);
 	TEST_ASSERT_NOT_EQUAL_CHAR(202, object->rgb->blue);
-	TEST_ASSERT_EQUAL_DOUBLE(12.6, object->sphere);
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(12.7, object->sphere);
+	TEST_ASSERT_EQUAL_DOUBLE(12.6, object->sphere.diameter);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(12.7, object->sphere.diameter);
 	ft_lstclear(&scene->objects, free_lst_obj);
 	free(scene);
 	splited = ft_split(full_line_4, ' ');
