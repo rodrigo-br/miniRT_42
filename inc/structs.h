@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 19:18:34 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:24:43 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_rgb
 	double	blue;
 	double	green;
 	double	red;
+	int		merged;
 }	t_rgb;
 
 typedef struct s_ambience

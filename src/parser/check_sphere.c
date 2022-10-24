@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/22 19:54:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:30:20 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 	object->x = ft_atod(coordinates[0]);
 	object->y = ft_atod(coordinates[1]);
 	object->z = ft_atod(coordinates[2]);
-	object->rgb = create_color(ft_atoi(rgb[0]), \
-								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	object->rgb = create_color(ft_atod(rgb[0]) / 255, \
+								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
 	object->sphere.diameter = ft_atod(s);
 	ft_free_matrix((void *)&coordinates);
 	ft_free_matrix((void *)&rgb);

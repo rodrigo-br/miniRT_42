@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 09:08:42 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 15:17:49 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:29:33 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_light	*set_light(char **coordinates, char **rgb, double brightness)
 	light->x = ft_atod(coordinates[0]);
 	light->y = ft_atod(coordinates[1]);
 	light->z = ft_atod(coordinates[2]);
-	light->rgb = create_color(ft_atoi(rgb[0]), \
-							ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	light->rgb = create_color(ft_atod(rgb[0]) / 255, \
+							ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
 	light->brightness = brightness;
 	ft_free_matrix((void *)&coordinates);
 	ft_free_matrix((void *)&rgb);

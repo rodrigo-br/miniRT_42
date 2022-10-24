@@ -323,6 +323,9 @@ void shearing_x_to_y(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){5, 3, 4, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 /*
@@ -344,6 +347,9 @@ void shearing_x_to_z(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){6, 3, 4, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 /*
@@ -365,6 +371,9 @@ void shearing_y_to_x(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 5, 4, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 /*
@@ -386,6 +395,9 @@ void shearing_y_to_z(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 7, 4, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 /*
@@ -407,6 +419,9 @@ void shearing_z_to_x(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 3, 6, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 /*
@@ -428,6 +443,9 @@ void shearing_z_to_y(void)
 	shearing = shearing_matrix(s);
 	result = multiply_matrix_tuple(shearing, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 3, 7, 1}));
+	free(p);
+	free(shearing);
+	free(result);
 }
 
 void test_transformations(void)
