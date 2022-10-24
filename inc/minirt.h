@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 13:17:44 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:32:17 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
 
 /* Matrix */
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
-t_matrix	*create_matrix(size_t size, const double m[MATRIX_MAX][MATRIX_MAX]);
+t_matrix	*create_matrix(size_t size, const double m[MAT_MAX][MAT_MAX]);
 t_matrix	*create_identity_matrix(void);
 t_matrix	*create_submatrix(t_matrix *m, size_t delrow, size_t delcol);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
@@ -117,5 +117,20 @@ t_matrix	*rotate_matrix_x(double r);
 t_matrix	*rotate_matrix_y(double r);
 t_matrix	*rotate_matrix_z(double r);
 double		radians(double degree);
+
+/* Ray */
+t_ray		*create_ray(t_point *origin, t_vector *direction);
+void		destroy_ray(t_ray *ray);
+t_object	*create_sphere(void);
+void		destroy_shape(t_object *object);
+t_point		*get_position(t_ray *ray, double time);
+t_intersect	*create_intersection(double time, t_object *object);
+t_intersect	*get_hit(t_intersect *intersect);
+t_ray		*transform_ray(t_ray *ray, t_matrix *matrix);
+void		set_transformation(t_object *object, t_matrix *transformation);
+void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
+void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
+void		intersection_list_clear(t_intersect **list);
+size_t		intersection_list_size(t_intersect *list);
 
 #endif /* MINIRT_H */
