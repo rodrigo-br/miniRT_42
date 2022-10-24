@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 13:32:11 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:23:12 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	main(void)
 	srand(time(NULL));
 	UNITY_BEGIN();
 	test_tuple_operations();
-	test_colors();
-	test_canvas();
-	test_atod();
+	// test_colors();
+	// test_canvas();
+	// test_atod();
 	test_check_light();
 	test_check_ambient();
 	test_check_camera();

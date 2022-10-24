@@ -13,9 +13,9 @@ void	test_parser_only_1_each_unique_element(void)
 	fd = open("../rt_files/many_obj.rt", O_RDONLY);
 	TEST_ASSERT_EQUAL_INT(0, parser_1(fd, scene));
 	TEST_ASSERT_EQUAL_DOUBLE(0.2, scene->ambience->ratio);
-	TEST_ASSERT_EQUAL_CHAR(255, scene->ambience->rgb->red);
-	TEST_ASSERT_EQUAL_CHAR(250, scene->ambience->rgb->green);
-	TEST_ASSERT_EQUAL_CHAR(245, scene->ambience->rgb->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 255, scene->ambience->rgb->red);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 250, scene->ambience->rgb->green);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 245, scene->ambience->rgb->blue);
 	TEST_ASSERT_EQUAL_DOUBLE(0, scene->camera->view_x);
 	TEST_ASSERT_EQUAL_DOUBLE(2, scene->camera->view_y);
 	TEST_ASSERT_EQUAL_DOUBLE(-6, scene->camera->view_z);
@@ -27,9 +27,9 @@ void	test_parser_only_1_each_unique_element(void)
 	TEST_ASSERT_EQUAL_DOUBLE(10, scene->light->y);
 	TEST_ASSERT_EQUAL_DOUBLE(-10, scene->light->z);
 	TEST_ASSERT_EQUAL_DOUBLE(1, scene->light->brightness);
-	TEST_ASSERT_EQUAL_DOUBLE(250, scene->light->rgb->red);
-	TEST_ASSERT_EQUAL_DOUBLE(255, scene->light->rgb->green);
-	TEST_ASSERT_EQUAL_DOUBLE(245, scene->light->rgb->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 250, scene->light->rgb->red);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 255, scene->light->rgb->green);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 245, scene->light->rgb->blue);
 	aux = scene->objects;
 	while (aux)
 	{
@@ -39,9 +39,9 @@ void	test_parser_only_1_each_unique_element(void)
 			TEST_ASSERT_EQUAL_DOUBLE(9, obj->x);
 			TEST_ASSERT_EQUAL_DOUBLE(3, obj->y);
 			TEST_ASSERT_EQUAL_DOUBLE(0, obj->z);
-			TEST_ASSERT_EQUAL_DOUBLE(250, obj->rgb->red);
-			TEST_ASSERT_EQUAL_DOUBLE(90, obj->rgb->green);
-			TEST_ASSERT_EQUAL_DOUBLE(201, obj->rgb->blue);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 250, obj->rgb->red);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 90, obj->rgb->green);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 201, obj->rgb->blue);
 			TEST_ASSERT_EQUAL_DOUBLE(0, obj->cylinder.x_3d);
 			TEST_ASSERT_EQUAL_DOUBLE(1, obj->cylinder.y_3d);
 			TEST_ASSERT_EQUAL_DOUBLE(-0.3, obj->cylinder.z_3d);
@@ -54,9 +54,9 @@ void	test_parser_only_1_each_unique_element(void)
 			TEST_ASSERT_EQUAL_DOUBLE(6.1, obj->x);
 			TEST_ASSERT_EQUAL_DOUBLE(5.7, obj->y);
 			TEST_ASSERT_EQUAL_DOUBLE(20.6, obj->z);
-			TEST_ASSERT_EQUAL_DOUBLE(10, obj->rgb->red);
-			TEST_ASSERT_EQUAL_DOUBLE(0, obj->rgb->green);
-			TEST_ASSERT_EQUAL_DOUBLE(255, obj->rgb->blue);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 10, obj->rgb->red);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 0, obj->rgb->green);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 255, obj->rgb->blue);
 			TEST_ASSERT_EQUAL_DOUBLE(12.6, obj->sphere.diameter);
 			//sp 6.1,5.7,20.6 12.6 10,0,255
 		}
@@ -65,9 +65,9 @@ void	test_parser_only_1_each_unique_element(void)
 			TEST_ASSERT_EQUAL_DOUBLE(1, obj->x);
 			TEST_ASSERT_EQUAL_DOUBLE(2, obj->y);
 			TEST_ASSERT_EQUAL_DOUBLE(3, obj->z);
-			TEST_ASSERT_EQUAL_DOUBLE(250, obj->rgb->red);
-			TEST_ASSERT_EQUAL_DOUBLE(200, obj->rgb->green);
-			TEST_ASSERT_EQUAL_DOUBLE(225, obj->rgb->blue);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 250, obj->rgb->red);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 200, obj->rgb->green);
+			TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 225, obj->rgb->blue);
 			TEST_ASSERT_EQUAL_DOUBLE(0.3, obj->plane.x_3d);
 			TEST_ASSERT_EQUAL_DOUBLE(0.1, obj->plane.y_3d);
 			TEST_ASSERT_EQUAL_DOUBLE(-1, obj->plane.z_3d);

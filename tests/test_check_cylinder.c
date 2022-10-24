@@ -42,12 +42,12 @@ void	test_check_cylinder_function(void)
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(0, (object->cylinder.y_3d));
 	TEST_ASSERT_EQUAL_DOUBLE(0, (object->cylinder.z_3d));
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->cylinder.z_3d));
-	TEST_ASSERT_EQUAL_CHAR(250, object->rgb->red);
-	TEST_ASSERT_NOT_EQUAL_CHAR(251, object->rgb->red);
-	TEST_ASSERT_EQUAL_CHAR(90, object->rgb->green);
-	TEST_ASSERT_NOT_EQUAL_CHAR(91, object->rgb->green);
-	TEST_ASSERT_EQUAL_CHAR(201, object->rgb->blue);
-	TEST_ASSERT_NOT_EQUAL_CHAR(202, object->rgb->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 250, object->rgb->red);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 251, object->rgb->red);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 90, object->rgb->green);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 91, object->rgb->green);
+	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 201, object->rgb->blue);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 202, object->rgb->blue);
 	TEST_ASSERT_EQUAL_DOUBLE(3.0000, object->cylinder.diameter);
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(2.9999, object->cylinder.diameter);
 	TEST_ASSERT_EQUAL_DOUBLE(2.0000, object->cylinder.height);
