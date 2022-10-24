@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 13:32:17 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 14:01:43 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ double		cofactor(t_matrix *m, size_t row, size_t col);
 /* Transformation */
 t_matrix	*translate_matrix(double x, double y, double z);
 t_matrix	*scale_matrix(double x, double y, double z);
+t_matrix	*shearing_matrix(t_shearing s);
 t_matrix	*rotate_matrix_x(double r);
 t_matrix	*rotate_matrix_y(double r);
 t_matrix	*rotate_matrix_z(double r);

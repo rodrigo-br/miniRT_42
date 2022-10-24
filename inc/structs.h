@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 13:32:25 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:55:29 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,15 @@ typedef struct s_intersect
 	double				time;
 	struct s_intersect	*next;
 }	t_intersect;
+
+typedef struct s_shearing
+{
+	double	xy;
+	double	xz;
+	double	yx;
+	double	yz;
+	double	zx;
+	double	zy;
+}	t_shearing;
 
 #endif

@@ -234,7 +234,7 @@ void inverse_rotation_x_axis(void)
 	t_tuple *solution;
 
 	p = create_point(0, 1, 0);
-	half_quarter = rotate_matrix_x(M_PI / 4);
+	half_quarter = rotate_matrix_x(radians(180/4));
 	inverse = inverse_matrix(half_quarter);
 	solution = multiply_matrix_tuple(inverse, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(solution, &(t_tuple){0, (sqrt(2)/2), -(sqrt(2)/2), 1}));
@@ -261,8 +261,8 @@ void	rotation_y_axis(void)
 	t_tuple	*second_solution;
 
 	p = create_point(0, 0, 1);
-	half_quarter = rotate_matrix_y(M_PI / 4);
-	full_quarter = rotate_matrix_y(M_PI / 2);
+	half_quarter = rotate_matrix_y(radians(180/4));
+	full_quarter = rotate_matrix_y(radians(180/2));
 	first_solution = multiply_matrix_tuple(half_quarter, p);
 	TEST_ASSERT_TRUE(is_equal_tuple(first_solution, &(t_tuple){(sqrt(2)/2), 0, (sqrt(2)/2), 1}));
 	free(first_solution);
@@ -304,6 +304,132 @@ void	rotation_z_axis(void)
 	free(p);
 }
 
+/*
+Scenario: A shearing transformation moves x in proportion to y
+Given transform ← shearing(1, 0, 0, 0, 0, 0)
+And p ← point(2, 3, 4)
+Then transform * p = point(5, 3, 4)
+*/
+void shearing_x_to_y(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.xy = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){5, 3, 4, 1}));
+}
+
+/*
+Scenario: A shearing transformation moves x in proportion to z
+Given transform ← shearing(0, 1, 0, 0, 0, 0)
+And p ← point(2, 3, 4)
+Then transform * p = point(6, 3, 4)
+*/
+void shearing_x_to_z(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.xz = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){6, 3, 4, 1}));
+}
+
+/*
+Scenario: A shearing transformation moves y in proportion to x
+Given transform ← shearing(0, 0, 1, 0, 0, 0)
+And p ← point(2, 3, 4)
+Then transform * p = point(2, 5, 4)
+*/
+void shearing_y_to_x(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.yx = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 5, 4, 1}));
+}
+
+/*
+Scenario: A shearing transformation moves y in proportion to z
+Given transform ← shearing(0, 0, 0, 1, 0, 0)
+And p ← point(2, 3, 4)
+Then transform * p = point(2, 7, 4)
+*/
+void shearing_y_to_z(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.yz = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 7, 4, 1}));
+}
+
+/*
+Scenario: A shearing transformation moves z in proportion to x
+Given transform ← shearing(0, 0, 0, 0, 1, 0)
+And p ← point(2, 3, 4)
+Then transform * p = point(2, 3, 6)
+*/
+void shearing_z_to_x(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.zx = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 3, 6, 1}));
+}
+
+/*
+Scenario: A shearing transformation moves z in proportion to y
+Given transform ← shearing(0, 0, 0, 0, 0, 1)
+And p ← point(2, 3, 4)
+Then transform * p = point(2, 3, 7)
+*/
+void shearing_z_to_y(void)
+{
+	t_matrix	*shearing;
+	t_tuple		*result;
+	t_point		*p;
+	t_shearing	s;
+
+	ft_bzero(&s, sizeof(t_shearing));
+	s.zy = 1;
+	p = create_point(2, 3, 4);
+	shearing = shearing_matrix(s);
+	result = multiply_matrix_tuple(shearing, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(result, &(t_tuple){2, 3, 7, 1}));
+}
+
 void test_transformations(void)
 {
 	RUN_TEST(translate_point_tuple);
@@ -318,4 +444,10 @@ void test_transformations(void)
 	RUN_TEST(inverse_rotation_x_axis);
 	RUN_TEST(rotation_y_axis);
 	RUN_TEST(rotation_z_axis);
+	RUN_TEST(shearing_x_to_y);
+	RUN_TEST(shearing_x_to_z);
+	RUN_TEST(shearing_y_to_x);
+	RUN_TEST(shearing_y_to_z);
+	RUN_TEST(shearing_z_to_x);
+	RUN_TEST(shearing_z_to_y);
 }
