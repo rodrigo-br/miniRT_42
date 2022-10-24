@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 13:55:29 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:09:19 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,11 @@ typedef struct s_matrix
 	double	matrix[MAT_MAX][MAT_MAX];
 }	t_matrix;
 
-typedef union u_rgb
+typedef struct s_rgb
 {
-	int					color;
-	struct
-	{
-		unsigned char	blue;
-		unsigned char	green;
-		unsigned char	red;
-		unsigned char	opacity;
-	};
+	int	blue;
+	int	green;
+	int	red;
 }	t_rgb;
 
 typedef struct s_ambience

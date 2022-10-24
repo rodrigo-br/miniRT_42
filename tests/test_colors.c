@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 14:08:49 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 14:30:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:14:28 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	test_color_creation(void)
 		g = rand();
 		b = rand();
 		color = create_color(r, g, b);
-		TEST_ASSERT_EQUAL_HEX(decode_rgba(r, g, b), color->color);
+		TEST_ASSERT_EQUAL_HEX(decode_rgba(r, g, b), decode_rgba(color->red, color->green, color->blue));
 		free(color);
 	}
 }
