@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/20 14:30:41 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:01:17 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ double double_rand()
 	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
 }
 
+double color_rand()
+{
+	return ((double)rand() / RAND_MAX);
+}
+
 int	decode_rgba(int r, int g, int b)
 {
-	return (((r & 0xFF) << 16) + ((g & 0xFF) << 8) + ((b & 0xFF)));
+	return (r << 16 | g << 8 | b);
 }

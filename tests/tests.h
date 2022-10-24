@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 12:22:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:01:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	test_light_and_shading(void);
 
 /* Utils */
 double	double_rand();
+double	color_rand();
 int		decode_rgba(int r, int g, int b);
 
 #endif /* TESTS_H */

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 19:17:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:11:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ t_tuple		*normalize(t_tuple *t);
 t_tuple		*cross_product(t_tuple *a, t_tuple *b);
 
 /* Colors */
-t_rgb		*create_color(int r, int g, int b);
+t_rgb		*create_color(double r, double g, double b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
 t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
+int			to_rgb(double color);
 
 /* Canvas */
 t_canvas	*create_canvas(void *mlx, int width, int height);

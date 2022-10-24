@@ -6,29 +6,21 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:08:24 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 19:20:50 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:18:15 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-static int	encode_big_endian_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
 void	write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb)
 {
 	char	*pixel;
-	int		color;
 	int		index;
+	int		color;
 
-	rgb.red *= 255;
-	rgb.green *= 255;
-	rgb.blue *= 255;
+	color = rgb.merged;
 	pixel = canvas->address;
 	pixel += (y * canvas->line_length) + (x * (canvas->bits_per_pixel / 8));
-	color = encode_big_endian_rgb((int)rgb.red, (int)rgb.green, (int)rgb.blue);
 	index = canvas->bits_per_pixel - 8;
 	while (index >= 0)
 	{
