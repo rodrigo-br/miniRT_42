@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_canvas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:08:24 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 19:12:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:20:50 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb)
 	rgb.blue *= 255;
 	pixel = canvas->address;
 	pixel += (y * canvas->line_length) + (x * (canvas->bits_per_pixel / 8));
-	color = encode_big_endian_rgb(rgb.red, rgb.green, rgb.blue);
+	color = encode_big_endian_rgb((int)rgb.red, (int)rgb.green, (int)rgb.blue);
 	index = canvas->bits_per_pixel - 8;
 	while (index >= 0)
 	{

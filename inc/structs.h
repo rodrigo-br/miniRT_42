@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 19:09:19 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:20:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_matrix
 
 typedef struct s_rgb
 {
-	int	blue;
-	int	green;
-	int	red;
+	double	blue;
+	double	green;
+	double	red;
 }	t_rgb;
 
 typedef struct s_ambience
