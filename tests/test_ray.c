@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 23:11:12 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	test_position_hard(void)
 	t_point	*p1, *p2, *p3, *p4;
 
 	ray = create_ray(create_point(2, 3, 4), create_vector(1, 0, 0));
-	p1 = position(ray, 0);
-	p2 = position(ray, 1);
-	p3 = position(ray, -1);
-	p4 = position(ray, 2.5);
+	p1 = get_position(ray, 0);
+	p2 = get_position(ray, 1);
+	p3 = get_position(ray, -1);
+	p4 = get_position(ray, 2.5);
 	e1 = create_point(2, 3, 4);
 	e2 = create_point(3, 3, 4);
 	e3 = create_point(1, 3, 4);
@@ -188,7 +188,7 @@ void	test_hit_all_positive(void)
 	intersection_sorted_insert(&xslist, create_intersection(2, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(12, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(1, sphere));
-	h = hit(xslist);
+	h = get_hit(xslist);
 	TEST_ASSERT_NOT_NULL(h);
 	TEST_ASSERT_EQUAL(1, h->time);
 	destroy_shape(sphere);
@@ -206,7 +206,7 @@ void	test_hit_some_negative(void)
 	intersection_sorted_insert(&xslist, create_intersection(-12, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(42, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(-1, sphere));
-	h = hit(xslist);
+	h = get_hit(xslist);
 	TEST_ASSERT_NOT_NULL(h);
 	TEST_ASSERT_EQUAL(42, h->time);
 	destroy_shape(sphere);
@@ -224,7 +224,7 @@ void	test_hit_all_negative(void)
 	intersection_sorted_insert(&xslist, create_intersection(-12, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(-42, sphere));
 	intersection_sorted_insert(&xslist, create_intersection(-1, sphere));
-	h = hit(xslist);
+	h = get_hit(xslist);
 	TEST_ASSERT_NULL(h);
 	destroy_shape(sphere);
 	intersection_list_clear(&xslist);
@@ -237,7 +237,7 @@ void	test_ray_translation(void)
 
 	ray = create_ray(create_point(1, 2, 3), create_vector(0, 1, 0));
 	matrix = translate_matrix(3, 4, 5);
-	transformed = transform(ray, matrix);
+	transformed = transform_ray(ray, matrix);
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_point){4, 6, 8, 1}, transformed->origin));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, transformed->direction));
 	destroy_ray(ray);
@@ -252,7 +252,7 @@ void	test_ray_scaling(void)
 
 	ray = create_ray(create_point(1, 2, 3), create_vector(0, 1, 0));
 	matrix = scale_matrix(2, 3, 4);
-	transformed = transform(ray, matrix);
+	transformed = transform_ray(ray, matrix);
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_point){2, 6, 12, 1}, transformed->origin));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 3, 0, 0}, transformed->direction));
 	destroy_ray(ray);
@@ -340,7 +340,7 @@ void	test_print_circle(void)
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(origin, normalize(sub_tuple(position, origin)));
 			intersect_sphere(sphere, ray, &list);
-			if (hit(list))
+			if (get_hit(list))
 				write_to_canvas(canvas, x, y, color);
 			intersection_list_clear(&list);
 		}

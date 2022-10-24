@@ -6,13 +6,13 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 23:11:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_point	*position(t_ray *ray, double time)
+t_point	*get_position(t_ray *ray, double time)
 {
 	t_point	*_position;
 	t_point	*aux;
@@ -23,7 +23,7 @@ t_point	*position(t_ray *ray, double time)
 	return (_position);
 }
 
-t_ray	*transform(t_ray *ray, t_matrix *matrix)
+t_ray	*transform_ray(t_ray *ray, t_matrix *matrix)
 {
 	t_point		*new_origin;
 	t_vector	*new_direction;
@@ -33,7 +33,7 @@ t_ray	*transform(t_ray *ray, t_matrix *matrix)
 	return (create_ray(new_origin, new_direction));
 }
 
-t_intersect	*hit(t_intersect *intersect)
+t_intersect	*get_hit(t_intersect *intersect)
 {
 	t_intersect	*_hit;
 
