@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_constructor.c                                :+:      :+:    :+:   */
+/*   material_destructor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 19:07:50 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/24 16:18:42 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/24 16:19:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_rgb	*create_color(int r, int g, int b)
+void	destroy_material(t_material *material)
 {
-	t_rgb	*rgb;
-
-	rgb = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!rgb)
-		return (NULL);
-	rgb->red = r * TRUE_COLORS;
-	rgb->green = g * TRUE_COLORS;
-	rgb->blue = b * TRUE_COLORS;
-	return (rgb);
+	free(material->color);
+	free(material);
 }

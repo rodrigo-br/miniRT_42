@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 13:43:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:17:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <structs.h>
 
+# define TRUE_COLORS 0.00392156862745098039
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
@@ -95,7 +96,7 @@ t_rgb		*scalar_multiply_color(t_rgb *a, int multiplier);
 
 /* Canvas */
 t_canvas	*create_canvas(void *mlx, int width, int height);
-void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb *rgb);
+void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb);
 
 /* Matrix */
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
@@ -113,6 +114,7 @@ double		cofactor(t_matrix *m, size_t row, size_t col);
 /* Transformation */
 t_matrix	*translate_matrix(double x, double y, double z);
 t_matrix	*scale_matrix(double x, double y, double z);
+t_matrix	*shearing_matrix(t_shearing s);
 t_matrix	*rotate_matrix_x(double r);
 t_matrix	*rotate_matrix_y(double r);
 t_matrix	*rotate_matrix_z(double r);
