@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/23 19:19:59 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:00:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,14 @@ t_matrix	*scale_matrix(double x, double y, double z);
 
 /* Ray */
 t_ray		*create_ray(t_point *origin, t_vector *direction);
+void		destroy_ray(t_ray *ray);
 t_object	*create_sphere(void);
+void		destroy_shape(t_object *object);
 t_point		*position(t_ray *ray, double time);
 t_intersect	*create_intersection(double time, t_object *object);
 t_intersect	*hit(t_intersect *intersect);
+t_ray		*transform(t_ray *ray, t_matrix *matrix);
+void		set_transformation(t_object *object, t_matrix *transformation);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersection_list_clear(t_intersect **list);

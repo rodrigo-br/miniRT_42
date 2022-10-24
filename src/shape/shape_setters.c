@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_constructor.c                                  :+:      :+:    :+:   */
+/*   shape_setters.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 14:55:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 21:19:48 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/23 21:19:55 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/23 22:24:03 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_ray	*create_ray(t_point *origin, t_vector *direction)
+void	set_transformation(t_object *object, t_matrix *transformation)
 {
-	t_ray	*ray;
-
-	ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!ray)
-		return (NULL);
-	ray->origin = origin;
-	ray->direction = direction;
-	return (ray);
+	free(object->transformation);
+	free(object->inverse_transformation);
+	object->transformation = transformation;
+	object->inverse_transformation = inverse_matrix(transformation);
 }

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_constructor.c                                  :+:      :+:    :+:   */
+/*   ray_destructor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 14:55:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 21:19:48 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/23 21:59:59 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/23 22:00:22 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_ray	*create_ray(t_point *origin, t_vector *direction)
+void	destroy_ray(t_ray *ray)
 {
-	t_ray	*ray;
-
-	ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!ray)
-		return (NULL);
-	ray->origin = origin;
-	ray->direction = direction;
-	return (ray);
+	free(ray->origin);
+	free(ray->direction);
+	free(ray);
 }

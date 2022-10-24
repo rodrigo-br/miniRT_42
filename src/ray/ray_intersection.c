@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 18:56:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:13:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head)
 	double		x2;
 	t_bhaskara	bhaskara;
 	t_vector	*sphere_to_ray;
+	t_ray		*transformed;
 
-	sphere_to_ray = sub_tuple(ray->origin, &sphere->sphere.center);
-	bhaskara.a = dot_product(ray->direction, ray->direction);
-	bhaskara.b = dot_product(ray->direction, sphere_to_ray) * 2;
+	transformed = transform(ray, sphere->inverse_transformation);
+	sphere_to_ray = sub_tuple(transformed->origin, &sphere->sphere.center);
+	bhaskara.a = dot_product(transformed->direction, transformed->direction);
+	bhaskara.b = dot_product(transformed->direction, sphere_to_ray) * 2;
 	bhaskara.c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	free(sphere_to_ray);
+	destroy_ray(transformed);
 	bhaskara.delta = (bhaskara.b * bhaskara.b) - (4 * bhaskara.a * bhaskara.c);
 	if (bhaskara.delta < 0)
 		return ;

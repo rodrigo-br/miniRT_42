@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/23 20:52:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:09:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct s_tuple
 
 typedef t_tuple	t_vector; /* tuple with 'w' value equal to 0 */
 typedef t_tuple	t_point; /* tuple with 'w' value equal to 1 */
+
+typedef struct s_matrix
+{
+	size_t	size;
+	double	matrix[MAT_MAX][MAT_MAX];
+}	t_matrix;
 
 typedef union u_rgb
 {
@@ -96,17 +102,19 @@ typedef struct s_cylinder
 
 typedef struct s_object
 {
-	int		type;
+	int			type;
 	union
 	{
 		t_sphere	sphere;
 		t_cylinder	cylinder;
 		t_plane		plane;
 	};
-	double	x;
-	double	y;
-	double	z;
-	t_rgb	*rgb;
+	double		x;
+	double		y;
+	double		z;
+	t_rgb		*rgb;
+	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
 }	t_object;
 
 typedef struct s_scene
@@ -125,12 +133,6 @@ typedef struct s_canvas
 	int		line_length;
 	int		endianness;
 }	t_canvas;
-
-typedef struct s_matrix
-{
-	size_t	size;
-	double	matrix[MAT_MAX][MAT_MAX];
-}	t_matrix;
 
 typedef struct s_ray
 {
