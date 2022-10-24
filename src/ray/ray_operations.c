@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:45:24 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ t_intersect	*get_hit(t_intersect *intersect)
 		intersect = intersect->next;
 	}
 	return (_hit);
+}
+
+t_vector	*get_sphere_normal(t_object *sphere, t_point *point)
+{
+	t_tuple	*sub;
+	t_tuple	*normal;
+
+	sub = sub_tuple(point, &sphere->sphere.center);
+	normal = normalize(sub);
+	free(sub);
+	return (normal);
 }

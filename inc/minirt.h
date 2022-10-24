@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:39:37 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void		destroy_ray(t_ray *ray);
 t_object	*create_sphere(void);
 void		destroy_shape(t_object *object);
 t_point		*get_position(t_ray *ray, double time);
+t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_intersect	*create_intersection(double time, t_object *object);
 t_intersect	*get_hit(t_intersect *intersect);
 t_ray		*transform_ray(t_ray *ray, t_matrix *matrix);

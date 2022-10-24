@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/22 19:00:52 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:22:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	test_check_plane(void);
 void	test_check_sphere(void);
 void	test_transformations(void);
 void	test_ray(void);
+void	test_light_and_shading(void);
 
 /* Utils */
 double	double_rand();
