@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/22 10:17:33 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:38:50 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ typedef union u_rgb
 		unsigned char	opacity;
 	};
 }	t_rgb;
-
-t_rgb	cavalinho;
-cavalinho.blue = 
 
 typedef struct s_ambience
 {
