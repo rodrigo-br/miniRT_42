@@ -189,6 +189,121 @@ void	scaling_reflection_tuple(void)
 	free(matrix);
 }
 
+/*
+Scenario: Rotating a point around the x axis
+Given p ← point(0, 1, 0)
+And half_quarter ← rotation_x(π / 4)
+And full_quarter ← rotation_x(π / 2)
+Then half_quarter * p = point(0, √2/2, √2/2)
+And full_quarter * p = point(0, 0, 1)
+*/
+void	rotation_x_axis(void)
+{
+	t_point *p;
+	t_matrix *half_quarter;
+	t_matrix *full_quarter;
+	t_tuple *first_solution;
+	t_tuple	*second_solution;
+
+	p = create_point(0, 1, 0);
+	half_quarter = rotate_matrix_x(M_PI / 4);
+	full_quarter = rotate_matrix_x(M_PI / 2);
+	first_solution = multiply_matrix_tuple(half_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(first_solution, &(t_tuple){0, (sqrt(2)/2), (sqrt(2)/2), 1}));
+	free(first_solution);
+	free(half_quarter);
+	second_solution = multiply_matrix_tuple(full_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(second_solution, &(t_tuple){0, 0, 1, 1}));
+	free(second_solution);
+	free(full_quarter);
+	free(p);
+}
+
+/*
+Scenario: The inverse of an x-rotation rotates in the opposite direction
+Given p ← point(0, 1, 0)
+And half_quarter ← rotation_x(π / 4)
+And inv ← inverse(half_quarter)
+Then inv * p = point(0, √2/2, -√2/2)
+*/
+void inverse_rotation_x_axis(void)
+{
+	t_point *p;
+	t_matrix *half_quarter;
+	t_matrix *inverse;
+	t_tuple *solution;
+
+	p = create_point(0, 1, 0);
+	half_quarter = rotate_matrix_x(M_PI / 4);
+	inverse = inverse_matrix(half_quarter);
+	solution = multiply_matrix_tuple(inverse, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(solution, &(t_tuple){0, (sqrt(2)/2), -(sqrt(2)/2), 1}));
+	free(solution);
+	free(inverse);
+	free(half_quarter);
+	free(p);
+}
+
+/*
+Scenario: Rotating a point around the y axis
+Given p ← point(0, 0, 1)
+And half_quarter ← rotation_y(π / 4)
+And full_quarter ← rotation_y(π / 2)
+Then half_quarter * p = point(√2/2, 0, √2/2)
+And full_quarter * p = point(1, 0, 0)
+*/
+void	rotation_y_axis(void)
+{
+	t_point *p;
+	t_matrix *half_quarter;
+	t_matrix *full_quarter;
+	t_tuple *first_solution;
+	t_tuple	*second_solution;
+
+	p = create_point(0, 0, 1);
+	half_quarter = rotate_matrix_y(M_PI / 4);
+	full_quarter = rotate_matrix_y(M_PI / 2);
+	first_solution = multiply_matrix_tuple(half_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(first_solution, &(t_tuple){(sqrt(2)/2), 0, (sqrt(2)/2), 1}));
+	free(first_solution);
+	free(half_quarter);
+	second_solution = multiply_matrix_tuple(full_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(second_solution, &(t_tuple){1, 0, 0, 1}));
+	free(second_solution);
+	free(full_quarter);
+	free(p);
+}
+
+/*
+Scenario: Rotating a point around the z axis
+Given p ← point(0, 1, 0)
+And half_quarter ← rotation_z(π / 4)
+And full_quarter ← rotation_z(π / 2)
+Then half_quarter * p = point(-√2/2, √2/2, 0)
+And full_quarter * p = point(-1, 0, 0)
+*/
+void	rotation_z_axis(void)
+{
+	t_point *p;
+	t_matrix *half_quarter;
+	t_matrix *full_quarter;
+	t_tuple *first_solution;
+	t_tuple	*second_solution;
+
+	p = create_point(0, 1, 0);
+	half_quarter = rotate_matrix_z(M_PI / 4);
+	full_quarter = rotate_matrix_z(M_PI / 2);
+	first_solution = multiply_matrix_tuple(half_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(first_solution, &(t_tuple){-(sqrt(2)/2), (sqrt(2)/2), 0, 1}));
+	free(first_solution);
+	free(half_quarter);
+	second_solution = multiply_matrix_tuple(full_quarter, p);
+	TEST_ASSERT_TRUE(is_equal_tuple(second_solution, &(t_tuple){-1, 0, 0, 1}));
+	free(second_solution);
+	free(full_quarter);
+	free(p);
+}
+
 void test_transformations(void)
 {
 	RUN_TEST(translate_point_tuple);
@@ -199,4 +314,8 @@ void test_transformations(void)
 	RUN_TEST(scaling_vector_tuple);
 	RUN_TEST(scaling_vector_inversed_tuple);
 	RUN_TEST(scaling_reflection_tuple);
+	RUN_TEST(rotation_x_axis);
+	RUN_TEST(inverse_rotation_x_axis);
+	RUN_TEST(rotation_y_axis);
+	RUN_TEST(rotation_z_axis);
 }

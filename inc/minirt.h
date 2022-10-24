@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 12:39:37 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:43:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ double		cofactor(t_matrix *m, size_t row, size_t col);
 /* Transformation */
 t_matrix	*translate_matrix(double x, double y, double z);
 t_matrix	*scale_matrix(double x, double y, double z);
+t_matrix	*rotate_matrix_x(double r);
+t_matrix	*rotate_matrix_y(double r);
+t_matrix	*rotate_matrix_z(double r);
+double		radians(double degree);
 
 /* Ray */
 t_ray		*create_ray(t_point *origin, t_vector *direction);

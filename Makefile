@@ -11,11 +11,8 @@ OBJS	= $(MAIN:%.c=$(OBJ_DIR)/%.o)
 
 HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
-
-
-MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) $(SHAPE)
-SRCS	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c \
-		lst_obj_free.c ft_set_double_value.c ft_get_matrix_len.c free_scene.c
+ 
+MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) $(SHAPE) $(UTILS)
 PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
@@ -23,12 +20,15 @@ TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulat
 COLOR	= color_constructor.c color_operations.c
 CANVAS	= canvas_constructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
-		matrix_transformations.c
+		matrix_transformations.c matrix_rotations.c
+UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c \
+		lst_obj_free.c ft_set_double_value.c ft_get_matrix_len.c free_scene.c \
+		radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
 SHAPE	= shape_destructor.c shape_setters.c sphere.c
 
-DIRS	= . tuple color canvas matrix ray shape parser
+DIRS	= . tuple color canvas matrix ray shape parser transformations utils
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
