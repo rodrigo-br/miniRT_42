@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 13:41:00 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 14:17:22 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,23 @@ void	test_normalat_translated_sphere(void)
 	free(normal);
 }
 
-/*
-Scenario: Computing the normal on a transformed sphere
-Given s ← sphere()
-And m ← scaling(1, 0.5, 1) * rotation_z(π/5)
-And set_transform(s, m)
-When n ← normal_at(s, point(0, √2/2, -√2/2))
-Then n = vector(0, 0.97014, -0.24254)
-*/
-// void	test_normalat_scaled_sphere(void)
-// {
-// 	t_object	*sphere;
-// 	t_vector	*normal;
-// 	t_matrix	*scale, *rotate;
+void	test_normalat_scaled_sphere(void)
+{
+	t_object	*sphere;
+	t_vector	*normal;
+	t_matrix	*scale, *rotate;
 
-// 	sphere = create_sphere();
-// 	scale = scale_matrix(1, 0.5, 1);
-// 	rotate =
-// 	set_transformation(sphere, _matrix(0, 1, 0));
-// 	normal = get_sphere_normal(sphere, &(t_point){0, 1.70711, -0.70711, 1});
-// 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.70711, -0.70711, 0}, normal));
-// 	destroy_shape(sphere);
-// 	free(normal);
-// }
+	sphere = create_sphere();
+	scale = scale_matrix(1, 0.5, 1);
+	rotate = rotate_matrix_z(radians(180 / 5));
+	set_transformation(sphere, multiply_matrix(scale, rotate));
+	normal = get_sphere_normal(sphere, &(t_point){0, sqrt(2)/2, -sqrt(2)/2, 1});
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.97014, -0.24254, 0}, normal));
+	destroy_shape(sphere);
+	free(normal);
+	free(scale);
+	free(rotate);
+}
 
 void	test_light_and_shading(void)
 {
@@ -119,4 +113,6 @@ void	test_light_and_shading(void)
 	RUN_TEST(test_normalat_sphere_z_axis);
 	RUN_TEST(test_normalat_sphere_nonaxial);
 	RUN_TEST(test_normalat_is_normalized);
+	RUN_TEST(test_normalat_translated_sphere);
+	RUN_TEST(test_normalat_scaled_sphere);
 }
