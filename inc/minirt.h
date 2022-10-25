@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 11:20:54 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:53:50 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ double		radians(double degree);
 t_ray		*create_ray(t_point *origin, t_vector *direction);
 void		destroy_ray(t_ray *ray);
 t_object	*create_sphere(void);
-void		destroy_shape(t_object *object);
+void		destroy_shape(void *object);
 t_point		*get_position(t_ray *ray, double time);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_intersect	*create_intersection(double time, t_object *object);
@@ -143,7 +143,11 @@ t_pos_attr	*create_pos_attr(t_vector *camera, t_vector *normal, t_point *pos);
 t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity);
 t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m);
 void		destroy_material(t_material *material);
-void		destroy_light_point(t_light_pnt *light_point);
+void		destroy_light_point(void *light_point);
 void		destroy_lightattr(t_lightattr *attributes);
+
+/*World*/
+t_world		*create_world(void);
+void		destroy_world(t_world *w);
 
 #endif /* MINIRT_H */

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:24:16 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:00:54 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int	main(void)
 	test_transformations();
 	test_ray();
 	test_light_and_shading();
+	test_world();
 	return (UNITY_END());
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 15:30:11 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:56:05 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ t_intersect	*get_hit(t_intersect *intersect)
 	}
 	return (_hit);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 11:20:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:30:00 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,11 @@ typedef struct s_light_attributes
 	t_point		*position;
 	t_material	*material;
 }	t_lightattr;
+
+typedef struct s_world
+{
+	t_list	*light_point;
+	t_list	*objects;
+}	t_world;
 
 #endif

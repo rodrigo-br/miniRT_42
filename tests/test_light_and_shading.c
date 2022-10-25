@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_light_and_shading.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 11:08:37 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 12:45:39 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void	test_print_3d_sphere(void)
 
 	free(sphere->material->color);
 	sphere->material->color = create_color(color_rand(), color_rand(), color_rand());
-	lp = create_light_point(create_point(-10, 10, -10), create_color(0.5, 0.5, 0.5));
+	lp = create_light_point(create_point(-10, 10, -10), create_color(0.9, 0.9, 0.9));
 	for (int y = 0; y < canvas_pixels - 1; y++)
 	{
 		world_y = half - pixel_size * y;
