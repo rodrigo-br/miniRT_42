@@ -36,12 +36,12 @@ void	test_check_sphere_function(void)
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(2, (object->y));
 	TEST_ASSERT_EQUAL_DOUBLE(20.6, (object->z));
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->z));
-	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 10, object->rgb->red);
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 251, object->rgb->red);
-	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 0, object->rgb->green);
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 91, object->rgb->green);
-	TEST_ASSERT_EQUAL_DOUBLE(TRUE_COLORS * 255, object->rgb->blue);
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(TRUE_COLORS * 202, object->rgb->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(10.0 / 255.0, object->rgb->red);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(251.0 / 255.0, object->rgb->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0.0 / 255.0, object->rgb->green);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(91.0 / 255.0, object->rgb->green);
+	TEST_ASSERT_EQUAL_DOUBLE(255.0 / 255.0, object->rgb->blue);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(202.0 / 255.0, object->rgb->blue);
 	TEST_ASSERT_EQUAL_DOUBLE(12.6, object->sphere.diameter);
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(12.7, object->sphere.diameter);
 	ft_lstclear(&scene->objects, free_lst_obj);

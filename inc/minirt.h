@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:11:27 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:19:39 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdio.h>
 # include <structs.h>
 
-# define TRUE_COLORS 0.00392156862745098039
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
