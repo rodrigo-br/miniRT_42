@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:41:43 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:34:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,21 +155,19 @@ void	test_create_material(void)
 
 void	test_lighting_between_light_and_surface(void)
 {
-	t_material	*material;
-	t_lightattr	args;
+	t_lightattr	*args;
 	t_rgb		*result;
 
-	material = create_material();
-	args.light_point = create_light_point(create_point(0, 0, -10), create_color(1, 1, 1));
-	args.position = create_point(0, 0, 0);
-	args.camera = create_vector(0, 0, -1);
-	args.normal = create_vector(0, 0, -1);
-	result = lighting(&args, material);
+	args = create_lightattr(
+		create_light_point(create_point(0, 0, -10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, 0, -1), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	result = lighting(args);
 	TEST_ASSERT_EQUAL(1.9, result->red);
 	TEST_ASSERT_EQUAL(1.9, result->green);
 	TEST_ASSERT_EQUAL(1.9, result->blue);
-	destroy_material(material);
-	destroy_light_point(args.light_point);
+	destroy_lightattr(args);
 	free(result);
 	TEST_ASSERT_NOT_NULL(result);
 
@@ -177,85 +175,77 @@ void	test_lighting_between_light_and_surface(void)
 
 void	test_lighting_camera_offset_45deg(void)
 {
-	t_material	*material;
-	t_lightattr	args;
+	t_lightattr	*args;
 	t_rgb		*result;
 
-	material = create_material();
-	args.light_point = create_light_point(create_point(0, 0, -10), create_color(1, 1, 1));
-	args.position = create_point(0, 0, 0);
-	args.camera = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
-	args.normal = create_vector(0, 0, -1);
-	result = lighting(&args, material);
+	args = create_lightattr(
+		create_light_point(create_point(0, 0, -10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, sqrt(2)/2, -sqrt(2)/2), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
 	TEST_ASSERT_EQUAL(1.0, result->red);
 	TEST_ASSERT_EQUAL(1.0, result->green);
 	TEST_ASSERT_EQUAL(1.0, result->blue);
-	destroy_material(material);
-	destroy_light_point(args.light_point);
+	destroy_lightattr(args);
 	free(result);
 }
 
 void	test_lighting_light_offset_45deg_and_camera_opposite(void)
 {
-	t_material	*material;
-	t_lightattr	args;
+	t_lightattr	*args;
 	t_rgb		*result;
 
-	material = create_material();
-	args.light_point = create_light_point(create_point(0, 10, -10), create_color(1, 1, 1));
-	args.position = create_point(0, 0, 0);
-	args.camera = create_vector(0, 0, -1);
-	args.normal = create_vector(0, 0, -1);
-	result = lighting(&args, material);
+	args = create_lightattr(
+		create_light_point(create_point(0, 10, -10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, 0, -1), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
 	TEST_ASSERT_EQUAL(0.7364, result->red);
 	TEST_ASSERT_EQUAL(0.7364, result->green);
 	TEST_ASSERT_EQUAL(0.7364, result->blue);
-	destroy_material(material);
-	destroy_light_point(args.light_point);
+	destroy_lightattr(args);
 	free(result);
 }
 
 void	test_lighting_camera_in_reflection_vector(void)
 {
-	t_material	*material;
-	t_lightattr	args;
+	t_lightattr	*args;
 	t_rgb		*result;
 
-	material = create_material();
-	args.light_point = create_light_point(create_point(0, 10, -10), create_color(1, 1, 1));
-	args.position = create_point(0, 0, 0);
-	args.camera = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
-	args.normal = create_vector(0, 0, -1);
-	result = lighting(&args, material);
+	args = create_lightattr(
+		create_light_point(create_point(0, 10, -10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, -sqrt(2)/2, -sqrt(2)/2), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
 	TEST_ASSERT_EQUAL(1.6364, result->red);
 	TEST_ASSERT_EQUAL(1.6364, result->green);
 	TEST_ASSERT_EQUAL(1.6364, result->blue);
-	destroy_material(material);
-	destroy_light_point(args.light_point);
+	destroy_lightattr(args);
 	free(result);
 }
 
 void	test_lighting_light_behind_surface(void)
 {
-	t_material	*material;
-	t_lightattr	args;
+	t_lightattr	*args;
 	t_rgb		*result;
 
-	material = create_material();
-	args.light_point = create_light_point(create_point(0, 0, 10), create_color(1, 1, 1));
-	args.position = create_point(0, 0, 0);
-	args.camera = create_vector(0, 0, -1);
-	args.normal = create_vector(0, 0, -1);
-	result = lighting(&args, material);
+	args = create_lightattr(
+		create_light_point(create_point(0, 0, 10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, 0, -1), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
 	TEST_ASSERT_EQUAL(0.1, result->red);
 	TEST_ASSERT_EQUAL(0.1, result->green);
 	TEST_ASSERT_EQUAL(0.1, result->blue);
-	destroy_material(material);
-	destroy_light_point(args.light_point);
+	destroy_lightattr(args);
 	free(result);
 }
 

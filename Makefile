@@ -28,7 +28,7 @@ UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
 SHAPE	= shape_destructor.c shape_setters.c sphere.c
-LIGHT	= material_constructor.c material_destructor.c reflection.c
+LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c
 
 DIRS	= . tuple color canvas matrix ray shape parser transformations light utils
 IFLAGS	= -I $(HEADER_PATH)

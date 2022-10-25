@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:22:53 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:14:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,20 @@ typedef struct s_light_point
 	t_rgb	*intensity;
 }	t_light_pnt;
 
+typedef struct s_position_attributes
+{
+	t_vector	*camera;
+	t_vector	*normal;
+	t_point		*position;
+}	t_pos_attr;
+
 typedef struct s_light_attributes
 {
 	t_light_pnt	*light_point;
 	t_vector	*camera;
 	t_vector	*normal;
 	t_point		*position;
+	t_material	*material;
 }	t_lightattr;
 
 #endif

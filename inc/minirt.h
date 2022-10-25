@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:38:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:30:20 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,14 @@ size_t		intersection_list_size(t_intersect *list);
 
 /* Light */
 t_vector	*reflect(t_vector *in, t_vector *normal);
-t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity);
-void		destroy_light_point(t_light_pnt *light_point);
+t_rgb		*lighting(t_lightattr *args);
 t_material	*create_material(void);
+t_pos_attr	*create_pos_attr(t_vector *camera, t_vector *normal, t_point *pos);
+t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity);
+t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m);
 void		destroy_material(t_material *material);
-t_rgb		*lighting(t_lightattr *args, t_material *material);
+void		destroy_light_point(t_light_pnt *light_point);
+void		destroy_lightattr(t_lightattr *attributes);
+
 
 #endif /* MINIRT_H */
