@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 18:53:55 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:02:34 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,11 @@ void		destroy_computation(t_comp *comps);
 t_rgb		*shade_hit(t_world *world, t_comp *comps);
 t_rgb		*color_at(t_world *world, t_ray *ray);
 t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up);
+
+/*Camera*/
+t_cam		*create_camera(double h_size, double v_size, double field_of_view);
+t_ray		*ray_for_pixel(t_cam *camera, double x, double y);
+void		destroy_camera(t_cam *cam);
+void		set_camera_transformation(t_cam	*camera, t_matrix *transformation);
 
 #endif /* MINIRT_H */

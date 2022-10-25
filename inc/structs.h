@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 14:31:48 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:47:02 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,5 +208,17 @@ typedef struct s_comp
 	t_vector	*camera;
 	t_bool		inside;
 }	t_comp;
+
+typedef struct s_cam
+{
+	double		pixel_size;
+	double		field_of_view;
+	double		h_size;
+	double		v_size;
+	double		half_width;
+	double		half_height;
+	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
+}	t_cam;
 
 #endif

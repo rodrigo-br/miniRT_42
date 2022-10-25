@@ -13,7 +13,7 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
-		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD)
+		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA)
 PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
@@ -30,8 +30,9 @@ RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 SHAPE	= shape_destructor.c shape_setters.c sphere.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c
 WORLD	= world_constructor.c world_computations.c world_destructor.c
+CAMERA	= camera_destructor.c camera_constructor.c ray_for_pixel.c camera_setter.c
 
-DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world
+DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror
