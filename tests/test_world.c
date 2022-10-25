@@ -16,8 +16,8 @@ And w contains s2
 */
 void	test_create_world(void)
 {
-	t_world *w;
-	t_light_pnt *lp;
+	t_world		*w;
+	t_light_pnt	*lp;
 	t_object	*sphere_1;
 	t_object	*sphere_2;
 	t_object	*object_1;
@@ -56,11 +56,8 @@ And xs[3].t = 6
 */
 void	test_intersect_world(void)
 {
-	t_world *w;
-	t_light_pnt *lp;
+	t_world 	*w;
 	t_ray		*ray;
-	t_object	*sphere_1;
-	t_object	*sphere_2;
 	t_object	*object_1;
 	t_object	*object_2;
 	t_intersect	*xs;
@@ -78,9 +75,6 @@ void	test_intersect_world(void)
 	object_2 = create_sphere();
 	set_transformation(object_2, scale_matrix(0.5, 0.5, 0.5));
 	ft_lstadd_front(&w->objects, ft_lstnew(object_2));
-	lp = (t_light_pnt *)w->light_point->content;
-	sphere_1 = (t_object *)w->objects->content;
-	sphere_2 = (t_object *)w->objects->next->content;
 	intersect_world(w, ray, &xs);
 	TEST_ASSERT_EQUAL(4, intersection_list_size(xs));
 	TEST_ASSERT_EQUAL_DOUBLE(4, xs->time);
@@ -224,6 +218,159 @@ void	test_shading_an_intersection(void)
 	intersection_list_clear(&i);
 }
 
+/*
+Scenario: Shading an intersection from the inside
+Given w ← default_world()
+And w.light ← point_light(point(0, 0.25, 0), color(1, 1, 1))
+And r ← ray(point(0, 0, 0), vector(0, 0, 1))
+And shape ← the second object in w
+And i ← intersection(0.5, shape)
+When comps ← prepare_computations(i, r)
+And c ← shade_hit(w, comps)
+Then c = color(0.90498, 0.90498, 0.90498)
+*/
+void	test_shading_an_intersection_from_inside(void)
+{
+	t_world		*w;
+	t_object	*shape;
+	t_ray		*ray;
+	t_intersect	*i;
+	t_comp		*comps;
+	t_rgb		*rgb;
+
+	w = create_world();
+	w->light_point = ft_lstnew(create_light_point(create_point(0, 0.25, 0), create_color(1, 1, 1)));
+	shape = create_sphere();
+	set_transformation(shape, scale_matrix(0.5, 0.5, 0.5));
+	w->objects = ft_lstnew(shape);
+	ray = create_ray(create_point(0, 0, 0), create_vector(0, 0, 1));
+	i = create_intersection(0.5, shape);
+	comps = prepare_computation(i, ray);
+	rgb = shade_hit(w, comps);
+	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->blue));
+	destroy_world(w);
+	destroy_computation(comps);
+	free(rgb);
+	destroy_ray(ray);
+	intersection_list_clear(&i);
+}
+
+/*
+Scenario: The color when a ray misses
+Given w ← default_world()
+And r ← ray(point(0, 0, -5), vector(0, 1, 0))
+When c ← color_at(w, r)
+Then c = color(0, 0, 0)
+*/
+void	test_color_when_ray_misses(void)
+{
+	t_world		*w;
+	t_object	*sphere_1;
+	t_object	*sphere_2;
+	t_ray		*ray;
+	t_rgb		*rgb;
+
+	w = create_world();
+	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
+	sphere_1 = create_sphere();
+	free(sphere_1->material->color);
+	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
+	sphere_1->material->diffuse = 0.7;
+	sphere_1->material->specular = 0.2;
+	w->objects = ft_lstnew(sphere_1);
+	sphere_2 = create_sphere();
+	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
+	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	ray = create_ray(create_point(0, 0, -5), create_vector(0, 1, 0));
+	rgb = color_at(w, ray);
+	TEST_ASSERT_TRUE(is_equal_double(0, rgb->red));
+	TEST_ASSERT_TRUE(is_equal_double(0, rgb->green));
+	TEST_ASSERT_TRUE(is_equal_double(0, rgb->blue));
+	destroy_world(w);
+	destroy_ray(ray);
+	free(rgb);
+}
+
+/*
+Scenario: The color when a ray hits
+Given w ← default_world()
+And r ← ray(point(0, 0, -5), vector(0, 0, 1))
+When c ← color_at(w, r)
+Then c = color(0.38066, 0.47583, 0.2855)
+*/
+void	test_color_when_ray_hits(void)
+{
+	t_world		*w;
+	t_object	*sphere_1;
+	t_object	*sphere_2;
+	t_ray		*ray;
+	t_rgb		*rgb;
+
+	w = create_world();
+	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
+	sphere_1 = create_sphere();
+	free(sphere_1->material->color);
+	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
+	sphere_1->material->diffuse = 0.7;
+	sphere_1->material->specular = 0.2;
+	w->objects = ft_lstnew(sphere_1);
+	sphere_2 = create_sphere();
+	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
+	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
+	rgb = color_at(w, ray);
+	TEST_ASSERT_TRUE(is_equal_double(0.38066, rgb->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.47583, rgb->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.2855, rgb->blue));
+	destroy_world(w);
+	destroy_ray(ray);
+	free(rgb);
+}
+
+/*
+Scenario: The color with an intersection behind the ray
+Given w ← default_world()
+And outer ← the first object in w
+And outer.material.ambient ← 1
+And inner ← the second object in w
+And inner.material.ambient ← 1
+And r ← ray(point(0, 0, 0.75), vector(0, 0, -1))
+When c ← color_at(w, r)
+Then c = inner.material.color
+*/
+void	test_color_when_intersect_behind_ray(void)
+{
+	t_world		*w;
+	t_object	*sphere_1;
+	t_object	*sphere_2;
+	t_ray		*ray;
+	t_rgb		*rgb;
+
+	w = create_world();
+	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
+	sphere_1 = create_sphere();
+	free(sphere_1->material->color);
+	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
+	sphere_1->material->ambient = 1.0;
+	sphere_1->material->diffuse = 0.7;
+	sphere_1->material->specular = 0.2;
+	w->objects = ft_lstnew(sphere_1);
+	sphere_2 = create_sphere();
+	sphere_2->material->ambient = 1.0;
+	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
+	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	ray = create_ray(create_point(0, 0, 0.75), create_vector(0, 0, -1));
+	rgb = color_at(w, ray);
+	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->red, rgb->red));
+	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->green, rgb->green));
+	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->blue, rgb->blue));
+	destroy_world(w);
+	destroy_ray(ray);
+	free(rgb);
+}
+
 void	test_world(void)
 {
 	RUN_TEST(test_create_world);
@@ -232,4 +379,8 @@ void	test_world(void)
 	RUN_TEST(test_hit_when_intersection_outside);
 	RUN_TEST(test_hit_when_intersection_inside);
 	RUN_TEST(test_shading_an_intersection);
+	RUN_TEST(test_shading_an_intersection_from_inside);
+	RUN_TEST(test_color_when_ray_misses);
+	RUN_TEST(test_color_when_ray_hits);
+	RUN_TEST(test_color_when_intersect_behind_ray);
 }

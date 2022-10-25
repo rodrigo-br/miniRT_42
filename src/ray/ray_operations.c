@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 15:44:20 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:11:14 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,24 @@ t_rgb	*shade_hit(t_world *world, t_comp *comps)
 	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
 	color = lighting(light_attr);
 	free(light_attr);
+	return (color);
+}
+
+t_rgb	*color_at(t_world *world, t_ray *ray)
+{
+	t_intersect	*xs;
+	t_intersect	*hit;
+	t_comp		*comps;
+	t_rgb		*color;
+
+	xs = NULL;
+	intersect_world(world, ray, &xs);
+	hit = get_hit(xs);
+	if (!hit)
+		return (create_color(0, 0, 0));
+	comps = prepare_computation(hit, ray);
+	color = shade_hit(world, comps);
+	destroy_computation(comps);
+	intersection_list_clear(&xs);
 	return (color);
 }
