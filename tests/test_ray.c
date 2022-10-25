@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:13:13 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:45:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,14 @@ void	test_sphere_creation(void)
 	TEST_ASSERT_NOT_NULL(sphere);
 	TEST_ASSERT_TRUE(sphere->type == ID_SPHERE);
 	TEST_ASSERT_TRUE(is_equal_matrix(identity, sphere->transformation));
+	TEST_ASSERT_TRUE(is_equal_matrix(identity, sphere->inverse_transformation));
+	TEST_ASSERT_EQUAL(1, sphere->material->color->red);
+	TEST_ASSERT_EQUAL(1, sphere->material->color->green);
+	TEST_ASSERT_EQUAL(1, sphere->material->color->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, sphere->material->ambient);
+	TEST_ASSERT_EQUAL_DOUBLE(0.9, sphere->material->diffuse);
+	TEST_ASSERT_EQUAL_DOUBLE(0.9, sphere->material->specular);
+	TEST_ASSERT_EQUAL_DOUBLE(200.0, sphere->material->shininess);
 	destroy_shape(sphere);
 	free(identity);
 }
@@ -314,7 +322,7 @@ void	test_intersect_translated_sphere(void)
 */
 void	test_print_circle(void)
 {
-	double		wall_size = 10.0;
+	double		wall_size = 7.0;
 	double		world_x = 500;
 	double		world_y = 500;
 	double		world_z = 10;
@@ -326,7 +334,7 @@ void	test_print_circle(void)
 	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
 	t_object	*sphere = create_sphere();
 	t_point		*origin = create_point(0, 0, -5);
-	t_rgb		*color = create_color(rand(), rand(), rand());
+	t_rgb		*color = create_color(color_rand(), color_rand(), color_rand());
 	t_intersect	*list = NULL;
 	t_point		*position;
 	t_ray		*ray;

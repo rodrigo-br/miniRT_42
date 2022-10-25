@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:48:27 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/19 15:30:46 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:38:24 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_rgb	*multiply_color(t_rgb *a, t_rgb *b)
 	);
 }
 
-t_rgb	*scalar_multiply_color(t_rgb *a, int multiplier)
+t_rgb	*scalar_multiply_color(t_rgb *a, double multiplier)
 {
 	return (create_color(
 			(a->red * multiplier),

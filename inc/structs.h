@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:24:43 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:20:58 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,15 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
+typedef struct s_material
+{
+	t_rgb	*color;
+	double	ambient;
+	double	diffuse;
+	double	specular;
+	double	shininess;
+}	t_material;
+
 typedef struct s_object
 {
 	int			type;
@@ -111,6 +120,7 @@ typedef struct s_object
 	t_rgb		*rgb;
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
+	t_material	*material;
 }	t_object;
 
 typedef struct s_scene
@@ -160,5 +170,27 @@ typedef struct s_shearing
 	double	zx;
 	double	zy;
 }	t_shearing;
+
+typedef struct s_light_point
+{
+	t_point	*position;
+	t_rgb	*intensity;
+}	t_light_pnt;
+
+typedef struct s_position_attributes
+{
+	t_vector	*camera;
+	t_vector	*normal;
+	t_point		*position;
+}	t_pos_attr;
+
+typedef struct s_light_attributes
+{
+	t_light_pnt	*light_point;
+	t_vector	*camera;
+	t_vector	*normal;
+	t_point		*position;
+	t_material	*material;
+}	t_lightattr;
 
 #endif
