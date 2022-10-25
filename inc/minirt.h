@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 16:11:26 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:53:55 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ t_comp		*prepare_computation(t_intersect *i, t_ray *ray);
 void		destroy_computation(t_comp *comps);
 t_rgb		*shade_hit(t_world *world, t_comp *comps);
 t_rgb		*color_at(t_world *world, t_ray *ray);
+t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up);
 
 #endif /* MINIRT_H */
