@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:40:47 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 19:04:02 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:30:02 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_ambience	*set_ambient(char *s, char **rgb)
 	if (!ambience)
 		return (NULL);
 	ambience->ratio = ft_atod(s);
-	ambience->rgb = create_color(ft_atoi(rgb[0]), \
-								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	ambience->rgb = create_color(ft_atod(rgb[0]) / 255, \
+								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
 	ft_free_matrix((void *)&rgb);
 	return (ambience);
 }

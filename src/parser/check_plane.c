@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 18:13:39 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:28:59 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_object	*set_plane(char **coordinates, char **rgb, char *s)
 	object->x = ft_atod(coordinates[0]);
 	object->y = ft_atod(coordinates[1]);
 	object->z = ft_atod(coordinates[2]);
-	object->rgb = create_color(ft_atoi(rgb[0]), \
-								ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	object->rgb = create_color(ft_atod(rgb[0]) / 255, \
+								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
 	object->plane.x_3d = ft_atod(ori_3d[0]);
 	object->plane.y_3d = ft_atod(ori_3d[1]);
 	object->plane.z_3d = ft_atod(ori_3d[2]);

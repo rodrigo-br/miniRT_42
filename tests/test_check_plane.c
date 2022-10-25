@@ -42,12 +42,12 @@ void	test_check_plane_function(void)
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.y_3d));
 	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.z_3d));
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.z_3d));
-	TEST_ASSERT_EQUAL_CHAR(250, object->rgb->red);
-	TEST_ASSERT_NOT_EQUAL_CHAR(251, object->rgb->red);
-	TEST_ASSERT_EQUAL_CHAR(200, object->rgb->green);
-	TEST_ASSERT_NOT_EQUAL_CHAR(91, object->rgb->green);
-	TEST_ASSERT_EQUAL_CHAR(200, object->rgb->blue);
-	TEST_ASSERT_NOT_EQUAL_CHAR(202, object->rgb->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(250.0 / 255.0, object->rgb->red);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(251.0 / 255.0, object->rgb->red);
+	TEST_ASSERT_EQUAL_DOUBLE(200.0 / 255.0, object->rgb->green);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(91.0 / 255.0, object->rgb->green);
+	TEST_ASSERT_EQUAL_DOUBLE(200.0 / 255.0, object->rgb->blue);
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(202.0 / 255.0, object->rgb->blue);
 	ft_lstclear(&scene->objects, free_lst_obj);
 	free(scene);
 	splited = ft_split(full_line_4, ' ');

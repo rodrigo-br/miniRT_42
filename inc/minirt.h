@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 10:30:20 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:20:54 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@
 # include <stdio.h>
 # include <structs.h>
 
-# define TRUE_COLORS 0.00392156862745098039
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
-# define OPACITY_MAX 255
 # define AMBIENT 'A'
 # define CAMERA 'C'
 # define LIGHT	'L'
@@ -147,6 +145,5 @@ t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m);
 void		destroy_material(t_material *material);
 void		destroy_light_point(t_light_pnt *light_point);
 void		destroy_lightattr(t_lightattr *attributes);
-
 
 #endif /* MINIRT_H */
