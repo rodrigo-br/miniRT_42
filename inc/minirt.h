@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 14:03:59 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:21:52 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,8 @@ void		destroy_lightattr(t_lightattr *attributes);
 t_world		*create_world(void);
 void		destroy_world(t_world *w);
 void		intersect_world(t_world *world, t_ray *ray, t_intersect **head);
+t_comp		*prepare_computation(t_intersect *i, t_ray *ray);
+void		destroy_computation(t_comp *comps);
+t_rgb		*shade_hit(t_world *world, t_comp *comps);
 
 #endif /* MINIRT_H */

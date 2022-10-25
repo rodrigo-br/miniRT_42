@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:05 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:44:20 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,19 @@ t_intersect	*get_hit(t_intersect *intersect)
 		intersect = intersect->next;
 	}
 	return (_hit);
+}
+
+t_rgb	*shade_hit(t_world *world, t_comp *comps)
+{
+	t_pos_attr	*pos_attr;
+	t_lightattr	*light_attr;
+	t_light_pnt	*lp;
+	t_rgb		*color;
+
+	lp = (t_light_pnt *)world->light_point->content;
+	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->point);
+	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
+	color = lighting(light_attr);
+	free(light_attr);
+	return (color);
 }

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world_constructor.c                                :+:      :+:    :+:   */
+/*   world_destructor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 12:37:20 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 14:45:40 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/25 14:45:41 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/25 14:45:58 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_world	*create_world(void)
+void	destroy_world(t_world *w)
 {
-	t_world		*world;
+	ft_lstclear(&w->objects, &destroy_shape);
+	ft_lstclear(&w->light_point, &destroy_light_point);
+	free(w);
+}
 
-	world = (t_world *)malloc(sizeof(t_world));
-	if (!world)
-		return (NULL);
-	world->light_point = NULL;
-	world->objects = NULL;
-	return (world);
+void	destroy_computation(t_comp *comps)
+{
+	free(comps->point);
+	free(comps->camera);
+	free(comps->normal);
+	free(comps);
 }

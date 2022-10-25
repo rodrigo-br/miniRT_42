@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 13:30:00 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:31:48 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,15 @@ typedef struct s_world
 	t_list	*light_point;
 	t_list	*objects;
 }	t_world;
+
+typedef struct s_comp
+{
+	t_object	*object;
+	double		time;
+	t_point		*point;
+	t_vector	*normal;
+	t_vector	*camera;
+	t_bool		inside;
+}	t_comp;
 
 #endif

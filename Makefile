@@ -29,7 +29,7 @@ RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
 SHAPE	= shape_destructor.c shape_setters.c sphere.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c
-WORLD	= world_constructor.c
+WORLD	= world_constructor.c world_computations.c world_destructor.c
 
 DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world
 IFLAGS	= -I $(HEADER_PATH)
