@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 18:56:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:02:34 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	main(void)
 	test_light_and_shading();
 	test_world();
 	test_view_transformation();
+	test_camera();
 	return (UNITY_END());
 }
