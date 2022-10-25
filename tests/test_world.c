@@ -20,20 +20,8 @@ void	test_create_world(void)
 	t_light_pnt	*lp;
 	t_object	*sphere_1;
 	t_object	*sphere_2;
-	t_object	*object_1;
-	t_object	*object_2;
 
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	object_1 = create_sphere();
-	free(object_1->material->color);
-	object_1->material->color = create_color(0.8, 1.0, 0.6);
-	object_1->material->diffuse = 0.7;
-	object_1->material->specular = 0.2;
-	w->objects = ft_lstnew(object_1);
-	object_2 = create_sphere();
-	set_transformation(object_2, scale_matrix(0.5, 0.5, 0.5));
-	ft_lstadd_front(&w->objects, ft_lstnew(object_2));
+	w = default_world();
 	lp = (t_light_pnt *)w->light_point->content;
 	sphere_1 = (t_object *)w->objects->content;
 	sphere_2 = (t_object *)w->objects->next->content;
@@ -58,23 +46,11 @@ void	test_intersect_world(void)
 {
 	t_world 	*w;
 	t_ray		*ray;
-	t_object	*object_1;
-	t_object	*object_2;
 	t_intersect	*xs;
 
+	w = default_world();
 	xs = NULL;
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	object_1 = create_sphere();
-	free(object_1->material->color);
-	object_1->material->color = create_color(0.8, 1.0, 0.6);
-	object_1->material->diffuse = 0.7;
-	object_1->material->specular = 0.2;
-	w->objects = ft_lstnew(object_1);
-	object_2 = create_sphere();
-	set_transformation(object_2, scale_matrix(0.5, 0.5, 0.5));
-	ft_lstadd_front(&w->objects, ft_lstnew(object_2));
 	intersect_world(w, ray, &xs);
 	TEST_ASSERT_EQUAL(4, intersection_list_size(xs));
 	TEST_ASSERT_EQUAL_DOUBLE(4, xs->time);
@@ -196,18 +172,15 @@ void	test_shading_an_intersection(void)
 	t_comp		*comps;
 	t_rgb		*rgb;
 
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	shape = create_sphere();
-	free(shape->material->color);
-	shape->material->color = create_color(0.8, 1.0, 0.6);
-	shape->material->diffuse = 0.7;
-	shape->material->specular = 0.2;
-	w->objects = ft_lstnew(shape);
+	w = default_world();
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
+	shape = (t_object *)w->objects->content;
 	i = create_intersection(4, shape);
 	comps = prepare_computation(i, ray);
 	rgb = shade_hit(w, comps);
+	// TEST_ASSERT_EQUAL_DOUBLE(0.38066, rgb->red);
+	// TEST_ASSERT_EQUAL_DOUBLE(0.47583, rgb->green);
+	// TEST_ASSERT_EQUAL_DOUBLE(0.2855, rgb->blue);
 	TEST_ASSERT_TRUE(is_equal_double(0.38066, rgb->red));
 	TEST_ASSERT_TRUE(is_equal_double(0.47583, rgb->green));
 	TEST_ASSERT_TRUE(is_equal_double(0.2855, rgb->blue));
@@ -238,12 +211,11 @@ void	test_shading_an_intersection_from_inside(void)
 	t_comp		*comps;
 	t_rgb		*rgb;
 
-	w = create_world();
+	w = default_world();
+	ft_lstclear(&w->light_point, destroy_light_point);
 	w->light_point = ft_lstnew(create_light_point(create_point(0, 0.25, 0), create_color(1, 1, 1)));
-	shape = create_sphere();
-	set_transformation(shape, scale_matrix(0.5, 0.5, 0.5));
-	w->objects = ft_lstnew(shape);
 	ray = create_ray(create_point(0, 0, 0), create_vector(0, 0, 1));
+	shape = (t_object *)w->objects->next->content;
 	i = create_intersection(0.5, shape);
 	comps = prepare_computation(i, ray);
 	rgb = shade_hit(w, comps);
@@ -267,22 +239,10 @@ Then c = color(0, 0, 0)
 void	test_color_when_ray_misses(void)
 {
 	t_world		*w;
-	t_object	*sphere_1;
-	t_object	*sphere_2;
 	t_ray		*ray;
 	t_rgb		*rgb;
 
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	sphere_1 = create_sphere();
-	free(sphere_1->material->color);
-	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
-	sphere_1->material->diffuse = 0.7;
-	sphere_1->material->specular = 0.2;
-	w->objects = ft_lstnew(sphere_1);
-	sphere_2 = create_sphere();
-	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
-	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	w = default_world();
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 1, 0));
 	rgb = color_at(w, ray);
 	TEST_ASSERT_TRUE(is_equal_double(0, rgb->red));
@@ -303,22 +263,10 @@ Then c = color(0.38066, 0.47583, 0.2855)
 void	test_color_when_ray_hits(void)
 {
 	t_world		*w;
-	t_object	*sphere_1;
-	t_object	*sphere_2;
 	t_ray		*ray;
 	t_rgb		*rgb;
 
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	sphere_1 = create_sphere();
-	free(sphere_1->material->color);
-	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
-	sphere_1->material->diffuse = 0.7;
-	sphere_1->material->specular = 0.2;
-	w->objects = ft_lstnew(sphere_1);
-	sphere_2 = create_sphere();
-	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
-	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	w = default_world();
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	rgb = color_at(w, ray);
 	TEST_ASSERT_TRUE(is_equal_double(0.38066, rgb->red));
@@ -343,29 +291,20 @@ Then c = inner.material.color
 void	test_color_when_intersect_behind_ray(void)
 {
 	t_world		*w;
-	t_object	*sphere_1;
-	t_object	*sphere_2;
 	t_ray		*ray;
 	t_rgb		*rgb;
+	t_object	*outer, *inner;
 
-	w = create_world();
-	w->light_point = ft_lstnew(create_light_point(create_point(-10, 10, -10), create_color(1, 1, 1)));
-	sphere_1 = create_sphere();
-	free(sphere_1->material->color);
-	sphere_1->material->color = create_color(0.8, 1.0, 0.6);
-	sphere_1->material->ambient = 1.0;
-	sphere_1->material->diffuse = 0.7;
-	sphere_1->material->specular = 0.2;
-	w->objects = ft_lstnew(sphere_1);
-	sphere_2 = create_sphere();
-	sphere_2->material->ambient = 1.0;
-	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
-	ft_lstadd_front(&w->objects, ft_lstnew(sphere_2));
+	w = default_world();
+	outer = (t_object *)w->objects->content;
+	outer->material->ambient = 1.0;
+	inner = (t_object *)w->objects->next->content;
+	inner->material->ambient = 1.0;
 	ray = create_ray(create_point(0, 0, 0.75), create_vector(0, 0, -1));
 	rgb = color_at(w, ray);
-	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->red, rgb->red));
-	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->green, rgb->green));
-	TEST_ASSERT_TRUE(is_equal_double(sphere_2->material->color->blue, rgb->blue));
+	TEST_ASSERT_TRUE(is_equal_double(inner->material->color->red, rgb->red));
+	TEST_ASSERT_TRUE(is_equal_double(inner->material->color->green, rgb->green));
+	TEST_ASSERT_TRUE(is_equal_double(inner->material->color->blue, rgb->blue));
 	destroy_world(w);
 	destroy_ray(ray);
 	free(rgb);
