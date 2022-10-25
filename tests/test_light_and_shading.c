@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 10:34:49 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:08:37 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,64 @@ void	test_lighting_light_behind_surface(void)
 	free(result);
 }
 
+/* Note to self:
+	this leaks                              a lot.
+	only run this if you have a display available.
+*/
+void	test_print_3d_sphere(void)
+{
+	double		wall_size = 7.0;
+	double		world_x = 500;
+	double		world_y = 500;
+	double		world_z = 10;
+	int			canvas_pixels = 500;
+	double		pixel_size = wall_size / canvas_pixels;
+	double		half = wall_size / 2;
+	void		*mlx = mlx_init();
+	void		*win = mlx_new_window(mlx, world_x, world_y, "uwu");
+	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
+	t_object	*sphere = create_sphere();
+	t_point		*origin = create_point(0, 0, -5);
+	t_intersect	*list = NULL;
+	t_rgb		*color;
+	t_intersect	*just_hit;
+	t_light_pnt	*lp;
+	t_point		*position;
+	t_point		*point;
+	t_vector	*normal;
+	t_vector	*eye;
+	t_ray		*ray;
+	t_lightattr	*attr;
+
+	free(sphere->material->color);
+	sphere->material->color = create_color(color_rand(), color_rand(), color_rand());
+	lp = create_light_point(create_point(-10, 10, -10), create_color(0.5, 0.5, 0.5));
+	for (int y = 0; y < canvas_pixels - 1; y++)
+	{
+		world_y = half - pixel_size * y;
+		for (int x = 0; x < canvas_pixels - 1; x++)
+		{
+			world_x = -half + pixel_size * x;
+			position = create_point(world_x, world_y, world_z);
+			ray = create_ray(origin, normalize(sub_tuple(position, origin)));
+			intersect_sphere(sphere, ray, &list);
+			just_hit = get_hit(list);
+			if (just_hit)
+			{
+				point = get_position(ray, just_hit->time);
+				normal = get_sphere_normal(just_hit->object, point);
+				eye = neg_tuple(ray->direction);
+				attr = create_lightattr(lp, create_pos_attr(eye, normal, point), just_hit->object->material);
+				color = lighting(attr);
+				write_to_canvas(canvas, x, y, *color);
+			}
+			intersection_list_clear(&list);
+		}
+	}
+	mlx_put_image_to_window(mlx, win, canvas->image, 0, 0);
+	mlx_loop(mlx);
+}
+
 void	test_light_and_shading(void)
 {
 	RUN_TEST(test_normalat_sphere_x_axis);
@@ -267,4 +325,6 @@ void	test_light_and_shading(void)
 	RUN_TEST(test_lighting_light_offset_45deg_and_camera_opposite);
 	RUN_TEST(test_lighting_camera_in_reflection_vector);
 	RUN_TEST(test_lighting_light_behind_surface);
+	// uncomment at your own risk
+	// RUN_TEST(test_print_3d_sphere);
 }
