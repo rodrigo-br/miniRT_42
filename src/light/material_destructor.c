@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_utils.c                                    :+:      :+:    :+:   */
+/*   material_destructor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:01:17 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/24 16:18:42 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/24 16:19:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tests.h>
+#include <minirt.h>
 
-double double_rand()
+void	destroy_material(t_material *material)
 {
-	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
-}
-
-double color_rand()
-{
-	return ((double)rand() / RAND_MAX);
-}
-
-int	decode_rgba(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
+	free(material->color);
+	free(material);
 }

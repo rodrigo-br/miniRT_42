@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 15:30:11 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,4 @@ t_intersect	*get_hit(t_intersect *intersect)
 	}
 	return (_hit);
 }
+

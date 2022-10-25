@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 11:15:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:13:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,7 @@ void	test_print_circle(void)
 			ray = create_ray(origin, normalize(sub_tuple(position, origin)));
 			intersect_sphere(sphere, ray, &list);
 			if (get_hit(list))
-				write_to_canvas(canvas, x, y, color);
+				write_to_canvas(canvas, x, y, *color);
 			intersection_list_clear(&list);
 		}
 	}

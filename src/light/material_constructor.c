@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_utils.c                                    :+:      :+:    :+:   */
+/*   material_constructor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:01:17 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/24 16:05:27 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/24 16:18:26 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tests.h>
+#include <minirt.h>
 
-double double_rand()
+t_material	*create_material(void)
 {
-	return ((double)rand() / RAND_MAX * 40.0 - 20.0);
-}
+	t_material	*material;
 
-double color_rand()
-{
-	return ((double)rand() / RAND_MAX);
-}
-
-int	decode_rgba(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
+	material = (t_material *)malloc(sizeof(t_material));
+	if (!material)
+		return (NULL);
+	material->color = create_color(255, 255, 255);
+	material->ambient = 0.1;
+	material->diffuse = 0.9;
+	material->specular = 0.9;
+	material->shininess = 200.0;
+	return (material);
 }

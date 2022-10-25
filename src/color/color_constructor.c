@@ -3,24 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   color_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 19:07:50 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/24 20:20:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_rgb	*create_color(int r, int g, int b)
+int	to_rgb(double color)
+{
+	int	_color;
+
+	_color = (int)round(color * 255);
+	if (_color > 255)
+		return (255);
+	if (_color < 0)
+		return (0);
+	return (_color);
+}
+
+int	merge_colors(double r, double g, double b)
+{
+	return (to_rgb(r) << 16 | to_rgb(g) << 8 | to_rgb(b));
+}
+
+t_rgb	*create_color(double r, double g, double b)
 {
 	t_rgb	*rgb;
 
 	rgb = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!rgb)
 		return (NULL);
-	rgb->red = r * TRUE_COLORS;
-	rgb->green = g * TRUE_COLORS;
-	rgb->blue = b * TRUE_COLORS;
+	rgb->red = r;
+	rgb->green = g;
+	rgb->blue = b;
+	rgb->merged = merge_colors(r, g, b);
 	return (rgb);
 }
