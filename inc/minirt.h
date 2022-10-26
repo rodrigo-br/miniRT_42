@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 09:33:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:48:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void		intersection_list_clear(t_intersect **list);
 size_t		intersection_list_size(t_intersect *list);
 
 /* Light */
+t_bool		is_shadowed(t_world *world, t_point *point);
 t_vector	*reflect(t_vector *in, t_vector *normal);
 t_rgb		*lighting(t_lightattr *args);
 t_material	*create_material(void);

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 09:34:29 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:50:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ void	test_create_light_point(void)
 	light_point = create_light_point(create_point(0, 0, 0), create_color(1, 1, 1));
 	TEST_ASSERT_NOT_NULL(light_point);
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_point){0, 0, 0, 1}, light_point->position));
-	TEST_ASSERT_EQUAL(1, light_point->intensity->red);
-	TEST_ASSERT_EQUAL(1, light_point->intensity->green);
-	TEST_ASSERT_EQUAL(1, light_point->intensity->blue);
+	TEST_ASSERT_TRUE(is_equal_double(1, light_point->intensity->red));
+	TEST_ASSERT_TRUE(is_equal_double(1, light_point->intensity->green));
+	TEST_ASSERT_TRUE(is_equal_double(1, light_point->intensity->blue));
 	destroy_light_point(light_point);
 }
 
@@ -143,13 +143,13 @@ void	test_create_material(void)
 
 	material = create_material();
 	TEST_ASSERT_NOT_NULL(material);
-	TEST_ASSERT_EQUAL(1, material->color->red);
-	TEST_ASSERT_EQUAL(1, material->color->green);
-	TEST_ASSERT_EQUAL(1, material->color->blue);
-	TEST_ASSERT_EQUAL_DOUBLE(0.1, material->ambient);
-	TEST_ASSERT_EQUAL_DOUBLE(0.9, material->diffuse);
-	TEST_ASSERT_EQUAL_DOUBLE(0.9, material->specular);
-	TEST_ASSERT_EQUAL_DOUBLE(200.0, material->shininess);
+	TEST_ASSERT_TRUE(is_equal_double(1, material->color->red));
+	TEST_ASSERT_TRUE(is_equal_double(1, material->color->green));
+	TEST_ASSERT_TRUE(is_equal_double(1, material->color->blue));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, material->ambient));
+	TEST_ASSERT_TRUE(is_equal_double(0.9, material->diffuse));
+	TEST_ASSERT_TRUE(is_equal_double(0.9, material->specular));
+	TEST_ASSERT_TRUE(is_equal_double(200.0, material->shininess));
 	destroy_material(material);
 }
 
@@ -164,9 +164,9 @@ void	test_lighting_between_light_and_surface(void)
 		create_material()
 	);
 	result = lighting(args);
-	TEST_ASSERT_EQUAL(1.9, result->red);
-	TEST_ASSERT_EQUAL(1.9, result->green);
-	TEST_ASSERT_EQUAL(1.9, result->blue);
+	TEST_ASSERT_TRUE(is_equal_double(1.9, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(1.9, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(1.9, result->blue));
 	destroy_lightattr(args);
 	free(result);
 	TEST_ASSERT_NOT_NULL(result);
@@ -185,9 +185,9 @@ void	test_lighting_camera_offset_45deg(void)
 	);
 	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
-	TEST_ASSERT_EQUAL(1.0, result->red);
-	TEST_ASSERT_EQUAL(1.0, result->green);
-	TEST_ASSERT_EQUAL(1.0, result->blue);
+	TEST_ASSERT_TRUE(is_equal_double(1.0, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(1.0, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(1.0, result->blue));
 	destroy_lightattr(args);
 	free(result);
 }
@@ -204,9 +204,9 @@ void	test_lighting_light_offset_45deg_and_camera_opposite(void)
 	);
 	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
-	TEST_ASSERT_EQUAL(0.7364, result->red);
-	TEST_ASSERT_EQUAL(0.7364, result->green);
-	TEST_ASSERT_EQUAL(0.7364, result->blue);
+	TEST_ASSERT_TRUE(is_equal_double(0.7364, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.7364, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.7364, result->blue));
 	destroy_lightattr(args);
 	free(result);
 }
@@ -223,9 +223,9 @@ void	test_lighting_camera_in_reflection_vector(void)
 	);
 	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
-	TEST_ASSERT_EQUAL(1.6364, result->red);
-	TEST_ASSERT_EQUAL(1.6364, result->green);
-	TEST_ASSERT_EQUAL(1.6364, result->blue);
+	TEST_ASSERT_TRUE(is_equal_double(1.6364, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(1.6364, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(1.6364, result->blue));
 	destroy_lightattr(args);
 	free(result);
 }
@@ -242,11 +242,90 @@ void	test_lighting_light_behind_surface(void)
 	);
 	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
-	TEST_ASSERT_EQUAL(0.1, result->red);
-	TEST_ASSERT_EQUAL(0.1, result->green);
-	TEST_ASSERT_EQUAL(0.1, result->blue);
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->blue));
 	destroy_lightattr(args);
 	free(result);
+}
+
+/* Scenario: Lighting with the surface in shadow
+Given eyev ← vector(0, 0, -1)
+And normalv ← vector(0, 0, -1)
+And light ← point_light(point(0, 0, -10), color(1, 1, 1))
+And in_shadow ← true
+When result ← lighting(m, light, position, eyev, normalv, in_shadow)
+Then result = color(0.1, 0.1, 0.1) */
+void	test_lighting_surface_in_shadow(void)
+{
+	t_lightattr	*args;
+	t_rgb		*result;
+
+	args = create_lightattr(
+		create_light_point(create_point(0, 0, -10), create_color(1, 1, 1)),
+		create_pos_attr(create_vector(0, 0, -1), create_vector(0, 0, -1), create_point(0, 0, 0)),
+		create_material()
+	);
+	args->in_shadow = TRUE;
+	result = lighting(args);
+	TEST_ASSERT_NOT_NULL(result);
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, result->blue));
+	destroy_lightattr(args);
+	free(result);
+}
+
+/* Scenario: There is no shadow when nothing is collinear with point and light
+Given w ← default_world()
+And p ← point(0, 10, 0)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_at_all(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){0, 10, 0, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: The shadow when an object is between the point and the light
+Given w ← default_world()
+And p ← point(10, -10, 10)
+Then is_shadowed(w, p) is true */
+void	test_shadow_object_between_light_and_point(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_TRUE(is_shadowed(world, &(t_point){10, -10, 10, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: There is no shadow when an object is behind the light
+Given w ← default_world()
+And p ← point(-20, 20, -20)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_object_behind_light(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-20, 20, -20, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: There is no shadow when an object is behind the point
+Given w ← default_world()
+And p ← point(-2, 2, -2)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_object_behind_point(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-2, 2, -2, 1}));
+	destroy_world(world);
 }
 
 /* Note to self:
@@ -324,6 +403,11 @@ void	test_light_and_shading(void)
 	RUN_TEST(test_lighting_light_offset_45deg_and_camera_opposite);
 	RUN_TEST(test_lighting_camera_in_reflection_vector);
 	RUN_TEST(test_lighting_light_behind_surface);
+	RUN_TEST(test_lighting_surface_in_shadow);
+	RUN_TEST(test_no_shadow_at_all);
+	RUN_TEST(test_shadow_object_between_light_and_point);
+	RUN_TEST(test_no_shadow_object_behind_light);
+	RUN_TEST(test_no_shadow_object_behind_point);
 	// uncomment at your own risk
 	// RUN_TEST(test_print_3d_sphere);
 }
