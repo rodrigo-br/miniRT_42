@@ -3,34 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 15:40:28 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:12:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	create_shape(t_object *object)
-{
-	object->transformation = create_identity_matrix();
-	object->inverse_transformation = create_identity_matrix();
-	object->material = create_material();
-}
-
 t_object	*create_sphere(void)
 {
-	t_object	*object;
+	t_object	*sphere;
 
-	object = (t_object *)malloc(sizeof(t_object));
-	object->type = ID_SPHERE;
-	object->sphere.diameter = 1.0;
-	object->sphere.center = (t_point){0, 0, 0, 1};
-	object->intersect = &intersect_sphere;
-	object->saved_ray = NULL;
-	create_shape(object);
-	return (object);
+	sphere = create_shape();
+	if (!sphere)
+		return (NULL);
+	sphere->type = ID_SPHERE;
+	sphere->sphere.diameter = 1.0;
+	sphere->sphere.center = (t_point){0, 0, 0, 1};
+	sphere->intersect = intersect_sphere;
+	sphere->get_normal = get_sphere_normal;
+	return (sphere);
 }
 
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point)

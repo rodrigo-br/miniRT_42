@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 14:39:04 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:05:12 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ double		radians(double degree);
 /* Ray */
 t_ray		*create_ray(t_point *origin, t_vector *direction);
 void		destroy_ray(t_ray *ray);
+t_object	*create_shape(void);
 t_object	*create_sphere(void);
 void		destroy_shape(void *object);
 t_point		*get_position(t_ray *ray, double time);

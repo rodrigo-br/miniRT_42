@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 16:18:19 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:12:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_object
 	t_matrix	*inverse_transformation;
 	t_material	*material;
 	void		(*intersect)(t_object*, t_ray*, t_intersect**);
-	t_ray		*saved_ray;
+	t_vector	*(*get_normal)(t_object*, t_point*);
 }	t_object;
 
 typedef struct s_scene
