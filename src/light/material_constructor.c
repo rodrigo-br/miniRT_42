@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:05:27 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 10:21:42 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:21:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m)
 	attributes->normal = pos->normal;
 	attributes->position = pos->position;
 	attributes->material = m;
+	attributes->in_shadow = FALSE;
 	free(pos);
 	return (attributes);
 }

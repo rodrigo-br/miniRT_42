@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 10:36:16 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:29:01 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,16 @@ t_rgb	*lighting(t_lightattr *args)
 	t_vector	*aux;
 	t_vector	*light_vector;
 	t_rgb		*eff;
+	t_rgb		*case_in_shadow;
 	double		light_dot;
 
 	eff = multiply_color(args->material->color, args->light_point->intensity);
+	if (args->in_shadow)
+	{
+		case_in_shadow = scalar_multiply_color(eff, args->material->ambient);
+		free(eff);
+		return (case_in_shadow);
+	}
 	aux = sub_tuple(args->light_point->position, args->position);
 	light_vector = normalize(aux);
 	free(aux);

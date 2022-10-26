@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 20:42:38 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:20:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct s_light_attributes
 	t_vector	*normal;
 	t_point		*position;
 	t_material	*material;
+	t_bool		in_shadow;
 }	t_lightattr;
 
 typedef struct s_world
