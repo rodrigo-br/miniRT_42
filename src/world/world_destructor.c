@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_destructor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:45:41 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 14:45:58 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:58:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	destroy_world(t_world *w)
 {
-	ft_lstclear(&w->objects, &destroy_shape);
-	ft_lstclear(&w->light_point, &destroy_light_point);
+	ft_lstclear(&w->objects, destroy_shape);
+	ft_lstclear(&w->light_point, destroy_light_point);
 	free(w);
 }
 
