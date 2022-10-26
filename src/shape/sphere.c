@@ -6,11 +6,18 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 14:21:27 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:39:18 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+void	create_shape(t_object *object)
+{
+	object->transformation = create_identity_matrix();
+	object->inverse_transformation = create_identity_matrix();
+	object->material = create_material();
+}
 
 t_object	*create_sphere(void)
 {
@@ -20,10 +27,8 @@ t_object	*create_sphere(void)
 	object->type = ID_SPHERE;
 	object->sphere.diameter = 1.0;
 	object->sphere.center = (t_point){0, 0, 0, 1};
-	object->transformation = create_identity_matrix();
-	object->inverse_transformation = create_identity_matrix();
-	object->material = create_material();
 	object->intersect = &intersect_sphere;
+	create_shape(object);
 	return (object);
 }
 
