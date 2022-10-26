@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:45:41 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:22:47 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,12 +329,11 @@ void	test_print_circle(void)
 	int			canvas_pixels = 500;
 	double		pixel_size = wall_size / canvas_pixels;
 	double		half = wall_size / 2;
-	void		*mlx = mlx_init();
-	void		*win = mlx_new_window(mlx, world_x, world_y, "uwu");
-	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
+	t_canvas	*canvas = create_canvas(canvas_pixels, canvas_pixels);
 	t_object	*sphere = create_sphere();
 	t_point		*origin = create_point(0, 0, -5);
 	t_rgb		*color = create_color(color_rand(), color_rand(), color_rand());
+	void		*win = mlx_new_window(canvas->mlx, world_x, world_y, "uwu");
 	t_intersect	*list = NULL;
 	t_point		*position;
 	t_ray		*ray;
@@ -353,8 +352,8 @@ void	test_print_circle(void)
 			intersection_list_clear(&list);
 		}
 	}
-	mlx_put_image_to_window(mlx, win, canvas->image, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
 }
 
 void	test_ray(void)

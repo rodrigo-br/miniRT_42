@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 19:47:02 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:42:38 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_scene
 
 typedef struct s_canvas
 {
+	void	*mlx;
 	void	*image;
 	char	*address;
 	int		bits_per_pixel;

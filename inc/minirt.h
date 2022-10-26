@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 20:08:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:57:10 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
 t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
-int			to_rgb(double color);
 
 /* Canvas */
-t_canvas	*create_canvas(void *mlx, int width, int height);
+t_canvas	*create_canvas(double height, double width);
+void		destroy_canvas(t_canvas *canvas);
 void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb);
 
 /* Matrix */
@@ -146,7 +146,7 @@ void		destroy_material(t_material *material);
 void		destroy_light_point(void *light_point);
 void		destroy_lightattr(t_lightattr *attributes);
 
-/*World*/
+/* World */
 t_world		*create_world(void);
 void		destroy_world(t_world *w);
 void		intersect_world(t_world *world, t_ray *ray, t_intersect **head);
@@ -156,10 +156,11 @@ t_rgb		*shade_hit(t_world *world, t_comp *comps);
 t_rgb		*color_at(t_world *world, t_ray *ray);
 t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up);
 
-/*Camera*/
+/* Camera */
 t_cam		*create_camera(double h_size, double v_size, double field_of_view);
 t_ray		*ray_for_pixel(t_cam *camera, double x, double y);
 void		destroy_camera(t_cam *camera);
 void		set_camera_transformation(t_cam	*camera, t_matrix *transformation);
+t_canvas	*render(t_cam *camera, t_world *world);
 
 #endif /* MINIRT_H */

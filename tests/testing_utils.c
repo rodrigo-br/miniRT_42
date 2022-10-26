@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 18:10:17 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:50:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,30 @@ t_world	*default_world(void)
 	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
 	ft_lstadd_back(&world->objects, ft_lstnew(sphere_2));
 	return (world);
+}
+
+int	pixel_at(t_canvas *canvas, int x, int y)
+{
+	char	*pixel;
+
+	pixel = canvas->address;
+	pixel += (y * canvas->line_length) + (x * (canvas->bits_per_pixel / 8));
+	return (*(int *)pixel);
+}
+
+int	to_rgb(double color)
+{
+	int	_color;
+
+	_color = (int)round(color * 255);
+	if (_color > 255)
+		return (255);
+	if (_color < 0)
+		return (0);
+	return (_color);
+}
+
+int	merge_colors(double r, double g, double b)
+{
+	return (to_rgb(r) << 16 | to_rgb(g) << 8 | to_rgb(b));
 }

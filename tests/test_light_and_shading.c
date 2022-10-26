@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_light_and_shading.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 12:45:39 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:23:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,11 +262,10 @@ void	test_print_3d_sphere(void)
 	int			canvas_pixels = 500;
 	double		pixel_size = wall_size / canvas_pixels;
 	double		half = wall_size / 2;
-	void		*mlx = mlx_init();
-	void		*win = mlx_new_window(mlx, world_x, world_y, "uwu");
-	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
+	t_canvas	*canvas = create_canvas(canvas_pixels, canvas_pixels);
 	t_object	*sphere = create_sphere();
 	t_point		*origin = create_point(0, 0, -5);
+	void		*win = mlx_new_window(canvas->mlx, world_x, world_y, "uwu");
 	t_intersect	*list = NULL;
 	t_rgb		*color;
 	t_intersect	*just_hit;
@@ -303,8 +302,8 @@ void	test_print_3d_sphere(void)
 			intersection_list_clear(&list);
 		}
 	}
-	mlx_put_image_to_window(mlx, win, canvas->image, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
 }
 
 void	test_light_and_shading(void)
