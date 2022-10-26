@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:40:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/18 15:47:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:55:16 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 double	dot_product(t_tuple *a, t_tuple *b)
 {
-	return ((a->x * b->x) + \
-			(a->y * b->y) + \
-			(a->z * b->z) + \
-			(a->w * b->w)
+	return (
+		(a->x * b->x) + \
+		(a->y * b->y) + \
+		(a->z * b->z) + \
+		(a->w * b->w)
 	);
 }
 

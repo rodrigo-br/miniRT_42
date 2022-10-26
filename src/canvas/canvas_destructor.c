@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_destructor.c                                 :+:      :+:    :+:   */
+/*   canvas_destructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:53 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/25 21:54:12 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/25 21:56:09 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	destroy_shape(void *object)
+void	destroy_canvas(t_canvas *canvas)
 {
-	t_object	*obj;
-
-	obj = (t_object *)object;
-	free(obj->transformation);
-	free(obj->inverse_transformation);
-	destroy_material(obj->material);
-	free(obj);
+	mlx_destroy_image(canvas->mlx, canvas->image);
+	mlx_destroy_display(canvas->mlx);
+	free(canvas->mlx);
+	free(canvas);
 }

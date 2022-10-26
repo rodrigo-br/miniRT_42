@@ -6,13 +6,13 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:20:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:38:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	to_rgb(double color)
+static int	to_rgb(double color)
 {
 	int	_color;
 
@@ -24,9 +24,17 @@ int	to_rgb(double color)
 	return (_color);
 }
 
-int	merge_colors(double r, double g, double b)
+static int	merge_colors(double r, double g, double b)
 {
 	return (to_rgb(r) << 16 | to_rgb(g) << 8 | to_rgb(b));
+}
+
+void	set_color(t_rgb *color, double r, double g, double b)
+{
+	color->red = r;
+	color->green = g;
+	color->blue = b;
+	color->merged = merge_colors(r, g, b);
 }
 
 t_rgb	*create_color(double r, double g, double b)
@@ -36,9 +44,6 @@ t_rgb	*create_color(double r, double g, double b)
 	rgb = (t_rgb *)malloc(sizeof(t_rgb));
 	if (!rgb)
 		return (NULL);
-	rgb->red = r;
-	rgb->green = g;
-	rgb->blue = b;
-	rgb->merged = merge_colors(r, g, b);
+	set_color(rgb, r, g, b);
 	return (rgb);
 }

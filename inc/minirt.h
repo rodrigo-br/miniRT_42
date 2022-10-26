@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 11:20:54 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:33:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,12 @@ t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
 t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
-int			to_rgb(double color);
+void		set_color(t_rgb *color, double r, double g, double b);
 
 /* Canvas */
-t_canvas	*create_canvas(void *mlx, int width, int height);
-void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb);
+t_canvas	*create_canvas(double height, double width);
+void		destroy_canvas(t_canvas *canvas);
+void		write_to_canvas(t_canvas *canvas, int x, int y, int color);
 
 /* Matrix */
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
@@ -123,13 +124,13 @@ double		radians(double degree);
 t_ray		*create_ray(t_point *origin, t_vector *direction);
 void		destroy_ray(t_ray *ray);
 t_object	*create_sphere(void);
-void		destroy_shape(t_object *object);
+void		destroy_shape(void *object);
 t_point		*get_position(t_ray *ray, double time);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_intersect	*create_intersection(double time, t_object *object);
 t_intersect	*get_hit(t_intersect *intersect);
 t_ray		*transform_ray(t_ray *ray, t_matrix *matrix);
-void		set_transformation(t_object *object, t_matrix *transformation);
+void		set_object_transformation(t_object *object, t_matrix *transform);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersection_list_clear(t_intersect **list);
@@ -143,7 +144,24 @@ t_pos_attr	*create_pos_attr(t_vector *camera, t_vector *normal, t_point *pos);
 t_light_pnt	*create_light_point(t_point *position, t_rgb *intensity);
 t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m);
 void		destroy_material(t_material *material);
-void		destroy_light_point(t_light_pnt *light_point);
+void		destroy_light_point(void *light_point);
 void		destroy_lightattr(t_lightattr *attributes);
+
+/* World */
+t_world		*create_world(void);
+void		destroy_world(t_world *w);
+void		intersect_world(t_world *world, t_ray *ray, t_intersect **head);
+t_comp		*prepare_computation(t_intersect *i, t_ray *ray);
+void		destroy_computation(t_comp *comps);
+t_rgb		*shade_hit(t_world *world, t_comp *comps);
+t_rgb		*color_at(t_world *world, t_ray *ray);
+t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up);
+
+/* Camera */
+t_cam		*create_camera(double h_size, double v_size, double field_of_view);
+t_ray		*ray_for_pixel(t_cam *camera, double x, double y);
+void		destroy_camera(t_cam *camera);
+void		set_camera_transformation(t_cam	*camera, t_matrix *transform);
+t_canvas	*render(t_cam *camera, t_world *world);
 
 #endif /* MINIRT_H */

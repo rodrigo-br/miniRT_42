@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_destructor.c                                 :+:      :+:    :+:   */
+/*   camera_setter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:53 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/25 20:01:03 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/26 09:28:24 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	destroy_shape(void *object)
+void	set_camera_transformation(t_cam *camera, t_matrix *transform)
 {
-	t_object	*obj;
-
-	obj = (t_object *)object;
-	free(obj->transformation);
-	free(obj->inverse_transformation);
-	destroy_material(obj->material);
-	free(obj);
+	free(camera->transformation);
+	free(camera->inverse_transformation);
+	camera->transformation = transform;
+	camera->inverse_transformation = inverse_matrix(transform);
 }

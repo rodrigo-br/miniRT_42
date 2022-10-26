@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 11:13:55 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:09:08 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ void	intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head)
 	intersection_sorted_insert(head, create_intersection(x1, sphere));
 	if (!is_equal_double(x1, x2))
 		intersection_sorted_insert(head, create_intersection(x2, sphere));
+}
+
+void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)
+{
+	t_object	*current_obj;
+	t_list		*obj_list;
+
+	obj_list = world->objects;
+	while (obj_list)
+	{
+		current_obj = (t_object *)obj_list->content;
+		intersect_sphere(current_obj, ray, head);
+		obj_list = obj_list->next;
+	}
 }

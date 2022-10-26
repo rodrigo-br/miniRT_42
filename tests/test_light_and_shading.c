@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 11:08:37 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:34:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	test_normalat_translated_sphere(void)
 	t_vector	*normal;
 
 	sphere = create_sphere();
-	set_transformation(sphere, translate_matrix(0, 1, 0));
+	set_object_transformation(sphere, translate_matrix(0, 1, 0));
 	normal = get_sphere_normal(sphere, &(t_point){0, 1.70711, -0.70711, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.70711, -0.70711, 0}, normal));
 	destroy_shape(sphere);
@@ -97,7 +97,7 @@ void	test_normalat_scaled_sphere(void)
 	sphere = create_sphere();
 	scale = scale_matrix(1, 0.5, 1);
 	rotate = rotate_matrix_z(radians(180 / 5));
-	set_transformation(sphere, multiply_matrix(scale, rotate));
+	set_object_transformation(sphere, multiply_matrix(scale, rotate));
 	normal = get_sphere_normal(sphere, &(t_point){0, sqrt(2)/2, -sqrt(2)/2, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.97014, -0.24254, 0}, normal));
 	destroy_shape(sphere);
@@ -262,11 +262,10 @@ void	test_print_3d_sphere(void)
 	int			canvas_pixels = 500;
 	double		pixel_size = wall_size / canvas_pixels;
 	double		half = wall_size / 2;
-	void		*mlx = mlx_init();
-	void		*win = mlx_new_window(mlx, world_x, world_y, "uwu");
-	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
+	t_canvas	*canvas = create_canvas(canvas_pixels, canvas_pixels);
 	t_object	*sphere = create_sphere();
 	t_point		*origin = create_point(0, 0, -5);
+	void		*win = mlx_new_window(canvas->mlx, world_x, world_y, "uwu");
 	t_intersect	*list = NULL;
 	t_rgb		*color;
 	t_intersect	*just_hit;
@@ -280,7 +279,7 @@ void	test_print_3d_sphere(void)
 
 	free(sphere->material->color);
 	sphere->material->color = create_color(color_rand(), color_rand(), color_rand());
-	lp = create_light_point(create_point(-10, 10, -10), create_color(0.5, 0.5, 0.5));
+	lp = create_light_point(create_point(-10, 10, -10), create_color(0.9, 0.9, 0.9));
 	for (int y = 0; y < canvas_pixels - 1; y++)
 	{
 		world_y = half - pixel_size * y;
@@ -298,13 +297,13 @@ void	test_print_3d_sphere(void)
 				eye = neg_tuple(ray->direction);
 				attr = create_lightattr(lp, create_pos_attr(eye, normal, point), just_hit->object->material);
 				color = lighting(attr);
-				write_to_canvas(canvas, x, y, *color);
+				write_to_canvas(canvas, x, y, color->merged);
 			}
 			intersection_list_clear(&list);
 		}
 	}
-	mlx_put_image_to_window(mlx, win, canvas->image, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
 }
 
 void	test_light_and_shading(void)

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 11:20:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:42:38 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_scene
 
 typedef struct s_canvas
 {
+	void	*mlx;
 	void	*image;
 	char	*address;
 	int		bits_per_pixel;
@@ -192,5 +193,33 @@ typedef struct s_light_attributes
 	t_point		*position;
 	t_material	*material;
 }	t_lightattr;
+
+typedef struct s_world
+{
+	t_list	*light_point;
+	t_list	*objects;
+}	t_world;
+
+typedef struct s_comp
+{
+	t_object	*object;
+	double		time;
+	t_point		*point;
+	t_vector	*normal;
+	t_vector	*camera;
+	t_bool		inside;
+}	t_comp;
+
+typedef struct s_cam
+{
+	double		pixel_size;
+	double		field_of_view;
+	double		h_size;
+	double		v_size;
+	double		half_width;
+	double		half_height;
+	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
+}	t_cam;
 
 #endif

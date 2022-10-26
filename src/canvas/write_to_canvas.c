@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_canvas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:08:24 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:24:33 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:33:33 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb)
+void	write_to_canvas(t_canvas *canvas, int x, int y, int color)
 {
 	char	*pixel;
 	int		index;
-	int		color;
 
-	color = rgb.merged;
 	pixel = canvas->address;
 	pixel += (y * canvas->line_length) + (x * (canvas->bits_per_pixel / 8));
 	index = canvas->bits_per_pixel - 8;

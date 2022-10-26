@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 15:30:11 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:11:14 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,36 @@ t_intersect	*get_hit(t_intersect *intersect)
 	return (_hit);
 }
 
+t_rgb	*shade_hit(t_world *world, t_comp *comps)
+{
+	t_pos_attr	*pos_attr;
+	t_lightattr	*light_attr;
+	t_light_pnt	*lp;
+	t_rgb		*color;
+
+	lp = (t_light_pnt *)world->light_point->content;
+	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->point);
+	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
+	color = lighting(light_attr);
+	free(light_attr);
+	return (color);
+}
+
+t_rgb	*color_at(t_world *world, t_ray *ray)
+{
+	t_intersect	*xs;
+	t_intersect	*hit;
+	t_comp		*comps;
+	t_rgb		*color;
+
+	xs = NULL;
+	intersect_world(world, ray, &xs);
+	hit = get_hit(xs);
+	if (!hit)
+		return (create_color(0, 0, 0));
+	comps = prepare_computation(hit, ray);
+	color = shade_hit(world, comps);
+	destroy_computation(comps);
+	intersection_list_clear(&xs);
+	return (color);
+}

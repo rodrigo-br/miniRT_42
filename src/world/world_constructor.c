@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_destructor.c                                 :+:      :+:    :+:   */
+/*   world_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:53 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/25 12:37:20 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/25 14:45:40 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	destroy_shape(void *object)
+t_world	*create_world(void)
 {
-	t_object	*obj;
+	t_world		*world;
 
-	obj = (t_object *)object;
-	free(obj->transformation);
-	free(obj->inverse_transformation);
-	destroy_material(obj->material);
-	free(obj);
+	world = (t_world *)malloc(sizeof(t_world));
+	if (!world)
+		return (NULL);
+	world->light_point = NULL;
+	world->objects = NULL;
+	return (world);
 }

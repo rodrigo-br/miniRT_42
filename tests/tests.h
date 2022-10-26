@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:01:29 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:34:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ void	test_check_plane(void);
 void	test_check_sphere(void);
 void	test_transformations(void);
 void	test_ray(void);
+void	test_world(void);
 void	test_light_and_shading(void);
+void	test_view_transformation(void);
+void	test_camera(void);
 
 /* Utils */
 double	double_rand();
 double	color_rand();
 int		decode_rgba(int r, int g, int b);
+int		pixel_at(t_canvas *canvas, int x, int y);
+int		merge_colors(double r, double g, double b);
+int		to_rgb(double color);
+t_world	*default_world(void);
 
 #endif /* TESTS_H */

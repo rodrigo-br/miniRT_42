@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_destructor.c                                 :+:      :+:    :+:   */
+/*   world_destructor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:53 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/25 14:45:41 by ralves-b          #+#    #+#             */
+/*   Updated: 2022/10/26 09:58:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	destroy_shape(void *object)
+void	destroy_world(t_world *w)
 {
-	t_object	*obj;
+	ft_lstclear(&w->objects, destroy_shape);
+	ft_lstclear(&w->light_point, destroy_light_point);
+	free(w);
+}
 
-	obj = (t_object *)object;
-	free(obj->transformation);
-	free(obj->inverse_transformation);
-	destroy_material(obj->material);
-	free(obj);
+void	destroy_computation(t_comp *comps)
+{
+	free(comps->point);
+	free(comps->camera);
+	free(comps->normal);
+	free(comps);
 }

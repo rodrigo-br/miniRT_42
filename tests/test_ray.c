@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 20:45:41 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:34:34 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ void	test_sphere_set_transform(void)
 
 	sphere = create_sphere();
 	transformation = translate_matrix(2, 3, 4);
-	set_transformation(sphere, transformation);
+	set_object_transformation(sphere, transformation);
 	TEST_ASSERT_TRUE(is_equal_matrix(transformation, sphere->transformation));
 	destroy_shape(sphere);
 }
@@ -288,7 +288,7 @@ void	test_intersect_scaled_sphere(void)
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	set_transformation(sphere, scale_matrix(2, 2, 2));
+	set_object_transformation(sphere, scale_matrix(2, 2, 2));
 	intersect_sphere(sphere, ray, &list);
 	TEST_ASSERT_EQUAL(2, intersection_list_size(list));
 	TEST_ASSERT_EQUAL_DOUBLE(3.0, list->time);
@@ -307,7 +307,7 @@ void	test_intersect_translated_sphere(void)
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	set_transformation(sphere, translate_matrix(5, 0, 0));
+	set_object_transformation(sphere, translate_matrix(5, 0, 0));
 	intersect_sphere(sphere, ray, &list);
 	TEST_ASSERT_EQUAL(0, intersection_list_size(list));
 	TEST_ASSERT_NULL(list);
@@ -329,12 +329,11 @@ void	test_print_circle(void)
 	int			canvas_pixels = 500;
 	double		pixel_size = wall_size / canvas_pixels;
 	double		half = wall_size / 2;
-	void		*mlx = mlx_init();
-	void		*win = mlx_new_window(mlx, world_x, world_y, "uwu");
-	t_canvas	*canvas = create_canvas(mlx, canvas_pixels, canvas_pixels);
+	t_canvas	*canvas = create_canvas(canvas_pixels, canvas_pixels);
 	t_object	*sphere = create_sphere();
 	t_point		*origin = create_point(0, 0, -5);
 	t_rgb		*color = create_color(color_rand(), color_rand(), color_rand());
+	void		*win = mlx_new_window(canvas->mlx, world_x, world_y, "uwu");
 	t_intersect	*list = NULL;
 	t_point		*position;
 	t_ray		*ray;
@@ -349,12 +348,12 @@ void	test_print_circle(void)
 			ray = create_ray(origin, normalize(sub_tuple(position, origin)));
 			intersect_sphere(sphere, ray, &list);
 			if (get_hit(list))
-				write_to_canvas(canvas, x, y, *color);
+				write_to_canvas(canvas, x, y, color->merged);
 			intersection_list_clear(&list);
 		}
 	}
-	mlx_put_image_to_window(mlx, win, canvas->image, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
 }
 
 void	test_ray(void)
