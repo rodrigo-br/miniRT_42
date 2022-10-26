@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:42:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 21:58:13 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:34:22 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	test_canvas_painting(void)
 
 	canvas = create_canvas(500.0, 500.0);
 	rgb = create_color(255, 0, 0);
-	write_to_canvas(canvas, 250, 250, *rgb);
+	write_to_canvas(canvas, 250, 250, rgb->merged);
 	TEST_ASSERT_EQUAL_HEX(0xFF0000, pixel_at(canvas, 250, 250));
 	destroy_canvas(canvas);
 	free(rgb);

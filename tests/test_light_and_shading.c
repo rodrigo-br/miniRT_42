@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 22:08:11 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:34:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ void	test_print_3d_sphere(void)
 				eye = neg_tuple(ray->direction);
 				attr = create_lightattr(lp, create_pos_attr(eye, normal, point), just_hit->object->material);
 				color = lighting(attr);
-				write_to_canvas(canvas, x, y, *color);
+				write_to_canvas(canvas, x, y, color->merged);
 			}
 			intersection_list_clear(&list);
 		}

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 20:36:26 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 22:01:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:33:59 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_canvas	*render(t_cam *camera, t_world *world)
 			ray = ray_for_pixel(camera, x, y);
 			color = color_at(world, ray);
 			destroy_ray(ray);
-			write_to_canvas(canvas, x, y, *color);
+			write_to_canvas(canvas, x, y, color->merged);
 			free(color);
 			++x;
 		}

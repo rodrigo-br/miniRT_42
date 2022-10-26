@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 09:27:12 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:33:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void		set_color(t_rgb *color, double r, double g, double b);
 /* Canvas */
 t_canvas	*create_canvas(double height, double width);
 void		destroy_canvas(t_canvas *canvas);
-void		write_to_canvas(t_canvas *canvas, int x, int y, t_rgb rgb);
+void		write_to_canvas(t_canvas *canvas, int x, int y, int color);
 
 /* Matrix */
 t_bool		is_equal_matrix(t_matrix *a, t_matrix *b);
