@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:56:25 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 20:12:10 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:30:46 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static t_ray	*_ray_for_pixel(t_cam *camera, double x_world, double y_world)
 {
-	t_point	*pixel;
-	t_tuple	*aux;
-	t_point	*origin;
-	t_point	*direction;
+	t_tuple		*aux;
+	t_point		*pixel;
+	t_point		*origin;
+	t_vector	*direction;
 
 	aux = create_point(x_world, y_world, -1);
 	pixel = multiply_matrix_tuple(camera->inverse_transformation, aux);
