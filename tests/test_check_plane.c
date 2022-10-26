@@ -36,12 +36,12 @@ void	test_check_plane_function(void)
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(2, (object->y));
 	TEST_ASSERT_EQUAL_DOUBLE(0, (object->z));
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->z));
-	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.x_3d));
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.x_3d));
-	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.y_3d));
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.y_3d));
-	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.z_3d));
-	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.z_3d));
+	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.orientation.x));
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.orientation.x));
+	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.orientation.y));
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.orientation.y));
+	TEST_ASSERT_EQUAL_DOUBLE(0, (object->plane.orientation.z));
+	TEST_ASSERT_NOT_EQUAL_DOUBLE(1, (object->plane.orientation.z));
 	TEST_ASSERT_EQUAL_DOUBLE(250.0 / 255.0, object->rgb->red);
 	TEST_ASSERT_NOT_EQUAL_DOUBLE(251.0 / 255.0, object->rgb->red);
 	TEST_ASSERT_EQUAL_DOUBLE(200.0 / 255.0, object->rgb->green);

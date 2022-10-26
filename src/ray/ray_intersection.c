@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 19:11:01 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:44:56 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ void	intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head)
 	intersection_sorted_insert(head, create_intersection(x1, sphere));
 	if (!is_equal_double(x1, x2))
 		intersection_sorted_insert(head, create_intersection(x2, sphere));
+}
+
+void	intersect_plane(t_object *plane, t_ray *ray, t_intersect **head)
+{
+	double	time;
+
+	if (fabs(ray->direction->y) < EPSILON)
+		return ;
+	time = -ray->origin->y / ray->direction->y;
+	intersection_sorted_insert(head, create_intersection(time, plane));
 }
 
 void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)

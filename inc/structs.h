@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:12:27 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:57:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	double	x_3d;
-	double	y_3d;
-	double	z_3d;
+	t_vector	orientation;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -135,8 +133,8 @@ typedef struct s_object
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
 	t_material	*material;
-	void		(*intersect)(t_object*, t_ray*, t_intersect**);
-	t_vector	*(*get_normal)(t_object*, t_point*);
+	void		(*intersect)(t_object *, t_ray *, t_intersect **);
+	t_vector	*(*get_normal)(t_object *, t_point *);
 }	t_object;
 
 typedef struct s_scene
