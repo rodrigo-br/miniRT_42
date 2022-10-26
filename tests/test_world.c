@@ -310,6 +310,77 @@ void	test_color_when_intersect_behind_ray(void)
 	free(rgb);
 }
 
+/* Scenario: shade_hit() is given an intersection in shadow
+Given w ← world()
+And w.light ← point_light(point(0, 0, -10), color(1, 1, 1))
+And s1 ← sphere()
+And s1 is added to w
+And s2 ← sphere() with:
+| transform | translation(0, 0, 10) |
+And s2 is added to w
+And r ← ray(point(0, 0, 5), vector(0, 0, 1))
+And i ← intersection(4, s2)
+When comps ← prepare_computations(i, r)
+And c ← shade_hit(w, comps)
+Then c = color(0.1, 0.1, 0.1) */
+void	test_shade_hit_shadow_intersection(void)
+{
+	t_world		*world;
+	t_object	*s1, *s2;
+	t_ray		*ray;
+	t_intersect	*i;
+	t_comp		*comps;
+	t_rgb		*color;
+
+	world = create_world();
+	world->light_point = ft_lstnew(create_light_point(create_point(0, 0, -10), create_color(1, 1, 1)));
+	s1 = create_sphere();
+	s2 = create_sphere();
+	set_object_transformation(s2, translate_matrix(0, 0, 10));
+	ft_lstadd_front(&world->objects, ft_lstnew(s1));
+	ft_lstadd_front(&world->objects, ft_lstnew(s2));
+	ray = create_ray(create_point(0, 0, 5), create_vector(0, 0, 1));
+	i = create_intersection(4, s2);
+	comps = prepare_computation(i, ray);
+	color = shade_hit(world, comps);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->blue);
+	destroy_world(world);
+	destroy_ray(ray);
+	destroy_computation(comps);
+	free(color);
+	intersection_list_clear(&i);
+}
+
+/* Scenario: The hit should offset the point
+Given r ← ray(point(0, 0, -5), vector(0, 0, 1))
+And shape ← sphere() with:
+| transform | translation(0, 0, 1) |
+And i ← intersection(5, shape)
+When comps ← prepare_computations(i, r)
+Then comps.over_point.z < -EPSILON/2
+And comps.point.z > comps.over_point.z */
+void	test_hit_should_offset_point(void)
+{
+	t_ray		*ray;
+	t_object	*shape;
+	t_intersect	*i;
+	t_comp		*comps;
+
+	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
+	shape = create_sphere();
+	set_object_transformation(shape, translate_matrix(0, 0, 1));
+	i = create_intersection(5, shape);
+	comps = prepare_computation(i, ray);
+	TEST_ASSERT_TRUE(comps->over_point->z < -EPSILON / 2);
+	TEST_ASSERT_TRUE(comps->point->z > comps->over_point->z);
+	destroy_ray(ray);
+	destroy_shape(shape);
+	destroy_computation(comps);
+	intersection_list_clear(&i);
+}
+
 void	test_world(void)
 {
 	RUN_TEST(test_create_world);
@@ -322,4 +393,6 @@ void	test_world(void)
 	RUN_TEST(test_color_when_ray_misses);
 	RUN_TEST(test_color_when_ray_hits);
 	RUN_TEST(test_color_when_intersect_behind_ray);
+	RUN_TEST(test_shade_hit_shadow_intersection);
+	RUN_TEST(test_hit_should_offset_point);
 }

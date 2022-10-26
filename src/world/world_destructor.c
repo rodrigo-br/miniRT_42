@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:45:41 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 09:58:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:14:18 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	destroy_computation(t_comp *comps)
 	free(comps->point);
 	free(comps->camera);
 	free(comps->normal);
+	free(comps->over_point);
 	free(comps);
 }

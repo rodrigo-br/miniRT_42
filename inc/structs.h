@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 10:20:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:06:10 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ typedef struct s_comp
 	t_point		*point;
 	t_vector	*normal;
 	t_vector	*camera;
+	t_point		*over_point;
 	t_bool		inside;
 }	t_comp;
 
