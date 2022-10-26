@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 11:06:10 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:21:56 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_tuple
 
 typedef t_tuple	t_vector; /* tuple with 'w' value equal to 0 */
 typedef t_tuple	t_point; /* tuple with 'w' value equal to 1 */
+typedef struct s_object t_object;
 
 typedef struct s_matrix
 {
@@ -105,6 +106,19 @@ typedef struct s_material
 	double	shininess;
 }	t_material;
 
+typedef struct s_ray
+{
+	t_point		*origin;
+	t_vector	*direction;
+}	t_ray;
+
+typedef struct s_intersect
+{
+	t_object			*object;
+	double				time;
+	struct s_intersect	*next;
+}	t_intersect;
+
 typedef struct s_object
 {
 	int			type;
@@ -121,6 +135,7 @@ typedef struct s_object
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
 	t_material	*material;
+	void		(*intersect)(t_object*, t_ray*, t_intersect**);
 }	t_object;
 
 typedef struct s_scene
@@ -141,12 +156,6 @@ typedef struct s_canvas
 	int		endianness;
 }	t_canvas;
 
-typedef struct s_ray
-{
-	t_point		*origin;
-	t_vector	*direction;
-}	t_ray;
-
 typedef struct s_bhaskara
 {
 	double	a;
@@ -154,13 +163,6 @@ typedef struct s_bhaskara
 	double	c;
 	double	delta;
 }	t_bhaskara;
-
-typedef struct s_intersect
-{
-	t_object			*object;
-	double				time;
-	struct s_intersect	*next;
-}	t_intersect;
 
 typedef struct s_shearing
 {

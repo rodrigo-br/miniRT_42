@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 16:20:02 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:21:27 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_object	*create_sphere(void)
 	object->transformation = create_identity_matrix();
 	object->inverse_transformation = create_identity_matrix();
 	object->material = create_material();
+	object->intersect = &intersect_sphere;
 	return (object);
 }
 

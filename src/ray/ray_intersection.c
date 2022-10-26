@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 14:09:08 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 14:20:32 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)
 	while (obj_list)
 	{
 		current_obj = (t_object *)obj_list->content;
-		intersect_sphere(current_obj, ray, head);
+		current_obj->intersect(current_obj, ray, head);
 		obj_list = obj_list->next;
 	}
 }
