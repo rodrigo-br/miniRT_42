@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:18:41 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 16:13:53 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:48:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,10 @@ t_matrix	*transpose_matrix(t_matrix *m)
 
 t_matrix	*inverse_matrix(t_matrix *m)
 {
-	const double		_determinant = determinant(m);
-	double				_cofactor;
-	size_t				row;
-	size_t				col;
-	double				inverse[MAT_MAX][MAT_MAX];
+	const double	_determinant = determinant(m);
+	size_t			row;
+	size_t			col;
+	double			inverse[MAT_MAX][MAT_MAX];
 
 	if (!_determinant)
 		return (NULL);
@@ -97,8 +96,7 @@ t_matrix	*inverse_matrix(t_matrix *m)
 		col = 0;
 		while (col < m->size)
 		{
-			_cofactor = cofactor(m, row, col);
-			inverse[col][row] = _cofactor / _determinant;
+			inverse[col][row] = cofactor(m, row, col) / _determinant;
 			++col;
 		}
 		++row;
