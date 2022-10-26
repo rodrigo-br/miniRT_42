@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:02:07 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 22:00:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:36:37 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,105 @@ void	test_render_world_with_camera(void)
 	free(to);
 }
 
+/* Note to self:
+	this leaks                              a lot.
+	only run this if you have a display available.
+*/
+void	test_print_three_spheres(void)
+{
+	t_object	*floor, *lwall, *rwall, *middle, *right, *left;
+	t_matrix	*aux1, *aux2, *aux3, *aux4;
+	t_world		*world;
+	t_cam		*camera;
+	t_canvas	*canvas;
+	void		*win;
+
+	floor = create_sphere();
+	set_object_transformation(floor, scale_matrix(10, 0.01, 10));
+	set_color(floor->material->color, 1, 0.9, 0.9);
+	floor->material->specular = 0;
+
+	lwall = create_sphere();
+	aux1 = translate_matrix(0, 0, 5);
+	aux2 = rotate_matrix_y(-radians(180 / 4));
+	aux3 = multiply_matrix(aux1, aux2);
+	free(aux1); free(aux2);
+	aux1 = rotate_matrix_x(radians(180 / 2));
+	aux2 = scale_matrix(10, 0.01, 10);
+	aux4 = multiply_matrix(aux3, aux1);
+	free(aux3); free(aux1);
+	aux1 = multiply_matrix(aux4, aux2);
+	free(aux4), free(aux2);
+	set_object_transformation(lwall, aux1);
+	set_color(lwall->material->color, 1, 0.9, 0.9);
+	lwall->material->specular = 0;
+
+	rwall = create_sphere();
+	aux1 = translate_matrix(0, 0, 5);
+	aux2 = rotate_matrix_y(radians(180 / 4));
+	aux3 = multiply_matrix(aux1, aux2);
+	free(aux1); free(aux2);
+	aux1 = rotate_matrix_x(radians(180 / 2));
+	aux2 = scale_matrix(10, 0.01, 10);
+	aux4 = multiply_matrix(aux3, aux1);
+	free(aux3); free(aux1);
+	set_object_transformation(rwall, multiply_matrix(aux4, aux2));
+	free(aux4), free(aux2);
+	set_color(rwall->material->color, 1, 0.9, 0.9);
+	rwall->material->specular = 0;
+
+	middle = create_sphere();
+	set_object_transformation(middle, translate_matrix(-0.5, 1, 0.5));
+	set_color(middle->material->color, 0.1, 1, 0.5);
+	middle->material->diffuse = 0.7;
+	middle->material->specular = 0.3;
+
+	right = create_sphere();
+	aux1 = translate_matrix(1.5, 0.5, -0.5);
+	set_object_transformation(right, multiply_matrix(aux1, scale_matrix(0.5, 0.5, 0.5)));
+	free(aux1);
+	set_color(right->material->color, 0.5, 1, 0.1);
+	right->material->diffuse = 0.7;
+	right->material->specular = 0.3;
+
+	left = create_sphere();
+	aux1 = translate_matrix(-1.5, 0.33, -0.75);
+	set_object_transformation(left, multiply_matrix(aux1, scale_matrix(0.33, 0.33, 0.33)));
+	free(aux1);
+	set_color(left->material->color, 1, 0.8, 0.1);
+	left->material->diffuse = 0.7;
+	left->material->specular = 0.3;
+
+	world = create_world();
+	world->light_point = ft_lstnew(create_light_point(
+			create_point(-10, 10, -10),
+			create_color(1, 1, 1)
+		));
+	ft_lstadd_front(&world->objects, ft_lstnew(floor));
+	ft_lstadd_front(&world->objects, ft_lstnew(lwall));
+	ft_lstadd_front(&world->objects, ft_lstnew(rwall));
+	ft_lstadd_front(&world->objects, ft_lstnew(middle));
+	ft_lstadd_front(&world->objects, ft_lstnew(right));
+	ft_lstadd_front(&world->objects, ft_lstnew(left));
+
+	camera = create_camera(1000, 500, radians(180 / 3));
+	set_camera_transformation(camera, view_transform(
+		create_point(0, 1.5, -5),
+		create_point(0, 1, 0),
+		create_vector(0, 1, 0)
+	));
+
+	canvas = render(camera, world);
+	win = mlx_new_window(
+		canvas->mlx,
+		(int)round(camera->h_size),
+		(int)round(camera->v_size),
+		"uwu"
+	);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
+}
+
 void	test_camera(void)
 {
 	RUN_TEST(test_camera_creation);
@@ -169,4 +268,6 @@ void	test_camera(void)
 	RUN_TEST(test_ray_through_corner_of_canvas);
 	RUN_TEST(test_ray_when_camera_is_transformed);
 	RUN_TEST(test_render_world_with_camera);
+	// uncomment at your own risk
+	// RUN_TEST(test_print_three_spheres);
 }

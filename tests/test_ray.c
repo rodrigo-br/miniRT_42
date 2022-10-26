@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 21:22:47 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:08:11 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,7 +275,7 @@ void	test_sphere_set_transform(void)
 
 	sphere = create_sphere();
 	transformation = translate_matrix(2, 3, 4);
-	set_transformation(sphere, transformation);
+	set_object_transformation(sphere, transformation);
 	TEST_ASSERT_TRUE(is_equal_matrix(transformation, sphere->transformation));
 	destroy_shape(sphere);
 }
@@ -288,7 +288,7 @@ void	test_intersect_scaled_sphere(void)
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	set_transformation(sphere, scale_matrix(2, 2, 2));
+	set_object_transformation(sphere, scale_matrix(2, 2, 2));
 	intersect_sphere(sphere, ray, &list);
 	TEST_ASSERT_EQUAL(2, intersection_list_size(list));
 	TEST_ASSERT_EQUAL_DOUBLE(3.0, list->time);
@@ -307,7 +307,7 @@ void	test_intersect_translated_sphere(void)
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
-	set_transformation(sphere, translate_matrix(5, 0, 0));
+	set_object_transformation(sphere, translate_matrix(5, 0, 0));
 	intersect_sphere(sphere, ray, &list);
 	TEST_ASSERT_EQUAL(0, intersection_list_size(list));
 	TEST_ASSERT_NULL(list);

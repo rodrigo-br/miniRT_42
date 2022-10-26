@@ -18,7 +18,7 @@ PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
-COLOR	= color_constructor.c color_operations.c
+COLOR	= color_constructor.c color_operations.c color_setter.c
 CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 		matrix_transformations.c matrix_rotations.c matrix_view_transform.c

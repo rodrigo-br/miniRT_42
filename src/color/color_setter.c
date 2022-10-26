@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_setters.c                                    :+:      :+:    :+:   */
+/*   color_setter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:19:55 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 22:37:53 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/25 22:33:18 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/25 22:33:23 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	set_object_transformation(t_object *object, t_matrix *transform)
+void	set_color(t_rgb *color, double r, double g, double b)
 {
-	free(object->transformation);
-	free(object->inverse_transformation);
-	object->transformation = transform;
-	object->inverse_transformation = inverse_matrix(transform);
+	color->red = r;
+	color->green = g;
+	color->blue = b;
 }

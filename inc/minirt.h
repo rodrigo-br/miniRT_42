@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 21:57:10 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:37:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
 t_rgb		*scalar_multiply_color(t_rgb *a, double multiplier);
+void		set_color(t_rgb *color, double r, double g, double b);
 
 /* Canvas */
 t_canvas	*create_canvas(double height, double width);
@@ -129,7 +130,7 @@ t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_intersect	*create_intersection(double time, t_object *object);
 t_intersect	*get_hit(t_intersect *intersect);
 t_ray		*transform_ray(t_ray *ray, t_matrix *matrix);
-void		set_transformation(t_object *object, t_matrix *transformation);
+void		set_object_transformation(t_object *object, t_matrix *transform);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersection_list_clear(t_intersect **list);

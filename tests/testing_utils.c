@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:29:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 21:50:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:08:11 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_world	*default_world(void)
 	sphere_1->material->specular = 0.2;
 	ft_lstadd_back(&world->objects, ft_lstnew(sphere_1));
 	sphere_2 = create_sphere();
-	set_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
+	set_object_transformation(sphere_2, scale_matrix(0.5, 0.5, 0.5));
 	ft_lstadd_back(&world->objects, ft_lstnew(sphere_2));
 	return (world);
 }
