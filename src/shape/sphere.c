@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 14:39:18 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:40:28 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_object	*create_sphere(void)
 	object->sphere.diameter = 1.0;
 	object->sphere.center = (t_point){0, 0, 0, 1};
 	object->intersect = &intersect_sphere;
+	object->saved_ray = NULL;
 	create_shape(object);
 	return (object);
 }

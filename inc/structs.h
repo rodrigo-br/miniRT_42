@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 14:21:56 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:18:19 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_tuple
 	double	w;
 }	t_tuple;
 
-typedef t_tuple	t_vector; /* tuple with 'w' value equal to 0 */
-typedef t_tuple	t_point; /* tuple with 'w' value equal to 1 */
-typedef struct s_object t_object;
+typedef t_tuple			t_vector; /* tuple with 'w' value equal to 0 */
+typedef t_tuple			t_point; /* tuple with 'w' value equal to 1 */
+typedef struct s_object	t_object;
 
 typedef struct s_matrix
 {
@@ -136,6 +136,7 @@ typedef struct s_object
 	t_matrix	*inverse_transformation;
 	t_material	*material;
 	void		(*intersect)(t_object*, t_ray*, t_intersect**);
+	t_ray		*saved_ray;
 }	t_object;
 
 typedef struct s_scene

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 13:56:53 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:04:14 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ void	destroy_shape(void *object)
 	free(obj->transformation);
 	free(obj->inverse_transformation);
 	destroy_material(obj->material);
+	if (obj->saved_ray)
+		destroy_ray(obj->saved_ray);
 	free(obj);
 }

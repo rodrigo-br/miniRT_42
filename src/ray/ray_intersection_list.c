@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersection_list.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:46:28 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 19:11:09 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:47:43 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
