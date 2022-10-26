@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:30:26 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:50:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,58 @@ void	test_lighting_surface_in_shadow(void)
 	free(result);
 }
 
+/* Scenario: There is no shadow when nothing is collinear with point and light
+Given w ← default_world()
+And p ← point(0, 10, 0)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_at_all(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){0, 10, 0, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: The shadow when an object is between the point and the light
+Given w ← default_world()
+And p ← point(10, -10, 10)
+Then is_shadowed(w, p) is true */
+void	test_shadow_object_between_light_and_point(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_TRUE(is_shadowed(world, &(t_point){10, -10, 10, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: There is no shadow when an object is behind the light
+Given w ← default_world()
+And p ← point(-20, 20, -20)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_object_behind_light(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-20, 20, -20, 1}));
+	destroy_world(world);
+}
+
+/* Scenario: There is no shadow when an object is behind the point
+Given w ← default_world()
+And p ← point(-2, 2, -2)
+Then is_shadowed(w, p) is false */
+void	test_no_shadow_object_behind_point(void)
+{
+	t_world	*world;
+
+	world = default_world();
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-2, 2, -2, 1}));
+	destroy_world(world);
+}
+
 /* Note to self:
 	this leaks                              a lot.
 	only run this if you have a display available.
@@ -352,6 +404,10 @@ void	test_light_and_shading(void)
 	RUN_TEST(test_lighting_camera_in_reflection_vector);
 	RUN_TEST(test_lighting_light_behind_surface);
 	RUN_TEST(test_lighting_surface_in_shadow);
+	RUN_TEST(test_no_shadow_at_all);
+	RUN_TEST(test_shadow_object_between_light_and_point);
+	RUN_TEST(test_no_shadow_object_behind_light);
+	RUN_TEST(test_no_shadow_object_behind_point);
 	// uncomment at your own risk
 	// RUN_TEST(test_print_3d_sphere);
 }
