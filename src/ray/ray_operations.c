@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:44:58 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:31:15 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_rgb	*shade_hit(t_world *world, t_comp *comps)
 
 	in_shadow = is_shadowed(world, comps->over_point);
 	lp = (t_light_pnt *)world->light_point->content;
-	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->point);
+	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->over_point);
 	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
 	light_attr->in_shadow = in_shadow;
 	light_attr->object = comps->object;

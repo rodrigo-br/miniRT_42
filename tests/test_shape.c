@@ -232,7 +232,7 @@ void	test_print_three_spheres_and_plane(void)
 	middle->material->specular = 0.3;
 
 	right = create_sphere();
-	right->material->pattern = middle->material->pattern = create_pattern(create_color(0, 0, 1), create_color(0, 0, 0));
+	right->material->pattern = create_pattern(create_color(0, 0, 1), create_color(0, 0, 0));
 	aux = translate_matrix(1.5, 0.5, -0.5);
 	set_object_transformation(right, multiply_matrix(aux, scale_matrix(0.5, 0.5, 0.5)));
 	free(aux);
@@ -254,7 +254,7 @@ void	test_print_three_spheres_and_plane(void)
 			create_color(1, 1, 1)
 		));
 	ft_lstadd_front(&world->objects, ft_lstnew(floor));
-	ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
+	// ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
 	ft_lstadd_front(&world->objects, ft_lstnew(middle));
 	ft_lstadd_front(&world->objects, ft_lstnew(right));
 	ft_lstadd_front(&world->objects, ft_lstnew(left));

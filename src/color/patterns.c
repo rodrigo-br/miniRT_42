@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:36:57 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 13:35:12 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:39:16 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_pattern	*create_pattern(t_rgb *a, t_rgb *b)
 
 t_rgb	*pattern_at(t_pattern *pattern, t_point	*point)
 {
-	if ((int)floor(point->x) % 2)
+	if (((int)floor(point->x) + (int)floor(point->y) + (int)floor(point->z)) \
+		% 2)
 		return (pattern->color_b);
 	return (pattern->color_a);
 }

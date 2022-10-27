@@ -237,14 +237,101 @@ void	test_pattern_with_pattern_n_obj_transformation(void)
 	destroy_shape(object);
 }
 
+/*
+Scenario: Checkers should repeat in x
+Given pattern ← checkers_pattern(white, black)
+Then pattern_at(pattern, point(0, 0, 0)) = white
+And pattern_at(pattern, point(0.99, 0, 0)) = white
+And pattern_at(pattern, point(1.01, 0, 0)) = black
+*/
+void	checkers_should_repeat_in_x(void)
+{
+	t_pattern	*pattern;
+	t_rgb		*color;
+
+	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
+	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){0.99, 0, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){1.01, 0, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);
+	destroy_pattern(pattern);
+}
+
+/*
+Scenario: Checkers should repeat in y
+Given pattern ← checkers_pattern(white, black)
+Then pattern_at(pattern, point(0, 0, 0)) = white
+And pattern_at(pattern, point(0, 0.99, 0)) = white
+And pattern_at(pattern, point(0, 1.01, 0)) = black
+*/
+void	checkers_should_repeat_in_y(void)
+{
+	t_pattern	*pattern;
+	t_rgb		*color;
+
+	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
+	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){0, 0.99, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){0, 1.01, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);
+	destroy_pattern(pattern);
+}
+
+/*
+Scenario: Checkers should repeat in z
+Given pattern ← checkers_pattern(white, black)
+Then pattern_at(pattern, point(0, 0, 0)) = white
+And pattern_at(pattern, point(0, 0, 0.99)) = white
+And pattern_at(pattern, point(0, 0, 1.01)) = black
+*/
+void	checkers_should_repeat_in_z(void)
+{
+	t_pattern	*pattern;
+	t_rgb		*color;
+
+	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
+	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){0, 0, 0.99});
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	color = pattern_at(pattern, &(t_point){0, 0, 1.01});
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);
+	destroy_pattern(pattern);
+}
+
 void test_patterns(void)
 {
-	RUN_TEST(test_create_pattern);
-	RUN_TEST(test_pattern_constant_y);
-	RUN_TEST(test_pattern_constant_z);
-	RUN_TEST(test_pattern_alternate_x);
-	RUN_TEST(test_pattern_lightning_with_pattern);
-	RUN_TEST(test_pattern_with_object_transformation);
-	RUN_TEST(test_pattern_with_pattern_transformation);
-	RUN_TEST(test_pattern_with_pattern_n_obj_transformation);
+	// RUN_TEST(test_create_pattern);
+	// RUN_TEST(test_pattern_constant_y);
+	// RUN_TEST(test_pattern_constant_z);
+	// RUN_TEST(test_pattern_alternate_x);
+	// RUN_TEST(test_pattern_lightning_with_pattern);
+	// RUN_TEST(test_pattern_with_object_transformation);
+	// RUN_TEST(test_pattern_with_pattern_transformation);
+	// RUN_TEST(test_pattern_with_pattern_n_obj_transformation);
+	RUN_TEST(checkers_should_repeat_in_x);
+	RUN_TEST(checkers_should_repeat_in_y);
+	RUN_TEST(checkers_should_repeat_in_z);
 }
