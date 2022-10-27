@@ -27,7 +27,7 @@ UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_c
 		radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
-SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c sphere.c plane.c
+SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c sphere.c plane.c cylinder.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c \
 		is_shadowed.c
 WORLD	= world_constructor.c world_destructor.c world_computations.c
@@ -52,10 +52,12 @@ clean:
 	rm -rf obj
 	make clean -C $(LIBFT_PATH)
 	make clean -C $(MINILIBX_PATH)
+	make clean -C tests
 
 fclean: clean
 	rm -rf $(NAME) $(MINILIBX)
 	make fclean -C $(LIBFT_PATH)
+	make fclean -C tests
 
 re:  fclean all
 
