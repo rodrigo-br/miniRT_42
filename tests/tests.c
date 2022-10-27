@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 21:07:20 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:15:10 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int	main(void)
 	test_world();
 	test_view_transformation();
 	test_camera();
+	test_shape();
 	return (UNITY_END());
 }

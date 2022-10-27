@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_destructor.c                                 :+:      :+:    :+:   */
+/*   shape_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 19:14:42 by maolivei         ###   ########.fr       */
+/*   Created: 2022/10/26 19:04:32 by maolivei          #+#    #+#             */
+/*   Updated: 2022/10/26 19:04:45 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-void	destroy_shape(void *object)
+t_object	*create_shape(void)
 {
-	t_object	*obj;
+	t_object	*object;
 
-	obj = (t_object *)object;
-	free(obj->transformation);
-	free(obj->inverse_transformation);
-	destroy_material(obj->material);
-	free(obj);
+	object = (t_object *)malloc(sizeof(t_object));
+	if (!object)
+		return (NULL);
+	object->transformation = create_identity_matrix();
+	object->inverse_transformation = create_identity_matrix();
+	object->material = create_material();
+	return (object);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:28:59 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:50:07 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_object	*set_plane(char **coordinates, char **rgb, char *s)
 	object->z = ft_atod(coordinates[2]);
 	object->rgb = create_color(ft_atod(rgb[0]) / 255, \
 								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
-	object->plane.x_3d = ft_atod(ori_3d[0]);
-	object->plane.y_3d = ft_atod(ori_3d[1]);
-	object->plane.z_3d = ft_atod(ori_3d[2]);
+	object->plane.orientation.x = ft_atod(ori_3d[0]);
+	object->plane.orientation.y = ft_atod(ori_3d[1]);
+	object->plane.orientation.z = ft_atod(ori_3d[2]);
 	ft_free_matrix((void *)&ori_3d);
 	return (object);
 }

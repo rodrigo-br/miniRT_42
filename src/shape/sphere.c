@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/24 16:20:02 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:12:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 t_object	*create_sphere(void)
 {
-	t_object	*object;
+	t_object	*sphere;
 
-	object = (t_object *)malloc(sizeof(t_object));
-	object->type = ID_SPHERE;
-	object->sphere.diameter = 1.0;
-	object->sphere.center = (t_point){0, 0, 0, 1};
-	object->transformation = create_identity_matrix();
-	object->inverse_transformation = create_identity_matrix();
-	object->material = create_material();
-	return (object);
+	sphere = create_shape();
+	if (!sphere)
+		return (NULL);
+	sphere->type = ID_SPHERE;
+	sphere->sphere.diameter = 1.0;
+	sphere->sphere.center = (t_point){0, 0, 0, 1};
+	sphere->intersect = intersect_sphere;
+	sphere->get_normal = get_sphere_normal;
+	return (sphere);
 }
 
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point)
