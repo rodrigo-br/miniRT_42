@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:09:33 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 11:58:47 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:13:28 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,73 @@ void	test_get_cylinder_normal(void)
 	free(n1); free(n2); free(n3); free(n4);
 }
 
+/* Scenario Outline: Intersecting a constrained cylinder
+Given cyl ← cylinder()
+And cyl.minimum ← 1
+And cyl.maximum ← 2
+And direction ← normalize(<direction>)
+And r ← ray(<point>, direction)
+When xs ← local_intersect(cyl, r)
+Then xs.count = <count>
+Examples:
+|   | point             | direction         | count |
+| 1 | point(0, 1.5, 0)  | vector(0.1, 1, 0) | 0     |
+| 2 | point(0, 3, -5)   | vector(0, 0, 1)   | 0     |
+| 3 | point(0, 0, -5)   | vector(0, 0, 1)   | 0     |
+| 4 | point(0, 2, -5)   | vector(0, 0, 1)   | 0     |
+| 5 | point(0, 1, -5)   | vector(0, 0, 1)   | 0     |
+| 6 | point(0, 1.5, -2) | vector(0, 0, 1)   | 2     | */
+void	test_intersect_truncated_cylinder(void)
+{
+	t_object	*cyl;
+	t_vector	*d1, *d2, *d3, *d4, *d5, *d6;
+	t_point		*o1, *o2, *o3, *o4, *o5, *o6;
+	t_ray		*r1, *r2, *r3, *r4, *r5, *r6;
+	t_intersect	*xs = NULL;
+
+	cyl = create_cylinder();
+	cyl->cylinder.min = 1;
+	cyl->cylinder.max = 2;
+	o1 = create_point(0, 1.5, 0);
+	o2 = create_point(0, 3, -5);
+	o3 = create_point(0, 0, -5);
+	o4 = create_point(0, 2, -5);
+	o5 = create_point(0, 1, -5);
+	o6 = create_point(0, 1.5, -2);
+	d1 = normalize(&(t_vector){0.1, 1, 0, 0});
+	d2 = normalize(&(t_vector){0, 0, 1, 0});
+	d3 = normalize(&(t_vector){0, 0, 1, 0});
+	d4 = normalize(&(t_vector){0, 0, 1, 0});
+	d5 = normalize(&(t_vector){0, 0, 1, 0});
+	d6 = normalize(&(t_vector){0, 0, 1, 0});
+	r1 = create_ray(o1, d1);
+	r2 = create_ray(o2, d2);
+	r3 = create_ray(o3, d3);
+	r4 = create_ray(o4, d4);
+	r5 = create_ray(o5, d5);
+	r6 = create_ray(o6, d6);
+	cyl->intersect(cyl, r1, &xs);
+	cyl->intersect(cyl, r2, &xs);
+	cyl->intersect(cyl, r3, &xs);
+	cyl->intersect(cyl, r4, &xs);
+	cyl->intersect(cyl, r5, &xs);
+	cyl->intersect(cyl, r6, &xs);
+	TEST_ASSERT_NOT_NULL(xs);
+	TEST_ASSERT_EQUAL(2, intersection_list_size(xs));
+	destroy_ray(r1);
+	destroy_ray(r2);
+	destroy_ray(r3);
+	destroy_ray(r4);
+	destroy_ray(r5);
+	destroy_ray(r6);
+	destroy_shape(cyl);
+	intersection_list_clear(&xs);
+}
+
 void	test_cylinder(void)
 {
 	RUN_TEST(test_ray_misses_cylinder);
 	RUN_TEST(test_ray_strikes_cylinder);
 	RUN_TEST(test_get_cylinder_normal);
+	RUN_TEST(test_intersect_truncated_cylinder);
 }

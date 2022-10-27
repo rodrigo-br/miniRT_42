@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 11:37:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:32:44 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,28 @@ void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
 {
 	double		x1;
 	double		x2;
-	double		x_coef;
-	double		z_coef;
+	double		y1;
+	double		y2;
 	t_bhaskara	bhaskara;
 
 	bhaskara.a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
 	if (fabs(bhaskara.a) < EPSILON)
 		return ;
-	x_coef = 2 * ray->origin->x * ray->direction->x;
-	z_coef = 2 * ray->origin->z * ray->direction->z;
-	bhaskara.b = x_coef + z_coef;
+	bhaskara.b = 2 * ray->origin->x * ray->direction->x;
+	bhaskara.b += 2 * ray->origin->z * ray->direction->z;
 	bhaskara.c = pow(ray->origin->x, 2) + pow(ray->origin->z, 2) - 1;
 	bhaskara.delta = (bhaskara.b * bhaskara.b) - (4 * bhaskara.a * bhaskara.c);
 	if (bhaskara.delta < 0)
 		return ;
 	x1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	x2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-	intersection_sorted_insert(head, create_intersection(x1, cyl));
+	y1 = ray->origin->y + (x1 * ray->direction->y);
+	y2 = ray->origin->y + (x2 * ray->direction->y);
+	if (cyl->cylinder.min < y1 && y1 < cyl->cylinder.max)
+		intersection_sorted_insert(head, create_intersection(x1, cyl));
 	if (!is_equal_double(x1, x2))
-		intersection_sorted_insert(head, create_intersection(x2, cyl));
+		if (cyl->cylinder.min < y2 && y2 < cyl->cylinder.max)
+			intersection_sorted_insert(head, create_intersection(x2, cyl));
 }
 
 void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)

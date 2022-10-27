@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:57:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:03:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct s_cylinder
 	double	z_3d;
 	double	diameter;
 	double	height;
+	double	min;
+	double	max;
 }	t_cylinder;
 
 typedef struct s_material
