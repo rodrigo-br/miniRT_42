@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 09:34:34 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/26 21:27:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,36 +282,40 @@ void	test_sphere_set_transform(void)
 
 void	test_intersect_scaled_sphere(void)
 {
-	t_ray		*ray;
+	t_ray		*ray, *transformed;
 	t_object	*sphere;
 	t_intersect	*list = NULL;
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
 	set_object_transformation(sphere, scale_matrix(2, 2, 2));
-	intersect_sphere(sphere, ray, &list);
+	transformed = transform_ray(ray, sphere->inverse_transformation);
+	intersect_sphere(sphere, transformed, &list);
 	TEST_ASSERT_EQUAL(2, intersection_list_size(list));
 	TEST_ASSERT_EQUAL_DOUBLE(3.0, list->time);
 	TEST_ASSERT_EQUAL_DOUBLE(7.0, list->next->time);
 	TEST_ASSERT_NULL(list->next->next);
 	destroy_ray(ray);
+	destroy_ray(transformed);
 	destroy_shape(sphere);
 	intersection_list_clear(&list);
 }
 
 void	test_intersect_translated_sphere(void)
 {
-	t_ray		*ray;
+	t_ray		*ray, *transformed;
 	t_object	*sphere;
 	t_intersect	*list = NULL;
 
 	ray = create_ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	sphere = create_sphere();
 	set_object_transformation(sphere, translate_matrix(5, 0, 0));
-	intersect_sphere(sphere, ray, &list);
+	transformed = transform_ray(ray, sphere->inverse_transformation);
+	intersect_sphere(sphere, transformed, &list);
 	TEST_ASSERT_EQUAL(0, intersection_list_size(list));
 	TEST_ASSERT_NULL(list);
 	destroy_ray(ray);
+	destroy_ray(transformed);
 	destroy_shape(sphere);
 	intersection_list_clear(&list);
 }

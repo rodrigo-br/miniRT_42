@@ -201,6 +201,78 @@ void	test_ray_intersect_plane_from_below(void)
 	intersection_list_clear(&xs);
 }
 
+/* Note to self:
+	this leaks                              a lot.
+	only run this if you have a display available.
+*/
+void	test_print_three_spheres_and_plane(void)
+{
+	t_object	*floor, *backdrop, *middle, *right, *left;
+	t_matrix	*aux;
+	t_world		*world;
+	t_cam		*camera;
+	t_canvas	*canvas;
+	void		*win;
+
+	floor = create_plane();
+
+	backdrop = create_plane();
+	aux = translate_matrix(0, 0, 10);
+	set_object_transformation(backdrop, multiply_matrix(aux, rotate_matrix_x(M_PI / 2)));
+	free(aux);
+	set_color(backdrop->material->color, 1, 0, 0);
+
+	middle = create_sphere();
+	set_object_transformation(middle, translate_matrix(-0.5, 1, 0.5));
+	set_color(middle->material->color, 0.1, 1, 0.5);
+	middle->material->diffuse = 0.7;
+	middle->material->specular = 0.3;
+
+	right = create_sphere();
+	aux = translate_matrix(1.5, 0.5, -0.5);
+	set_object_transformation(right, multiply_matrix(aux, scale_matrix(0.5, 0.5, 0.5)));
+	free(aux);
+	set_color(right->material->color, 0.5, 1, 0.1);
+	right->material->diffuse = 0.7;
+	right->material->specular = 0.3;
+
+	left = create_sphere();
+	aux = translate_matrix(-1.5, 0.33, -0.75);
+	set_object_transformation(left, multiply_matrix(aux, scale_matrix(0.33, 0.33, 0.33)));
+	free(aux);
+	set_color(left->material->color, 1, 0.8, 0.1);
+	left->material->diffuse = 0.7;
+	left->material->specular = 0.3;
+
+	world = create_world();
+	world->light_point = ft_lstnew(create_light_point(
+			create_point(-10, 10, -10),
+			create_color(1, 1, 1)
+		));
+	ft_lstadd_front(&world->objects, ft_lstnew(floor));
+	ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
+	ft_lstadd_front(&world->objects, ft_lstnew(middle));
+	ft_lstadd_front(&world->objects, ft_lstnew(right));
+	ft_lstadd_front(&world->objects, ft_lstnew(left));
+
+	camera = create_camera(1000, 500, radians(180 / 2));
+	set_camera_transformation(camera, view_transform(
+		create_point(0, 1.5, -5),
+		create_point(0, 1, 0),
+		create_vector(0, 1, 0)
+	));
+
+	canvas = render(camera, world);
+	win = mlx_new_window(
+		canvas->mlx,
+		(int)round(camera->h_size),
+		(int)round(camera->v_size),
+		"uwu"
+	);
+	mlx_put_image_to_window(canvas->mlx, win, canvas->image, 0, 0);
+	mlx_loop(canvas->mlx);
+}
+
 void test_shape(void)
 {
 	RUN_TEST(test_shape_default_transform);
@@ -212,4 +284,6 @@ void test_shape(void)
 	RUN_TEST(test_intersect_plane_coplanar_ray);
 	RUN_TEST(test_ray_intersect_plane_from_above);
 	RUN_TEST(test_ray_intersect_plane_from_below);
+	// uncomment at your own risk
+	// RUN_TEST(test_print_three_spheres_and_plane);
 }
