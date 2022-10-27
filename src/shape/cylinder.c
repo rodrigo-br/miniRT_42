@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:17:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:44:38 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:27:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,34 @@ t_object	*create_cylinder(void)
 	cylinder->cylinder.diameter = 1.0;
 	cylinder->cylinder.min = -INFINITY;
 	cylinder->cylinder.max = INFINITY;
+	cylinder->cylinder.capped = FALSE;
 	cylinder->intersect = intersect_cylinder;
 	cylinder->get_normal = get_cylinder_normal;
 	return (cylinder);
+}
+
+t_bool	is_cap_within_radius(t_ray *ray, double time)
+{
+	double	x;
+	double	z;
+
+	x = ray->origin->x + (time * ray->direction->x);
+	z = ray->origin->z + (time * ray->direction->z);
+	return ((x * x) + (z * z) <= 1);
+}
+
+void	intersect_caps(t_object *cyl, t_ray *ray, t_intersect **head)
+{
+	double	time;
+
+	if (!cyl->cylinder.capped || fabs(ray->direction->y) < EPSILON)
+		return ;
+	time = (cyl->cylinder.min - ray->origin->y) / ray->direction->y;
+	if (is_cap_within_radius(ray, time))
+		intersection_sorted_insert(head, create_intersection(time, cyl));
+	time = (cyl->cylinder.max - ray->origin->y) / ray->direction->y;
+	if (is_cap_within_radius(ray, time))
+		intersection_sorted_insert(head, create_intersection(time, cyl));
 }
 
 void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
@@ -36,6 +61,7 @@ void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
 	double		y2;
 	t_bhaskara	bhaskara;
 
+	intersect_caps(cyl, ray, head);
 	bhaskara.a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
 	if (fabs(bhaskara.a) < EPSILON)
 		return ;

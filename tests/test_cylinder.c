@@ -6,11 +6,24 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:09:33 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:13:28 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:12:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tests.h>
+
+void	test_cylinder_creation(void)
+{
+	t_object	*cyl;
+
+	cyl = create_cylinder();
+	TEST_ASSERT_NOT_NULL(cyl);
+	TEST_ASSERT_EQUAL_DOUBLE(1.0, cyl->cylinder.diameter);
+	TEST_ASSERT_EQUAL_DOUBLE(-INFINITY, cyl->cylinder.min);
+	TEST_ASSERT_EQUAL_DOUBLE(INFINITY, cyl->cylinder.max);
+	TEST_ASSERT_FALSE(cyl->cylinder.capped);
+	destroy_shape(cyl);
+}
 
 /* Scenario Outline: A ray misses a cylinder
 Given cyl ← cylinder()
@@ -192,10 +205,71 @@ void	test_intersect_truncated_cylinder(void)
 	intersection_list_clear(&xs);
 }
 
+/* Scenario Outline: Intersecting the caps of a closed cylinder
+Given cyl ← cylinder()
+And cyl.minimum ← 1
+And cyl.maximum ← 2
+And cyl.closed ← true
+And direction ← normalize(<direction>)
+And r ← ray(<point>, direction)
+When xs ← local_intersect(cyl, r)
+Then xs.count = <count>
+Examples:
+|   | point            | direction        | count |
+| 1 | point(0, 3, 0)   | vector(0, -1, 0) | 2     |
+| 2 | point(0, 3, -2)  | vector(0, -1, 2) | 2     |
+| 3 | point(0, 4, -2)  | vector(0, -1, 1) | 2     | # corner case
+| 4 | point(0, 0, -2)  | vector(0, 1, 2)  | 2     |
+| 5 | point(0, -1, -2) | vector(0, 1, 1)  | 2     | # corner case */
+void	test_intersect_cylinder_caps(void)
+{
+	t_object	*cyl;
+	t_vector	*d1, *d2, *d3, *d4, *d5;
+	t_point		*o1, *o2, *o3, *o4, *o5;
+	t_ray		*r1, *r2, *r3, *r4, *r5;
+	t_intersect	*xs = NULL;
+
+	cyl = create_cylinder();
+	cyl->cylinder.min = 1;
+	cyl->cylinder.max = 2;
+	cyl->cylinder.capped = TRUE;
+	o1 = create_point(0, 3, 0);
+	o2 = create_point(0, 3, -2);
+	o3 = create_point(0, 4, -2);
+	o4 = create_point(0, 0, -2);
+	o5 = create_point(0, -1, -2);
+	d1 = normalize(&(t_vector){0, -1, 0, 0});
+	d2 = normalize(&(t_vector){0, -1, 2, 0});
+	d3 = normalize(&(t_vector){0, -1, 1, 0});
+	d4 = normalize(&(t_vector){0, 1, 2, 0});
+	d5 = normalize(&(t_vector){0, 1, 1, 0});
+	r1 = create_ray(o1, d1);
+	r2 = create_ray(o2, d2);
+	r3 = create_ray(o3, d3);
+	r4 = create_ray(o4, d4);
+	r5 = create_ray(o5, d5);
+	cyl->intersect(cyl, r1, &xs);
+	cyl->intersect(cyl, r2, &xs);
+	cyl->intersect(cyl, r3, &xs);
+	cyl->intersect(cyl, r4, &xs);
+	cyl->intersect(cyl, r5, &xs);
+	TEST_ASSERT_NOT_NULL(xs);
+	TEST_ASSERT_EQUAL(10, intersection_list_size(xs));
+	destroy_ray(r1);
+	destroy_ray(r2);
+	destroy_ray(r3);
+	destroy_ray(r4);
+	destroy_ray(r5);
+	destroy_shape(cyl);
+	intersection_list_clear(&xs);
+}
+
 void	test_cylinder(void)
 {
+	RUN_TEST(test_cylinder_creation);
 	RUN_TEST(test_ray_misses_cylinder);
 	RUN_TEST(test_ray_strikes_cylinder);
 	RUN_TEST(test_get_cylinder_normal);
 	RUN_TEST(test_intersect_truncated_cylinder);
+	RUN_TEST(test_intersect_cylinder_caps);
 }
