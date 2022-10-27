@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:28:00 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 20:04:28 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:04:38 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ t_object	*create_plane(void)
 	plane->intersect = intersect_plane;
 	plane->get_normal = get_plane_normal;
 	return (plane);
+}
+
+void	intersect_plane(t_object *plane, t_ray *ray, t_intersect **head)
+{
+	double	time;
+
+	if (fabs(ray->direction->y) < EPSILON)
+		return ;
+	time = -ray->origin->y / ray->direction->y;
+	intersection_sorted_insert(head, create_intersection(time, plane));
 }
 
 t_vector	*get_plane_normal(t_object *plane, t_point *point)
