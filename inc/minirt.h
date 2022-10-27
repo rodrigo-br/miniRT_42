@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:52:07 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:29:16 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,19 +125,22 @@ t_ray		*create_ray(t_point *origin, t_vector *direction);
 void		destroy_ray(t_ray *ray);
 t_ray		*transform_ray(t_ray *ray, t_matrix *matrix);
 
-t_object	*create_plane(void);
-t_object	*create_sphere(void);
 t_object	*create_shape(void);
+t_object	*create_sphere(void);
+t_object	*create_plane(void);
+t_object	*create_cylinder(void);
 void		destroy_shape(void *object);
 void		set_object_transformation(t_object *object, t_matrix *transform);
 
 t_point		*get_position(t_ray *ray, double time);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_vector	*get_plane_normal(t_object *plane, t_point *point);
+t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point);
 t_intersect	*get_hit(t_intersect *intersect);
 
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersect_plane(t_object *plane, t_ray *ray, t_intersect **head);
+void		intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersection_list_clear(t_intersect **list);
 size_t		intersection_list_size(t_intersect *list);
