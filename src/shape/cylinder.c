@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:17:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:27:13 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:41:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_bool	is_cap_within_radius(t_ray *ray, double time)
 
 	x = ray->origin->x + (time * ray->direction->x);
 	z = ray->origin->z + (time * ray->direction->z);
-	return ((x * x) + (z * z) <= 1);
+	return (((x * x) + (z * z)) <= 1);
 }
 
 void	intersect_caps(t_object *cyl, t_ray *ray, t_intersect **head)
@@ -84,6 +84,12 @@ void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
 
 t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point)
 {
-	(void)cylinder;
+	double	distance;
+
+	distance = (point->x * point->x) + (point->z * point->z);
+	if (distance < 1 && point->y >= cylinder->cylinder.max - EPSILON)
+		return (create_vector(0, 1, 0));
+	if (distance < 1 && point->y <= cylinder->cylinder.min + EPSILON)
+		return (create_vector(0, -1, 0));
 	return (create_vector(point->x, 0, point->z));
 }

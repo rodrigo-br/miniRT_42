@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:09:33 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:12:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:40:44 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,47 @@ void	test_intersect_cylinder_caps(void)
 	intersection_list_clear(&xs);
 }
 
+/*
+Scenario Outline: The normal vector on a cylinder's end caps
+Given cyl ← cylinder()
+And cyl.minimum ← 1
+And cyl.maximum ← 2
+And cyl.closed ← true
+When n ← local_normal_at(cyl, <point>)
+Then n = <normal>
+Examples:
+| point            | normal           |
+| point(0, 1, 0)   | vector(0, -1, 0) |
+| point(0.5, 1, 0) | vector(0, -1, 0) |
+| point(0, 1, 0.5) | vector(0, -1, 0) |
+| point(0, 2, 0)   | vector(0, 1, 0)  |
+| point(0.5, 2, 0) | vector(0, 1, 0)  |
+| point(0, 2, 0.5) | vector(0, 1, 0)  | */
+void	test_get_cylinder_caps_normal(void)
+{
+	t_object	*cyl;
+	t_vector	*n1, *n2, *n3, *n4, *n5, *n6;
+
+	cyl = create_cylinder();
+	cyl->cylinder.min = 1;
+	cyl->cylinder.max = 2;
+	cyl->cylinder.capped = TRUE;
+	n1 = cyl->get_normal(cyl, &(t_point){0, 1, 0, 1});
+	n2 = cyl->get_normal(cyl, &(t_point){0.5, 1, 0, 1});
+	n3 = cyl->get_normal(cyl, &(t_point){0, 1, 0.5, 1});
+	n4 = cyl->get_normal(cyl, &(t_point){0, 2, 0, 1});
+	n5 = cyl->get_normal(cyl, &(t_point){0.5, 2, 0, 1});
+	n6 = cyl->get_normal(cyl, &(t_point){0, 2, 0.5, 1});
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n1));
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n2));
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n3));
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n4));
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n5));
+	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n6));
+	destroy_shape(cyl);
+	free(n1); free(n2); free(n3); free(n4); free(n5); free(n6);
+}
+
 void	test_cylinder(void)
 {
 	RUN_TEST(test_cylinder_creation);
@@ -272,4 +313,5 @@ void	test_cylinder(void)
 	RUN_TEST(test_get_cylinder_normal);
 	RUN_TEST(test_intersect_truncated_cylinder);
 	RUN_TEST(test_intersect_cylinder_caps);
+	RUN_TEST(test_get_cylinder_caps_normal);
 }
