@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material_constructor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:05:27 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:21:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:43:04 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_material	*create_material(void)
 	material = (t_material *)malloc(sizeof(t_material));
 	if (!material)
 		return (NULL);
+	material->pattern = NULL;
 	material->color = create_color(1, 1, 1);
 	material->ambient = 0.1;
 	material->diffuse = 0.9;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_intersection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 21:25:50 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:43:44 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)
 	t_object	*current_obj;
 	t_list		*obj_list;
 	t_ray		*transformed;
-
 
 	obj_list = world->objects;
 	while (obj_list)

@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 16:15:10 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:40:48 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	main(void)
 	test_view_transformation();
 	test_camera();
 	test_shape();
+	test_patterns();
 	return (UNITY_END());
 }

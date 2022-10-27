@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:29:01 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:42:54 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ t_rgb	*lighting(t_lightattr *args)
 	t_rgb		*case_in_shadow;
 	double		light_dot;
 
+	if (args->material->pattern)
+	{
+		free(args->material->color);
+		args->material->color = pattern_at(
+				args->material->pattern, args->position);
+	}
 	eff = multiply_color(args->material->color, args->light_point->intensity);
 	if (args->in_shadow)
 	{

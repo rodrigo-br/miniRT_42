@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:57:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:58:11 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,20 @@ typedef struct s_cylinder
 	double	height;
 }	t_cylinder;
 
+typedef struct s_pattern
+{
+	t_rgb	*color_a;
+	t_rgb	*color_b;
+}	t_pattern;
+
 typedef struct s_material
 {
-	t_rgb	*color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
+	t_rgb		*color;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+	t_pattern	*pattern;
 }	t_material;
 
 typedef struct s_ray

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 09:38:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:36:54 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
