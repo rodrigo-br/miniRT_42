@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:18:42 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:31:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 12:53:24 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	destroy_material(t_material *material)
 {
 	if (material->pattern)
 		destroy_pattern(material->pattern);
-	else
-		free(material->color);
+	free(material->color);
 	free(material);
 }
 

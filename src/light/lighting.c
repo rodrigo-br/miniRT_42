@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:42:54 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:06:05 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ static t_rgb	*get_diffuse(
 }
 
 static t_rgb	*get_lighting(
-	t_lightattr *args, t_rgb *eff, t_vector *lightv, double light_dot)
+	t_lightattr *args, t_rgb *eff, t_vector *lightv)
 {
 	t_rgb	*ambient;
 	t_rgb	*diffuse;
 	t_rgb	*specular;
+	double	light_dot;
 
+	light_dot = dot_product(lightv, args->normal);
 	ambient = scalar_multiply_color(eff, args->material->ambient);
 	diffuse = get_diffuse(eff, light_dot, args->material->diffuse);
 	specular = get_specular(args, lightv, light_dot);
@@ -87,15 +89,13 @@ t_rgb	*lighting(t_lightattr *args)
 	t_vector	*light_vector;
 	t_rgb		*eff;
 	t_rgb		*case_in_shadow;
-	double		light_dot;
+	t_rgb		*color;
 
 	if (args->material->pattern)
-	{
-		free(args->material->color);
-		args->material->color = pattern_at(
-				args->material->pattern, args->position);
-	}
-	eff = multiply_color(args->material->color, args->light_point->intensity);
+		color = pattern_at(args->material->pattern, args->position);
+	else
+		color = args->material->color;
+	eff = multiply_color(color, args->light_point->intensity);
 	if (args->in_shadow)
 	{
 		case_in_shadow = scalar_multiply_color(eff, args->material->ambient);
@@ -105,6 +105,5 @@ t_rgb	*lighting(t_lightattr *args)
 	aux = sub_tuple(args->light_point->position, args->position);
 	light_vector = normalize(aux);
 	free(aux);
-	light_dot = dot_product(light_vector, args->normal);
-	return (get_lighting(args, eff, light_vector, light_dot));
+	return (get_lighting(args, eff, light_vector));
 }

@@ -157,6 +157,56 @@ void	test_pattern_lightning_with_pattern(void)
 	free(color);
 }
 
+/*
+Scenario: Stripes with an object transformation
+Given object ← sphere()
+And set_transform(object, scaling(2, 2, 2))
+And pattern ← stripe_pattern(white, black)
+When c ← stripe_at_object(pattern, object, point(1.5, 0, 0))
+Then c = white
+*/
+void test_pattern_with_object_transformation(void)
+{
+	t_object	*object;
+	t_pattern	*pattern;
+	t_rgb		*color;
+
+	object = create_sphere();
+	set_object_transformation(object, scale_matrix(2, 2, 2));
+	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
+	color = pattern_at_obj(pattern, &(t_point){1.5, 0, 0, 1}, object);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	destroy_pattern(pattern);
+	destroy_shape(object);
+}
+
+/*
+Scenario: Stripes with a pattern transformation
+Given object ← sphere()
+And pattern ← stripe_pattern(white, black)
+And set_pattern_transform(pattern, scaling(2, 2, 2))
+When c ← stripe_at_object(pattern, object, point(1.5, 0, 0))
+Then c = white
+*/
+void	test_pattern_with_pattern_transformation(void)
+{
+	t_object	*object;
+	t_pattern	*pattern;
+	t_rgb		*color;
+
+	object = create_sphere();
+	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
+	set_pattern_transformation(pattern, scale_matrix(2, 2, 2));
+	color = pattern_at_obj(pattern, &(t_point){1.5, 0, 0, 1}, object);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
+	destroy_pattern(pattern);
+	destroy_shape(object);
+}
+
 void test_patterns(void)
 {
 	RUN_TEST(test_create_pattern);
@@ -164,4 +214,6 @@ void test_patterns(void)
 	RUN_TEST(test_pattern_constant_z);
 	RUN_TEST(test_pattern_alternate_x);
 	RUN_TEST(test_pattern_lightning_with_pattern);
+	RUN_TEST(test_pattern_with_object_transformation);
+	RUN_TEST(test_pattern_with_pattern_transformation);
 }

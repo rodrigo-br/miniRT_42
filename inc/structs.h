@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 11:58:11 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:19:16 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,9 @@ typedef struct s_cylinder
 
 typedef struct s_pattern
 {
-	t_rgb	*color_a;
-	t_rgb	*color_b;
+	t_rgb		*color_a;
+	t_rgb		*color_b;
+	t_matrix	*transformation;
 }	t_pattern;
 
 typedef struct s_material
