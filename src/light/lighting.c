@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:06:05 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:41:33 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ t_rgb	*lighting(t_lightattr *args)
 	t_rgb		*color;
 
 	if (args->material->pattern)
-		color = pattern_at(args->material->pattern, args->position);
+		color = pattern_at_obj(
+				args->material->pattern, args->position, args->object);
 	else
 		color = args->material->color;
 	eff = multiply_color(color, args->light_point->intensity);

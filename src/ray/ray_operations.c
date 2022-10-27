@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 11:14:43 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:44:58 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_rgb	*shade_hit(t_world *world, t_comp *comps)
 	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->point);
 	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
 	light_attr->in_shadow = in_shadow;
+	light_attr->object = comps->object;
 	color = lighting(light_attr);
 	free(light_attr);
 	return (color);

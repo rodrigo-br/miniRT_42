@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:18:42 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:53:24 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:50:21 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	destroy_light_point(void *light_point)
 
 void	destroy_lightattr(t_lightattr *attributes)
 {
+	if (attributes->object)
+		destroy_shape(attributes->object);
 	destroy_material(attributes->material);
 	destroy_light_point(attributes->light_point);
 	free(attributes->camera);

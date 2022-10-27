@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 13:19:16 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:40:34 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct s_position_attributes
 typedef struct s_light_attributes
 {
 	t_light_pnt	*light_point;
+	t_object	*object;
 	t_vector	*camera;
 	t_vector	*normal;
 	t_point		*position;

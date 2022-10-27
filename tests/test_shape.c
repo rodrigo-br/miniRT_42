@@ -215,20 +215,24 @@ void	test_print_three_spheres_and_plane(void)
 	void		*win;
 
 	floor = create_plane();
+	floor->material->pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
 
 	backdrop = create_plane();
+	backdrop->material->pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
 	aux = translate_matrix(0, 0, 10);
 	set_object_transformation(backdrop, multiply_matrix(aux, rotate_matrix_x(M_PI / 2)));
 	free(aux);
 	set_color(backdrop->material->color, 1, 0, 0);
 
 	middle = create_sphere();
+	middle->material->pattern = create_pattern(create_color(1, 0, 1), create_color(0, 0, 0));
 	set_object_transformation(middle, translate_matrix(-0.5, 1, 0.5));
 	set_color(middle->material->color, 0.1, 1, 0.5);
 	middle->material->diffuse = 0.7;
 	middle->material->specular = 0.3;
 
 	right = create_sphere();
+	right->material->pattern = middle->material->pattern = create_pattern(create_color(0, 0, 1), create_color(0, 0, 0));
 	aux = translate_matrix(1.5, 0.5, -0.5);
 	set_object_transformation(right, multiply_matrix(aux, scale_matrix(0.5, 0.5, 0.5)));
 	free(aux);
