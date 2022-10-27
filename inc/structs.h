@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 13:05:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:10:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,21 @@ typedef struct s_cylinder
 	t_bool	capped;
 }	t_cylinder;
 
+typedef struct s_pattern
+{
+	t_rgb		*color_a;
+	t_rgb		*color_b;
+	t_matrix	*transformation;
+}	t_pattern;
+
 typedef struct s_material
 {
-	t_rgb	*color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
+	t_rgb		*color;
+	double		ambient;
+	double		diffuse;
+	double		specular;
+	double		shininess;
+	t_pattern	*pattern;
 }	t_material;
 
 typedef struct s_ray
@@ -192,6 +200,7 @@ typedef struct s_position_attributes
 typedef struct s_light_attributes
 {
 	t_light_pnt	*light_point;
+	t_object	*object;
 	t_vector	*camera;
 	t_vector	*normal;
 	t_point		*position;

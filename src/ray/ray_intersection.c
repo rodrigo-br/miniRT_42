@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 16:12:44 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:04:44 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:10:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	intersect_world(t_world *world, t_ray *ray, t_intersect **head)
 	t_object	*current_obj;
 	t_list		*obj_list;
 	t_ray		*transformed;
-
 
 	obj_list = world->objects;
 	while (obj_list)
