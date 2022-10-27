@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 14:31:15 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:45:17 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ t_ray	*transform_ray(t_ray *ray, t_matrix *matrix)
 
 t_intersect	*get_hit(t_intersect *intersect)
 {
-	t_intersect	*_hit;
-
-	_hit = NULL;
 	while (intersect)
 	{
-		if ((!_hit || _hit->time > intersect->time) && intersect->time > 0)
-			_hit = intersect;
+		if (intersect->time - EPSILON > 0.0)
+			return (intersect);
 		intersect = intersect->next;
 	}
-	return (_hit);
+	return (NULL);
 }
 
 t_rgb	*shade_hit(t_world *world, t_comp *comps)

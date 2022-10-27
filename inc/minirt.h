@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 17:26:20 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:33:10 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ t_object	*create_shape(void);
 t_object	*create_sphere(void);
 t_object	*create_plane(void);
 t_object	*create_cylinder(void);
+t_object	*create_cone(void);
 void		destroy_shape(void *object);
 void		set_object_transformation(t_object *object, t_matrix *transform);
 

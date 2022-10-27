@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 11:09:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:34:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	test_view_transformation(void);
 void	test_camera(void);
 void	test_shape(void);
 void	test_cylinder(void);
+void	test_patterns(void);
+void	test_cone(void);
 
 /* Utils */
 double	double_rand();

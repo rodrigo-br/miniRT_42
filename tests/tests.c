@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 17:27:24 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 17:34:26 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int	main(void)
 	test_shape();
 	test_cylinder();
 	test_patterns();
+	test_cone();
 	return (UNITY_END());
 }

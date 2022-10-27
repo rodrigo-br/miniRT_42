@@ -18,7 +18,7 @@ PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
-COLOR	= color_constructor.c color_operations.c patterns.c 
+COLOR	= color_constructor.c color_operations.c patterns.c
 CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 		matrix_transformations.c matrix_rotations.c matrix_view_transform.c
@@ -27,7 +27,8 @@ UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_c
 		radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
-SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c sphere.c plane.c cylinder.c
+SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c \
+		sphere.c plane.c cylinder.c cone.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c \
 		is_shadowed.c
 WORLD	= world_constructor.c world_destructor.c world_computations.c
