@@ -68,9 +68,9 @@ void	test_parser_only_1_each_unique_element(void)
 			TEST_ASSERT_EQUAL_DOUBLE(250.0 / 255.0, obj->rgb->red);
 			TEST_ASSERT_EQUAL_DOUBLE(200.0 / 255.0, obj->rgb->green);
 			TEST_ASSERT_EQUAL_DOUBLE(225.0 / 255.0, obj->rgb->blue);
-			TEST_ASSERT_EQUAL_DOUBLE(0.3, obj->plane.x_3d);
-			TEST_ASSERT_EQUAL_DOUBLE(0.1, obj->plane.y_3d);
-			TEST_ASSERT_EQUAL_DOUBLE(-1, obj->plane.z_3d);
+			TEST_ASSERT_EQUAL_DOUBLE(0.3, obj->plane.orientation.x);
+			TEST_ASSERT_EQUAL_DOUBLE(0.1, obj->plane.orientation.y);
+			TEST_ASSERT_EQUAL_DOUBLE(-1, obj->plane.orientation.z);
 		}
 		aux = aux->next;
 	}
