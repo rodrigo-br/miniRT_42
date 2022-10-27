@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material_constructor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:05:27 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:21:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:50:07 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_material	*create_material(void)
 	material = (t_material *)malloc(sizeof(t_material));
 	if (!material)
 		return (NULL);
+	material->pattern = NULL;
 	material->color = create_color(1, 1, 1);
 	material->ambient = 0.1;
 	material->diffuse = 0.9;
@@ -59,6 +60,7 @@ t_lightattr	*create_lightattr(t_light_pnt *lp, t_pos_attr *pos, t_material *m)
 	attributes = (t_lightattr *)malloc(sizeof(t_lightattr));
 	if (!attributes)
 		return (NULL);
+	attributes->object = NULL;
 	attributes->light_point = lp;
 	attributes->camera = pos->camera;
 	attributes->normal = pos->normal;

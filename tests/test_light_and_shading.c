@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_light_and_shading.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:50:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:52:50 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ void	test_lighting_surface_in_shadow(void)
 		create_material()
 	);
 	args->in_shadow = TRUE;
+	args->object = create_sphere();
 	result = lighting(args);
 	TEST_ASSERT_NOT_NULL(result);
 	TEST_ASSERT_TRUE(is_equal_double(0.1, result->red));

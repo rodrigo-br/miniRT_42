@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:52:07 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:35:24 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,4 +172,11 @@ void		destroy_camera(t_cam *camera);
 void		set_camera_transformation(t_cam	*camera, t_matrix *transform);
 t_canvas	*render(t_cam *camera, t_world *world);
 
+/* Pattern */
+t_pattern	*create_pattern(t_rgb *a, t_rgb *b);
+t_rgb		*pattern_at(t_pattern *pattern, t_point	*point);
+void		destroy_pattern(t_pattern *pattern);
+void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
+t_rgb		*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj);
+void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
 #endif /* MINIRT_H */
