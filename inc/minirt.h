@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 17:26:20 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:40:39 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
-# define AMBIENT 'A'
-# define CAMERA 'C'
-# define LIGHT	'L'
+# define AMBIENT "A"
+# define CAMERA "C"
+# define LIGHT	"L"
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
