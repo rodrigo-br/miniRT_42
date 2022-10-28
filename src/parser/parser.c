@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 21:26:46 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/28 09:40:19 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	parse_line(char **line_splited, t_scene *scene)
 	int	errors;
 
 	errors = 0;
-	if (line_splited[0][0] == LIGHT && !scene->light)
+	if (!ft_strcmp(line_splited[0], LIGHT) && !scene->light)
 		errors = check_light(line_splited, &scene->light);
-	else if (line_splited[0][0] == AMBIENT && !scene->ambience)
+	else if (!ft_strcmp(line_splited[0], AMBIENT) && !scene->ambience)
 		errors = check_ambient(line_splited, &scene->ambience);
-	else if (line_splited[0][0] == CAMERA && !scene->camera)
+	else if (!ft_strcmp(line_splited[0], CAMERA) && !scene->camera)
 		errors = check_camera(line_splited, &scene->camera);
 	else if (!ft_strcmp(line_splited[0], SPHERE))
 		errors = check_sphere(line_splited, &scene->objects);
