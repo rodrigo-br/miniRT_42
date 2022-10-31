@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 11:35:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:36:53 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_pattern
 	t_rgb		*color_a;
 	t_rgb		*color_b;
 	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
 }	t_pattern;
 
 typedef struct s_material

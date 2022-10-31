@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 10:53:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:45:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ t_pattern	*create_pattern(t_rgb *a, t_rgb *b);
 t_rgb		*pattern_at(t_pattern *pattern, t_point	*point);
 void		destroy_pattern(t_pattern *pattern);
 void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
-t_rgb		*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj);
+t_rgb		*pattern_at_obj(t_pattern *pat, t_point *point, t_object *obj);
 void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
+
 #endif /* MINIRT_H */
