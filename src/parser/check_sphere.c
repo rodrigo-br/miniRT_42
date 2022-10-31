@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 14:30:47 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:42:33 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 	set_color(object->material->color, (ft_atod(rgb[0]) / 255), \
 							(ft_atod(rgb[1]) / 255), (ft_atod(rgb[2]) / 255));
 	object->sphere.diameter = ft_atod(s);
+	set_object_transformation(object, scale_matrix(
+		object->sphere.diameter, object->sphere.diameter, object->sphere.diameter));
 	ft_free_matrix((void *)&coordinates);
 	ft_free_matrix((void *)&rgb);
 	return (object);

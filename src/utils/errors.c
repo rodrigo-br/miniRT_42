@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:44:10 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 11:59:37 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:20:42 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	errors(int argc, char **argv, int *fd)
 		perror(file);
 		return (EXIT_FAILURE);
 	}
+	ft_free_matrix((void *)&argv);
 	return (EXIT_SUCCESS);
 }
