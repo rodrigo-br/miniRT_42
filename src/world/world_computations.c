@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:25:08 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 10:49:11 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:35:24 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,10 @@ t_comp	*prepare_computation(t_intersect *i, t_ray *ray)
 	comps->normal = normal_at(comps->object, comps->point);
 	if (dot_product(comps->normal, comps->camera) < 0)
 	{
-		comps->inside = TRUE;
 		aux = comps->normal;
 		comps->normal = neg_tuple(comps->normal);
 		free(aux);
 	}
-	else
-		comps->inside = FALSE;
 	aux = scalar_multiply_tuple(comps->normal, EPSILON);
 	comps->over_point = sum_tuple(comps->point, aux);
 	free(aux);
