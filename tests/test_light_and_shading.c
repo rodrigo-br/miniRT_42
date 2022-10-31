@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_light_and_shading.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:52:50 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:06:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	test_normalat_translated_sphere(void)
 
 	sphere = create_sphere();
 	set_object_transformation(sphere, translate_matrix(0, 1, 0));
-	normal = get_sphere_normal(sphere, &(t_point){0, 1.70711, -0.70711, 1});
+	normal = normal_at(sphere, &(t_point){0, 1.70711, -0.70711, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.70711, -0.70711, 0}, normal));
 	destroy_shape(sphere);
 	free(normal);
@@ -98,7 +98,7 @@ void	test_normalat_scaled_sphere(void)
 	scale = scale_matrix(1, 0.5, 1);
 	rotate = rotate_matrix_z(radians(180 / 5));
 	set_object_transformation(sphere, multiply_matrix(scale, rotate));
-	normal = get_sphere_normal(sphere, &(t_point){0, sqrt(2)/2, -sqrt(2)/2, 1});
+	normal = normal_at(sphere, &(t_point){0, sqrt(2)/2, -sqrt(2)/2, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0.97014, -0.24254, 0}, normal));
 	destroy_shape(sphere);
 	free(normal);

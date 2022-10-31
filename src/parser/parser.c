@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 18:39:46 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 20:02:04 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	generate_world(t_scene *scene)
 	t_light_pnt	*lp;
 	t_cam		*camera;
 	t_canvas	*canvas;
+	t_point		*f;
 
 	lp = create_light_point(
 			create_point(scene->light->x, scene->light->y, scene->light->z), \
@@ -67,9 +68,10 @@ void	generate_world(t_scene *scene)
 	world->light_point = ft_lstnew(lp);
 	generate_objects(world, scene);
 	camera = create_camera(1000, 500, radians(scene->camera->fov));
+	f = normalize(&(t_point){scene->camera->x_3d, scene->camera->y_3d, scene->camera->z_3d, 1});
 	set_camera_transformation(camera, view_transform(
 		&(t_point){scene->camera->view_x, scene->camera->view_y, scene->camera->view_z, 1},
-		&(t_point){scene->camera->x_3d, scene->camera->y_3d, scene->camera->z_3d, 1},
+		f,
 		&(t_vector){0, 1, 0, 0}
 	));
 	canvas = render(camera, world);

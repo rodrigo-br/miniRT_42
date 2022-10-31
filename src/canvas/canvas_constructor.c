@@ -6,11 +6,17 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:08:24 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/25 22:02:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:05:04 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+static void	destroy_mlx(void *mlx)
+{
+	mlx_destroy_display(mlx);
+	free(mlx);
+}
 
 t_canvas	*create_canvas(double height, double width)
 {
@@ -22,11 +28,11 @@ t_canvas	*create_canvas(double height, double width)
 	canvas->mlx = mlx_init();
 	if (!canvas->mlx)
 		return (free(canvas), NULL);
-	canvas->image = mlx_new_image(canvas->mlx,
-			(int)round(width), (int)round(height));
+	canvas->image = \
+	mlx_new_image(canvas->mlx, (int)round(width), (int)round(height));
 	if (!canvas->image)
 	{
-		free(canvas->mlx);
+		destroy_mlx(canvas->mlx);
 		return (free(canvas), NULL);
 	}
 	canvas->address = mlx_get_data_addr(canvas->image, &canvas->bits_per_pixel,
@@ -34,7 +40,7 @@ t_canvas	*create_canvas(double height, double width)
 	if (!canvas->address)
 	{
 		mlx_destroy_image(canvas->mlx, canvas->image);
-		free(canvas->mlx);
+		destroy_mlx(canvas->mlx);
 		return (free(canvas), NULL);
 	}
 	return (canvas);
