@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/28 09:40:39 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:47:31 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,8 @@ void		destroy_pattern(t_pattern *pattern);
 void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
 t_rgb		*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj);
 void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
+
+/* Test */
+int			sub_main(int argc, char **argv);
+
 #endif /* MINIRT_H */

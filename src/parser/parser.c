@@ -6,11 +6,29 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/28 09:40:19 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:04:53 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+int	sub_main(int argc, char **argv)
+{
+	t_scene	*scene;
+	int		fd;
+
+	if (errors(argc, argv, &fd))
+		return (EXIT_FAILURE);
+	scene = (t_scene *)ft_calloc(1, sizeof(t_scene));
+	if (parser_1(fd, scene))
+		return (EXIT_FAILURE);
+	if (!scene->camera || !scene->ambience || !scene->light)
+	{
+		free_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	parse_line(char **line_splited, t_scene *scene)
 {
