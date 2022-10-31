@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:08:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 19:42:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:37:55 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	test_get_cone_normal(void)
 */
 void	test_print_cylinder_and_cone(void)
 {
-	t_object	*floor, *backdrop, *cyl, *cone;
+	t_object	*floor, *backdrop, *cyl, *cone, *sph;
 	t_matrix	*aux;
 	t_world		*world;
 	t_cam		*camera;
@@ -178,17 +178,25 @@ void	test_print_cylinder_and_cone(void)
 	free(aux);
 	set_color(backdrop->material->color, 1, 0, 0);
 
-	// cyl = create_cylinder();
-	// set_color(cyl->material->color, 1, 0, 1);
+	sph = create_sphere();
+	set_color(sph->material->color, 1, 0, 0);
+	set_object_transformation(sph, translate_matrix(-2, 1, 0));
+
+	cyl = create_cylinder();
+	set_color(cyl->material->color, 1, 0, 1);
+	set_object_transformation(cyl, translate_matrix(2, 0.7, 0));
+	cyl->material->specular = 1.0;
 	// cyl->cylinder.min = 0;
-	// cyl->cylinder.max = 0.2;
+	cyl->cylinder.max = 2;
 	// cyl->cylinder.capped = TRUE;
 
 	cone = create_cone();
-	set_color(cone->material->color, 1, 0, 1);
-	set_object_transformation(cone, translate_matrix(0, 2, 0));
-	cone->cone.min = -2;
-	cone->cone.max = 0;
+	set_color(cone->material->color, 1, 1, 1);
+	aux = rotate_matrix_x(0.4);
+	set_object_transformation(cone, multiply_matrix(aux, translate_matrix(0, 1, 0)));
+	cone->material->specular = 1.0;
+	cone->cone.min = 0;
+	cone->cone.max = 2;
 	cone->cone.capped = TRUE;
 
 	world = create_world();
@@ -197,11 +205,12 @@ void	test_print_cylinder_and_cone(void)
 			create_color(1, 1, 1)
 		));
 	ft_lstadd_front(&world->objects, ft_lstnew(floor));
-	ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
-	// ft_lstadd_front(&world->objects, ft_lstnew(cyl));
+	// ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
+	ft_lstadd_front(&world->objects, ft_lstnew(cyl));
+	ft_lstadd_front(&world->objects, ft_lstnew(sph));
 	ft_lstadd_front(&world->objects, ft_lstnew(cone));
 
-	camera = create_camera(1000, 500, radians(180 / 2));
+	camera = create_camera(1000, 500, radians(90));
 	set_camera_transformation(camera, view_transform(
 		create_point(0, 1.5, -5),
 		create_point(0, 1, 0),
@@ -226,5 +235,5 @@ void	test_cone(void)
 	RUN_TEST(test_intersect_cone_caps);
 	RUN_TEST(test_get_cone_normal);
 	// uncomment at your own risk
-	// RUN_TEST(test_print_cylinder_and_cone);
+	RUN_TEST(test_print_cylinder_and_cone);
 }

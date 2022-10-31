@@ -99,9 +99,9 @@ void	test_check_normal_of_a_plane(void)
 	t_vector	*n1, *n2, *n3;
 
 	plane = create_plane();
-	n1 = plane->get_normal(plane, &(t_point){0, 0, 0, 1});
-	n2 = plane->get_normal(plane, &(t_point){10, 0, -10, 1});
-	n3 = plane->get_normal(plane, &(t_point){-5, 0, 150, 1});
+	n1 = normal_at(plane, &(t_point){0, 0, 0, 1});
+	n2 = normal_at(plane, &(t_point){10, 0, -10, 1});
+	n3 = normal_at(plane, &(t_point){-5, 0, 150, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n1));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n2));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 1, 0, 0}, n3));
@@ -220,7 +220,7 @@ void	test_print_three_spheres_and_plane(void)
 	backdrop = create_plane();
 	backdrop->material->pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
 	aux = translate_matrix(0, 0, 10);
-	set_object_transformation(backdrop, multiply_matrix(aux, rotate_matrix_x(M_PI / 2)));
+	set_object_transformation(backdrop, multiply_matrix(aux, rotate_matrix_x(radians(90))));
 	free(aux);
 	set_color(backdrop->material->color, 1, 0, 0);
 
@@ -245,8 +245,6 @@ void	test_print_three_spheres_and_plane(void)
 	set_object_transformation(left, multiply_matrix(aux, scale_matrix(0.33, 0.33, 0.33)));
 	free(aux);
 	set_color(left->material->color, 1, 0.8, 0.1);
-	left->material->diffuse = 0.7;
-	left->material->specular = 0.3;
 
 	world = create_world();
 	world->light_point = ft_lstnew(create_light_point(
@@ -254,7 +252,7 @@ void	test_print_three_spheres_and_plane(void)
 			create_color(1, 1, 1)
 		));
 	ft_lstadd_front(&world->objects, ft_lstnew(floor));
-	// ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
+	ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
 	ft_lstadd_front(&world->objects, ft_lstnew(middle));
 	ft_lstadd_front(&world->objects, ft_lstnew(right));
 	ft_lstadd_front(&world->objects, ft_lstnew(left));

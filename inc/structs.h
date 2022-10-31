@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 17:33:54 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:08:45 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_pattern
 	t_rgb		*color_a;
 	t_rgb		*color_b;
 	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
 }	t_pattern;
 
 typedef struct s_material
@@ -226,7 +227,6 @@ typedef struct s_comp
 	t_vector	*normal;
 	t_vector	*camera;
 	t_point		*over_point;
-	t_bool		inside;
 }	t_comp;
 
 typedef struct s_cam

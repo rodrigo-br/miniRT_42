@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 17:33:10 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:07:59 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void		destroy_shape(void *object);
 void		set_object_transformation(t_object *object, t_matrix *transform);
 
 t_point		*get_position(t_ray *ray, double time);
+t_vector	*normal_at(t_object *shape, t_point *point);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_vector	*get_plane_normal(t_object *plane, t_point *point);
 t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point);
@@ -181,6 +182,7 @@ t_pattern	*create_pattern(t_rgb *a, t_rgb *b);
 t_rgb		*pattern_at(t_pattern *pattern, t_point	*point);
 void		destroy_pattern(t_pattern *pattern);
 void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
-t_rgb		*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj);
+t_rgb		*pattern_at_obj(t_pattern *pat, t_point *point, t_object *obj);
 void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
+
 #endif /* MINIRT_H */

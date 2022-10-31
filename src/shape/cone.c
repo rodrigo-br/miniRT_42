@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:56:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 16:45:59 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:26:02 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	intersect_caps_cone(t_object *cone, t_ray *ray, t_intersect **head)
 {
 	double	time;
 
-	if (!cone->cone.capped || fabs(ray->direction->y) < EPSILON)
+	if (!cone->cone.capped || is_equal_double(0.0, ray->direction->y))
 		return ;
 	time = (cone->cone.min - ray->origin->y) / ray->direction->y;
 	if (is_cap_within_radius_cone(ray, time, cone->cone.min))
@@ -72,9 +72,9 @@ t_vector	*get_cone_normal(t_object *cone, t_point *point)
 	double	y;
 
 	distance = (point->x * point->x) + (point->z * point->z);
-	if (distance < 1 && point->y >= cone->cone.max - EPSILON)
+	if (distance < 1 && point->y >= (cone->cone.max - EPSILON))
 		return (create_vector(0, 1, 0));
-	if (distance < 1 && point->y <= cone->cone.min + EPSILON)
+	if (distance < 1 && point->y <= (cone->cone.min + EPSILON))
 		return (create_vector(0, -1, 0));
 	y = sqrt((point->x * point->x) + (point->z * point->z));
 	if (point->y > 0.0)
