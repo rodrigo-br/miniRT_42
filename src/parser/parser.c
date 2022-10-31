@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 12:04:53 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:37:02 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	sub_main(int argc, char **argv)
 	scene = (t_scene *)ft_calloc(1, sizeof(t_scene));
 	if (parser_1(fd, scene))
 		return (EXIT_FAILURE);
-	if (!scene->camera || !scene->ambience || !scene->light)
-	{
-		free_scene(scene);
-		return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }
 
@@ -76,7 +71,7 @@ int	parser_1(int fd, t_scene *scene)
 		}
 		line = ft_gnl(fd, FALSE);
 	}
-	if (errors)
+	if (errors || !scene->camera || !scene->ambience || !scene->light)
 		return (free_scene(scene), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
