@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/26 19:50:07 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 14:55:14 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,20 @@ t_object	*set_plane(char **coordinates, char **rgb, char *s)
 	char		**ori_3d;
 
 	ori_3d = ft_split(s, ',');
-	object = (t_object *)malloc(sizeof(t_object));
+	object = create_plane();
 	if (fail_mallocs(ori_3d, object))
 	{
 		ft_free_matrix((void *)&coordinates);
 		ft_free_matrix((void *)&rgb);
 		return (NULL);
 	}
-	object->type = ID_PLANE;
-	object->x = ft_atod(coordinates[0]);
-	object->y = ft_atod(coordinates[1]);
-	object->z = ft_atod(coordinates[2]);
-	object->rgb = create_color(ft_atod(rgb[0]) / 255, \
-								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
-	object->plane.orientation.x = ft_atod(ori_3d[0]);
-	object->plane.orientation.y = ft_atod(ori_3d[1]);
-	object->plane.orientation.z = ft_atod(ori_3d[2]);
+	set_color(object->material->color, (ft_atod(rgb[0]) / 255), \
+							(ft_atod(rgb[1]) / 255), (ft_atod(rgb[2]) / 255));
+	set_object_transformation(object, translate_matrix(
+		ft_atod(coordinates[0]), ft_atod(coordinates[1]), ft_atod(coordinates[2])));
+	set_object_transformation(object, rotate_matrix_x(ft_atod(ori_3d[0])));
+	set_object_transformation(object, rotate_matrix_y(ft_atod(ori_3d[1])));
+	set_object_transformation(object, rotate_matrix_z(ft_atod(ori_3d[2])));
 	ft_free_matrix((void *)&ori_3d);
 	return (object);
 }

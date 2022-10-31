@@ -37,9 +37,18 @@ void	sub_main_test_invalid_files(void)
 	ft_free_matrix((void *)&argv);
 }
 
+void	sub_main_valid_scene(void)
+{
+	char **argv = ft_split("./miniRT ../rt_files/many_obj.rt", ' ');
+
+	TEST_ASSERT_EQUAL_INT(0, sub_main(2, argv));
+	ft_free_matrix((void *)&argv);
+}
+
 void test_sub_main(void)
 {
-	RUN_TEST(sub_main_inexistent_file);
-	RUN_TEST(sub_main_empty_file);
-	RUN_TEST(sub_main_test_invalid_files);
+	// RUN_TEST(sub_main_inexistent_file);
+	// RUN_TEST(sub_main_empty_file);
+	// RUN_TEST(sub_main_test_invalid_files);
+	RUN_TEST(sub_main_valid_scene);
 }

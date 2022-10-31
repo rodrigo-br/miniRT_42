@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:22:25 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/24 20:29:47 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:00:34 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,22 @@ t_object	*set_cylinder(char **coordinates, char **rgb, char **line_splited)
 	char		**ori_3d;
 
 	ori_3d = ft_split(line_splited[0], ',');
-	object = (t_object *)malloc(sizeof(t_object));
+	object = create_cylinder();
 	if (fail_mallocs(ori_3d, object))
 	{
 		ft_free_matrix((void *)&coordinates);
 		ft_free_matrix((void *)&rgb);
 		return (NULL);
 	}
-	object->type = ID_CYLINDER;
-	object->x = ft_atod(coordinates[0]);
-	object->y = ft_atod(coordinates[1]);
-	object->z = ft_atod(coordinates[2]);
-	object->rgb = create_color(ft_atod(rgb[0]) / 255, \
-								ft_atod(rgb[1]) / 255, ft_atod(rgb[2]) / 255);
-	object->cylinder.x_3d = ft_atod(ori_3d[0]);
-	object->cylinder.y_3d = ft_atod(ori_3d[1]);
-	object->cylinder.z_3d = ft_atod(ori_3d[2]);
-	object->cylinder.diameter = ft_atod(line_splited[1]);
-	object->cylinder.height = ft_atod(line_splited[2]);
+	set_object_transformation(object, translate_matrix(
+		ft_atod(coordinates[0]), ft_atod(coordinates[1]), ft_atod(coordinates[2])));
+	set_color(object->material->color, (ft_atod(rgb[0]) / 255), \
+							(ft_atod(rgb[1]) / 255), (ft_atod(rgb[2]) / 255));
+	// object->cylinder.diameter = ft_atod(line_splited[1]);
+	// object->cylinder.height = ft_atod(line_splited[2]);
+	// set_object_transformation(object, rotate_matrix_x(ft_atod(ori_3d[0])));
+	// set_object_transformation(object, rotate_matrix_y(ft_atod(ori_3d[1])));
+	// set_object_transformation(object, rotate_matrix_z(ft_atod(ori_3d[2])));
 	ft_free_matrix((void *)&ori_3d);
 	ft_free_matrix((void *)&rgb);
 	return (object);
