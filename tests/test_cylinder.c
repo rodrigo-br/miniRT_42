@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:09:33 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:40:44 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:55:19 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,10 @@ void	test_get_cylinder_normal(void)
 	t_vector	*n1, *n2, *n3, *n4;
 
 	cyl = create_cylinder();
-	n1 = cyl->get_normal(cyl, &(t_point){1, 0, 0, 1});
-	n2 = cyl->get_normal(cyl, &(t_point){0, 5, -1, 1});
-	n3 = cyl->get_normal(cyl, &(t_point){0, -2, 1, 1});
-	n4 = cyl->get_normal(cyl, &(t_point){-1, 1, 0, 1});
+	n1 = normal_at(cyl, &(t_point){1, 0, 0, 1});
+	n2 = normal_at(cyl, &(t_point){0, 5, -1, 1});
+	n3 = normal_at(cyl, &(t_point){0, -2, 1, 1});
+	n4 = normal_at(cyl, &(t_point){-1, 1, 0, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){1, 0, 0, 0}, n1));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0, -1, 0}, n2));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0, 1, 0}, n3));
@@ -289,12 +289,12 @@ void	test_get_cylinder_caps_normal(void)
 	cyl->cylinder.min = 1;
 	cyl->cylinder.max = 2;
 	cyl->cylinder.capped = TRUE;
-	n1 = cyl->get_normal(cyl, &(t_point){0, 1, 0, 1});
-	n2 = cyl->get_normal(cyl, &(t_point){0.5, 1, 0, 1});
-	n3 = cyl->get_normal(cyl, &(t_point){0, 1, 0.5, 1});
-	n4 = cyl->get_normal(cyl, &(t_point){0, 2, 0, 1});
-	n5 = cyl->get_normal(cyl, &(t_point){0.5, 2, 0, 1});
-	n6 = cyl->get_normal(cyl, &(t_point){0, 2, 0.5, 1});
+	n1 = normal_at(cyl, &(t_point){0, 1, 0, 1});
+	n2 = normal_at(cyl, &(t_point){0.5, 1, 0, 1});
+	n3 = normal_at(cyl, &(t_point){0, 1, 0.5, 1});
+	n4 = normal_at(cyl, &(t_point){0, 2, 0, 1});
+	n5 = normal_at(cyl, &(t_point){0.5, 2, 0, 1});
+	n6 = normal_at(cyl, &(t_point){0, 2, 0.5, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n1));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n2));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n3));
