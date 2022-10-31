@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 20:06:24 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/10/31 17:05:58 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ t_rgb	*color_at(t_world *world, t_ray *ray)
 	intersect_world(world, ray, &xs);
 	hit = get_hit(xs);
 	if (!hit)
+	{
+		intersection_list_clear(&xs);
 		return (create_color(0, 0, 0));
+	}
 	comps = prepare_computation(hit, ray);
 	color = shade_hit(world, comps);
 	destroy_computation(comps);
