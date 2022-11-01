@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 10:46:16 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 19:05:51 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:18:36 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	fail_mallocs(char **ori_3d, t_object *object)
 	return (EXIT_FAILURE);
 }
 
-t_object	*set_plane(char **coordinates, char **rgb, char *s)
+t_object	*set_plane(char **c, char **rgb, char *s)
 {
 	t_object	*object;
 	char		**ori_3d;
@@ -33,20 +33,17 @@ t_object	*set_plane(char **coordinates, char **rgb, char *s)
 	ori_3d = ft_split(s, ',');
 	object = create_plane();
 	if (fail_mallocs(ori_3d, object))
-	{
-		ft_free_matrix((void *)&coordinates);
-		ft_free_matrix((void *)&rgb);
-		return (NULL);
-	}
+		return (ft_free_matrix((void *)&c), ft_free_matrix((void *)&rgb), NULL);
 	set_color(object->material->color, (ft_atod(rgb[0]) / 255), \
 							(ft_atod(rgb[1]) / 255), (ft_atod(rgb[2]) / 255));
 	aux_cavalinho = translate_matrix(
-		ft_atod(coordinates[0]), ft_atod(coordinates[1]), ft_atod(coordinates[2]));
+			ft_atod(c[0]), ft_atod(c[1]), ft_atod(c[2]));
 	aux = multiply_matrix(aux_cavalinho, rotate_matrix_x(ft_atod(ori_3d[0])));
 	free(aux_cavalinho);
 	aux_cavalinho = multiply_matrix(aux, rotate_matrix_y(ft_atod(ori_3d[1])));
 	free(aux);
-	set_object_transformation(object, multiply_matrix(aux_cavalinho, rotate_matrix_z(ft_atod(ori_3d[2]))));
+	set_object_transformation(object, multiply_matrix(
+			aux_cavalinho, rotate_matrix_z(ft_atod(ori_3d[2]))));
 	ft_free_matrix((void *)&ori_3d);
 	return (object);
 }

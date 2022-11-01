@@ -6,7 +6,7 @@
 /*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:50:15 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 18:42:33 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:20:40 by ralves-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 t_object	*set_sphere(char **coordinates, char **rgb, char *s)
 {
-	t_object	*object;
+	t_object	*obj;
 
-	object = create_sphere();
-	if (!object)
+	obj = create_sphere();
+	if (!obj)
 	{
 		ft_free_matrix((void *)&coordinates);
 		ft_free_matrix((void *)&rgb);
 		return (NULL);
 	}
-	object->sphere.center.x = ft_atod(coordinates[0]);
-	object->sphere.center.y = ft_atod(coordinates[1]);
-	object->sphere.center.z = ft_atod(coordinates[2]);
-	set_color(object->material->color, (ft_atod(rgb[0]) / 255), \
+	obj->sphere.center.x = ft_atod(coordinates[0]);
+	obj->sphere.center.y = ft_atod(coordinates[1]);
+	obj->sphere.center.z = ft_atod(coordinates[2]);
+	set_color(obj->material->color, (ft_atod(rgb[0]) / 255), \
 							(ft_atod(rgb[1]) / 255), (ft_atod(rgb[2]) / 255));
-	object->sphere.diameter = ft_atod(s);
-	set_object_transformation(object, scale_matrix(
-		object->sphere.diameter, object->sphere.diameter, object->sphere.diameter));
+	obj->sphere.diameter = ft_atod(s);
+	set_object_transformation(obj, scale_matrix(
+			obj->sphere.diameter, obj->sphere.diameter, obj->sphere.diameter));
 	ft_free_matrix((void *)&coordinates);
 	ft_free_matrix((void *)&rgb);
-	return (object);
+	return (obj);
 }
 
 int	check_sphere(char **line_splited, t_list **object)
