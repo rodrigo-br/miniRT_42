@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:18:41 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 09:48:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 20:33:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b)
 		++row;
 	}
 	return (create_matrix(a->size, m));
+}
+
+t_matrix	*multiply_matrix_triple(t_matrix *a, t_matrix *b, t_matrix *c)
+{
+	t_matrix	*aux;
+	t_matrix	*multiply;
+
+	if (a->size != b->size || b->size != c->size || c->size != a->size)
+		return (NULL);
+	aux = multiply_matrix(a, b);
+	multiply = multiply_matrix(aux, c);
+	free(aux);
+	return (multiply);
 }
 
 t_tuple	*multiply_matrix_tuple(t_matrix *m, t_tuple *t)

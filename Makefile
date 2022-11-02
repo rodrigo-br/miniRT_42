@@ -13,12 +13,12 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
-		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA)
-PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
+		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA) $(ALT)
+# PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
-COLOR	= color_constructor.c color_operations.c patterns.c 
+COLOR	= color_constructor.c color_operations.c patterns.c
 CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 		matrix_transformations.c matrix_rotations.c matrix_view_transform.c
@@ -34,7 +34,10 @@ WORLD	= world_constructor.c world_destructor.c world_computations.c
 CAMERA	= camera_constructor.c camera_destructor.c ray_for_pixel.c camera_setter.c \
 		render.c
 
-DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera
+ALT		= alt_parser.c alt_utils.c alt_ambient.c alt_camera.c alt_light.c \
+		alt_shape.c alt_sphere.c alt_plane.c alt_cylinder.c
+
+DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera alt_parser
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror

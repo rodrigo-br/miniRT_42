@@ -287,5 +287,5 @@ void test_shape(void)
 	// RUN_TEST(test_ray_intersect_plane_from_above);
 	// RUN_TEST(test_ray_intersect_plane_from_below);
 	// uncomment at your own risk
-	RUN_TEST(test_print_three_spheres_and_plane);
+	// RUN_TEST(test_print_three_spheres_and_plane);
 }

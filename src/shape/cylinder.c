@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:17:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:41:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 20:34:18 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_object	*create_cylinder(void)
 	cylinder->cylinder.diameter = 1.0;
 	cylinder->cylinder.min = -INFINITY;
 	cylinder->cylinder.max = INFINITY;
-	cylinder->cylinder.capped = FALSE;
+	cylinder->cylinder.capped = TRUE;
 	cylinder->intersect = intersect_cylinder;
 	cylinder->get_normal = get_cylinder_normal;
 	return (cylinder);
