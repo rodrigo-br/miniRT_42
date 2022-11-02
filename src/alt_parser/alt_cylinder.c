@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:01:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:24:49 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:24:57 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static int	set_cylinder_transformation(t_object *cyl)
 		error(ERR_CYL_RTT));
 	final = multiply_matrix_triple(trans, rotat, scale);
 	if (!final)
-		return (free(trans), free(rotat), free(scale), \
-		error(ERR_CYL_TRF));
+		return (free(trans), free(rotat), free(scale), error(ERR_CYL_TRF));
 	set_object_transformation(cyl, final);
 	free(trans);
 	free(rotat);
@@ -67,7 +66,7 @@ static int	set_cylinder_height(char *token, t_object *cyl)
 		return (error(ERR_CYL_HEIGHT_RANGE));
 	half = height / 2.0;
 	cyl->cylinder.min = -half;
-	cyl->cylinder.min = half;
+	cyl->cylinder.max = half;
 	return (0);
 }
 
