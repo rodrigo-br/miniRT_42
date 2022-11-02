@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:01:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 09:24:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:09:57 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define ERR_CYL_TRL "Unable to allocate memory for cylinder's translation."
 #define ERR_CYL_TRF "Unable to allocate memory for cylinder's transformation."
 #define ERR_CYL_MALLOC_FAIL "Unable to allocate memory for cylinder."
-#define CYL_LIST "Unable to allocate memory for cylinder list node."
+#define ERR_CYL_LINKED_LIST "Unable to allocate memory for cylinder list node."
 #define ERR_CYL_BAD_CONFIGS "Invalid cylinder configuration."
 #define ERR_CYL_COORD_SETTN "Invalid cylinder coordinates settings."
 #define ERR_CYL_COORD_VALUE "Invalid cylinder coordinates value."
@@ -33,7 +33,9 @@ static int	set_cylinder_transformation(t_object *cyl)
 	t_matrix	*scale;
 	t_matrix	*final;
 
-	trans = translate_matrix(cyl->cylinder.position.x, cyl->cylinder.position.y,
+	trans = translate_matrix(
+			cyl->cylinder.position.x,
+			cyl->cylinder.position.y,
 			cyl->cylinder.position.z);
 	if (!trans)
 		return (error(ERR_CYL_TRL));
@@ -42,8 +44,7 @@ static int	set_cylinder_transformation(t_object *cyl)
 		return (free(trans), error(ERR_CYL_RTT));
 	scale = scale_matrix(cyl->cylinder.diameter, 1, cyl->cylinder.diameter);
 	if (!scale)
-		return (free(trans), free(rotat), \
-		error(ERR_CYL_RTT));
+		return (free(trans), free(rotat), error(ERR_CYL_RTT));
 	final = multiply_matrix_triple(trans, rotat, scale);
 	if (!final)
 		return (free(trans), free(rotat), free(scale), error(ERR_CYL_TRF));
@@ -128,7 +129,7 @@ int	parse_cylinder(char **tokens, t_rt_scene *s)
 		return (destroy_shape(cylinder), -1);
 	node = ft_lstnew(cylinder);
 	if (!node)
-		return (destroy_shape(cylinder), error(CYL_LIST));
+		return (destroy_shape(cylinder), error(ERR_CYL_LINKED_LIST));
 	ft_lstadd_front(&s->objects, node);
 	return (0);
 }

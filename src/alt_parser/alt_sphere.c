@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:26:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:09:05 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define ERR_SPH_TRL "Unable to allocate memory for sphere's translation."
 #define ERR_SPH_TRF "Unable to allocate memory for sphere's transformation."
 #define ERR_SPH_MALLOC_FAIL "Unable to allocate memory for sphere."
-#define SPH_LIST "Unable to allocate memory for sphere list node."
+#define ERR_SPH_LINKED_LIST "Unable to allocate memory for sphere list node."
 #define ERR_SPH_BAD_CONFIGS "Invalid sphere configuration."
 #define ERR_SPH_CENTR_SETTN "Invalid sphere center coordinates settings."
 #define ERR_SPH_CENTR_VALUE "Invalid sphere center coordinates value."
@@ -43,8 +43,7 @@ static int	set_sphere_transformation(t_object *sphere)
 		return (free(trans), error(ERR_SPH_SCL));
 	final = multiply_matrix(trans, scale);
 	if (!final)
-		return (free(trans), free(scale), \
-		error(ERR_SPH_TRF));
+		return (free(trans), free(scale), error(ERR_SPH_TRF));
 	set_object_transformation(sphere, final);
 	free(trans);
 	free(scale);
@@ -105,7 +104,7 @@ int	parse_sphere(char **tokens, t_rt_scene *s)
 		return (destroy_shape(sphere), -1);
 	node = ft_lstnew(sphere);
 	if (!node)
-		return (destroy_shape(sphere), error(SPH_LIST));
+		return (destroy_shape(sphere), error(ERR_SPH_LINKED_LIST));
 	ft_lstadd_front(&s->objects, node);
 	return (0);
 }
