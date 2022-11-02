@@ -297,9 +297,9 @@ void	test_color_when_intersect_behind_ray(void)
 
 	w = default_world();
 	outer = (t_object *)w->objects->content;
-	outer->material->ambient = 1.0;
+	set_color(outer->material->ambient, 1, 1, 1);
 	inner = (t_object *)w->objects->next->content;
-	inner->material->ambient = 1.0;
+	set_color(inner->material->ambient, 1, 1, 1);
 	ray = create_ray(create_point(0, 0, 0.75), create_vector(0, 0, -1));
 	rgb = color_at(w, ray);
 	TEST_ASSERT_TRUE(is_equal_double(inner->material->color->red, rgb->red));

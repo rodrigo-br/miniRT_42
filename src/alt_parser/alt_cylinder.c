@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:01:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 10:09:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:02:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,24 @@ static int	set_cylinder_diameter(char *token, t_object *cyl)
 	cyl->cylinder.diameter = ft_atof(token);
 	if (cyl->cylinder.diameter <= 0.0)
 		return (error(ERR_CYL_DMTER_RANGE));
+	cyl->cylinder.diameter /= 2.0;
 	return (0);
 }
 
 static int	set_cylinder_coordinates(char *token, t_object *cyl)
 {
-	char	**crd;
+	char	**coord;
 	double	aux[3];
 
-	crd = ft_split(token, ',');
-	if (!crd || ft_splitsize(crd) != 3)
-	{
-		ft_free_matrix((void *)&crd);
-		return (error(ERR_CYL_COORD_SETTN));
-	}
-	if (!ft_isfloat(crd[0]) || !ft_isfloat(crd[1]) || !ft_isfloat(crd[2]))
-	{
-		ft_free_matrix((void *)&crd);
-		return (error(ERR_CYL_COORD_VALUE));
-	}
-	aux[0] = ft_atof(crd[0]);
-	aux[1] = ft_atof(crd[1]);
-	aux[2] = ft_atof(crd[2]);
-	ft_free_matrix((void *)&crd);
+	coord = ft_split(token, ',');
+	if (!coord || ft_splitsize(coord) != 3)
+		return (ft_free_matrix((void *)&coord), error(ERR_CYL_COORD_SETTN));
+	if (!ft_isfloat(coord[0]) || !ft_isfloat(coord[1]) || !ft_isfloat(coord[2]))
+		return (ft_free_matrix((void *)&coord), error(ERR_CYL_COORD_VALUE));
+	aux[0] = ft_atof(coord[0]);
+	aux[1] = ft_atof(coord[1]);
+	aux[2] = ft_atof(coord[2]);
+	ft_free_matrix((void *)&coord);
 	cyl->cylinder.position = (t_point){aux[0], aux[1], aux[2], 1};
 	return (0);
 }

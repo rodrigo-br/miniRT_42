@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 10:09:05 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:52:19 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	set_sphere_diameter(char *token, t_object *sphere)
 	sphere->sphere.diameter = ft_atof(token);
 	if (sphere->sphere.diameter <= 0.0)
 		return (error(ERR_SPH_DMTER_RANGE));
+	sphere->sphere.diameter /= 2.0;
 	return (0);
 }
 
@@ -67,15 +68,9 @@ static int	set_sphere_center_coordinates(char *token, t_object *sphere)
 
 	cntr = ft_split(token, ',');
 	if (!cntr || ft_splitsize(cntr) != 3)
-	{
-		ft_free_matrix((void *)&cntr);
-		return (error(ERR_SPH_CENTR_SETTN));
-	}
+		return (ft_free_matrix((void *)&cntr), error(ERR_SPH_CENTR_SETTN));
 	if (!ft_isfloat(cntr[0]) || !ft_isfloat(cntr[1]) || !ft_isfloat(cntr[2]))
-	{
-		ft_free_matrix((void *)&cntr);
-		return (error(ERR_SPH_CENTR_VALUE));
-	}
+		return (ft_free_matrix((void *)&cntr), error(ERR_SPH_CENTR_VALUE));
 	aux[0] = ft_atof(cntr[0]);
 	aux[1] = ft_atof(cntr[1]);
 	aux[2] = ft_atof(cntr[2]);

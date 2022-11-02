@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:22:11 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:11:05 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:58:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	destroy_shape(void *object)
 	t_object	*obj;
 
 	obj = (t_object *)object;
-	ft_memfree((void *)&obj->orientation);
-	free(obj->transformation);
-	free(obj->inverse_transformation);
 	destroy_material(obj->material);
-	free(obj);
+	ft_memfree((void *)&obj->orientation);
+	ft_memfree((void *)&obj->transformation);
+	ft_memfree((void *)&obj->inverse_transformation);
+	ft_memfree((void *)&obj);
 }

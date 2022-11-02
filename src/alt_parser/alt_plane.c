@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:23:28 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 10:09:16 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:30:03 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,18 @@ static int	set_plane_transformation(t_object *plane)
 
 static int	set_plane_coordinates(char *token, t_object *plane)
 {
-	char	**crd;
+	char	**coord;
 	double	aux[3];
 
-	crd = ft_split(token, ',');
-	if (!crd || ft_splitsize(crd) != 3)
-	{
-		ft_free_matrix((void *)&crd);
-		return (error(ERR_PLN_COORD_SETTN));
-	}
-	if (!ft_isfloat(crd[0]) || !ft_isfloat(crd[1]) || !ft_isfloat(crd[2]))
-	{
-		ft_free_matrix((void *)&crd);
-		return (error(ERR_PLN_COORD_VALUE));
-	}
-	aux[0] = ft_atof(crd[0]);
-	aux[1] = ft_atof(crd[1]);
-	aux[2] = ft_atof(crd[2]);
-	ft_free_matrix((void *)&crd);
+	coord = ft_split(token, ',');
+	if (!coord || ft_splitsize(coord) != 3)
+		return (ft_free_matrix((void *)&coord), error(ERR_PLN_COORD_SETTN));
+	if (!ft_isfloat(coord[0]) || !ft_isfloat(coord[1]) || !ft_isfloat(coord[2]))
+		return (ft_free_matrix((void *)&coord), error(ERR_PLN_COORD_VALUE));
+	aux[0] = ft_atof(coord[0]);
+	aux[1] = ft_atof(coord[1]);
+	aux[2] = ft_atof(coord[2]);
+	ft_free_matrix((void *)&coord);
 	plane->plane.position = (t_point){aux[0], aux[1], aux[2], 1};
 	return (0);
 }

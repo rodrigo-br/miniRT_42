@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:11:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:24:07 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:06:18 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,22 @@ static int	set_ambient_ratio(char *token, t_rt_scene *s)
 static int	set_ambient_color(char *token, t_rt_scene *s)
 {
 	char	**rgb;
+	int		aux[3];
 
 	rgb = ft_split(token, ',');
 	if (!rgb || ft_splitsize(rgb) != 3)
-	{
-		ft_free_matrix((void *)&rgb);
-		return (error(ERR_AMB_COLOR_SETTN));
-	}
+		return (ft_free_matrix((void *)&rgb), error(ERR_AMB_COLOR_SETTN));
 	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
-	{
-		ft_free_matrix((void *)&rgb);
-		return (error(ERR_AMB_COLOR_VALUE));
-	}
-	s->ambient->red = ft_atoi(rgb[0]);
-	s->ambient->green = ft_atoi(rgb[1]);
-	s->ambient->blue = ft_atoi(rgb[2]);
+		return (ft_free_matrix((void *)&rgb), error(ERR_AMB_COLOR_VALUE));
+	aux[0] = ft_atoi(rgb[0]);
+	aux[1] = ft_atoi(rgb[1]);
+	aux[2] = ft_atoi(rgb[2]);
 	ft_free_matrix((void *)&rgb);
-	if (!ft_isinrange(s->ambient->red, 0, 255) \
-	|| !ft_isinrange(s->ambient->green, 0, 255) \
-	|| !ft_isinrange(s->ambient->blue, 0, 255))
+	if (!ft_isinrange(aux[0], 0, 255) \
+	|| !ft_isinrange(aux[1], 0, 255) \
+	|| !ft_isinrange(aux[2], 0, 255))
 		return (error(ERR_AMB_COLOR_RANGE));
+	s->ambient->color = create_formatted_color(aux[0], aux[1], aux[2]);
 	return (0);
 }
 

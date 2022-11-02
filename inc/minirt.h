@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/02 09:50:00 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:29:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <structs.h>
 
+# define RT_WIDTH 1366
+# define RT_HEIGHT 768
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
@@ -57,6 +59,7 @@ typedef enum e_parse_id
 typedef int	t_delegator(char **tokens, t_rt_scene *s);
 
 /* ALT */
+t_minirt	*scene_to_world(t_rt_scene *s);
 int			read_rt_file(char *filename, t_rt_scene *s);
 int			parse_ambient(char **tokens, t_rt_scene *s);
 int			parse_camera(char **tokens, t_rt_scene *s);
@@ -77,6 +80,7 @@ size_t		ft_splitsize(char **split);
 t_bool		ft_isfloat(const char *str);
 t_bool		ft_isnumber(const char *str);
 t_bool		ft_isinrange(double value, double min, double max);
+t_rgb		*create_formatted_color(double r, double g, double b);
 
 // /* Errors before canvas*/
 // int			errors(int argc, char **argv, int *fd);

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 09:50:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:30:57 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ static int	parse_rt_file(char *line, t_rt_scene *s)
 		return (0);
 	parse_function = get_parse_function(get_token_id(tokens[0]));
 	if (!parse_function)
-	{
-		ft_free_matrix((void *)&tokens);
-		return (error(ERR_BAD_ID));
-	}
+		return (ft_free_matrix((void *)&tokens), error(ERR_BAD_ID));
 	status = parse_function(tokens, s);
 	ft_free_matrix((void *)&tokens);
 	return (status);

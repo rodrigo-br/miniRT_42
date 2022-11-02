@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/01 22:03:04 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:02:01 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,23 @@ typedef struct s_matrix
 
 typedef struct s_rgb
 {
-	double	blue;
-	double	green;
 	double	red;
+	double	green;
+	double	blue;
 	int		merged;
 }	t_rgb;
 
 typedef struct s_rt_ambient
 {
 	double	ratio;
-	int		red;
-	int		green;
-	int		blue;
+	t_rgb	*color;
 }	t_rt_ambient;
 
 typedef struct s_rt_camera
 {
-	double	view_x;
-	double	view_y;
-	double	view_z;
-	double	x_3d;
-	double	y_3d;
-	double	z_3d;
-	int		fov;
+	t_point		*view_point;
+	t_vector	*orientation;
+	int			fov;
 }	t_rt_camera;
 
 typedef struct s_rt_light
@@ -118,7 +112,7 @@ typedef struct s_pattern
 typedef struct s_material
 {
 	t_rgb		*color;
-	double		ambient;
+	t_rgb		*ambient;
 	double		diffuse;
 	double		specular;
 	double		shininess;
@@ -234,5 +228,13 @@ typedef struct s_cam
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
 }	t_cam;
+
+typedef struct s_minirt
+{
+	t_cam		*camera;
+	t_canvas	*canvas;
+	t_world		*world;
+	void		*window;
+}	t_minirt;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:41:33 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:11:33 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_rgb	*get_lighting(
 	double	light_dot;
 
 	light_dot = dot_product(lightv, args->normal);
-	ambient = scalar_multiply_color(eff, args->material->ambient);
+	ambient = multiply_color(eff, args->material->ambient);
 	diffuse = get_diffuse(eff, light_dot, args->material->diffuse);
 	specular = get_specular(args, lightv, light_dot);
 	free(eff);
@@ -99,7 +99,7 @@ t_rgb	*lighting(t_lightattr *args)
 	eff = multiply_color(color, args->light_point->intensity);
 	if (args->in_shadow)
 	{
-		case_in_shadow = scalar_multiply_color(eff, args->material->ambient);
+		case_in_shadow = multiply_color(eff, args->material->ambient);
 		free(eff);
 		return (case_in_shadow);
 	}

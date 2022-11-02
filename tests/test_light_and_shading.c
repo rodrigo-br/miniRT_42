@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/31 11:06:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:31:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,9 @@ void	test_create_material(void)
 	TEST_ASSERT_TRUE(is_equal_double(1, material->color->red));
 	TEST_ASSERT_TRUE(is_equal_double(1, material->color->green));
 	TEST_ASSERT_TRUE(is_equal_double(1, material->color->blue));
-	TEST_ASSERT_TRUE(is_equal_double(0.1, material->ambient));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, material->ambient->red));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, material->ambient->green));
+	TEST_ASSERT_TRUE(is_equal_double(0.1, material->ambient->blue));
 	TEST_ASSERT_TRUE(is_equal_double(0.9, material->diffuse));
 	TEST_ASSERT_TRUE(is_equal_double(0.9, material->specular));
 	TEST_ASSERT_TRUE(is_equal_double(200.0, material->shininess));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 21:18:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/31 19:08:43 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:36:53 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head)
 	t_bhaskara	bhaskara;
 	t_vector	*sphere_to_ray;
 
-	sphere_to_ray = sub_tuple(ray->origin, &sphere->sphere.center);
+	// sphere_to_ray = sub_tuple(ray->origin, &sphere->sphere.center);
+	sphere_to_ray = sub_tuple(ray->origin, &(t_point){0, 0, 0, 1});
 	bhaskara.a = dot_product(ray->direction, ray->direction);
 	bhaskara.b = dot_product(ray->direction, sphere_to_ray) * 2;
 	bhaskara.c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
@@ -53,7 +54,9 @@ t_vector	*get_sphere_normal(t_object *sphere, t_point *point)
 {
 	t_vector	*normal;
 
-	normal = sub_tuple(point, &sphere->sphere.center);
+	// normal = sub_tuple(point, &sphere->sphere.center);
+	normal = sub_tuple(point, &(t_point){0, 0, 0, 1});
 	normal->w = VECTOR_W;
+	(void)sphere;
 	return (normal);
 }

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:39:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:25:19 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:27:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #define ERR_LGT_MALLOC_FAIL "Unable to allocate memory for light."
 #define ERR_LGT_ALREADY_SET "Light must be set only once."
 #define ERR_LGT_BAD_CONFIGS "Invalid light configuration."
+#define ERR_LGT_POINT_SETTN "Invalid light point settings."
 #define ERR_LGT_POINT_VALUE "Invalid light point value."
 #define ERR_LGT_BRGHT_VALUE "Invalid light brightness value."
 #define ERR_LGT_BRGHT_RANGE "Light brightness must be between 0 and 1."
@@ -28,15 +29,9 @@ static int	set_light_color(char *token, t_rt_scene *s)
 
 	rgb = ft_split(token, ',');
 	if (!rgb || ft_splitsize(rgb) != 3)
-	{
-		ft_free_matrix((void *)&rgb);
-		return (error(ERR_LGT_COLOR_SETTN));
-	}
+		return (ft_free_matrix((void *)&rgb), error(ERR_LGT_COLOR_SETTN));
 	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
-	{
-		ft_free_matrix((void *)&rgb);
-		return (error(ERR_LGT_COLOR_VALUE));
-	}
+		return (ft_free_matrix((void *)&rgb), error(ERR_LGT_COLOR_VALUE));
 	s->light->red = ft_atoi(rgb[0]);
 	s->light->green = ft_atoi(rgb[1]);
 	s->light->blue = ft_atoi(rgb[2]);
@@ -64,15 +59,9 @@ static int	set_light_point(char *token, t_rt_scene *s)
 
 	lp = ft_split(token, ',');
 	if (!lp || ft_splitsize(lp) != 3)
-	{
-		ft_free_matrix((void *)&lp);
-		return (-1);
-	}
+		return (ft_free_matrix((void *)&lp), error(ERR_LGT_POINT_SETTN));
 	if (!ft_isfloat(lp[0]) || !ft_isfloat(lp[1]) || !ft_isfloat(lp[2]))
-	{
-		ft_free_matrix((void *)&lp);
-		return (error(ERR_LGT_POINT_VALUE));
-	}
+		return (ft_free_matrix((void *)&lp), error(ERR_LGT_POINT_VALUE));
 	s->light->x = ft_atof(lp[0]);
 	s->light->y = ft_atof(lp[1]);
 	s->light->z = ft_atof(lp[2]);

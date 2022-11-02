@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:54:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:24:24 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:31:50 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,26 @@ static int	set_camera_field_of_view(char *token, t_rt_scene *s)
 
 static int	set_camera_orientation_vector(char *token, t_rt_scene *s)
 {
-	char	**vect;
+	char		**vect;
+	double		aux[3];
+	t_vector	*tmp;
 
 	vect = ft_split(token, ',');
 	if (!vect || ft_splitsize(vect) != 3)
-	{
-		ft_free_matrix((void *)&vect);
-		return (error(ERR_CAM_OVECT_SETTN));
-	}
+		return (ft_free_matrix((void *)&vect), error(ERR_CAM_OVECT_SETTN));
 	if (!ft_isfloat(vect[0]) || !ft_isfloat(vect[1]) || !ft_isfloat(vect[2]))
-	{
-		ft_free_matrix((void *)&vect);
-		return (error(ERR_CAM_OVECT_VALUE));
-	}
-	s->camera->x_3d = ft_atof(vect[0]);
-	s->camera->y_3d = ft_atof(vect[1]);
-	s->camera->z_3d = ft_atof(vect[2]);
+		return (ft_free_matrix((void *)&vect), error(ERR_CAM_OVECT_VALUE));
+	aux[0] = ft_atof(vect[0]);
+	aux[1] = ft_atof(vect[1]);
+	aux[2] = ft_atof(vect[2]);
 	ft_free_matrix((void *)&vect);
-	if (!ft_isinrange(s->camera->x_3d, -1, 1) \
-	|| !ft_isinrange(s->camera->y_3d, -1, 1) \
-	|| !ft_isinrange(s->camera->z_3d, -1, 1))
+	if (!ft_isinrange(aux[0], -1, 1) \
+	|| !ft_isinrange(aux[1], -1, 1) \
+	|| !ft_isinrange(aux[2], -1, 1))
 		return (error(ERR_CAM_OVECT_RANGE));
+	tmp = create_vector(aux[0], aux[1], aux[2]);
+	s->camera->orientation = normalize(tmp);
+	free(tmp);
 	return (0);
 }
 
@@ -65,18 +64,11 @@ static int	set_camera_view_point(char *token, t_rt_scene *s)
 
 	vp = ft_split(token, ',');
 	if (!vp || ft_splitsize(vp) != 3)
-	{
-		ft_free_matrix((void *)&vp);
-		return (error(ERR_CAM_VIEWP_SETTN));
-	}
+		return (ft_free_matrix((void *)&vp), error(ERR_CAM_VIEWP_SETTN));
 	if (!ft_isfloat(vp[0]) || !ft_isfloat(vp[1]) || !ft_isfloat(vp[2]))
-	{
-		ft_free_matrix((void *)&vp);
-		return (error(ERR_CAM_VIEWP_VALUE));
-	}
-	s->camera->view_x = ft_atof(vp[0]);
-	s->camera->view_y = ft_atof(vp[1]);
-	s->camera->view_z = ft_atof(vp[2]);
+		return (ft_free_matrix((void *)&vp), error(ERR_CAM_VIEWP_VALUE));
+	s->camera->view_point = \
+	create_point(ft_atof(vp[0]), ft_atof(vp[1]), ft_atof(vp[2]));
 	ft_free_matrix((void *)&vp);
 	return (0);
 }

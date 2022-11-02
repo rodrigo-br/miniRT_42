@@ -6,11 +6,16 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:08:37 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:04:05 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:05:28 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
+
+t_rgb	*create_formatted_color(double r, double g, double b)
+{
+	return (create_color((r / 255), (g / 255), (b / 255)));
+}
 
 double	ft_atof(const char *nptr)
 {
