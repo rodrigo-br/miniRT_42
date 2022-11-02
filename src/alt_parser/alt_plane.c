@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:23:28 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:33:15 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:25:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static int	set_plane_transformation(t_object *plane)
 			plane->plane.position.y,
 			plane->plane.position.z);
 	if (!trans)
-		return (ft_putendl_fd(ERR_PLN_TRL, STDERR), -1);
+		return (error(ERR_PLN_TRL));
 	rotat = full_rotation_matrix(plane->orientation);
 	if (!rotat)
-		return (free(trans), ft_putendl_fd(ERR_PLN_RTT, STDERR), -1);
+		return (free(trans), error(ERR_PLN_RTT));
 	final = multiply_matrix(trans, rotat);
 	if (!final)
 		return (free(trans), free(rotat), \
-		ft_putendl_fd(ERR_PLN_TRF, STDERR), -1);
+		error(ERR_PLN_TRF));
 	set_object_transformation(plane, final);
 	free(trans);
 	free(rotat);
@@ -55,12 +55,12 @@ static int	set_plane_coordinates(char *token, t_object *plane)
 	if (!crd || ft_splitsize(crd) != 3)
 	{
 		ft_free_matrix((void *)&crd);
-		return (ft_putendl_fd(ERR_PLN_COORD_SETTN, STDERR), -1);
+		return (error(ERR_PLN_COORD_SETTN));
 	}
 	if (!ft_isfloat(crd[0]) || !ft_isfloat(crd[1]) || !ft_isfloat(crd[2]))
 	{
 		ft_free_matrix((void *)&crd);
-		return (ft_putendl_fd(ERR_PLN_COORD_VALUE, STDERR), -1);
+		return (error(ERR_PLN_COORD_VALUE));
 	}
 	aux[0] = ft_atof(crd[0]);
 	aux[1] = ft_atof(crd[1]);
@@ -76,10 +76,10 @@ int	parse_plane(char **tokens, t_rt_scene *s)
 	t_list		*node;
 
 	if (ft_splitsize(tokens) != 4)
-		return (ft_putendl_fd(ERR_PLN_BAD_CONFIGS, STDERR), -1);
+		return (error(ERR_PLN_BAD_CONFIGS));
 	plane = create_plane();
 	if (!plane)
-		return (ft_putendl_fd(ERR_PLN_MALLOC_FAIL, STDERR), -1);
+		return (error(ERR_PLN_MALLOC_FAIL));
 	if (set_plane_coordinates(tokens[1], plane) != 0)
 		return (destroy_shape(plane), -1);
 	if (set_shape_orientation_vector(tokens[2], plane) != 0)
@@ -90,7 +90,7 @@ int	parse_plane(char **tokens, t_rt_scene *s)
 		return (destroy_shape(plane), -1);
 	node = ft_lstnew(plane);
 	if (!node)
-		return (destroy_shape(plane), ft_putendl_fd(PLN_LIST, STDERR), -1);
+		return (destroy_shape(plane), error(PLN_LIST));
 	ft_lstadd_front(&s->objects, node);
 	return (0);
 }

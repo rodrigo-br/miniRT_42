@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/01 21:30:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:26:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	scene_to_world(t_world *w, t_rt_scene *s)
 {
 	(void)w;
 	if (!s->ambient)
-		return (ft_putendl_fd("Undefined ambient.", STDERR), -1);
+		return (error("Undefined ambient."));
 	if (!s->camera)
-		return (ft_putendl_fd("Undefined camera.", STDERR), -1);
+		return (error("Undefined camera."));
 	if (!s->light)
-		return (ft_putendl_fd("Undefined light.", STDERR), -1);
+		return (error("Undefined light."));
 	return (0);
 }
 
@@ -58,10 +58,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		if (argc > 2)
-			ft_putendl_fd("miniRT: too many arguments", STDERR);
+			error("miniRT: too many arguments");
 		if (argc < 2)
-			ft_putendl_fd("miniRT: too few arguments", STDERR);
-		ft_putendl_fd("usage: ./miniRT <map file>.rt", STDERR);
+			error("miniRT: too few arguments");
+		error("usage: ./miniRT <map file>.rt");
 		return (1);
 	}
 	ft_bzero(&scene, sizeof(t_rt_scene));

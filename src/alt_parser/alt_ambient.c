@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:11:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:00:05 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:24:07 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 static int	set_ambient_ratio(char *token, t_rt_scene *s)
 {
 	if (!ft_isfloat(token))
-		return (ft_putendl_fd(ERR_AMB_RATIO_VALUE, STDERR), -1);
+		return (error(ERR_AMB_RATIO_VALUE));
 	s->ambient->ratio = ft_atof(token);
 	if (!ft_isinrange(s->ambient->ratio, 0.0, 1.0))
-		return (ft_putendl_fd(ERR_AMB_RATIO_RANGE, STDERR), -1);
+		return (error(ERR_AMB_RATIO_RANGE));
 	return (0);
 }
 
@@ -39,12 +39,12 @@ static int	set_ambient_color(char *token, t_rt_scene *s)
 	if (!rgb || ft_splitsize(rgb) != 3)
 	{
 		ft_free_matrix((void *)&rgb);
-		return (ft_putendl_fd(ERR_AMB_COLOR_SETTN, STDERR), -1);
+		return (error(ERR_AMB_COLOR_SETTN));
 	}
 	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
 	{
 		ft_free_matrix((void *)&rgb);
-		return (ft_putendl_fd(ERR_AMB_COLOR_VALUE, STDERR), -1);
+		return (error(ERR_AMB_COLOR_VALUE));
 	}
 	s->ambient->red = ft_atoi(rgb[0]);
 	s->ambient->green = ft_atoi(rgb[1]);
@@ -53,19 +53,19 @@ static int	set_ambient_color(char *token, t_rt_scene *s)
 	if (!ft_isinrange(s->ambient->red, 0, 255) \
 	|| !ft_isinrange(s->ambient->green, 0, 255) \
 	|| !ft_isinrange(s->ambient->blue, 0, 255))
-		return (ft_putendl_fd(ERR_AMB_COLOR_RANGE, STDERR), -1);
+		return (error(ERR_AMB_COLOR_RANGE));
 	return (0);
 }
 
 int	parse_ambient(char **tokens, t_rt_scene *s)
 {
 	if (s->ambient)
-		return (ft_putendl_fd(ERR_AMB_ALREADY_SET, STDERR), -1);
+		return (error(ERR_AMB_ALREADY_SET));
 	if (ft_splitsize(tokens) != 3)
-		return (ft_putendl_fd(ERR_AMB_BAD_CONFIGS, STDERR), -1);
+		return (error(ERR_AMB_BAD_CONFIGS));
 	s->ambient = (t_rt_ambient *)malloc(sizeof(t_rt_ambient));
 	if (!s->ambient)
-		return (ft_putendl_fd(ERR_AMB_MALLOC_FAIL, STDERR), -1);
+		return (error(ERR_AMB_MALLOC_FAIL));
 	if (set_ambient_ratio(tokens[1], s) != 0)
 		return (-1);
 	if (set_ambient_color(tokens[2], s) != 0)

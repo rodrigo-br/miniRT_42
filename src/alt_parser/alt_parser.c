@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:50:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:25:30 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	check_file_extension(char *filename)
 
 	extension = ft_strrchr(filename, '.');
 	if (!extension)
-		return (ft_putendl_fd(ERR_NO_EXT, STDERR), -1);
+		return (error(ERR_NO_EXT));
 	else if (ft_strcmp(".rt", extension) != 0)
-		return (ft_putendl_fd(ERR_WRONG_EXT, STDERR), -1);
+		return (error(ERR_WRONG_EXT));
 	return (0);
 }
 
@@ -75,7 +75,7 @@ static int	parse_rt_file(char *line, t_rt_scene *s)
 	if (!parse_function)
 	{
 		ft_free_matrix((void *)&tokens);
-		return (ft_putendl_fd(ERR_BAD_ID, STDERR), -1);
+		return (error(ERR_BAD_ID));
 	}
 	status = parse_function(tokens, s);
 	ft_free_matrix((void *)&tokens);

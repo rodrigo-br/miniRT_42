@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:33:36 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:26:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ static int	set_sphere_transformation(t_object *sphere)
 			sphere->sphere.center.y,
 			sphere->sphere.center.z);
 	if (!trans)
-		return (ft_putendl_fd(ERR_SPH_TRL, STDERR), -1);
+		return (error(ERR_SPH_TRL));
 	scale = scale_matrix(
 			sphere->sphere.diameter,
 			sphere->sphere.diameter,
 			sphere->sphere.diameter);
 	if (!scale)
-		return (free(trans), ft_putendl_fd(ERR_SPH_SCL, STDERR), -1);
+		return (free(trans), error(ERR_SPH_SCL));
 	final = multiply_matrix(trans, scale);
 	if (!final)
 		return (free(trans), free(scale), \
-		ft_putendl_fd(ERR_SPH_TRF, STDERR), -1);
+		error(ERR_SPH_TRF));
 	set_object_transformation(sphere, final);
 	free(trans);
 	free(scale);
@@ -54,10 +54,10 @@ static int	set_sphere_transformation(t_object *sphere)
 static int	set_sphere_diameter(char *token, t_object *sphere)
 {
 	if (!ft_isfloat(token))
-		return (ft_putendl_fd(ERR_SPH_DMTER_VALUE, STDERR), -1);
+		return (error(ERR_SPH_DMTER_VALUE));
 	sphere->sphere.diameter = ft_atof(token);
 	if (sphere->sphere.diameter <= 0.0)
-		return (ft_putendl_fd(ERR_SPH_DMTER_RANGE, STDERR), -1);
+		return (error(ERR_SPH_DMTER_RANGE));
 	return (0);
 }
 
@@ -70,12 +70,12 @@ static int	set_sphere_center_coordinates(char *token, t_object *sphere)
 	if (!cntr || ft_splitsize(cntr) != 3)
 	{
 		ft_free_matrix((void *)&cntr);
-		return (ft_putendl_fd(ERR_SPH_CENTR_SETTN, STDERR), -1);
+		return (error(ERR_SPH_CENTR_SETTN));
 	}
 	if (!ft_isfloat(cntr[0]) || !ft_isfloat(cntr[1]) || !ft_isfloat(cntr[2]))
 	{
 		ft_free_matrix((void *)&cntr);
-		return (ft_putendl_fd(ERR_SPH_CENTR_VALUE, STDERR), -1);
+		return (error(ERR_SPH_CENTR_VALUE));
 	}
 	aux[0] = ft_atof(cntr[0]);
 	aux[1] = ft_atof(cntr[1]);
@@ -91,10 +91,10 @@ int	parse_sphere(char **tokens, t_rt_scene *s)
 	t_list		*node;
 
 	if (ft_splitsize(tokens) != 4)
-		return (ft_putendl_fd(ERR_SPH_BAD_CONFIGS, STDERR), -1);
+		return (error(ERR_SPH_BAD_CONFIGS));
 	sphere = create_sphere();
 	if (!sphere)
-		return (ft_putendl_fd(ERR_SPH_MALLOC_FAIL, STDERR), -1);
+		return (error(ERR_SPH_MALLOC_FAIL));
 	if (set_sphere_center_coordinates(tokens[1], sphere) != 0)
 		return (destroy_shape(sphere), -1);
 	if (set_sphere_diameter(tokens[2], sphere) != 0)
@@ -105,7 +105,7 @@ int	parse_sphere(char **tokens, t_rt_scene *s)
 		return (destroy_shape(sphere), -1);
 	node = ft_lstnew(sphere);
 	if (!node)
-		return (destroy_shape(sphere), ft_putendl_fd(SPH_LIST, STDERR), -1);
+		return (destroy_shape(sphere), error(SPH_LIST));
 	ft_lstadd_front(&s->objects, node);
 	return (0);
 }

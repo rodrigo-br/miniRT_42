@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:39:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:00:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:25:19 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static int	set_light_color(char *token, t_rt_scene *s)
 	if (!rgb || ft_splitsize(rgb) != 3)
 	{
 		ft_free_matrix((void *)&rgb);
-		return (ft_putendl_fd(ERR_LGT_COLOR_SETTN, STDERR), -1);
+		return (error(ERR_LGT_COLOR_SETTN));
 	}
 	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
 	{
 		ft_free_matrix((void *)&rgb);
-		return (ft_putendl_fd(ERR_LGT_COLOR_VALUE, STDERR), -1);
+		return (error(ERR_LGT_COLOR_VALUE));
 	}
 	s->light->red = ft_atoi(rgb[0]);
 	s->light->green = ft_atoi(rgb[1]);
@@ -44,17 +44,17 @@ static int	set_light_color(char *token, t_rt_scene *s)
 	if (!ft_isinrange(s->light->red, 0, 255) \
 	|| !ft_isinrange(s->light->green, 0, 255) \
 	|| !ft_isinrange(s->light->blue, 0, 255))
-		return (ft_putendl_fd(ERR_LGT_COLOR_RANGE, STDERR), -1);
+		return (error(ERR_LGT_COLOR_RANGE));
 	return (0);
 }
 
 static int	set_light_brightness(char *token, t_rt_scene *s)
 {
 	if (!ft_isfloat(token))
-		return (ft_putendl_fd(ERR_LGT_BRGHT_VALUE, STDERR), -1);
+		return (error(ERR_LGT_BRGHT_VALUE));
 	s->light->brightness = ft_atof(token);
 	if (!ft_isinrange(s->light->brightness, 0.0, 1.0))
-		return (ft_putendl_fd(ERR_LGT_BRGHT_RANGE, STDERR), -1);
+		return (error(ERR_LGT_BRGHT_RANGE));
 	return (0);
 }
 
@@ -71,7 +71,7 @@ static int	set_light_point(char *token, t_rt_scene *s)
 	if (!ft_isfloat(lp[0]) || !ft_isfloat(lp[1]) || !ft_isfloat(lp[2]))
 	{
 		ft_free_matrix((void *)&lp);
-		return (ft_putendl_fd(ERR_LGT_POINT_VALUE, STDERR), -1);
+		return (error(ERR_LGT_POINT_VALUE));
 	}
 	s->light->x = ft_atof(lp[0]);
 	s->light->y = ft_atof(lp[1]);
@@ -83,12 +83,12 @@ static int	set_light_point(char *token, t_rt_scene *s)
 int	parse_light(char **tokens, t_rt_scene *s)
 {
 	if (s->light)
-		return (ft_putendl_fd(ERR_LGT_ALREADY_SET, STDERR), -1);
+		return (error(ERR_LGT_ALREADY_SET));
 	if (ft_splitsize(tokens) != 4)
-		return (ft_putendl_fd(ERR_LGT_BAD_CONFIGS, STDERR), -1);
+		return (error(ERR_LGT_BAD_CONFIGS));
 	s->light = (t_rt_light *)malloc(sizeof(t_rt_light));
 	if (!s->light)
-		return (ft_putendl_fd(ERR_LGT_MALLOC_FAIL, STDERR), -1);
+		return (error(ERR_LGT_MALLOC_FAIL));
 	if (set_light_point(tokens[1], s) != 0)
 		return (-1);
 	if (set_light_brightness(tokens[2], s) != 0)

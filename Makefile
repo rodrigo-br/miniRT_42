@@ -35,7 +35,7 @@ CAMERA	= camera_constructor.c camera_destructor.c ray_for_pixel.c camera_setter.
 		render.c
 
 ALT		= alt_parser.c alt_utils.c alt_ambient.c alt_camera.c alt_light.c \
-		alt_shape.c alt_sphere.c alt_plane.c alt_cylinder.c
+		alt_shape.c alt_sphere.c alt_plane.c alt_cylinder.c alt_error.c
 
 DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera alt_parser
 IFLAGS	= -I $(HEADER_PATH)

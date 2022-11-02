@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:01:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 21:33:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:24:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ static int	set_cylinder_transformation(t_object *cyl)
 	trans = translate_matrix(cyl->cylinder.position.x, cyl->cylinder.position.y,
 			cyl->cylinder.position.z);
 	if (!trans)
-		return (ft_putendl_fd(ERR_CYL_TRL, STDERR), -1);
+		return (error(ERR_CYL_TRL));
 	rotat = full_rotation_matrix(cyl->orientation);
 	if (!rotat)
-		return (free(trans), ft_putendl_fd(ERR_CYL_RTT, STDERR), -1);
+		return (free(trans), error(ERR_CYL_RTT));
 	scale = scale_matrix(cyl->cylinder.diameter, 1, cyl->cylinder.diameter);
 	if (!scale)
 		return (free(trans), free(rotat), \
-		ft_putendl_fd(ERR_CYL_RTT, STDERR), -1);
+		error(ERR_CYL_RTT));
 	final = multiply_matrix_triple(trans, rotat, scale);
 	if (!final)
 		return (free(trans), free(rotat), free(scale), \
-		ft_putendl_fd(ERR_CYL_TRF, STDERR), -1);
+		error(ERR_CYL_TRF));
 	set_object_transformation(cyl, final);
 	free(trans);
 	free(rotat);
@@ -61,10 +61,10 @@ static int	set_cylinder_height(char *token, t_object *cyl)
 	double	half;
 
 	if (!ft_isfloat(token))
-		return (ft_putendl_fd(ERR_CYL_HEIGHT_VALUE, STDERR), -1);
+		return (error(ERR_CYL_HEIGHT_VALUE));
 	height = ft_atof(token);
 	if (height <= 0.0)
-		return (ft_putendl_fd(ERR_CYL_HEIGHT_RANGE, STDERR), -1);
+		return (error(ERR_CYL_HEIGHT_RANGE));
 	half = height / 2.0;
 	cyl->cylinder.min = -half;
 	cyl->cylinder.min = half;
@@ -74,10 +74,10 @@ static int	set_cylinder_height(char *token, t_object *cyl)
 static int	set_cylinder_diameter(char *token, t_object *cyl)
 {
 	if (!ft_isfloat(token))
-		return (ft_putendl_fd(ERR_CYL_DMTER_VALUE, STDERR), -1);
+		return (error(ERR_CYL_DMTER_VALUE));
 	cyl->cylinder.diameter = ft_atof(token);
 	if (cyl->cylinder.diameter <= 0.0)
-		return (ft_putendl_fd(ERR_CYL_DMTER_RANGE, STDERR), -1);
+		return (error(ERR_CYL_DMTER_RANGE));
 	return (0);
 }
 
@@ -90,12 +90,12 @@ static int	set_cylinder_coordinates(char *token, t_object *cyl)
 	if (!crd || ft_splitsize(crd) != 3)
 	{
 		ft_free_matrix((void *)&crd);
-		return (ft_putendl_fd(ERR_CYL_COORD_SETTN, STDERR), -1);
+		return (error(ERR_CYL_COORD_SETTN));
 	}
 	if (!ft_isfloat(crd[0]) || !ft_isfloat(crd[1]) || !ft_isfloat(crd[2]))
 	{
 		ft_free_matrix((void *)&crd);
-		return (ft_putendl_fd(ERR_CYL_COORD_VALUE, STDERR), -1);
+		return (error(ERR_CYL_COORD_VALUE));
 	}
 	aux[0] = ft_atof(crd[0]);
 	aux[1] = ft_atof(crd[1]);
@@ -111,10 +111,10 @@ int	parse_cylinder(char **tokens, t_rt_scene *s)
 	t_list		*node;
 
 	if (ft_splitsize(tokens) != 6)
-		return (ft_putendl_fd(ERR_CYL_BAD_CONFIGS, STDERR), -1);
+		return (error(ERR_CYL_BAD_CONFIGS));
 	cylinder = create_cylinder();
 	if (!cylinder)
-		return (ft_putendl_fd(ERR_CYL_MALLOC_FAIL, STDERR), -1);
+		return (error(ERR_CYL_MALLOC_FAIL));
 	if (set_cylinder_coordinates(tokens[1], cylinder) != 0)
 		return (destroy_shape(cylinder), -1);
 	if (set_shape_orientation_vector(tokens[2], cylinder) != 0)
@@ -129,7 +129,7 @@ int	parse_cylinder(char **tokens, t_rt_scene *s)
 		return (destroy_shape(cylinder), -1);
 	node = ft_lstnew(cylinder);
 	if (!node)
-		return (destroy_shape(cylinder), ft_putendl_fd(CYL_LIST, STDERR), -1);
+		return (destroy_shape(cylinder), error(CYL_LIST));
 	ft_lstadd_front(&s->objects, node);
 	return (0);
 }
