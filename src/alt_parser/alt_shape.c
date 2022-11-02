@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:25:52 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:34:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define ERR_SHP_COLOR_VALUE "Invalid shape color value."
 #define ERR_SHP_COLOR_RANGE "Shape color channels must be between 0 and 255."
 
-static t_rgb	*create_formatted_color(int r, int g, int b)
+static t_rgb	*create_formatted_color(double r, double g, double b)
 {
 	return (create_color((r / 255), (g / 255), (b / 255)));
 }
