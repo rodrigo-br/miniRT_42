@@ -6,28 +6,14 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:25:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:50:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
 #define ERR_OPEN_FAIL "Could not open .rt file"
-#define ERR_WRONG_EXT "Given file has wrong extension."
-#define ERR_NO_EXT "Given file has no extension."
 #define ERR_BAD_ID "Invalid identifier in .rt file."
-
-static int	check_file_extension(char *filename)
-{
-	char	*extension;
-
-	extension = ft_strrchr(filename, '.');
-	if (!extension)
-		return (error(ERR_NO_EXT));
-	else if (ft_strcmp(".rt", extension) != 0)
-		return (error(ERR_WRONG_EXT));
-	return (0);
-}
 
 static t_delegator	*get_parse_function(t_parse_id id)
 {
@@ -106,5 +92,5 @@ int	read_rt_file(char *filename, t_rt_scene *s)
 			return (free(current_line), -1);
 		free(current_line);
 	}
-	return (0);
+	return (check_scene_elements(s));
 }

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/01 22:23:28 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:50:00 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int			parse_light(char **tokens, t_rt_scene *s);
 int			parse_sphere(char **tokens, t_rt_scene *s);
 int			parse_plane(char **tokens, t_rt_scene *s);
 int			parse_cylinder(char **tokens, t_rt_scene *s);
+int			check_file_extension(char *filename);
+int			check_scene_elements(t_rt_scene *s);
 int			error(const char *warning);
 
 int			set_shape_color(char *token, t_object *shape);
