@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 10:00:22 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 14:11:33 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:48:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_rgb	*get_specular(
 	reflectv = reflect(auxtup, args->normal);
 	free(auxtup);
 	reflect_dot_eye = dot_product(reflectv, args->camera);
-	if (reflect_dot_eye < 0)
+	if (reflect_dot_eye <= 0)
 		return (free(reflectv), create_color(0, 0, 0));
 	auxrgb = scalar_multiply_color(
 			args->light_point->intensity, args->material->specular);
