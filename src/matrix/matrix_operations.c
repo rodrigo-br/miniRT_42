@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:18:41 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 20:33:27 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:39:09 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b)
 	double	m[MAT_MAX][MAT_MAX];
 
 	if (a->size != b->size)
-		return (NULL);
+		return (create_identity_matrix());
 	ft_bzero(m, (sizeof(double) * MAT_MAX * MAT_MAX));
 	row = 0;
 	while (row < a->size)
@@ -47,7 +47,7 @@ t_matrix	*multiply_matrix_triple(t_matrix *a, t_matrix *b, t_matrix *c)
 	t_matrix	*multiply;
 
 	if (a->size != b->size || b->size != c->size || c->size != a->size)
-		return (NULL);
+		return (create_identity_matrix());
 	aux = multiply_matrix(a, b);
 	multiply = multiply_matrix(aux, c);
 	free(aux);
@@ -60,7 +60,7 @@ t_tuple	*multiply_matrix_tuple(t_matrix *m, t_tuple *t)
 	double	aux[MAT_MAX];
 
 	if (m->size != MAT_MAX)
-		return (NULL);
+		return (create_tuple(0, 0, 0, 0));
 	row = 0;
 	while (row < MAT_MAX)
 	{
@@ -102,7 +102,7 @@ t_matrix	*inverse_matrix(t_matrix *m)
 	double			inverse[MAT_MAX][MAT_MAX];
 
 	if (!_determinant)
-		return (NULL);
+		return (create_identity_matrix());
 	row = 0;
 	while (row < m->size)
 	{
