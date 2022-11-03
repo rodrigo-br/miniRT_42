@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:18:05 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 11:39:55 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:31:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 static void	setup_camera(t_cam *camera, t_rt_camera *c)
 {
 	t_matrix	*transformation;
+	t_vector	*aux;
 	t_vector	*up;
 
-	up = create_vector(0, 1, 0);
+	if (is_equal_double(1.0, c->orientation->y))
+		up = create_vector(1, 0, 0);
+	else
+	{
+		aux = cross_product(&(t_tuple){0, 1, 0, 0}, c->orientation);
+		up = cross_product(c->orientation, aux);
+		free(aux);
+	}
 	transformation = view_transform(c->view_point, c->orientation, up);
 	set_camera_transformation(camera, transformation);
 	free(up);
