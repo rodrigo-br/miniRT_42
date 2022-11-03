@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:19:30 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/01 20:17:00 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 12:42:17 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_matrix	*rotate_matrix_z(double r)
 	return (matrix);
 }
 
+/* It is MANDATORY to multiply Z by X, not X by Z. */
 t_matrix	*full_rotation_matrix(t_vector *vector)
 {
 	double		x;
@@ -57,13 +58,13 @@ t_matrix	*full_rotation_matrix(t_vector *vector)
 	t_matrix	*rotation;
 
 	ratio = sqrt((vector->x * vector->x) + (vector->y * vector->y));
-	if (!ratio)
+	if (is_equal_double(0.0, ratio))
 		z = M_PI_2;
 	else
 		z = acos(vector->y / ratio);
 	x = acos(ratio);
-	aux[0] = rotate_matrix_x(x);
-	aux[1] = rotate_matrix_z(z);
+	aux[0] = rotate_matrix_z(z);
+	aux[1] = rotate_matrix_x(x);
 	rotation = multiply_matrix(aux[0], aux[1]);
 	free(aux[0]);
 	free(aux[1]);
