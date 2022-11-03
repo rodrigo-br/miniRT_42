@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/03 19:43:05 by maolivei         ###   ########.fr       */
+/*   Created: 2022/11/03 19:38:05 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/03 19:38:57 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	main(int argc, char **argv)
+int	end_program(t_minirt *rt)
 {
-	t_rt_scene	scene;
-	t_minirt	*rt;
+	mlx_destroy_window(rt->canvas->mlx, rt->window);
+	destroy_canvas(rt->canvas);
+	ft_memfree((void *)&rt);
+	return (exit(0), 0);
+}
 
-	if (check_user_input(argc) != 0)
-		return (1);
-	ft_bzero(&scene, sizeof(t_rt_scene));
-	if (read_rt_file(argv[1], &scene) != 0)
-		return (destroy_scene(&scene), 1);
-	rt = scene_to_world(&scene);
-	destroy_minirt(&scene, rt);
-	setup_visual_environment(rt);
+int	keypress_handler(int keysym, t_minirt *rt)
+{
+	if (keysym == XK_Escape || keysym == XK_q)
+		end_program(rt);
 	return (0);
 }

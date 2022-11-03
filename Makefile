@@ -13,7 +13,7 @@ HEADER_PATH		= ./inc
 HEADER_FILES	= structs.h minirt.h
 
 MAIN	= main.c $(SRCS) $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
-		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA) $(ALT)
+		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA) $(ALT) $(MLX)
 # PARSER	= parser.c check_light.c checkers.c check_ambient.c check_camera.c \
 		check_sphere.c check_plane.c check_cylinder.c check_rgb.c \
 		check_object_3d_orientation.c
@@ -23,7 +23,7 @@ CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c
 MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 		matrix_transformations.c matrix_rotations.c matrix_view_transform.c
 UTILS 	= errors.c ft_atod.c ft_is_a_double.c ft_is_all_digit.c ft_str_swap_set_chr.c \
-		lst_obj_free.c ft_set_double_value.c ft_get_matrix_len.c free_scene.c \
+		lst_obj_free.c ft_set_double_value.c ft_get_matrix_len.c free_scene.c destructors.c \
 		radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
@@ -36,8 +36,9 @@ CAMERA	= camera_constructor.c camera_destructor.c ray_for_pixel.c camera_setter.
 
 ALT		= alt_parser.c alt_checkers.c alt_utils.c alt_ambient.c alt_camera.c alt_light.c \
 		alt_shape.c alt_sphere.c alt_plane.c alt_cylinder.c alt_error.c scene_to_world.c
+MLX		= setup.c hooks.c
 
-DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera alt_parser
+DIRS	= . tuple color canvas matrix ray shape parser transformations light utils world camera alt_parser mlx
 IFLAGS	= -I $(HEADER_PATH)
 LDFLAGS	= -L$(LIBFT_PATH) -lft -L$(MINILIBX_PATH) -lmlx -lXext -lX11 -lm
 CFLAGS	= -Wall -Wextra -Werror

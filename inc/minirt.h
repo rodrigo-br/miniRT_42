@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/03 15:21:23 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:46:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <math.h>
 # include <stdio.h>
 # include <structs.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 # define RT_WIDTH 1366
 # define RT_HEIGHT 768
@@ -68,15 +70,19 @@ int			parse_sphere(char **tokens, t_rt_scene *s);
 int			parse_plane(char **tokens, t_rt_scene *s);
 int			parse_cylinder(char **tokens, t_rt_scene *s);
 
+/* Parser setters */
+int			set_shape_color(char *token, t_object *shape);
+int			set_shape_orientation_vector(char *token, t_object *shape);
+int			set_shape_material(t_object *shape, t_rt_scene *s);
+
+/* Checkers */
+int			check_user_input(int argc);
 int			check_file_extension(char *filename);
 int			check_scene_elements(t_rt_scene *s);
 int			check_vector_normalization(double x, double y, double z);
 
+/* Error handling */
 int			error(const char *warning);
-
-int			set_shape_color(char *token, t_object *shape);
-int			set_shape_orientation_vector(char *token, t_object *shape);
-int			set_shape_material(t_object *shape, t_rt_scene *s);
 
 double		ft_atof(const char *nptr);
 size_t		ft_splitsize(char **split);
@@ -84,6 +90,15 @@ t_bool		ft_isfloat(const char *str);
 t_bool		ft_isnumber(const char *str);
 t_bool		ft_isinrange(double value, double min, double max);
 t_rgb		*create_formatted_color(double r, double g, double b);
+
+/* MLX helpers */
+int			end_program(t_minirt *rt);
+int			keypress_handler(int keysym, t_minirt *rt);
+void		setup_visual_environment(t_minirt *rt);
+
+/* Destructors */
+void		destroy_scene(t_rt_scene *scene);
+void		destroy_minirt(t_rt_scene *scene, t_minirt *rt);
 
 // /* Errors before canvas*/
 // int			errors(int argc, char **argv, int *fd);

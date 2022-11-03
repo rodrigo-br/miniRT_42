@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:46:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 16:37:41 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:42:12 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 #define ERR_UNDEF_CAM "Undefined camera."
 #define ERR_UNDEF_LGT "Undefined light."
 #define ERR_UNDEF_OBJ "At least one object is required."
+
+int	check_user_input(int argc)
+{
+	if (argc != 2)
+	{
+		if (argc > 2)
+			error("miniRT: too many arguments");
+		if (argc < 2)
+			error("miniRT: too few arguments");
+		error("usage: ./miniRT <map file>.rt");
+		return (-1);
+	}
+	return (0);
+}
 
 int	check_file_extension(char *filename)
 {
