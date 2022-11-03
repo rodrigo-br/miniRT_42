@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 11:30:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:03:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ int	read_rt_file(char *filename, t_rt_scene *s)
 			continue ;
 		}
 		if (parse_rt_file(current_line, s) != 0)
-			return (free(current_line), -1);
+			return (free(current_line), close(file_descriptor), -1);
 		free(current_line);
 	}
+	close(file_descriptor);
 	return (check_scene_elements(s));
 }
