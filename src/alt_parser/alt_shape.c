@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 11:36:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:32:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define ERR_SHP_COLOR_SETTN "Invalid shape color settings."
 #define ERR_SHP_COLOR_VALUE "Invalid shape color value."
 #define ERR_SHP_COLOR_RANGE "Shape color channels must be between 0 and 255."
+#define ERR_SHP_NOT_NORMALIZED "Shape orientation vector is not normalized."
 
 int	set_shape_color(char *token, t_object *shape)
 {
@@ -45,22 +46,24 @@ int	set_shape_color(char *token, t_object *shape)
 
 int	set_shape_orientation_vector(char *token, t_object *shape)
 {
-	char	**vec;
-	double	aux[3];
+	char		**vect;
+	double		aux[3];
 
-	vec = ft_split(token, ',');
-	if (!vec || ft_splitsize(vec) != 3)
-		return (ft_free_matrix((void *)&vec), error(ERR_SHP_OVECT_SETTN));
-	if (!ft_isfloat(vec[0]) || !ft_isfloat(vec[1]) || !ft_isfloat(vec[2]))
-		return (ft_free_matrix((void *)&vec), error(ERR_SHP_OVECT_VALUE));
-	aux[0] = ft_atof(vec[0]);
-	aux[1] = ft_atof(vec[1]);
-	aux[2] = ft_atof(vec[2]);
-	ft_free_matrix((void *)&vec);
+	vect = ft_split(token, ',');
+	if (!vect || ft_splitsize(vect) != 3)
+		return (ft_free_matrix((void *)&vect), error(ERR_SHP_OVECT_SETTN));
+	if (!ft_isfloat(vect[0]) || !ft_isfloat(vect[1]) || !ft_isfloat(vect[2]))
+		return (ft_free_matrix((void *)&vect), error(ERR_SHP_OVECT_VALUE));
+	aux[0] = ft_atof(vect[0]);
+	aux[1] = ft_atof(vect[1]);
+	aux[2] = ft_atof(vect[2]);
+	ft_free_matrix((void *)&vect);
 	if (!ft_isinrange(aux[0], -1, 1) \
 	|| !ft_isinrange(aux[1], -1, 1) \
 	|| !ft_isinrange(aux[2], -1, 1))
 		return (error(ERR_SHP_OVECT_RANGE));
+	if (check_vector_normalization(aux[0], aux[1], aux[2]) != 0)
+		return (error(ERR_SHP_NOT_NORMALIZED));
 	shape->orientation = create_vector(aux[0], aux[1], aux[2]);
 	return (0);
 }

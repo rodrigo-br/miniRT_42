@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:46:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 09:56:45 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:37:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,11 @@ int	check_scene_elements(t_rt_scene *s)
 	if (!s->objects)
 		status += error(ERR_UNDEF_OBJ);
 	return (status);
+}
+
+int	check_vector_normalization(double x, double y, double z)
+{
+	if (!is_equal_double(1.0, magnitude(&(t_vector){x, y, z, 0})))
+		return (-1);
+	return (0);
 }

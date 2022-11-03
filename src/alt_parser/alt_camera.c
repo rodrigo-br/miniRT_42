@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:54:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 11:00:11 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:31:23 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define ERR_CAM_OVECT_RANGE "Camera orietation values must be between -1 and 1."
 #define ERR_CAM_FIELD_VALUE "Invalid camera field of view value."
 #define ERR_CAM_FIELD_RANGE "Camera field of view must be between 0 and 180."
+#define ERR_CAM_NOT_NORMALIZED "Camera orientation vector is not normalized."
 
 static int	set_camera_field_of_view(char *token, t_rt_scene *s)
 {
@@ -37,7 +38,6 @@ static int	set_camera_orientation_vector(char *token, t_rt_scene *s)
 {
 	char		**vect;
 	double		aux[3];
-	t_vector	*tmp;
 
 	vect = ft_split(token, ',');
 	if (!vect || ft_splitsize(vect) != 3)
@@ -52,9 +52,9 @@ static int	set_camera_orientation_vector(char *token, t_rt_scene *s)
 	|| !ft_isinrange(aux[1], -1, 1) \
 	|| !ft_isinrange(aux[2], -1, 1))
 		return (error(ERR_CAM_OVECT_RANGE));
-	tmp = create_vector(aux[0], aux[1], aux[2]);
-	s->camera->orientation = normalize(tmp);
-	free(tmp);
+	if (check_vector_normalization(aux[0], aux[1], aux[2]) != 0)
+		return (error(ERR_CAM_NOT_NORMALIZED));
+	s->camera->orientation = create_vector(aux[0], aux[1], aux[2]);
 	return (0);
 }
 
