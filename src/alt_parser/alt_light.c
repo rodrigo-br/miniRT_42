@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:39:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 11:27:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:00:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	parse_light(char **tokens, t_rt_scene *s)
 		return (error(ERR_LGT_ALREADY_SET));
 	if (ft_splitsize(tokens) != 4)
 		return (error(ERR_LGT_BAD_CONFIGS));
-	s->light = (t_rt_light *)malloc(sizeof(t_rt_light));
+	s->light = (t_rt_light *)ft_calloc(1, sizeof(t_rt_light));
 	if (!s->light)
 		return (error(ERR_LGT_MALLOC_FAIL));
 	if (set_light_point(tokens[1], s) != 0)

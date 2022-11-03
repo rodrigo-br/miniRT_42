@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:11:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 14:06:18 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:00:03 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_ambient(char **tokens, t_rt_scene *s)
 		return (error(ERR_AMB_ALREADY_SET));
 	if (ft_splitsize(tokens) != 3)
 		return (error(ERR_AMB_BAD_CONFIGS));
-	s->ambient = (t_rt_ambient *)malloc(sizeof(t_rt_ambient));
+	s->ambient = (t_rt_ambient *)ft_calloc(1, sizeof(t_rt_ambient));
 	if (!s->ambient)
 		return (error(ERR_AMB_MALLOC_FAIL));
 	if (set_ambient_ratio(tokens[1], s) != 0)

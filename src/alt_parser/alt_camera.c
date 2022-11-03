@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:54:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 17:31:50 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:00:11 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	parse_camera(char **tokens, t_rt_scene *s)
 		return (error(ERR_CAM_ALREADY_SET));
 	if (ft_splitsize(tokens) != 4)
 		return (error(ERR_CAM_BAD_CONFIGS));
-	s->camera = (t_rt_camera *)malloc(sizeof(t_rt_camera));
+	s->camera = (t_rt_camera *)ft_calloc(1, sizeof(t_rt_camera));
 	if (!s->camera)
 		return (error(ERR_CAM_MALLOC_FAIL));
 	if (set_camera_view_point(tokens[1], s) != 0)

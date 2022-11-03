@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:23:27 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/02 17:37:23 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:32:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,30 @@ void	print_scene(t_rt_scene *s)
 
 void	destroy_scene(t_rt_scene *scene)
 {
+	if (scene->camera)
+	{
+		ft_memfree((void *)&scene->camera->orientation);
+		ft_memfree((void *)&scene->camera->view_point);
+		ft_memfree((void *)&scene->camera);
+	}
+	if (scene->ambient)
+	{
+		ft_memfree((void *)&scene->ambient->color);
+		ft_memfree((void *)&scene->ambient);
+	}
+	if (scene->light)
+		ft_memfree((void *)&scene->light);
+	ft_lstclear(&scene->objects, destroy_shape);
+}
+
+void	destroy_minirt(t_rt_scene *scene, t_minirt *rt)
+{
+	destroy_world(rt->world);
+	destroy_camera(rt->camera);
 	ft_memfree((void *)&scene->camera->orientation);
 	ft_memfree((void *)&scene->camera->view_point);
-	ft_memfree((void *)&scene->ambient->color);
 	ft_memfree((void *)&scene->camera);
+	ft_memfree((void *)&scene->ambient->color);
 	ft_memfree((void *)&scene->ambient);
 	ft_memfree((void *)&scene->light);
 }
@@ -88,8 +108,6 @@ int	end_program(t_minirt *rt)
 {
 	mlx_destroy_window(rt->canvas->mlx, rt->window);
 	destroy_canvas(rt->canvas);
-	destroy_world(rt->world);
-	destroy_camera(rt->camera);
 	ft_memfree((void *)&rt);
 	exit(0);
 	return (0);
@@ -121,7 +139,7 @@ int	main(int argc, char **argv)
 		return (destroy_scene(&scene), 1);
 	rt = scene_to_world(&scene);
 	print_scene(&scene);
-	destroy_scene(&scene);
+	destroy_minirt(&scene, rt);
 	mlx_put_image_to_window(
 		rt->canvas->mlx, rt->window, rt->canvas->image, 0, 0);
 	mlx_hook(rt->window, 17, (1L << 2), end_program, rt);
