@@ -3,62 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 19:29:07 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 21:26:46 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:49:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	parse_line(char **line_splited, t_scene *scene)
-{
-	int	errors;
+#define ERR_OPEN_FAIL "Could not open .rt file"
+#define ERR_BAD_ID "Invalid identifier in .rt file."
 
-	errors = 0;
-	if (line_splited[0][0] == LIGHT && !scene->light)
-		errors = check_light(line_splited, &scene->light);
-	else if (line_splited[0][0] == AMBIENT && !scene->ambience)
-		errors = check_ambient(line_splited, &scene->ambience);
-	else if (line_splited[0][0] == CAMERA && !scene->camera)
-		errors = check_camera(line_splited, &scene->camera);
-	else if (!ft_strcmp(line_splited[0], SPHERE))
-		errors = check_sphere(line_splited, &scene->objects);
-	else if (!ft_strcmp(line_splited[0], CYLINDER))
-		errors = check_cylinder(line_splited, &scene->objects);
-	else if (!ft_strcmp(line_splited[0], PLANE))
-		errors = check_plane(line_splited, &scene->objects);
-	else if (line_splited[0][0] != '#')
-		errors = 1;
-	if (!errors)
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
+static t_delegator	*get_parse_function(t_parse_id id)
+{
+	static t_delegator	*function_table[PARSE_ID_MAX + 1];
+
+	if (function_table[PARSE_ID_MIN])
+		return (function_table[id]);
+	function_table[PARSE_AMBIENT] = parse_ambient;
+	function_table[PARSE_CAMERA] = parse_camera;
+	function_table[PARSE_LIGHT] = parse_light;
+	function_table[PARSE_SPHERE] = parse_sphere;
+	function_table[PARSE_PLANE] = parse_plane;
+	function_table[PARSE_CYLINDER] = parse_cylinder;
+	return (function_table[id]);
 }
 
-int	parser_1(int fd, t_scene *scene)
+static t_parse_id	get_token_id(char *token)
 {
-	char		*line;
-	char		**line_splited;
-	int			errors;
+	if (ft_strcmp(AMBIENT, token) == 0)
+		return (PARSE_AMBIENT);
+	if (ft_strcmp(CAMERA, token) == 0)
+		return (PARSE_CAMERA);
+	if (ft_strcmp(LIGHT, token) == 0)
+		return (PARSE_LIGHT);
+	if (ft_strcmp(SPHERE, token) == 0)
+		return (PARSE_SPHERE);
+	if (ft_strcmp(CYLINDER, token) == 0)
+		return (PARSE_CYLINDER);
+	if (ft_strcmp(PLANE, token) == 0)
+		return (PARSE_PLANE);
+	return (NONE);
+}
 
-	errors = 0;
-	line = ft_gnl(fd, FALSE);
-	while (line)
+static int	parse_rt_file(char *line, t_rt_scene *s)
+{
+	int			status;
+	char		**tokens;
+	t_delegator	*parse_function;
+
+	ft_swap_set(line, BLANKSPACES, ' ');
+	tokens = ft_split(line, ' ');
+	if (!tokens)
+		return (0);
+	parse_function = get_parse_function(get_token_id(tokens[0]));
+	if (!parse_function)
+		return (ft_free_matrix((void *)&tokens), error(ERR_BAD_ID));
+	status = parse_function(tokens, s);
+	ft_free_matrix((void *)&tokens);
+	return (status);
+}
+
+int	read_rt_file(char *filename, t_rt_scene *s)
+{
+	int		file_descriptor;
+	char	*current_line;
+
+	if (check_file_extension(filename) != 0)
+		return (-1);
+	file_descriptor = open(filename, O_RDONLY);
+	if (file_descriptor < 0)
+		return (perror(ERR_OPEN_FAIL), -1);
+	while (TRUE)
 	{
-		line = ft_strtrim_free(line, " \f\n\r\t\v");
-		ft_str_swap_set_chr(line, "\f\r\t\v", ' ');
-		line_splited = ft_split(line, ' ');
-		free(line);
-		if (line_splited)
+		current_line = ft_gnl(file_descriptor, FALSE);
+		if (!current_line)
+			break ;
+		if (!*current_line || *current_line == '#')
 		{
-			if (parse_line(line_splited, scene))
-				errors++;
-			ft_free_matrix((void *)&line_splited);
+			free(current_line);
+			continue ;
 		}
-		line = ft_gnl(fd, FALSE);
+		if (parse_rt_file(current_line, s) != 0)
+			return (free(current_line), close(file_descriptor), -1);
+		free(current_line);
 	}
-	if (errors)
-		return (free_scene(scene), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	close(file_descriptor);
+	return (check_scene_elements(s));
 }

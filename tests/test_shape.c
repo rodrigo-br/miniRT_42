@@ -53,10 +53,12 @@ void	test_shape_default_material(void)
 
 	s = create_sphere();
 	m = s->material;
-	TEST_ASSERT_TRUE(m->ambient == DEFAULT_AMBIENT);
-	TEST_ASSERT_TRUE(m->diffuse == DEFAULT_DIFFUSE);
-	TEST_ASSERT_TRUE(m->specular == DEFAULT_SPECULAR);
-	TEST_ASSERT_TRUE(m->shininess == DEFAULT_SHININESS);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_AMBIENT, m->ambient->red);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_AMBIENT, m->ambient->green);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_AMBIENT, m->ambient->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_DIFFUSE, m->diffuse);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_SPECULAR, m->specular);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_SHININESS, m->shininess);
 	destroy_shape(s);
 }
 
@@ -75,13 +77,15 @@ void test_shape_assign_material(void)
 
 	s = create_sphere();
 	m = create_material();
-	m->ambient = 1;
+	set_color(m->ambient, 1, 1, 1);
 	destroy_material(s->material);
 	s->material = m;
-	TEST_ASSERT_TRUE(s->material->ambient == 1);
-	TEST_ASSERT_TRUE(s->material->diffuse == DEFAULT_DIFFUSE);
-	TEST_ASSERT_TRUE(s->material->specular == DEFAULT_SPECULAR);
-	TEST_ASSERT_TRUE(s->material->shininess == DEFAULT_SHININESS);
+	TEST_ASSERT_EQUAL_DOUBLE(1, s->material->ambient->red);
+	TEST_ASSERT_EQUAL_DOUBLE(1, s->material->ambient->green);
+	TEST_ASSERT_EQUAL_DOUBLE(1, s->material->ambient->blue);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_DIFFUSE, s->material->diffuse);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_SPECULAR, s->material->specular);
+	TEST_ASSERT_EQUAL_DOUBLE(DEFAULT_SHININESS, s->material->shininess);
 	destroy_shape(s);
 }
 

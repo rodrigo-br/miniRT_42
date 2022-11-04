@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:17:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:41:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:11:55 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_object	*create_cylinder(void)
 	cylinder->cylinder.diameter = 1.0;
 	cylinder->cylinder.min = -INFINITY;
 	cylinder->cylinder.max = INFINITY;
-	cylinder->cylinder.capped = FALSE;
+	cylinder->cylinder.capped = TRUE;
 	cylinder->intersect = intersect_cylinder;
 	cylinder->get_normal = get_cylinder_normal;
 	return (cylinder);
@@ -43,7 +43,7 @@ void	intersect_caps(t_object *cyl, t_ray *ray, t_intersect **head)
 {
 	double	time;
 
-	if (!cyl->cylinder.capped || fabs(ray->direction->y) < EPSILON)
+	if (!cyl->cylinder.capped || is_equal_double(0.0, ray->direction->y))
 		return ;
 	time = (cyl->cylinder.min - ray->origin->y) / ray->direction->y;
 	if (is_cap_within_radius(ray, time))
@@ -63,7 +63,7 @@ void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
 
 	intersect_caps(cyl, ray, head);
 	bhaskara.a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
-	if (fabs(bhaskara.a) < EPSILON)
+	if (is_equal_double(0.0, bhaskara.a))
 		return ;
 	bhaskara.b = 2 * ray->origin->x * ray->direction->x;
 	bhaskara.b += 2 * ray->origin->z * ray->direction->z;

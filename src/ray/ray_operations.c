@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/31 12:09:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:19:54 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,11 @@ t_rgb	*shade_hit(t_world *world, t_comp *comps)
 	t_lightattr	*light_attr;
 	t_light_pnt	*lp;
 	t_rgb		*color;
-	t_bool		in_shadow;
 
-	in_shadow = is_shadowed(world, comps->over_point);
 	lp = (t_light_pnt *)world->light_point->content;
 	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->over_point);
 	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
-	light_attr->in_shadow = in_shadow;
+	light_attr->in_shadow = is_shadowed(world, comps->over_point);
 	light_attr->object = comps->object;
 	color = lighting(light_attr);
 	free(light_attr);
@@ -74,7 +72,10 @@ t_rgb	*color_at(t_world *world, t_ray *ray)
 	intersect_world(world, ray, &xs);
 	hit = get_hit(xs);
 	if (!hit)
+	{
+		intersection_list_clear(&xs);
 		return (create_color(0, 0, 0));
+	}
 	comps = prepare_computation(hit, ray);
 	color = shade_hit(world, comps);
 	destroy_computation(comps);

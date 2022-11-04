@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_double_value.c                              :+:      :+:    :+:   */
+/*   ft_splitsize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 11:03:11 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 11:03:19 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	set_double_value(double *variable, char *value)
+size_t	ft_splitsize(char **split)
 {
-	double	double_value;
+	size_t	size;
 
-	if (!ft_is_a_double(value))
-		return (EXIT_FAILURE);
-	double_value = ft_atod(value);
-	*variable = double_value;
-	return (EXIT_SUCCESS);
+	size = 0;
+	while (split[size])
+		++size;
+	return (size);
 }

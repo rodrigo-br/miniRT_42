@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:43:19 by maolivei          #+#    #+#             */
-/*   Updated: 2022/09/25 22:08:44 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:56:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,6 +321,14 @@ void		ft_putstr_fd(char *s, int fd);
 /******************************************************************************/
 
 /**
+* @brief Converts the initial portion of the string pointed to by nptr to
+* floating point.
+* @param nptr The string to be converted.
+* @return Converted value or 0 on error.
+*/
+double		ft_atof(const char *nptr);
+
+/**
 * @brief Converts the initial portion of the string pointed to by nptr to int.
 * @param nptr The string to be converted.
 * @return Converted value or 0 on error.
@@ -359,6 +367,56 @@ void		*ft_calloc(size_t nmemb, size_t size);
 /*   ########   ########   ########     ###     ########  ###       ###       */
 /*                                                                            */
 /******************************************************************************/
+
+/**
+* @brief Calculate the size of the array of strings 'split'.
+* @param split Array of strings to get the size of.
+* @return The size of the array.
+*/
+size_t		ft_splitsize(char **split);
+
+/**
+* @brief Verifies if 'str' is a floating point number.
+* @param str String to be checked.
+* @return 1 if string is a floating point, else returns 0.
+*/
+t_bool		ft_isfloat(const char *str);
+
+/**
+* @brief Verifies if 'str' is a decimal number.
+* @param str String to be checked.
+* @return 1 if string is a decimal, else returns 0.
+*/
+t_bool		ft_isnumber(const char *str);
+
+/**
+* @brief Verifies if integer value 'value'
+* is in the range between 'min' and 'max'.
+* @param value Value to be checked.
+* @param min Minimum value in range, inclusive.
+* @param max Maximum value in range, inclusive.
+* @return 1 if value is in range, else returns 0.
+*/
+t_bool		ft_isinrange_i(int value, int min, int max);
+
+/**
+* @brief Verifies if floating point value 'value'
+* is in the range between 'min' and 'max'.
+* @param value Value to be checked.
+* @param min Minimum value in range, inclusive.
+* @param max Maximum value in range, inclusive.
+* @return 1 if value is in range, else returns 0.
+*/
+t_bool		ft_isinrange_f(double value, double min, double max);
+
+/**
+* @brief Swaps the set of characters 'from' to the character
+* 'to' from string 'str'.
+* @param str String to swap characters from.
+* @param from Set of characteres to swap from.
+* @param to Character to swap to.
+*/
+void		ft_swap_set(char *str, const char *from, int to);
 
 /**
 * @brief Read and return a line from a given file descriptor.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:02:07 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 14:25:19 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:54:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,35 +130,40 @@ And up ← vector(0, 1, 0)
 And c.transform ← view_transform(from, to, up)
 When image ← render(c, w)
 Then pixel_at(image, 5, 5) = color(0.38066, 0.47583, 0.2855) */
-void	test_render_world_with_camera(void)
-{
-	t_world		*world;
-	t_cam		*camera;
-	t_point		*from, *to;
-	t_vector	*up;
-	t_canvas	*canvas;
 
-	world = default_world();
-	camera = create_camera(11, 11, radians(180 / 2));
-	from = create_point(0, 0, -5);
-	to = create_point(0, 0, 0);
-	up = create_vector(0, 1, 0);
-	set_camera_transformation(camera, view_transform(from, to, up));
-	canvas = render(camera, world);
-	TEST_ASSERT_EQUAL(
-		/* altered values cause algorithm produces very visually similar colors,
-		but not as similar as needed to be considered equal to the suggested tests
-		e.g tests suggests: 0x607848, program produces 0x617949 */
-		merge_colors(0.38039, 0.47450, 0.28627),
-		pixel_at(canvas, 5, 5)
-	);
-	destroy_world(world);
-	destroy_camera(camera);
-	destroy_canvas(canvas);
-	free(from);
-	free(up);
-	free(to);
-}
+/* This test is now obsolete, because view transformation considers
+the already normalized vector coming from the '.rt' file. The calculus
+used to setup 'forward' by subtracting 'to' from 'from' is no longer
+performed. */
+// void	test_render_world_with_camera(void)
+// {
+// 	t_world		*world;
+// 	t_cam		*camera;
+// 	t_point		*from, *to;
+// 	t_vector	*up;
+// 	t_canvas	*canvas;
+
+// 	world = default_world();
+// 	camera = create_camera(11, 11, radians(180 / 2));
+// 	from = create_point(0, 0, -5);
+// 	to = create_point(0, 0, 0);
+// 	up = create_vector(0, 1, 0);
+// 	set_camera_transformation(camera, view_transform(from, to, up));
+// 	canvas = render(camera, world);
+// 	TEST_ASSERT_EQUAL(
+// 		/* altered values cause algorithm produces very visually similar colors,
+// 		but not as similar as needed to be considered equal to the suggested tests
+// 		e.g tests suggests: 0x607848, program produces 0x617949 */
+// 		merge_colors(0.38039, 0.47450, 0.28627),
+// 		pixel_at(canvas, 5, 5)
+// 	);
+// 	destroy_world(world);
+// 	destroy_camera(camera);
+// 	destroy_canvas(canvas);
+// 	free(from);
+// 	free(up);
+// 	free(to);
+// }
 
 /* Note to self:
 	this leaks                              a lot.
@@ -267,7 +272,7 @@ void	test_camera(void)
 	RUN_TEST(test_ray_through_center_of_canvas);
 	RUN_TEST(test_ray_through_corner_of_canvas);
 	RUN_TEST(test_ray_when_camera_is_transformed);
-	RUN_TEST(test_render_world_with_camera);
+	// RUN_TEST(test_render_world_with_camera); /* obsolete, read above */
 	// uncomment at your own risk
 	// RUN_TEST(test_print_three_spheres);
 }

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 12:07:59 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:19:36 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,77 @@
 # include <math.h>
 # include <stdio.h>
 # include <structs.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
+# define RT_WIDTH 1366
+# define RT_HEIGHT 768
 # define VECTOR_W 0.0
 # define POINT_W 1.0
 # define EPSILON 0.00001
-# define AMBIENT 'A'
-# define CAMERA 'C'
-# define LIGHT	'L'
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846	/* π */
+# endif
+# ifndef M_PI_2
+#  define M_PI_2 1.57079632679489661923	/* π / 2 */
+# endif
+
+# define AMBIENT "A"
+# define CAMERA "C"
+# define LIGHT	"L"
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
+# define BLANKSPACES "\f\r\t\v"
 
-/* Errors before canvas*/
-int			errors(int argc, char **argv, int *fd);
+typedef enum e_parse_id
+{
+	NONE,
+	PARSE_AMBIENT,
+	PARSE_CAMERA,
+	PARSE_LIGHT,
+	PARSE_SPHERE,
+	PARSE_PLANE,
+	PARSE_CYLINDER
+}	t_parse_id;
 
-/* Parser */
-int			parser_1(int fd, t_scene *scene);
-int			check_light(char **line_splited, t_light **light);
-int			check_ambient(char **line_splited, t_ambience **ambience);
-int			check_camera(char **line_splited, t_camera **camera);
-int			check_sphere(char **line_splited, t_list **object);
-int			check_plane(char **line_splited, t_list **object);
-int			check_cylinder(char **line_splited, t_list **object);
-int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
-int			check_object_3d_orientation(char *s);
-int			check_coordinates_digits(char **coordinates);
-char		**check_rgb(char *s);
+# define PARSE_ID_MIN PARSE_AMBIENT
+# define PARSE_ID_MAX PARSE_CYLINDER
 
-/* List */
-void		free_lst_obj(void *obj);
-void		free_scene(t_scene *scene);
+typedef int	t_delegator(char **tokens, t_rt_scene *s);
 
-/* Extra libft functions */
-double		ft_atod(char *s);
-int			ft_is_a_double(char *string);
-int			ft_is_all_digit(char *string);
-void		ft_str_swap_set_chr(char *str, char *old, char new);
-int			set_double_value(double *variable, char *value);
-size_t		ft_get_matrix_len(char **matrix);
+/* ALT */
+t_minirt	*scene_to_world(t_rt_scene *s);
+int			read_rt_file(char *filename, t_rt_scene *s);
+int			parse_ambient(char **tokens, t_rt_scene *s);
+int			parse_camera(char **tokens, t_rt_scene *s);
+int			parse_light(char **tokens, t_rt_scene *s);
+int			parse_sphere(char **tokens, t_rt_scene *s);
+int			parse_plane(char **tokens, t_rt_scene *s);
+int			parse_cylinder(char **tokens, t_rt_scene *s);
+
+/* Parser setters */
+int			set_shape_color(char *token, t_object *shape);
+int			set_shape_orientation_vector(char *token, t_object *shape);
+int			set_shape_material(t_object *shape, t_rt_scene *s);
+
+/* Checkers */
+int			check_user_input(int argc);
+int			check_file_extension(char *filename);
+int			check_scene_elements(t_rt_scene *s);
+int			check_vector_normalization(double x, double y, double z);
+
+/* Error handling */
+int			error(const char *warning);
+
+/* MLX helpers */
+int			end_program(t_minirt *rt);
+int			keypress_handler(int keysym, t_minirt *rt);
+void		setup_visual_environment(t_minirt *rt);
+
+/* Destructors */
+void		destroy_scene(t_rt_scene *scene);
+void		destroy_minirt(t_rt_scene *scene, t_minirt *rt);
 
 /* Constructors */
 t_tuple		*create_tuple(double x, double y, double z, double w);
@@ -87,6 +120,7 @@ t_tuple		*cross_product(t_tuple *a, t_tuple *b);
 
 /* Colors */
 t_rgb		*create_color(double r, double g, double b);
+t_rgb		*create_formatted_color(double r, double g, double b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
@@ -104,6 +138,7 @@ t_matrix	*create_matrix(size_t size, const double m[MAT_MAX][MAT_MAX]);
 t_matrix	*create_identity_matrix(void);
 t_matrix	*create_submatrix(t_matrix *m, size_t delrow, size_t delcol);
 t_matrix	*multiply_matrix(t_matrix *a, t_matrix *b);
+t_matrix	*multiply_matrix_triple(t_matrix *a, t_matrix *b, t_matrix *c);
 t_tuple		*multiply_matrix_tuple(t_matrix *m, t_tuple *t);
 t_matrix	*transpose_matrix(t_matrix *m);
 t_matrix	*inverse_matrix(t_matrix *m);
@@ -118,6 +153,7 @@ t_matrix	*shearing_matrix(t_shearing s);
 t_matrix	*rotate_matrix_x(double r);
 t_matrix	*rotate_matrix_y(double r);
 t_matrix	*rotate_matrix_z(double r);
+t_matrix	*full_rotation_matrix(t_vector *vector);
 double		radians(double degree);
 
 /* Ray */
@@ -181,7 +217,6 @@ t_canvas	*render(t_cam *camera, t_world *world);
 t_pattern	*create_pattern(t_rgb *a, t_rgb *b);
 t_rgb		*pattern_at(t_pattern *pattern, t_point	*point);
 void		destroy_pattern(t_pattern *pattern);
-void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
 t_rgb		*pattern_at_obj(t_pattern *pat, t_point *point, t_object *obj);
 void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
 

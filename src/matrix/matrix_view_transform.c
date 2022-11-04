@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_view_transform.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:50:50 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/25 18:55:04 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:36:59 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,18 @@ static t_matrix	*create_transformation(
 	free(translated);
 	free(left);
 	free(true_up);
-	free(forward);
 	return (view_transformation);
 }
 
 t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up)
 {
-	t_vector	*forward;
 	t_vector	*left;
-	t_vector	*aux;
 	t_vector	*normalized_up;
 	t_vector	*true_up;
 
-	aux = sub_tuple(to, from);
-	forward = normalize(aux);
-	free(aux);
 	normalized_up = normalize(up);
-	left = cross_product(forward, normalized_up);
+	left = cross_product(to, normalized_up);
 	free(normalized_up);
-	true_up = cross_product(left, forward);
-	return (create_transformation(left, true_up, forward, from));
+	true_up = cross_product(left, to);
+	return (create_transformation(left, true_up, to, from));
 }

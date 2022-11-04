@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_all_digit.c                                  :+:      :+:    :+:   */
+/*   alt_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 11:15:36 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 12:21:46 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/11/01 22:22:09 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/01 22:27:18 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-int	ft_is_all_digit(char *string)
+int	error(const char *warning)
 {
-	int		i;
-
-	i = -1;
-	if (!string)
-		return (0);
-	while (string[++i])
-	{
-		if (!ft_isdigit(string[i]))
-			return (0);
-	}
-	return (1);
+	ft_putendl_fd((char *)warning, STDERR);
+	return (-1);
 }

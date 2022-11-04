@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_obj_free.c                                     :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 18:10:26 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/20 19:03:02 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-void	free_lst_obj(void *_obj)
+t_bool	ft_isnumber(const char *str)
 {
-	t_object	*obj;
-
-	obj = (t_object *)_obj;
-	free(obj->rgb);
-	free(obj);
+	if (*str == '+' || *str == '-')
+		++str;
+	while (*str)
+		if (!ft_isdigit(*str++))
+			return (FALSE);
+	return (TRUE);
 }
