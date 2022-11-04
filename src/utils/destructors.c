@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:44:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 19:44:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:09:37 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	destroy_scene(t_rt_scene *scene)
 		ft_memfree((void *)&scene->ambient->color);
 		ft_memfree((void *)&scene->ambient);
 	}
-	if (scene->light)
-		ft_memfree((void *)&scene->light);
 	ft_lstclear(&scene->objects, destroy_shape);
+	ft_lstclear(&scene->lights, destroy_light_point);
 }
 
 void	destroy_minirt(t_rt_scene *scene, t_minirt *rt)
@@ -39,5 +38,4 @@ void	destroy_minirt(t_rt_scene *scene, t_minirt *rt)
 	ft_memfree((void *)&scene->camera);
 	ft_memfree((void *)&scene->ambient->color);
 	ft_memfree((void *)&scene->ambient);
-	ft_memfree((void *)&scene->light);
 }

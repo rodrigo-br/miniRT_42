@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 10:21:16 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:12:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ typedef struct s_rt_scene
 {
 	t_rt_ambient	*ambient;
 	t_rt_camera		*camera;
-	t_rt_light		*light;
 	t_list			*objects;
+	t_list			*lights;
+	double			brightness;
 }	t_rt_scene;
 
 /* tipos de acordo com as especificaçoes de cada um */
