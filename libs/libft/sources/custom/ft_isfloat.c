@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_scene.c                                       :+:      :+:    :+:   */
+/*   ft_isfloat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 19:05:13 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/01 20:57:01 by maolivei         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-// void	free_scene(t_scene *scene)
-// {
-// 	ft_lstclear(&scene->objects, free_lst_obj);
-// 	if (scene->ambience)
-// 	{
-// 		free(scene->ambience->rgb);
-// 		free(scene->ambience);
-// 	}
-// 	if (scene->light)
-// 	{
-// 		free(scene->light->rgb);
-// 		free(scene->light);
-// 	}
-// 	if (scene->camera)
-// 		free(scene->camera);
-// 	free(scene);
-// }
+t_bool	ft_isfloat(const char *str)
+{
+	if (*str == '+' || *str == '-')
+		++str;
+	while (*str && ft_isdigit(*str))
+		++str;
+	if (*str == '.')
+		++str;
+	while (*str && ft_isdigit(*str))
+		++str;
+	if (*str && !ft_isdigit(*str))
+		return (FALSE);
+	return (TRUE);
+}

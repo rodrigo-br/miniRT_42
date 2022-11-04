@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/03 19:46:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:51:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,6 @@ int			check_vector_normalization(double x, double y, double z);
 /* Error handling */
 int			error(const char *warning);
 
-double		ft_atof(const char *nptr);
-size_t		ft_splitsize(char **split);
-t_bool		ft_isfloat(const char *str);
-t_bool		ft_isnumber(const char *str);
-t_bool		ft_isinrange(double value, double min, double max);
-t_rgb		*create_formatted_color(double r, double g, double b);
-
 /* MLX helpers */
 int			end_program(t_minirt *rt);
 int			keypress_handler(int keysym, t_minirt *rt);
@@ -99,34 +92,6 @@ void		setup_visual_environment(t_minirt *rt);
 /* Destructors */
 void		destroy_scene(t_rt_scene *scene);
 void		destroy_minirt(t_rt_scene *scene, t_minirt *rt);
-
-// /* Errors before canvas*/
-// int			errors(int argc, char **argv, int *fd);
-
-// /* Parser */
-// int			parser_1(int fd, t_scene *scene);
-// int			check_light(char **line_splited, t_light **light);
-// int			check_ambient(char **line_splited, t_ambient **ambience);
-// int			check_camera(char **line_splited, t_camera **camera);
-// int			check_sphere(char **line_splited, t_list **object);
-// int			check_plane(char **line_splited, t_list **object);
-// int			check_cylinder(char **line_splited, t_list **object);
-// int			check_rgb_digits(char **rgb, int *red, int *green, int *blue);
-// int			check_object_3d_orientation(char *s);
-// int			check_coordinates_digits(char **coordinates);
-// char		**check_rgb(char *s);
-
-// /* List */
-// void		free_lst_obj(void *obj);
-// void		free_scene(t_scene *scene);
-
-/* Extra libft functions */
-double		ft_atod(char *s);
-int			ft_is_a_double(char *string);
-int			ft_is_all_digit(char *string);
-void		ft_str_swap_set_chr(char *str, char *old, char new);
-int			set_double_value(double *variable, char *value);
-size_t		ft_get_matrix_len(char **matrix);
 
 /* Constructors */
 t_tuple		*create_tuple(double x, double y, double z, double w);
@@ -155,6 +120,7 @@ t_tuple		*cross_product(t_tuple *a, t_tuple *b);
 
 /* Colors */
 t_rgb		*create_color(double r, double g, double b);
+t_rgb		*create_formatted_color(double r, double g, double b);
 t_rgb		*sum_color(t_rgb *a, t_rgb *b);
 t_rgb		*sub_color(t_rgb *a, t_rgb *b);
 t_rgb		*multiply_color(t_rgb *a, t_rgb *b);
@@ -250,11 +216,7 @@ t_canvas	*render(t_cam *camera, t_world *world);
 t_pattern	*create_pattern(t_rgb *a, t_rgb *b);
 t_rgb		*pattern_at(t_pattern *pattern, t_point	*point);
 void		destroy_pattern(t_pattern *pattern);
-void		set_color_from_pattern(t_rgb *color, t_rgb *pattern);
 t_rgb		*pattern_at_obj(t_pattern *pat, t_point *point, t_object *obj);
 void		set_pattern_transformation(t_pattern *pattern, t_matrix *transform);
-
-/* Test */
-int			sub_main(int argc, char **argv);
 
 #endif /* MINIRT_H */

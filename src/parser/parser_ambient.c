@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_ambient.c                                      :+:      :+:    :+:   */
+/*   parser_ambient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:11:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 11:00:03 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:34:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	set_ambient_ratio(char *token, t_rt_scene *s)
 	if (!ft_isfloat(token))
 		return (error(ERR_AMB_RATIO_VALUE));
 	s->ambient->ratio = ft_atof(token);
-	if (!ft_isinrange(s->ambient->ratio, 0.0, 1.0))
+	if (!ft_isinrange_f(s->ambient->ratio, 0.0, 1.0))
 		return (error(ERR_AMB_RATIO_RANGE));
 	return (0);
 }
@@ -45,9 +45,9 @@ static int	set_ambient_color(char *token, t_rt_scene *s)
 	aux[1] = ft_atoi(rgb[1]);
 	aux[2] = ft_atoi(rgb[2]);
 	ft_free_matrix((void *)&rgb);
-	if (!ft_isinrange(aux[0], 0, 255) \
-	|| !ft_isinrange(aux[1], 0, 255) \
-	|| !ft_isinrange(aux[2], 0, 255))
+	if (!ft_isinrange_f(aux[0], 0, 255) \
+	|| !ft_isinrange_f(aux[1], 0, 255) \
+	|| !ft_isinrange_f(aux[2], 0, 255))
 		return (error(ERR_AMB_COLOR_RANGE));
 	s->ambient->color = create_formatted_color(aux[0], aux[1], aux[2]);
 	return (0);

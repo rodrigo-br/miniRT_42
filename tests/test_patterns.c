@@ -147,7 +147,7 @@ void	test_pattern_lightning_with_pattern(void)
 	lp = create_light_point(create_point(0, 0, -10), create_color(1, 1, 1));
 	material = create_material();
 	material->pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
-	material->ambient = 1;
+	set_color(material->ambient, 1, 1, 1);
 	material->diffuse = 0;
 	material->specular = 0;
 	args = create_lightattr(lp, pos, material);
@@ -250,15 +250,15 @@ void	checkers_should_repeat_in_x(void)
 	t_rgb		*color;
 
 	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
-	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	color = pattern_at(pattern, &(t_point){0, 0, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){0.99, 0, 0});
+	color = pattern_at(pattern, &(t_point){0.99, 0, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){1.01, 0, 0});
+	color = pattern_at(pattern, &(t_point){1.01, 0, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);
@@ -278,15 +278,15 @@ void	checkers_should_repeat_in_y(void)
 	t_rgb		*color;
 
 	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
-	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	color = pattern_at(pattern, &(t_point){0, 0, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){0, 0.99, 0});
+	color = pattern_at(pattern, &(t_point){0, 0.99, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){0, 1.01, 0});
+	color = pattern_at(pattern, &(t_point){0, 1.01, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);
@@ -306,15 +306,15 @@ void	checkers_should_repeat_in_z(void)
 	t_rgb		*color;
 
 	pattern = create_pattern(create_color(1, 1, 1), create_color(0, 0, 0));
-	color = pattern_at(pattern, &(t_point){0, 0, 0});
+	color = pattern_at(pattern, &(t_point){0, 0, 0, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){0, 0, 0.99});
+	color = pattern_at(pattern, &(t_point){0, 0, 0.99, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(1, color->blue);
-	color = pattern_at(pattern, &(t_point){0, 0, 1.01});
+	color = pattern_at(pattern, &(t_point){0, 0, 1.01, 1});
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(0, color->blue);

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_all_digit.c                                  :+:      :+:    :+:   */
+/*   ft_splitsize.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 11:15:36 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 12:21:46 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-int	ft_is_all_digit(char *string)
+size_t	ft_splitsize(char **split)
 {
-	int		i;
+	size_t	size;
 
-	i = -1;
-	if (!string)
-		return (0);
-	while (string[++i])
-	{
-		if (!ft_isdigit(string[i]))
-			return (0);
-	}
-	return (1);
+	size = 0;
+	while (split[size])
+		++size;
+	return (size);
 }

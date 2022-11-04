@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_light.c                                        :+:      :+:    :+:   */
+/*   parser_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:39:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 11:00:21 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:34:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	set_light_color(char *token, t_rt_scene *s)
 	s->light->green = ft_atoi(rgb[1]);
 	s->light->blue = ft_atoi(rgb[2]);
 	ft_free_matrix((void *)&rgb);
-	if (!ft_isinrange(s->light->red, 0, 255) \
-	|| !ft_isinrange(s->light->green, 0, 255) \
-	|| !ft_isinrange(s->light->blue, 0, 255))
+	if (!ft_isinrange_f(s->light->red, 0, 255) \
+	|| !ft_isinrange_f(s->light->green, 0, 255) \
+	|| !ft_isinrange_f(s->light->blue, 0, 255))
 		return (error(ERR_LGT_COLOR_RANGE));
 	return (0);
 }
@@ -48,7 +48,7 @@ static int	set_light_brightness(char *token, t_rt_scene *s)
 	if (!ft_isfloat(token))
 		return (error(ERR_LGT_BRGHT_VALUE));
 	s->light->brightness = ft_atof(token);
-	if (!ft_isinrange(s->light->brightness, 0.0, 1.0))
+	if (!ft_isinrange_f(s->light->brightness, 0.0, 1.0))
 		return (error(ERR_LGT_BRGHT_RANGE));
 	return (0);
 }

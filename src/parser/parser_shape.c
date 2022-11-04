@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_shape.c                                        :+:      :+:    :+:   */
+/*   parser_shape.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 17:32:13 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:34:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	set_shape_color(char *token, t_object *shape)
 	aux[1] = ft_atoi(rgb[1]);
 	aux[2] = ft_atoi(rgb[2]);
 	ft_free_matrix((void *)&rgb);
-	if (!ft_isinrange(aux[0], 0, 255) \
-	|| !ft_isinrange(aux[1], 0, 255) \
-	|| !ft_isinrange(aux[2], 0, 255))
+	if (!ft_isinrange_f(aux[0], 0, 255) \
+	|| !ft_isinrange_f(aux[1], 0, 255) \
+	|| !ft_isinrange_f(aux[2], 0, 255))
 		return (error(ERR_SHP_COLOR_RANGE));
 	free(shape->material->color);
 	shape->material->color = create_formatted_color(aux[0], aux[1], aux[2]);
@@ -58,9 +58,9 @@ int	set_shape_orientation_vector(char *token, t_object *shape)
 	aux[1] = ft_atof(vect[1]);
 	aux[2] = ft_atof(vect[2]);
 	ft_free_matrix((void *)&vect);
-	if (!ft_isinrange(aux[0], -1, 1) \
-	|| !ft_isinrange(aux[1], -1, 1) \
-	|| !ft_isinrange(aux[2], -1, 1))
+	if (!ft_isinrange_f(aux[0], -1, 1) \
+	|| !ft_isinrange_f(aux[1], -1, 1) \
+	|| !ft_isinrange_f(aux[2], -1, 1))
 		return (error(ERR_SHP_OVECT_RANGE));
 	if (check_vector_normalization(aux[0], aux[1], aux[2]) != 0)
 		return (error(ERR_SHP_NOT_NORMALIZED));

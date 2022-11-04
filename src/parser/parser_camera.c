@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_camera.c                                       :+:      :+:    :+:   */
+/*   parser_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:54:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 17:31:23 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:34:43 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	set_camera_field_of_view(char *token, t_rt_scene *s)
 	if (!ft_isnumber(token))
 		return (error(ERR_CAM_FIELD_VALUE));
 	s->camera->fov = ft_atoi(token);
-	if (!ft_isinrange(s->camera->fov, 0, 180))
+	if (!ft_isinrange_f(s->camera->fov, 0, 180))
 		return (error(ERR_CAM_FIELD_RANGE));
 	return (0);
 }
@@ -48,9 +48,9 @@ static int	set_camera_orientation_vector(char *token, t_rt_scene *s)
 	aux[1] = ft_atof(vect[1]);
 	aux[2] = ft_atof(vect[2]);
 	ft_free_matrix((void *)&vect);
-	if (!ft_isinrange(aux[0], -1, 1) \
-	|| !ft_isinrange(aux[1], -1, 1) \
-	|| !ft_isinrange(aux[2], -1, 1))
+	if (!ft_isinrange_f(aux[0], -1, 1) \
+	|| !ft_isinrange_f(aux[1], -1, 1) \
+	|| !ft_isinrange_f(aux[2], -1, 1))
 		return (error(ERR_CAM_OVECT_RANGE));
 	if (check_vector_normalization(aux[0], aux[1], aux[2]) != 0)
 		return (error(ERR_CAM_NOT_NORMALIZED));

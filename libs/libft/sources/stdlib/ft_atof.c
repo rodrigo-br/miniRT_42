@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_utils.c                                        :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/01 14:08:37 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 21:33:36 by maolivei         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
 double	ft_atof(const char *nptr)
 {
@@ -36,44 +36,4 @@ double	ft_atof(const char *nptr)
 		power *= 10.0;
 	}
 	return (is_neg * result / power);
-}
-
-size_t	ft_splitsize(char **split)
-{
-	size_t	size;
-
-	size = 0;
-	while (split[size])
-		++size;
-	return (size);
-}
-
-t_bool	ft_isfloat(const char *str)
-{
-	if (*str == '+' || *str == '-')
-		++str;
-	while (*str && ft_isdigit(*str))
-		++str;
-	if (*str == '.')
-		++str;
-	while (*str && ft_isdigit(*str))
-		++str;
-	if (*str && !ft_isdigit(*str))
-		return (FALSE);
-	return (TRUE);
-}
-
-t_bool	ft_isnumber(const char *str)
-{
-	if (*str == '+' || *str == '-')
-		++str;
-	while (*str)
-		if (!ft_isdigit(*str++))
-			return (FALSE);
-	return (TRUE);
-}
-
-t_bool	ft_isinrange(double value, double min, double max)
-{
-	return (value >= min && value <= max);
 }

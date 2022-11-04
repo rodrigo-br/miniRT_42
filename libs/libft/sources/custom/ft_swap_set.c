@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_matrix_len.c                                :+:      :+:    :+:   */
+/*   ft_swap_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 15:51:17 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/19 15:55:27 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 16:29:43 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 11:04:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-size_t	ft_get_matrix_len(char **matrix)
+void	ft_swap_set(char *str, const char *from, int to)
 {
-	size_t	i;
-
-	if (!matrix || !(*matrix))
-		return (0);
-	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
+	while (*str)
+		if (ft_strchr(from, *str++))
+			*(str - 1) = to;
 }

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 20:25:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 11:09:57 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:25:14 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	test_tuple_operations(void);
 void	test_colors(void);
 void	test_canvas(void);
 void	test_matrix(void);
-void	pre_parser_errors(void);
-void	test_parser(void);
-void	test_check_light(void);
-void	test_check_ambient(void);
-void	test_check_camera(void);
-void	test_check_cylinder(void);
-void	test_check_plane(void);
-void	test_check_sphere(void);
 void	test_transformations(void);
 void	test_ray(void);
 void	test_world(void);
@@ -39,6 +31,7 @@ void	test_view_transformation(void);
 void	test_camera(void);
 void	test_shape(void);
 void	test_cylinder(void);
+void	test_patterns(void);
 
 /* Utils */
 double	double_rand();
