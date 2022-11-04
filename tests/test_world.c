@@ -177,7 +177,7 @@ void	test_shading_an_intersection(void)
 	shape = (t_object *)w->objects->content;
 	i = create_intersection(4, shape);
 	comps = prepare_computation(i, ray);
-	rgb = shade_hit(w, comps);
+	rgb = shade_hit(w, comps, w->light_point);
 	// TEST_ASSERT_EQUAL_DOUBLE(0.38066, rgb->red);
 	// TEST_ASSERT_EQUAL_DOUBLE(0.47583, rgb->green);
 	// TEST_ASSERT_EQUAL_DOUBLE(0.2855, rgb->blue);
@@ -218,7 +218,7 @@ void	test_shading_an_intersection_from_inside(void)
 	shape = (t_object *)w->objects->next->content;
 	i = create_intersection(0.5, shape);
 	comps = prepare_computation(i, ray);
-	rgb = shade_hit(w, comps);
+	rgb = shade_hit(w, comps, w->light_point);
 	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->red));
 	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->green));
 	TEST_ASSERT_TRUE(is_equal_double(0.90498, rgb->blue));
@@ -342,7 +342,7 @@ void	test_shade_hit_shadow_intersection(void)
 	ray = create_ray(create_point(0, 0, 5), create_vector(0, 0, 1));
 	i = create_intersection(4, s2);
 	comps = prepare_computation(i, ray);
-	color = shade_hit(world, comps);
+	color = shade_hit(world, comps, world->light_point);
 	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->red);
 	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->green);
 	TEST_ASSERT_EQUAL_DOUBLE(0.1, color->blue);
