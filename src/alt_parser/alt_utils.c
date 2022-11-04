@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:08:37 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 20:00:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:33:36 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,8 @@ t_bool	ft_isfloat(const char *str)
 {
 	if (*str == '+' || *str == '-')
 		++str;
-	if (!*str)
-		return (FALSE);
 	while (*str && ft_isdigit(*str))
 		++str;
-	if (*str != '.' && *str != '\0')
-		return (FALSE);
 	if (*str == '.')
 		++str;
 	while (*str && ft_isdigit(*str))
