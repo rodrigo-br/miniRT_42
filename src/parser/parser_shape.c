@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 15:13:32 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:59:56 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,10 @@ int	set_shape_orientation_vector(char *token, t_object *shape)
 
 int	set_shape_material(t_object *shape, t_rt_scene *s)
 {
-	if (!s->ambient || !s->lights)
+	if (!s->ambient)
 		return (error(ERR_SHP_MISS_INFO));
 	free(shape->material->ambient);
 	shape->material->ambient = \
 	scalar_multiply_color(s->ambient->color, s->ambient->ratio);
-	shape->material->diffuse = s->brightness;
-	shape->material->specular = s->brightness;
 	return (0);
 }
