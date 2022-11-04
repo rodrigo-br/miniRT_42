@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:08:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/31 12:37:55 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:49:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,40 @@ Examples:
 | point(0, 0, -5) | vector(0, 0, 1)     | 5       | 5        |
 | point(0, 0, -5) | vector(1, 1, 1)     | 8.66025 | 8.66025  |
 | point(1, 1, -5) | vector(-0.5, -1, 1) | 4.55006 | 49.44994 | */
-void	test_intersect_cone(void)
-{
-	t_object	*cone;
-	t_vector	*d1, *d2, *d3;
-	t_point		*o1, *o2, *o3;
-	t_ray		*r1, *r2, *r3;
-	t_intersect	*xs = NULL;
 
-	cone = create_cone();
-	o1 = create_point(0, 0, -5);
-	o2 = create_point(0, 0, -5);
-	o3 = create_point(1, 1, -5);
-	d1 = normalize(&(t_vector){0, 0, 1, 0});
-	d2 = normalize(&(t_vector){1, 1, 1, 0});
-	d3 = normalize(&(t_vector){-0.5, -1, 1, 0});
-	r1 = create_ray(o1, d1);
-	r2 = create_ray(o2, d2);
-	r3 = create_ray(o3, d3);
-	cone->intersect(cone, r1, &xs);
-	cone->intersect(cone, r2, &xs);
-	cone->intersect(cone, r3, &xs);
-	TEST_ASSERT_EQUAL(4, intersection_list_size(xs));
-	TEST_ASSERT_TRUE(is_equal_double(4.55006, xs->time));
-	TEST_ASSERT_TRUE(is_equal_double(5.0, xs->next->time));
-	TEST_ASSERT_TRUE(is_equal_double(8.66025, xs->next->next->time));
-	TEST_ASSERT_TRUE(is_equal_double(49.44994, xs->next->next->next->time));
-	destroy_ray(r1);
-	destroy_ray(r2);
-	destroy_ray(r3);
-	destroy_shape(cone);
-	intersection_list_clear(&xs);
-}
+/* obsolete, because default is capped */
+// void	test_intersect_cone(void)
+// {
+// 	t_object	*cone;
+// 	t_vector	*d1, *d2, *d3;
+// 	t_point		*o1, *o2, *o3;
+// 	t_ray		*r1, *r2, *r3;
+// 	t_intersect	*xs = NULL;
+
+// 	cone = create_cone();
+// 	o1 = create_point(0, 0, -5);
+// 	o2 = create_point(0, 0, -5);
+// 	o3 = create_point(1, 1, -5);
+// 	d1 = normalize(&(t_vector){0, 0, 1, 0});
+// 	d2 = normalize(&(t_vector){1, 1, 1, 0});
+// 	d3 = normalize(&(t_vector){-0.5, -1, 1, 0});
+// 	r1 = create_ray(o1, d1);
+// 	r2 = create_ray(o2, d2);
+// 	r3 = create_ray(o3, d3);
+// 	cone->intersect(cone, r1, &xs);
+// 	cone->intersect(cone, r2, &xs);
+// 	cone->intersect(cone, r3, &xs);
+// 	TEST_ASSERT_EQUAL(4, intersection_list_size(xs));
+// 	TEST_ASSERT_TRUE(is_equal_double(4.55006, xs->time));
+// 	TEST_ASSERT_TRUE(is_equal_double(5.0, xs->next->time));
+// 	TEST_ASSERT_TRUE(is_equal_double(8.66025, xs->next->next->time));
+// 	TEST_ASSERT_TRUE(is_equal_double(49.44994, xs->next->next->next->time));
+// 	destroy_ray(r1);
+// 	destroy_ray(r2);
+// 	destroy_ray(r3);
+// 	destroy_shape(cone);
+// 	intersection_list_clear(&xs);
+// }
 
 /* Scenario: Intersecting a cone with a ray parallel to one of its halves
 Given shape ← cone()
@@ -110,7 +112,6 @@ void	test_intersect_cone_caps(void)
 	cone = create_cone();
 	cone->cone.min = -0.5;
 	cone->cone.max = 0.5;
-	cone->cone.capped = TRUE;
 	o1 = create_point(0, 0, -5);
 	o2 = create_point(0, 0, -0.25);
 	o3 = create_point(0, 0, -0.25);
@@ -163,7 +164,7 @@ void	test_get_cone_normal(void)
 */
 void	test_print_cylinder_and_cone(void)
 {
-	t_object	*floor, *backdrop, *cyl, *cone, *sph;
+	t_object	*floor, *backdrop, *cone;
 	t_matrix	*aux;
 	t_world		*world;
 	t_cam		*camera;
@@ -178,25 +179,13 @@ void	test_print_cylinder_and_cone(void)
 	free(aux);
 	set_color(backdrop->material->color, 1, 0, 0);
 
-	sph = create_sphere();
-	set_color(sph->material->color, 1, 0, 0);
-	set_object_transformation(sph, translate_matrix(-2, 1, 0));
-
-	cyl = create_cylinder();
-	set_color(cyl->material->color, 1, 0, 1);
-	set_object_transformation(cyl, translate_matrix(2, 0.7, 0));
-	cyl->material->specular = 1.0;
-	// cyl->cylinder.min = 0;
-	cyl->cylinder.max = 2;
-	// cyl->cylinder.capped = TRUE;
-
 	cone = create_cone();
-	set_color(cone->material->color, 1, 1, 1);
-	aux = rotate_matrix_x(0.4);
-	set_object_transformation(cone, multiply_matrix(aux, translate_matrix(0, 1, 0)));
+	set_color(cone->material->color, 0.7, 0.7, 0.7);
+
+	set_object_transformation(cone, translate_matrix(0, 1, 0));
 	cone->material->specular = 1.0;
-	cone->cone.min = 0;
-	cone->cone.max = 2;
+	cone->cone.min = -1;
+	cone->cone.max = 1.5;
 	cone->cone.capped = TRUE;
 
 	world = create_world();
@@ -204,16 +193,14 @@ void	test_print_cylinder_and_cone(void)
 			create_point(-10, 10, -10),
 			create_color(1, 1, 1)
 		));
-	ft_lstadd_front(&world->objects, ft_lstnew(floor));
+	// ft_lstadd_front(&world->objects, ft_lstnew(floor));
 	// ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
-	ft_lstadd_front(&world->objects, ft_lstnew(cyl));
-	ft_lstadd_front(&world->objects, ft_lstnew(sph));
 	ft_lstadd_front(&world->objects, ft_lstnew(cone));
 
-	camera = create_camera(1000, 500, radians(90));
+	camera = create_camera(RT_WIDTH, RT_HEIGHT, radians(90));
 	set_camera_transformation(camera, view_transform(
 		create_point(0, 1.5, -5),
-		create_point(0, 1, 0),
+		normalize(sub_tuple(&(t_point){0, 1, 0, 1}, &(t_point){0, 1.5, -5, 1})),
 		create_vector(0, 1, 0)
 	));
 
@@ -230,10 +217,10 @@ void	test_print_cylinder_and_cone(void)
 
 void	test_cone(void)
 {
-	RUN_TEST(test_intersect_cone);
+	// RUN_TEST(test_intersect_cone); /* obsolete, read above */
 	RUN_TEST(test_intersect_parallel_to_half);
 	RUN_TEST(test_intersect_cone_caps);
 	RUN_TEST(test_get_cone_normal);
 	// uncomment at your own risk
-	RUN_TEST(test_print_cylinder_and_cone);
+	// RUN_TEST(test_print_cylinder_and_cone);
 }

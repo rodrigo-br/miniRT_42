@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 19:19:36 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:32:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,13 @@ t_vector	*normal_at(t_object *shape, t_point *point);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_vector	*get_plane_normal(t_object *plane, t_point *point);
 t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point);
+t_vector	*get_cone_normal(t_object *cone, t_point *point);
 t_intersect	*get_hit(t_intersect *intersect);
 
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersect_plane(t_object *plane, t_ray *ray, t_intersect **head);
 void		intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head);
+void		intersect_cone(t_object *cone, t_ray *ray, t_intersect **head);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersection_list_clear(t_intersect **list);
 size_t		intersection_list_size(t_intersect *list);

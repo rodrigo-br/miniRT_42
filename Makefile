@@ -25,7 +25,7 @@ UTILS 	= destructors.c radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
 SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c \
-		sphere.c plane.c cylinder.c cone.c
+		sphere.c plane.c cylinder.c cone.c cylinder_intersect.c cone_intersect.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c \
 		is_shadowed.c
 WORLD	= world_constructor.c world_destructor.c world_computations.c
