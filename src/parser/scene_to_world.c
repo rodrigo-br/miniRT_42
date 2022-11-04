@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:18:05 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 16:31:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:08:09 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,7 @@ static void	setup_camera(t_cam *camera, t_rt_camera *c)
 
 static void	setup_light(t_list **light, t_rt_scene *s)
 {
-	t_light_pnt	*lp;
-	t_list		*new;
-	t_rgb		*aux;
-
-	aux = create_formatted_color(
-			s->light->red,
-			s->light->green,
-			s->light->blue);
-	lp = create_light_point(
-			create_point(s->light->x, s->light->y, s->light->z),
-			scalar_multiply_color(aux, s->light->brightness));
-	new = ft_lstnew(lp);
-	*light = new;
-	free(aux);
+	*light = s->lights;
 }
 
 static void	setup_objects(t_list **objects, t_rt_scene *s)

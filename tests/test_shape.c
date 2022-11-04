@@ -251,10 +251,27 @@ void	test_print_three_spheres_and_plane(void)
 	set_color(left->material->color, 1, 0.8, 0.1);
 
 	world = create_world();
-	world->light_point = ft_lstnew(create_light_point(
-			create_point(-10, 10, -10),
-			create_color(1, 1, 1)
-		));
+	ft_lstadd_front(
+		&world->light_point,
+		ft_lstnew(
+			create_light_point(
+				create_point(-10, 10, -10),
+				create_color(0.5, 0.5, 0.5)
+	)));
+	ft_lstadd_front(
+		&world->light_point,
+		ft_lstnew(
+			create_light_point(
+				create_point(0, 5, -5),
+				create_color(1, 0, 0)
+	)));
+	ft_lstadd_front(
+		&world->light_point,
+		ft_lstnew(
+			create_light_point(
+				create_point(11, 2, -7),
+				create_color(0, 0, 1)
+	)));
 	ft_lstadd_front(&world->objects, ft_lstnew(floor));
 	ft_lstadd_front(&world->objects, ft_lstnew(backdrop));
 	ft_lstadd_front(&world->objects, ft_lstnew(middle));
@@ -264,7 +281,7 @@ void	test_print_three_spheres_and_plane(void)
 	camera = create_camera(1000, 500, radians(180 / 2));
 	set_camera_transformation(camera, view_transform(
 		create_point(0, 1.5, -5),
-		create_point(0, 1, 0),
+		normalize(sub_tuple(&(t_point){0, 1, 0, 1}, &(t_point){0, 1.5, -5, 1})),
 		create_vector(0, 1, 0)
 	));
 

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 19:32:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:59:08 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ size_t		intersection_list_size(t_intersect *list);
 t_intersect	*create_intersection(double time, t_object *object);
 
 /* Light */
-t_bool		is_shadowed(t_world *world, t_point *point);
+t_bool		is_shadowed(t_world *world, t_point *point, t_light_pnt *lp);
 t_vector	*reflect(t_vector *in, t_vector *normal);
 t_rgb		*lighting(t_lightattr *args);
 t_material	*create_material(void);
@@ -204,7 +204,7 @@ void		destroy_world(t_world *w);
 void		intersect_world(t_world *world, t_ray *ray, t_intersect **head);
 t_comp		*prepare_computation(t_intersect *i, t_ray *ray);
 void		destroy_computation(t_comp *comps);
-t_rgb		*shade_hit(t_world *world, t_comp *comps);
+t_rgb		*shade_hit(t_world *world, t_comp *comps, t_list *light_list);
 t_rgb		*color_at(t_world *world, t_ray *ray);
 t_matrix	*view_transform(t_point *from, t_point *to, t_vector *up);
 

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:07:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 19:19:54 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:59:31 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,31 @@ t_intersect	*get_hit(t_intersect *intersect)
 	return (NULL);
 }
 
-t_rgb	*shade_hit(t_world *world, t_comp *comps)
+t_rgb	*shade_hit(t_world *world, t_comp *comps, t_list *light_list)
 {
 	t_pos_attr	*pos_attr;
 	t_lightattr	*light_attr;
-	t_light_pnt	*lp;
+	t_rgb		*aux[2];
 	t_rgb		*color;
 
-	lp = (t_light_pnt *)world->light_point->content;
+	color = create_color(0, 0, 0);
 	pos_attr = create_pos_attr(comps->camera, comps->normal, comps->over_point);
-	light_attr = create_lightattr(lp, pos_attr, comps->object->material);
-	light_attr->in_shadow = is_shadowed(world, comps->over_point);
-	light_attr->object = comps->object;
-	color = lighting(light_attr);
-	free(light_attr);
+	while (light_list)
+	{
+		aux[0] = color;
+		light_attr = create_lightattr(
+				light_list->content, pos_attr, comps->object->material);
+		light_attr->in_shadow = is_shadowed(
+				world, comps->over_point, light_list->content);
+		light_attr->object = comps->object;
+		aux[1] = lighting(light_attr);
+		color = sum_color(aux[0], aux[1]);
+		free(light_attr);
+		free(aux[0]);
+		free(aux[1]);
+		light_list = light_list->next;
+	}
+	free(pos_attr);
 	return (color);
 }
 
@@ -77,7 +88,7 @@ t_rgb	*color_at(t_world *world, t_ray *ray)
 		return (create_color(0, 0, 0));
 	}
 	comps = prepare_computation(hit, ray);
-	color = shade_hit(world, comps);
+	color = shade_hit(world, comps, world->light_point);
 	destroy_computation(comps);
 	intersection_list_clear(&xs);
 	return (color);
