@@ -43,6 +43,6 @@ run: all
 	./$(NAME)
 
 val: all
-	valgrind --leak-check=full ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .PHONY:	all clean fclean re run

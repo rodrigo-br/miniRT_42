@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:36:57 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 15:20:15 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:45:06 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ t_pattern	*create_pattern(t_rgb *a, t_rgb *b)
 	pattern->color_a = a;
 	pattern->color_b = b;
 	pattern->transformation = create_identity_matrix();
+	pattern->inverse_transformation = create_identity_matrix();
 	return (pattern);
 }
 
 t_rgb	*pattern_at(t_pattern *pattern, t_point	*point)
 {
-	if ((int)((floor(point->x) + floor(point->y) + floor(point->z))) % 2)
+	if ((int)(floor(point->x) + floor(point->y) + floor(point->z)) % 2)
 		return (pattern->color_b);
 	return (pattern->color_a);
 }
@@ -37,25 +38,20 @@ void	destroy_pattern(t_pattern *pattern)
 	free(pattern->color_a);
 	free(pattern->color_b);
 	free(pattern->transformation);
+	free(pattern->inverse_transformation);
 	free(pattern);
 }
 
-t_rgb	*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj)
+t_rgb	*pattern_at_obj(t_pattern *pat, t_point *point, t_object *obj)
 {
-	t_point		*obj_point;
-	t_point		*pattern_point;
-	t_matrix	*obj_inversed;
-	t_matrix	*pat_inversed;
-	t_rgb		*result;
+	t_point	*obj_point;
+	t_point	*pat_point;
+	t_rgb	*result;
 
-	obj_inversed = inverse_matrix(obj->transformation);
-	obj_point = multiply_matrix_tuple(obj_inversed, point);
-	free(obj_inversed);
-	pat_inversed = inverse_matrix(pattern->transformation);
-	pattern_point = multiply_matrix_tuple(pat_inversed, obj_point);
-	free(pat_inversed);
-	result = pattern_at(pattern, pattern_point);
-	free(pattern_point);
+	obj_point = multiply_matrix_tuple(obj->inverse_transformation, point);
+	pat_point = multiply_matrix_tuple(pat->inverse_transformation, obj_point);
+	result = pattern_at(pat, pat_point);
+	free(pat_point);
 	free(obj_point);
 	return (result);
 }
@@ -63,5 +59,7 @@ t_rgb	*pattern_at_obj(t_pattern *pattern, t_point	*point, t_object *obj)
 void	set_pattern_transformation(t_pattern *pattern, t_matrix *transform)
 {
 	free(pattern->transformation);
+	free(pattern->inverse_transformation);
 	pattern->transformation = transform;
+	pattern->inverse_transformation = inverse_matrix(transform);
 }

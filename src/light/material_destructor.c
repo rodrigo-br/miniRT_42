@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material_destructor.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:18:42 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:50:21 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:03:27 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	destroy_material(t_material *material)
 	if (material->pattern)
 		destroy_pattern(material->pattern);
 	free(material->color);
+	free(material->ambient);
 	free(material);
 }
 

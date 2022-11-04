@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:09:33 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:40:44 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:11:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	test_cylinder_creation(void)
 	TEST_ASSERT_EQUAL_DOUBLE(1.0, cyl->cylinder.diameter);
 	TEST_ASSERT_EQUAL_DOUBLE(-INFINITY, cyl->cylinder.min);
 	TEST_ASSERT_EQUAL_DOUBLE(INFINITY, cyl->cylinder.max);
-	TEST_ASSERT_FALSE(cyl->cylinder.capped);
+	TEST_ASSERT_TRUE(cyl->cylinder.capped);
 	destroy_shape(cyl);
 }
 
@@ -130,10 +130,10 @@ void	test_get_cylinder_normal(void)
 	t_vector	*n1, *n2, *n3, *n4;
 
 	cyl = create_cylinder();
-	n1 = cyl->get_normal(cyl, &(t_point){1, 0, 0, 1});
-	n2 = cyl->get_normal(cyl, &(t_point){0, 5, -1, 1});
-	n3 = cyl->get_normal(cyl, &(t_point){0, -2, 1, 1});
-	n4 = cyl->get_normal(cyl, &(t_point){-1, 1, 0, 1});
+	n1 = normal_at(cyl, &(t_point){1, 0, 0, 1});
+	n2 = normal_at(cyl, &(t_point){0, 5, -1, 1});
+	n3 = normal_at(cyl, &(t_point){0, -2, 1, 1});
+	n4 = normal_at(cyl, &(t_point){-1, 1, 0, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){1, 0, 0, 0}, n1));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0, -1, 0}, n2));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, 0, 1, 0}, n3));
@@ -169,6 +169,7 @@ void	test_intersect_truncated_cylinder(void)
 	cyl = create_cylinder();
 	cyl->cylinder.min = 1;
 	cyl->cylinder.max = 2;
+	cyl->cylinder.capped = FALSE;
 	o1 = create_point(0, 1.5, 0);
 	o2 = create_point(0, 3, -5);
 	o3 = create_point(0, 0, -5);
@@ -232,7 +233,6 @@ void	test_intersect_cylinder_caps(void)
 	cyl = create_cylinder();
 	cyl->cylinder.min = 1;
 	cyl->cylinder.max = 2;
-	cyl->cylinder.capped = TRUE;
 	o1 = create_point(0, 3, 0);
 	o2 = create_point(0, 3, -2);
 	o3 = create_point(0, 4, -2);
@@ -288,13 +288,12 @@ void	test_get_cylinder_caps_normal(void)
 	cyl = create_cylinder();
 	cyl->cylinder.min = 1;
 	cyl->cylinder.max = 2;
-	cyl->cylinder.capped = TRUE;
-	n1 = cyl->get_normal(cyl, &(t_point){0, 1, 0, 1});
-	n2 = cyl->get_normal(cyl, &(t_point){0.5, 1, 0, 1});
-	n3 = cyl->get_normal(cyl, &(t_point){0, 1, 0.5, 1});
-	n4 = cyl->get_normal(cyl, &(t_point){0, 2, 0, 1});
-	n5 = cyl->get_normal(cyl, &(t_point){0.5, 2, 0, 1});
-	n6 = cyl->get_normal(cyl, &(t_point){0, 2, 0.5, 1});
+	n1 = normal_at(cyl, &(t_point){0, 1, 0, 1});
+	n2 = normal_at(cyl, &(t_point){0.5, 1, 0, 1});
+	n3 = normal_at(cyl, &(t_point){0, 1, 0.5, 1});
+	n4 = normal_at(cyl, &(t_point){0, 2, 0, 1});
+	n5 = normal_at(cyl, &(t_point){0.5, 2, 0, 1});
+	n6 = normal_at(cyl, &(t_point){0, 2, 0.5, 1});
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n1));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n2));
 	TEST_ASSERT_TRUE(is_equal_tuple(&(t_vector){0, -1, 0, 0}, n3));

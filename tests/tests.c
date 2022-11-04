@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 14:05:18 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 17:27:24 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:23:34 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ int	main(void)
 	test_tuple_operations();
 	test_colors();
 	test_canvas();
-	test_atod();
-	test_check_light();
-	test_check_ambient();
-	test_check_camera();
-	test_check_cylinder();
-	test_check_plane();
-	test_check_sphere();
-	test_parser();
 	test_matrix();
 	test_transformations();
 	test_ray();

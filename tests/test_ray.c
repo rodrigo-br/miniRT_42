@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:00:14 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 21:27:31 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:16:39 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ void	test_sphere_creation(void)
 	TEST_ASSERT_EQUAL(1, sphere->material->color->red);
 	TEST_ASSERT_EQUAL(1, sphere->material->color->green);
 	TEST_ASSERT_EQUAL(1, sphere->material->color->blue);
-	TEST_ASSERT_EQUAL_DOUBLE(0.1, sphere->material->ambient);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, sphere->material->ambient->red);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, sphere->material->ambient->green);
+	TEST_ASSERT_EQUAL_DOUBLE(0.1, sphere->material->ambient->blue);
 	TEST_ASSERT_EQUAL_DOUBLE(0.9, sphere->material->diffuse);
 	TEST_ASSERT_EQUAL_DOUBLE(0.9, sphere->material->specular);
 	TEST_ASSERT_EQUAL_DOUBLE(200.0, sphere->material->shininess);

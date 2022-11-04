@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_constructor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:41:13 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 12:59:20 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:02:24 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@ void	set_color(t_rgb *color, double r, double g, double b)
 	color->merged = merge_colors(r, g, b);
 }
 
-void	set_color_from_pattern(t_rgb *color, t_rgb *pattern)
+t_rgb	*create_formatted_color(double r, double g, double b)
 {
-	color->red = pattern->red;
-	color->green = pattern->green;
-	color->blue = pattern->blue;
-	color->merged = merge_colors(pattern->red, pattern->green, pattern->blue);
+	return (create_color((r / 255), (g / 255), (b / 255)));
 }
 
 t_rgb	*create_color(double r, double g, double b)

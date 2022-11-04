@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material_constructor.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:05:27 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/27 13:50:07 by ralves-b         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:02:51 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_material	*create_material(void)
 		return (NULL);
 	material->pattern = NULL;
 	material->color = create_color(1, 1, 1);
-	material->ambient = 0.1;
+	material->ambient = create_color(0.1, 0.1, 0.1);
 	material->diffuse = 0.9;
 	material->specular = 0.9;
 	material->shininess = 200.0;

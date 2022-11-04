@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_swap_set_chr.c                              :+:      :+:    :+:   */
+/*   ft_swap_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-b <ralves-b@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 16:29:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/18 16:41:30 by ralves-b         ###   ########.fr       */
+/*   Created: 2022/10/18 16:29:43 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 11:04:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-void	ft_str_swap_set_chr(char *str, char *old, char new)
+void	ft_swap_set(char *str, const char *from, int to)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_strchr(old, str[i]))
-			str[i] = new;
-		i++;
-	}
+	while (*str)
+		if (ft_strchr(from, *str++))
+			*(str - 1) = to;
 }

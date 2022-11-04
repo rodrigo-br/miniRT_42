@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas_destructor.c                                :+:      :+:    :+:   */
+/*   ft_isfloat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 21:54:12 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/01 22:03:29 by maolivei         ###   ########.fr       */
+/*   Created: 2022/11/04 10:32:25 by maolivei          #+#    #+#             */
+/*   Updated: 2022/11/04 10:52:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minirt.h>
+#include "libft.h"
 
-void	destroy_canvas(t_canvas *canvas)
+t_bool	ft_isfloat(const char *str)
 {
-	mlx_destroy_image(canvas->mlx, canvas->image);
-	mlx_destroy_display(canvas->mlx);
-	free(canvas->mlx);
-	free(canvas);
+	if (*str == '+' || *str == '-')
+		++str;
+	while (*str && ft_isdigit(*str))
+		++str;
+	if (*str == '.')
+		++str;
+	while (*str && ft_isdigit(*str))
+		++str;
+	if (*str && !ft_isdigit(*str))
+		return (FALSE);
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:04:32 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 19:04:45 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:10:48 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_object	*create_shape(void)
 	object = (t_object *)malloc(sizeof(t_object));
 	if (!object)
 		return (NULL);
+	object->orientation = NULL;
 	object->transformation = create_identity_matrix();
 	object->inverse_transformation = create_identity_matrix();
 	object->material = create_material();

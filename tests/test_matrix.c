@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 14:14:01 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/23 16:13:53 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:57:40 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -600,6 +600,8 @@ void	test_inverse_matrix3(void)
 	free(expected);
 }
 
+/* This test is altered to return an identity matrix, because otherwise
+it would produce very annoying segmentation faults. */
 void	test_inverse_matrix4(void)
 {
 	double	aux[MAT_MAX][MAT_MAX] = {
@@ -608,12 +610,15 @@ void	test_inverse_matrix4(void)
 		{0, -5, 1, -5},
 		{0, 0, 0, 0}
 	};
-	t_matrix	*a, *b;
+	t_matrix	*a, *b, *id;
 
 	a = create_matrix(4, aux);
 	b = inverse_matrix(a);
-	TEST_ASSERT_NULL(b);
+	id = create_identity_matrix();
+	TEST_ASSERT_TRUE(is_equal_matrix(id, b));
 	free(a);
+	free(b);
+	free(id);
 }
 
 void	test_inverse_matrix5(void)

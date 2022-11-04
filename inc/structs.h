@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/27 17:10:30 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 10:21:16 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,43 @@ typedef struct s_matrix
 
 typedef struct s_rgb
 {
-	double	blue;
-	double	green;
 	double	red;
+	double	green;
+	double	blue;
 	int		merged;
 }	t_rgb;
 
-typedef struct s_ambience
+typedef struct s_rt_ambient
 {
 	double	ratio;
-	t_rgb	*rgb;
-}	t_ambience;
+	t_rgb	*color;
+}	t_rt_ambient;
 
-typedef struct s_camera
+typedef struct s_rt_camera
 {
-	double	view_x;
-	double	view_y;
-	double	view_z;
-	double	x_3d;
-	double	y_3d;
-	double	z_3d;
-	int		fov;
-}	t_camera;
+	t_point		*view_point;
+	t_vector	*orientation;
+	int			fov;
+}	t_rt_camera;
 
-typedef struct s_light
+typedef struct s_rt_light
 {
 	double	x;
 	double	y;
 	double	z;
 	double	brightness;
-	t_rgb	*rgb;
-}	t_light;
+	int		red;
+	int		green;
+	int		blue;
+}	t_rt_light;
+
+typedef struct s_rt_scene
+{
+	t_rt_ambient	*ambient;
+	t_rt_camera		*camera;
+	t_rt_light		*light;
+	t_list			*objects;
+}	t_rt_scene;
 
 /* tipos de acordo com as especificaçoes de cada um */
 typedef struct s_sphere
@@ -83,16 +89,13 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_vector	orientation;
+	t_point	position;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	double	x_3d;
-	double	y_3d;
-	double	z_3d;
+	t_point	position;
 	double	diameter;
-	double	height;
 	double	min;
 	double	max;
 	t_bool	capped;
@@ -103,12 +106,13 @@ typedef struct s_pattern
 	t_rgb		*color_a;
 	t_rgb		*color_b;
 	t_matrix	*transformation;
+	t_matrix	*inverse_transformation;
 }	t_pattern;
 
 typedef struct s_material
 {
 	t_rgb		*color;
-	double		ambient;
+	t_rgb		*ambient;
 	double		diffuse;
 	double		specular;
 	double		shininess;
@@ -130,31 +134,20 @@ typedef struct s_intersect
 
 typedef struct s_object
 {
-	int			type;
+	t_object_id	type;
 	union
 	{
 		t_sphere	sphere;
 		t_cylinder	cylinder;
 		t_plane		plane;
 	};
-	double		x;
-	double		y;
-	double		z;
-	t_rgb		*rgb;
+	t_vector	*orientation;
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
 	t_material	*material;
 	void		(*intersect)(t_object *, t_ray *, t_intersect **);
 	t_vector	*(*get_normal)(t_object *, t_point *);
 }	t_object;
-
-typedef struct s_scene
-{
-	t_ambience	*ambience;
-	t_light		*light;
-	t_camera	*camera;
-	t_list		*objects;
-}	t_scene;
 
 typedef struct s_canvas
 {
@@ -222,7 +215,6 @@ typedef struct s_comp
 	t_vector	*normal;
 	t_vector	*camera;
 	t_point		*over_point;
-	t_bool		inside;
 }	t_comp;
 
 typedef struct s_cam
@@ -236,5 +228,13 @@ typedef struct s_cam
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
 }	t_cam;
+
+typedef struct s_minirt
+{
+	t_cam		*camera;
+	t_canvas	*canvas;
+	t_world		*world;
+	void		*window;
+}	t_minirt;
 
 #endif
