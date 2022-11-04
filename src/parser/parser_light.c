@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 15:39:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 15:12:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:52:16 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 #define ERR_LGT_COLOR_VALUE "Invalid light color value."
 #define ERR_LGT_COLOR_RANGE "Light color channels must be between 0 and 255."
 
-static int	set_light_color(char *token, t_light_pnt *lp)
+static int	set_light_color(char *token, t_light_pnt *lp, t_rt_scene *s)
 {
 	char	**rgb;
 	double	aux[3];
-	t_rgb	*tmp[2];
+	t_rgb	*tmp;
 
 	rgb = ft_split(token, ',');
 	if (!rgb || ft_splitsize(rgb) != 3)
@@ -42,25 +42,19 @@ static int	set_light_color(char *token, t_light_pnt *lp)
 	|| !ft_isinrange_f(aux[1], 0, 255) \
 	|| !ft_isinrange_f(aux[2], 0, 255))
 		return (error(ERR_LGT_COLOR_RANGE));
-	tmp[0] = create_formatted_color(aux[0], aux[1], aux[2]);
-	tmp[1] = multiply_color(tmp[0], lp->intensity);
-	free(lp->intensity);
-	free(tmp[0]);
-	lp->intensity = tmp[1];
+	tmp = create_formatted_color(aux[0], aux[1], aux[2]);
+	lp->intensity = scalar_multiply_color(tmp, s->brightness);
+	free(tmp);
 	return (0);
 }
 
-static int	set_light_brightness(char *token, t_light_pnt *lp, t_rt_scene *s)
+static int	set_light_brightness(char *token, t_rt_scene *s)
 {
-	double	aux;
-
 	if (!ft_isfloat(token))
 		return (error(ERR_LGT_BRGHT_VALUE));
-	aux = ft_atof(token);
-	if (!ft_isinrange_f(aux, 0.0, 1.0))
+	s->brightness = ft_atof(token);
+	if (!ft_isinrange_f(s->brightness, 0.0, 1.0))
 		return (error(ERR_LGT_BRGHT_RANGE));
-	lp->intensity = create_color(aux, aux, aux);
-	s->brightness = aux;
 	return (0);
 }
 
@@ -91,9 +85,9 @@ int	parse_light(char **tokens, t_rt_scene *s)
 		return (error(ERR_LGT_MALLOC_FAIL));
 	if (set_light_point_coordinates(tokens[1], light_point) != 0)
 		return (destroy_light_point(light_point), -1);
-	if (set_light_brightness(tokens[2], light_point, s) != 0)
+	if (set_light_brightness(tokens[2], s) != 0)
 		return (destroy_light_point(light_point), -1);
-	if (set_light_color(tokens[3], light_point) != 0)
+	if (set_light_color(tokens[3], light_point, s) != 0)
 		return (destroy_light_point(light_point), -1);
 	node = ft_lstnew(light_point);
 	if (!node)
