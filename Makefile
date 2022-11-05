@@ -15,8 +15,8 @@ HEADER_FILES	= structs.h minirt.h
 MAIN	= main.c $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
 		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA) $(MLX)
 PARSER	= parser.c parser_checkers.c parser_ambient.c parser_camera.c parser_light.c \
-		parser_shape.c parser_sphere.c parser_plane.c parser_cylinder.c parser_error.c \
-		scene_to_world.c
+		parser_shape.c parser_sphere.c parser_plane.c parser_cylinder.c parser_cone.c \
+		parser_error.c scene_to_world.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 COLOR	= color_constructor.c color_operations.c patterns.c
 CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c

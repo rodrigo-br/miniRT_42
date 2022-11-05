@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:51:52 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 10:49:51 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:01:29 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_delegator	*get_parse_function(t_parse_id id)
 	function_table[PARSE_SPHERE] = parse_sphere;
 	function_table[PARSE_PLANE] = parse_plane;
 	function_table[PARSE_CYLINDER] = parse_cylinder;
+	function_table[PARSE_CONE] = parse_cone;
 	return (function_table[id]);
 }
 
@@ -40,10 +41,12 @@ static t_parse_id	get_token_id(char *token)
 		return (PARSE_LIGHT);
 	if (ft_strcmp(SPHERE, token) == 0)
 		return (PARSE_SPHERE);
-	if (ft_strcmp(CYLINDER, token) == 0)
-		return (PARSE_CYLINDER);
 	if (ft_strcmp(PLANE, token) == 0)
 		return (PARSE_PLANE);
+	if (ft_strcmp(CYLINDER, token) == 0)
+		return (PARSE_CYLINDER);
+	if (ft_strcmp(CONE, token) == 0)
+		return (PARSE_CONE);
 	return (NONE);
 }
 

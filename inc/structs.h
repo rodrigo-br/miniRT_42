@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 19:59:18 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:29:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_cylinder
 	t_bool	capped;
 }	t_cylinder;
 
-typedef t_cylinder	t_cone;
+typedef t_cylinder		t_cone;
 
 typedef struct s_pattern
 {

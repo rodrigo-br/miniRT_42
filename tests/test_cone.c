@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:08:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 19:49:48 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:33:42 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ void	test_intersect_cone_caps(void)
 	cone->intersect(cone, r1, &xs);
 	cone->intersect(cone, r2, &xs);
 	cone->intersect(cone, r3, &xs);
-	// TEST_ASSERT_EQUAL(6, intersection_list_size(xs)); // it should be 6
-	TEST_ASSERT_EQUAL(5, intersection_list_size(xs));
+	TEST_ASSERT_EQUAL(6, intersection_list_size(xs));
 	destroy_ray(r1);
 	destroy_ray(r2);
 	destroy_ray(r3);

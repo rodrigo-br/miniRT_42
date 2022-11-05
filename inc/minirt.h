@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 19:59:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:02:52 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
+# define CONE "cn"
 # define BLANKSPACES "\f\r\t\v"
 
 typedef enum e_parse_id
@@ -52,11 +53,12 @@ typedef enum e_parse_id
 	PARSE_LIGHT,
 	PARSE_SPHERE,
 	PARSE_PLANE,
-	PARSE_CYLINDER
+	PARSE_CYLINDER,
+	PARSE_CONE
 }	t_parse_id;
 
 # define PARSE_ID_MIN PARSE_AMBIENT
-# define PARSE_ID_MAX PARSE_CYLINDER
+# define PARSE_ID_MAX PARSE_CONE
 
 typedef int	t_delegator(char **tokens, t_rt_scene *s);
 
@@ -69,6 +71,7 @@ int			parse_light(char **tokens, t_rt_scene *s);
 int			parse_sphere(char **tokens, t_rt_scene *s);
 int			parse_plane(char **tokens, t_rt_scene *s);
 int			parse_cylinder(char **tokens, t_rt_scene *s);
+int			parse_cone(char **tokens, t_rt_scene *s);
 
 /* Parser setters */
 int			set_shape_color(char *token, t_object *shape);
