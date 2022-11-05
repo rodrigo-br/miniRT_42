@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 15:12:29 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:29:35 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_object_id
 	ID_SPHERE,
 	ID_CYLINDER,
 	ID_PLANE,
+	ID_CONE,
 }	t_object_id;
 
 typedef struct s_tuple
@@ -102,6 +103,8 @@ typedef struct s_cylinder
 	t_bool	capped;
 }	t_cylinder;
 
+typedef t_cylinder		t_cone;
+
 typedef struct s_pattern
 {
 	t_rgb		*color_a;
@@ -140,6 +143,7 @@ typedef struct s_object
 	{
 		t_sphere	sphere;
 		t_cylinder	cylinder;
+		t_cone		cone;
 		t_plane		plane;
 	};
 	t_vector	*orientation;

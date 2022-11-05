@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:17:03 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 13:11:55 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:42:16 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,59 +27,6 @@ t_object	*create_cylinder(void)
 	cylinder->intersect = intersect_cylinder;
 	cylinder->get_normal = get_cylinder_normal;
 	return (cylinder);
-}
-
-t_bool	is_cap_within_radius(t_ray *ray, double time)
-{
-	double	x;
-	double	z;
-
-	x = ray->origin->x + (time * ray->direction->x);
-	z = ray->origin->z + (time * ray->direction->z);
-	return (((x * x) + (z * z)) <= 1);
-}
-
-void	intersect_caps(t_object *cyl, t_ray *ray, t_intersect **head)
-{
-	double	time;
-
-	if (!cyl->cylinder.capped || is_equal_double(0.0, ray->direction->y))
-		return ;
-	time = (cyl->cylinder.min - ray->origin->y) / ray->direction->y;
-	if (is_cap_within_radius(ray, time))
-		intersection_sorted_insert(head, create_intersection(time, cyl));
-	time = (cyl->cylinder.max - ray->origin->y) / ray->direction->y;
-	if (is_cap_within_radius(ray, time))
-		intersection_sorted_insert(head, create_intersection(time, cyl));
-}
-
-void	intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head)
-{
-	double		x1;
-	double		x2;
-	double		y1;
-	double		y2;
-	t_bhaskara	bhaskara;
-
-	intersect_caps(cyl, ray, head);
-	bhaskara.a = pow(ray->direction->x, 2) + pow(ray->direction->z, 2);
-	if (is_equal_double(0.0, bhaskara.a))
-		return ;
-	bhaskara.b = 2 * ray->origin->x * ray->direction->x;
-	bhaskara.b += 2 * ray->origin->z * ray->direction->z;
-	bhaskara.c = pow(ray->origin->x, 2) + pow(ray->origin->z, 2) - 1;
-	bhaskara.delta = (bhaskara.b * bhaskara.b) - (4 * bhaskara.a * bhaskara.c);
-	if (bhaskara.delta < 0)
-		return ;
-	x1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-	x2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-	y1 = ray->origin->y + (x1 * ray->direction->y);
-	y2 = ray->origin->y + (x2 * ray->direction->y);
-	if (cyl->cylinder.min < y1 && y1 < cyl->cylinder.max)
-		intersection_sorted_insert(head, create_intersection(x1, cyl));
-	if (!is_equal_double(x1, x2))
-		if (cyl->cylinder.min < y2 && y2 < cyl->cylinder.max)
-			intersection_sorted_insert(head, create_intersection(x2, cyl));
 }
 
 t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point)

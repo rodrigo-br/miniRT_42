@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:24:24 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 14:33:50 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 20:02:52 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define SPHERE "sp"
 # define PLANE	"pl"
 # define CYLINDER "cy"
+# define CONE "cn"
 # define BLANKSPACES "\f\r\t\v"
 
 typedef enum e_parse_id
@@ -52,11 +53,12 @@ typedef enum e_parse_id
 	PARSE_LIGHT,
 	PARSE_SPHERE,
 	PARSE_PLANE,
-	PARSE_CYLINDER
+	PARSE_CYLINDER,
+	PARSE_CONE
 }	t_parse_id;
 
 # define PARSE_ID_MIN PARSE_AMBIENT
-# define PARSE_ID_MAX PARSE_CYLINDER
+# define PARSE_ID_MAX PARSE_CONE
 
 typedef int	t_delegator(char **tokens, t_rt_scene *s);
 
@@ -69,6 +71,7 @@ int			parse_light(char **tokens, t_rt_scene *s);
 int			parse_sphere(char **tokens, t_rt_scene *s);
 int			parse_plane(char **tokens, t_rt_scene *s);
 int			parse_cylinder(char **tokens, t_rt_scene *s);
+int			parse_cone(char **tokens, t_rt_scene *s);
 
 /* Parser setters */
 int			set_shape_color(char *token, t_object *shape);
@@ -165,6 +168,7 @@ t_object	*create_shape(void);
 t_object	*create_sphere(void);
 t_object	*create_plane(void);
 t_object	*create_cylinder(void);
+t_object	*create_cone(void);
 void		destroy_shape(void *object);
 void		set_object_transformation(t_object *object, t_matrix *transform);
 
@@ -173,11 +177,13 @@ t_vector	*normal_at(t_object *shape, t_point *point);
 t_vector	*get_sphere_normal(t_object *sphere, t_point *point);
 t_vector	*get_plane_normal(t_object *plane, t_point *point);
 t_vector	*get_cylinder_normal(t_object *cylinder, t_point *point);
+t_vector	*get_cone_normal(t_object *cone, t_point *point);
 t_intersect	*get_hit(t_intersect *intersect);
 
 void		intersect_sphere(t_object *sphere, t_ray *ray, t_intersect **head);
 void		intersect_plane(t_object *plane, t_ray *ray, t_intersect **head);
 void		intersect_cylinder(t_object *cyl, t_ray *ray, t_intersect **head);
+void		intersect_cone(t_object *cone, t_ray *ray, t_intersect **head);
 void		intersection_sorted_insert(t_intersect **head, t_intersect *new);
 void		intersection_list_clear(t_intersect **list);
 size_t		intersection_list_size(t_intersect *list);

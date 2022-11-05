@@ -15,8 +15,8 @@ HEADER_FILES	= structs.h minirt.h
 MAIN	= main.c $(PARSER) $(TUPLE) $(COLOR) $(CANVAS) $(MATRIX) $(RAY) \
 		$(SHAPE) $(LIGHT) $(UTILS) $(WORLD) $(CAMERA) $(MLX)
 PARSER	= parser.c parser_checkers.c parser_ambient.c parser_camera.c parser_light.c \
-		parser_shape.c parser_sphere.c parser_plane.c parser_cylinder.c parser_error.c \
-		scene_to_world.c
+		parser_shape.c parser_sphere.c parser_plane.c parser_cylinder.c parser_cone.c \
+		parser_error.c scene_to_world.c
 TUPLE	= tuple_constructors.c tuple_operations.c tuple_checkers.c tuple_manipulators.c
 COLOR	= color_constructor.c color_operations.c patterns.c
 CANVAS	= canvas_constructor.c canvas_destructor.c write_to_canvas.c
@@ -25,7 +25,8 @@ MATRIX	= matrix_constructor.c matrix_checker.c matrix_operations.c \
 UTILS 	= destructors.c radians.c
 RAY		= ray_constructor.c ray_destructor.c ray_operations.c ray_intersection.c \
 		ray_intersection_list.c
-SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c sphere.c plane.c cylinder.c
+SHAPE	= shape_constructor.c shape_destructor.c shape_setters.c \
+		sphere.c plane.c cylinder.c cone.c cylinder_intersect.c cone_intersect.c
 LIGHT	= material_constructor.c material_destructor.c reflection.c lighting.c \
 		is_shadowed.c
 WORLD	= world_constructor.c world_destructor.c world_computations.c
