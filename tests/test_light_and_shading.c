@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 12:22:25 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 15:31:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:16:50 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,7 +288,7 @@ void	test_no_shadow_at_all(void)
 	t_world	*world;
 
 	world = default_world();
-	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){0, 10, 0, 1}));
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){0, 10, 0, 1}, world->light_point->content));
 	destroy_world(world);
 }
 
@@ -301,7 +301,7 @@ void	test_shadow_object_between_light_and_point(void)
 	t_world	*world;
 
 	world = default_world();
-	TEST_ASSERT_TRUE(is_shadowed(world, &(t_point){10, -10, 10, 1}));
+	TEST_ASSERT_TRUE(is_shadowed(world, &(t_point){10, -10, 10, 1}, world->light_point->content));
 	destroy_world(world);
 }
 
@@ -314,7 +314,7 @@ void	test_no_shadow_object_behind_light(void)
 	t_world	*world;
 
 	world = default_world();
-	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-20, 20, -20, 1}));
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-20, 20, -20, 1}, world->light_point->content));
 	destroy_world(world);
 }
 
@@ -327,7 +327,7 @@ void	test_no_shadow_object_behind_point(void)
 	t_world	*world;
 
 	world = default_world();
-	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-2, 2, -2, 1}));
+	TEST_ASSERT_FALSE(is_shadowed(world, &(t_point){-2, 2, -2, 1}, world->light_point->content));
 	destroy_world(world);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_checkers.c                                     :+:      :+:    :+:   */
+/*   parser_checkers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:46:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 19:42:12 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:10:13 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define ERR_WRONG_EXT "Given file has wrong extension."
 #define ERR_UNDEF_AMB "Undefined ambient."
 #define ERR_UNDEF_CAM "Undefined camera."
-#define ERR_UNDEF_LGT "Undefined light."
+#define ERR_UNDEF_LGT "At least one light spot is required."
 #define ERR_UNDEF_OBJ "At least one object is required."
 
 int	check_user_input(int argc)
@@ -54,7 +54,7 @@ int	check_scene_elements(t_rt_scene *s)
 		status += error(ERR_UNDEF_AMB);
 	if (!s->camera)
 		status += error(ERR_UNDEF_CAM);
-	if (!s->light)
+	if (!s->lights)
 		status += error(ERR_UNDEF_LGT);
 	if (!s->objects)
 		status += error(ERR_UNDEF_OBJ);

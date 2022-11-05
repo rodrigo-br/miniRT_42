@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 19:28:00 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/03 13:12:08 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:17:28 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_object	*create_plane(void)
 	if (!plane)
 		return (NULL);
 	plane->type = ID_PLANE;
+	plane->material->specular = 0.05;
 	plane->plane.position = (t_vector){0, 1, 0, 0};
 	plane->intersect = intersect_plane;
 	plane->get_normal = get_plane_normal;

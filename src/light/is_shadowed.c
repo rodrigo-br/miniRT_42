@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 10:37:47 by maolivei          #+#    #+#             */
-/*   Updated: 2022/10/26 10:49:58 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:09:41 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ t_bool	_is_shadowed(t_world *world, t_ray *ray, double distance)
 	return (in_shadow);
 }
 
-t_bool	is_shadowed(t_world *world, t_point *point)
+t_bool	is_shadowed(t_world *world, t_point *point, t_light_pnt *lp)
 {
 	t_tuple		*aux;
-	t_light_pnt	*lp;
 	double		distance;
 	t_vector	*direction;
 	t_ray		*ray;
 
-	lp = (t_light_pnt *)world->light_point->content;
 	aux = sub_tuple(lp->position, point);
 	distance = magnitude(aux);
 	direction = normalize(aux);
