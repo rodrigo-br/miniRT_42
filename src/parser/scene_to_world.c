@@ -18,7 +18,7 @@ static void	setup_camera(t_cam *camera, t_rt_camera *c)
 	t_vector	*aux;
 	t_vector	*up;
 
-	if (is_equal_double(1.0, c->orientation->y))
+	if (is_equal_double(1, fabs(c->orientation->y)))
 		up = create_vector(1, 0, 0);
 	else
 	{
