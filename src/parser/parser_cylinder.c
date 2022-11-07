@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_cylinder.c                                     :+:      :+:    :+:   */
+/*   parser_cylinder.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:01:39 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 17:02:29 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:45:04 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #define ERR_CYL_TRL "Unable to allocate memory for cylinder's translation."
 #define ERR_CYL_TRF "Unable to allocate memory for cylinder's transformation."
 #define ERR_CYL_MALLOC_FAIL "Unable to allocate memory for cylinder."
-#define ERR_CYL_LINKED_LIST "Unable to allocate memory for cylinder list node."
 #define ERR_CYL_BAD_CONFIGS "Invalid cylinder configuration."
 #define ERR_CYL_COORD_SETTN "Invalid cylinder coordinates settings."
 #define ERR_CYL_COORD_VALUE "Invalid cylinder coordinates value."
@@ -102,10 +101,10 @@ static int	set_cylinder_coordinates(char *token, t_object *cyl)
 
 int	parse_cylinder(char **tokens, t_rt_scene *s)
 {
-	t_object	*cylinder;
-	t_list		*node;
+	const size_t	splitsize = ft_splitsize(tokens);
+	t_object		*cylinder;
 
-	if (ft_splitsize(tokens) != 6)
+	if (splitsize < 6 || splitsize > 8)
 		return (error(ERR_CYL_BAD_CONFIGS));
 	cylinder = create_cylinder();
 	if (!cylinder)
@@ -120,11 +119,11 @@ int	parse_cylinder(char **tokens, t_rt_scene *s)
 		return (destroy_shape(cylinder), -1);
 	if (set_shape_color(tokens[5], cylinder) != 0)
 		return (destroy_shape(cylinder), -1);
+	if (set_shape_checkerboard(tokens, cylinder, 6) != 0)
+		return (destroy_shape(cylinder), -1);
 	if (set_cylinder_transformation(cylinder) != 0)
 		return (destroy_shape(cylinder), -1);
-	node = ft_lstnew(cylinder);
-	if (!node)
-		return (destroy_shape(cylinder), error(ERR_CYL_LINKED_LIST));
-	ft_lstadd_front(&s->objects, node);
+	if (set_shape_linked_list_node(cylinder, s) != 0)
+		return (destroy_shape(cylinder), -1);
 	return (0);
 }

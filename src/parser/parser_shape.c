@@ -6,20 +6,66 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 17:59:56 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:54:21 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
 #define ERR_SHP_MISS_INFO "Not enough information available."
+#define ERR_SHP_LINKED_LIST "Unable to allocate memory for cylinder list node."
 #define ERR_SHP_OVECT_SETTN "Invalid shape orientation vector settings."
 #define ERR_SHP_OVECT_VALUE "Invalid shape orientation vector value."
 #define ERR_SHP_OVECT_RANGE "Shape orientation values must be between -1 and 1."
 #define ERR_SHP_COLOR_SETTN "Invalid shape color settings."
 #define ERR_SHP_COLOR_VALUE "Invalid shape color value."
 #define ERR_SHP_COLOR_RANGE "Shape color channels must be between 0 and 255."
+#define ERR_SHP_INVALID_FEAT "Invalid shape feature."
+#define ERR_SHP_CHECKER_SETTN "Invalid checkerboard color settings."
+#define ERR_SHP_CHECKER_VALUE "Invalid checkerboard color value."
+#define ERR_SHP_CHECKER_RANGE "Invalid checkerboard color range."
+#define ERR_SHP_CHECKER_COLOR "Checkerboard requires a color feature."
 #define ERR_SHP_NOT_NORMALIZED "Shape orientation vector is not normalized."
+
+int	set_shape_checkerboard(char **tokens, t_object *shape, int offset)
+{
+	char	**rgb;
+	int		aux[3];
+
+	if (!tokens[offset])
+		return (0);
+	if (ft_strcmp(tokens[offset], "checkerboard") != 0)
+		return (error(ERR_SHP_INVALID_FEAT));
+	if (!tokens[offset + 1])
+		return (error(ERR_SHP_CHECKER_COLOR));
+	rgb = ft_split(tokens[offset + 1], ',');
+	if (!rgb || ft_splitsize(rgb) != 3)
+		return (ft_free_matrix((void *)&rgb), error(ERR_SHP_CHECKER_SETTN));
+	if (!ft_isnumber(rgb[0]) || !ft_isnumber(rgb[1]) || !ft_isnumber(rgb[2]))
+		return (ft_free_matrix((void *)&rgb), error(ERR_SHP_CHECKER_VALUE));
+	aux[0] = ft_atoi(rgb[0]);
+	aux[1] = ft_atoi(rgb[1]);
+	aux[2] = ft_atoi(rgb[2]);
+	ft_free_matrix((void *)&rgb);
+	if (!ft_isinrange_f(aux[0], 0, 255) \
+	|| !ft_isinrange_f(aux[1], 0, 255) \
+	|| !ft_isinrange_f(aux[2], 0, 255))
+		return (error(ERR_SHP_CHECKER_RANGE));
+	shape->material->pattern = create_pattern(shape->material->color,
+			create_formatted_color(aux[0], aux[1], aux[2]));
+	return (0);
+}
+
+int	set_shape_linked_list_node(t_object *shape, t_rt_scene *s)
+{
+	t_list	*node;
+
+	node = ft_lstnew(shape);
+	if (!node)
+		return (error(ERR_SHP_LINKED_LIST));
+	ft_lstadd_front(&s->objects, node);
+	return (0);
+}
 
 int	set_shape_color(char *token, t_object *shape)
 {
