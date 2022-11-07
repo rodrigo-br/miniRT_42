@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 21:06:43 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/11/04 21:29:35 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 01:07:34 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_object
 	t_vector	*orientation;
 	t_matrix	*transformation;
 	t_matrix	*inverse_transformation;
+	t_matrix	*transposed_inverse;
 	t_material	*material;
 	void		(*intersect)(t_object *, t_ray *, t_intersect **);
 	t_vector	*(*get_normal)(t_object *, t_point *);
