@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:41:56 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 21:15:55 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/09 10:14:45 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_bool	is_cap_within_radius(t_ray *ray, double time, double radius)
 
 	x = ray->origin->x + (time * ray->direction->x);
 	z = ray->origin->z + (time * ray->direction->z);
-	return (((x * x) + (z * z)) <= radius);
+	return (((x * x) + (z * z)) <= (radius * radius));
 }
 
 static void	intersect_caps(t_object *cone, t_ray *ray, t_intersect **head)
@@ -46,10 +46,10 @@ static void	intersect_caps(t_object *cone, t_ray *ray, t_intersect **head)
 	if (!cone->cone.capped || is_equal_double(0.0, ray->direction->y))
 		return ;
 	time = (cone->cone.min - ray->origin->y) / ray->direction->y;
-	if (is_cap_within_radius(ray, time, (cone->cone.max / 2)))
+	if (is_cap_within_radius(ray, time, cone->cone.min))
 		intersection_sorted_insert(head, create_intersection(time, cone));
 	time = (cone->cone.max - ray->origin->y) / ray->direction->y;
-	if (is_cap_within_radius(ray, time, (cone->cone.max / 2)))
+	if (is_cap_within_radius(ray, time, cone->cone.max))
 		intersection_sorted_insert(head, create_intersection(time, cone));
 }
 

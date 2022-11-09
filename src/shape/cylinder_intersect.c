@@ -6,13 +6,13 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:42:28 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/04 19:44:13 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:14:20 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt.h>
 
-t_bhaskara	get_delta_value(t_ray *ray)
+static t_bhaskara	get_delta_value(t_ray *ray)
 {
 	t_bhaskara	_;
 
