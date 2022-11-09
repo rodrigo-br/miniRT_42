@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 13:56:58 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/09 10:18:14 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/09 10:20:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vector	*get_cone_normal(t_object *cone, t_point *point)
 	radius = cone->cone.min * cone->cone.min;
 	if (distance < radius && point->y <= (cone->cone.min + EPSILON))
 		return (create_vector(0, -1, 0));
-	y = sqrt((point->x * point->x) + (point->z * point->z));
+	y = sqrt(distance);
 	if (point->y > 0.0)
 		y = -y;
 	return (create_vector(point->x, y, point->z));

@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:25:08 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 11:35:24 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 01:08:57 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ t_vector	*normal_at(t_object *shape, t_point *point)
 	t_vector	*object_normal;
 	t_point		*object_point;
 	t_tuple		*aux;
-	t_matrix	*transposed_inverse;
 
 	object_point = multiply_matrix_tuple(shape->inverse_transformation, point);
 	object_normal = shape->get_normal(shape, object_point);
-	transposed_inverse = transpose_matrix(shape->inverse_transformation);
-	world_normal = multiply_matrix_tuple(transposed_inverse, object_normal);
+	world_normal = multiply_matrix_tuple(
+			shape->transposed_inverse, object_normal);
 	world_normal->w = VECTOR_W;
-	free(transposed_inverse);
 	free(object_normal);
 	free(object_point);
 	aux = world_normal;
