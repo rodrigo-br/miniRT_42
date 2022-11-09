@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_sphere.c                                       :+:      :+:    :+:   */
+/*   parser_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:16:40 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 16:52:19 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:48:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #define ERR_SPH_TRL "Unable to allocate memory for sphere's translation."
 #define ERR_SPH_TRF "Unable to allocate memory for sphere's transformation."
 #define ERR_SPH_MALLOC_FAIL "Unable to allocate memory for sphere."
-#define ERR_SPH_LINKED_LIST "Unable to allocate memory for sphere list node."
 #define ERR_SPH_BAD_CONFIGS "Invalid sphere configuration."
 #define ERR_SPH_CENTR_SETTN "Invalid sphere center coordinates settings."
 #define ERR_SPH_CENTR_VALUE "Invalid sphere center coordinates value."
@@ -81,10 +80,10 @@ static int	set_sphere_center_coordinates(char *token, t_object *sphere)
 
 int	parse_sphere(char **tokens, t_rt_scene *s)
 {
-	t_object	*sphere;
-	t_list		*node;
+	const size_t	splitsize = ft_splitsize(tokens);
+	t_object		*sphere;
 
-	if (ft_splitsize(tokens) != 4)
+	if (splitsize < 4 || splitsize > 6)
 		return (error(ERR_SPH_BAD_CONFIGS));
 	sphere = create_sphere();
 	if (!sphere)
@@ -95,11 +94,11 @@ int	parse_sphere(char **tokens, t_rt_scene *s)
 		return (destroy_shape(sphere), -1);
 	if (set_shape_color(tokens[3], sphere) != 0)
 		return (destroy_shape(sphere), -1);
+	if (set_shape_checkerboard(tokens, sphere, 4) != 0)
+		return (destroy_shape(sphere), -1);
 	if (set_sphere_transformation(sphere) != 0)
 		return (destroy_shape(sphere), -1);
-	node = ft_lstnew(sphere);
-	if (!node)
-		return (destroy_shape(sphere), error(ERR_SPH_LINKED_LIST));
-	ft_lstadd_front(&s->objects, node);
+	if (set_shape_linked_list_node(sphere, s) != 0)
+		return (destroy_shape(sphere), -1);
 	return (0);
 }

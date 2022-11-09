@@ -6,7 +6,7 @@
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:36:57 by ralves-b          #+#    #+#             */
-/*   Updated: 2022/10/31 11:45:06 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:58:32 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_rgb	*pattern_at(t_pattern *pattern, t_point	*point)
 
 void	destroy_pattern(t_pattern *pattern)
 {
-	free(pattern->color_a);
 	free(pattern->color_b);
 	free(pattern->transformation);
 	free(pattern->inverse_transformation);

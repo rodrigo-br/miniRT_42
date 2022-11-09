@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alt_plane.c                                        :+:      :+:    :+:   */
+/*   parser_plane.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maolivei <maolivei@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:23:28 by maolivei          #+#    #+#             */
-/*   Updated: 2022/11/02 11:30:03 by maolivei         ###   ########.fr       */
+/*   Updated: 2022/11/07 10:49:49 by maolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #define ERR_PLN_TRL "Unable to allocate memory for plane's translation."
 #define ERR_PLN_TRF "Unable to allocate memory for plane's transformation."
 #define ERR_PLN_MALLOC_FAIL "Unable to allocate memory for plane."
-#define ERR_PLN_LINKED_LIST "Unable to allocate memory for plane list node."
 #define ERR_PLN_BAD_CONFIGS "Invalid plane configuration."
 #define ERR_PLN_COORD_SETTN "Invalid plane coordinates settings."
 #define ERR_PLN_COORD_VALUE "Invalid plane coordinates value."
@@ -65,10 +64,10 @@ static int	set_plane_coordinates(char *token, t_object *plane)
 
 int	parse_plane(char **tokens, t_rt_scene *s)
 {
-	t_object	*plane;
-	t_list		*node;
+	const size_t	splitsize = ft_splitsize(tokens);
+	t_object		*plane;
 
-	if (ft_splitsize(tokens) != 4)
+	if (splitsize < 4 || splitsize > 6)
 		return (error(ERR_PLN_BAD_CONFIGS));
 	plane = create_plane();
 	if (!plane)
@@ -79,11 +78,11 @@ int	parse_plane(char **tokens, t_rt_scene *s)
 		return (destroy_shape(plane), -1);
 	if (set_shape_color(tokens[3], plane) != 0)
 		return (destroy_shape(plane), -1);
+	if (set_shape_checkerboard(tokens, plane, 4) != 0)
+		return (destroy_shape(plane), -1);
 	if (set_plane_transformation(plane) != 0)
 		return (destroy_shape(plane), -1);
-	node = ft_lstnew(plane);
-	if (!node)
-		return (destroy_shape(plane), error(ERR_PLN_LINKED_LIST));
-	ft_lstadd_front(&s->objects, node);
+	if (set_shape_linked_list_node(plane, s) != 0)
+		return (destroy_shape(plane), -1);
 	return (0);
 }
